@@ -88,6 +88,12 @@ body {
     cursor: pointer;
 }
 
+/* Logo header */
+.site-logo {
+    display: inline-block;
+    object-fit: contain;
+}
+
 /* Barra de Navegação Interna */
 .site-nav-bar {
     background-color: #001f3f;
@@ -358,4 +364,10 @@ footer {
 .footer-socials a:hover {
     background: #ffcc00;
     color: #000;
+}
+
+@media (max-width: 768px) {
+    .footer-container { grid-template-columns: 1fr; gap: 25px; text-align: left; }
+    .footer-bar-bottom { text-align: center; justify-content: center; }
+    .footer-socials { justify-content: center; }
 }
