@@ -1,0 +1,361 @@
+/* =========================================
+   ESTILOS GLOBAIS E DA APSAN, LDA
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f7fa;
+    color: #333333;
+    line-height: 1.6;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Main Navigation */
+.main-nav {
+    background-color: #002b5c;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 75px;
+}
+
+.nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 75px;
+    right: 20px;
+    width: 280px;
+    background-color: #002b5c;
+    box-shadow: -5px 15px 30px rgba(0,0,0,0.4);
+    border-radius: 0 0 10px 10px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 15px 0;
+    align-items: flex-start;
+    z-index: 9999;
+}
+
+.nav-links.active {
+    display: flex;
+}
+
+.nav-links li {
+    width: 100%;
+    text-align: left;
+    padding: 8px 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 15px;
+    transition: color 0.3s;
+    display: block;
+    width: 100%;
+}
+
+.nav-links a:hover {
+    color: #ffcc00;
+}
+
+.menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: 2px solid #ffcc00;
+    color: #fff;
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* Barra de Navegação Interna */
+.site-nav-bar {
+    background-color: #001f3f;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.site-nav-btn {
+    background-color: #ffcc00;
+    color: #000;
+    border: none;
+    padding: 8px 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.site-nav-btn:hover {
+    background-color: #e6b800;
+}
+
+.site-nav-indicator {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Hero Slideshow com Overlay Suave (Imagens Claras) */
+.hero-custom-bg {
+    position: relative;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    padding: 60px 20px;
+    overflow: hidden;
+}
+
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    z-index: 1;
+}
+
+.hero-slide.active {
+    opacity: 1;
+}
+
+/* Overlay azul mais suave ajustado para as imagens ficarem bem claras e nítidas */
+.hero-custom-bg::after, .hero-overlay {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 40, 90, 0.25);
+    z-index: 2;
+}
+
+.hero-custom-bg .container {
+    position: relative;
+    z-index: 3;
+}
+
+.hero-custom-bg .hero-text h2 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.hero-custom-bg .hero-text p {
+    font-size: 1.15rem;
+    margin-bottom: 30px;
+    max-width: 650px;
+    color: #f1f5f9;
+    line-height: 1.6;
+}
+
+.badge-tag {
+    background-color: #ffcc00;
+    color: #000;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+section {
+    padding: 80px 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-title h2 {
+    font-size: 32px;
+    color: #002244;
+    margin-bottom: 10px;
+}
+
+.underline {
+    width: 60px;
+    height: 4px;
+    background-color: #003366;
+    margin: 0 auto 15px auto;
+    border-radius: 2px;
+}
+
+.services-grid, .mvv-grid, .portal-grid, .posts-grid, .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.service-card, .portal-card, .mvv-card, .post-card, .contact-info-box, .contact-form-box, .testimonial-card {
+    background-color: #ffffff;
+    color: #333333;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 25px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,64,128,0.15);
+}
+
+.search-container {
+    max-width: 500px;
+    margin: 0 auto 30px auto;
+    position: relative;
+}
+
+.search-container input {
+    width: 100%;
+    padding: 12px 20px 12px 45px;
+    border-radius: 30px;
+    border: 1px solid #ddd;
+    font-size: 15px;
+    outline: none;
+}
+
+.search-container i {
+    position: absolute;
+    top: 50%;
+    left: 18px;
+    transform: translateY(-50%);
+    color: #555;
+}
+
+/* Estilos específicos para o botão de acesso à Área do Cliente no menu */
+.nav-client-btn {
+    background-color: #ffcc00 !important;
+    color: #000 !important;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Rodapé Organizado */
+footer {
+    background-color: #001220;
+    color: #ffffff;
+    padding: 60px 20px 30px 20px;
+    border-top: 4px solid #ffcc00;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-col h4 {
+    color: #ffcc00;
+    margin-bottom: 18px;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-col p, .footer-col li {
+    color: #cbd5e1;
+    font-size: 14px;
+    list-style: none;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.footer-col p i, .footer-col li i {
+    color: #ffcc00;
+    width: 20px;
+}
+
+.footer-brand-col {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.footer-brand-col img {
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.footer-bar-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 12px;
+}
+
+.footer-socials a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+}
+
+.footer-socials a:hover {
+    background: #ffcc00;
+    color: #000;
+}
