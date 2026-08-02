@@ -255,8 +255,8 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
         }
         .footer-flag-item img {
-            width: 28px;
-            height: 18px;
+            width: 24px;
+            height: 16px;
             object-fit: cover;
             border-radius: 2px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.3);
@@ -294,6 +294,17 @@
             justify-content: center;
             text-decoration: none;
         }
+        .footer-socials a {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body data-theme="light">
@@ -303,8 +314,7 @@
         <div class="container nav-container" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; max-width: 1200px; margin: 0 auto;">
             <div class="logo">
                 <a href="#home" onclick="switchTab('home', event)" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
-                    <!-- Usar o logo oficial local (coloque assets/logo.png) -->
-                    <img src="assets/logo.png" alt="APSAN, LDA Logo" class="site-logo" style="width: 56px; height: 56px; object-fit: contain; border-radius: 8px;">
+                    <img src="assets/logo.png" alt="APSAN, LDA Logo" style="width: 48px; height: 48px; object-fit: contain; border-radius: 6px;">
                     <span style="color: #fff; font-weight: 800; font-size: 1.3rem;">APSAN, <span style="color: var(--accent-color);">LDA</span></span>
                 </a>
             </div>
@@ -342,49 +352,302 @@
                 <div class="hero-text" style="max-width: 700px;">
                     <span style="background: var(--accent-color); color: #000; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 12px; text-transform: uppercase;">Soluções Integradas</span>
                     <h2 style="font-size: 3rem; margin: 15px 0; font-weight: 800;">Qualidade Que Transforma!</h2>
-                    <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 25px;">A <strong>APSAN, LDA</strong> é uma empresa angolana prestadora de serviços que atua entre Angola e Namíbia, com foco em logística, tecnologia e serviços institucionais.</p>
+                    <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 25px;">A <strong>APSAN, LDA</strong> é uma empresa angolana prestadora de serviços que atua entre Angola e Namíbia, oferecendo soluções em logística, tecnologia e serviços institucionais.</p>
                     <button onclick="switchTab('services', event)" style="background: var(--accent-color); color: #000; border: none; padding: 12px 28px; border-radius: 30px; font-weight: bold; cursor: pointer;">Ver Serviços</button>
                 </div>
             </div>
         </div>
         <div class="stats-container">
             <div class="stat-card">
-                <h3>+1.300</h3>
+                <h3>+500</h3>
                 <p>Clientes Satisfeitos</p>
             </div>
             <div class="stat-card">
-                <h3>800.0 ★</h3>
-                <p>Avaliação Média</p>
+                <h3>100%</h3>
+                <p>Compromisso Transfronteiriço</p>
             </div>
             <div class="stat-card">
-                <h3>NIF 5002085011</h3>
-                <p>Empresa Registada & Ativa</p>
-            </div>
-            <div class="stat-card">
-                <h3>Angola & Namíbia</h3>
-                <p>Atuação Transfronteiriça</p>
+                <h3>24/7</h3>
+                <p>Suporte e Assistência</p>
             </div>
         </div>
     </section>
 
-    <!-- (As demais secções permanecem iguais — não alterei o conteúdo, apenas o logo e as bandeiras no footer) -->
-    <!-- ... (mantive todo o restante conteúdo das secções tal como no ficheiro original) ... -->
+    <!-- 2. SEÇÃO QUEM SOMOS -->
+    <section id="about" class="content-section container" style="padding: 60px 20px;">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h2 style="font-size: 32px; color: var(--primary-color);">Quem Somos</h2>
+            <div style="width: 60px; height: 4px; background: var(--accent-color); margin: 10px auto;"></div>
+            <p style="max-width: 800px; margin: 0 auto; color: var(--text-muted);">A APSAN, LDA destaca-se pela excelência no suporte empresarial, logística, importações e serviços institucionais entre Angola e Namíbia.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+            <div class="mvv-card" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 30px; border-radius: 12px;">
+                <h3 style="color: var(--primary-color); margin-bottom: 15px;"><i class="fas fa-bullseye"></i> Nossa Missão</h3>
+                <p style="color: var(--text-muted); line-height: 1.6;">Facilitar o comércio, a logística aduaneira e a prestação de serviços institucionais com máxima eficiência, rigor profissional e confiança.</p>
+            </div>
+            <div class="mvv-card" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 30px; border-radius: 12px;">
+                <h3 style="color: var(--primary-color); margin-bottom: 15px;"><i class="fas fa-eye"></i> Nossa Visão</h3>
+                <p style="color: var(--text-muted); line-height: 1.6;">Ser a referência transfronteiriça líder em soluções corporativas, tecnologia e serviços integrados na região sul de Angola e Namíbia.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. SEÇÃO SERVIÇOS PRINCIPAIS -->
+    <section id="services" class="content-section container" style="padding: 60px 20px;">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h2 style="font-size: 32px; color: var(--primary-color);">Serviços Principais</h2>
+            <div style="width: 60px; height: 4px; background: var(--accent-color); margin: 10px auto;"></div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
+            <div class="service-card" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px;" onclick="openServiceModal('Importação e Compras na Namíbia')">
+                <i class="fas fa-shopping-cart" style="font-size: 30px; color: var(--primary-color); margin-bottom: 15px;"></i>
+                <h3 style="margin-bottom: 10px;">Importação & Compras na Namíbia</h3>
+                <p style="font-size: 14px; color: var(--text-muted);">Aquisições de mercadorias, transporte seguro e trâmites aduaneiros transfronteiriços.</p>
+            </div>
+            <div class="service-card" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px;" onclick="openServiceModal('Software e Sistemas de Gestão')">
+                <i class="fas fa-laptop-code" style="font-size: 30px; color: var(--primary-color); margin-bottom: 15px;"></i>
+                <h3 style="margin-bottom: 10px;">Software & Sistemas de Gestão</h3>
+                <p style="font-size: 14px; color: var(--text-muted);">Desenvolvimento de plataformas digitais, portais web e ferramentas corporativas.</p>
+            </div>
+            <div class="service-card" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px;" onclick="openServiceModal('Serviços Institucionais')">
+                <i class="fas fa-broom" style="font-size: 30px; color: var(--primary-color); margin-bottom: 15px;"></i>
+                <h3 style="margin-bottom: 10px;">Serviços Institucionais</h3>
+                <p style="font-size: 14px; color: var(--text-muted);">Limpeza profissional, fornecimento de material de escritório e catering.</p>
+            </div>
+            <div class="service-card" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px;" onclick="openServiceModal('Internet e Cabling')">
+                <i class="fas fa-network-wired" style="font-size: 30px; color: var(--primary-color); margin-bottom: 15px;"></i>
+                <h3 style="margin-bottom: 10px;">Internet & Cabling</h3>
+                <p style="font-size: 14px; color: var(--text-muted);">Instalação de redes estruturadas, conectividade e suporte tecnológico.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. SEÇÃO SERVIÇOS EXTRAS -->
+    <section id="extras" class="content-section container" style="padding: 60px 20px;">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h2 style="font-size: 32px; color: var(--primary-color);">Serviços Extras</h2>
+            <div style="width: 60px; height: 4px; background: var(--accent-color); margin: 10px auto;"></div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
+            <div class="service-card" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px;">
+                <i class="fas fa-passport" style="font-size: 28px; color: var(--primary-color); margin-bottom: 12px;"></i>
+                <h4>Autorização de Viagem p/ Menor</h4>
+                <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">Apoio burocrático e logístico completo.</p>
+            </div>
+            <div class="service-card" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px;">
+                <i class="fas fa-hospital" style="font-size: 28px; color: var(--primary-color); margin-bottom: 12px;"></i>
+                <h4>Acompanhamento Hospitalar</h4>
+                <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">Zelo e assistência dedicada em unidades.</p>
+            </div>
+            <div class="service-card" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px;">
+                <i class="fas fa-language" style="font-size: 28px; color: var(--primary-color); margin-bottom: 12px;"></i>
+                <h4>Tradução Juramentada</h4>
+                <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">Validade legal e total confidencialidade.</p>
+            </div>
+            <div class="service-card" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px;">
+                <i class="fas fa-car" style="font-size: 28px; color: var(--primary-color); margin-bottom: 12px;"></i>
+                <h4>Aluguer de Carros & Guia</h4>
+                <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">Deslocações seguras na região.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. SEÇÃO PARCERIAS -->
+    <section id="parcerias" class="content-section container" style="padding: 60px 20px;">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h2 style="font-size: 32px; color: var(--primary-color);">Parcerias & Cooperação</h2>
+            <div style="width: 60px; height: 4px; background: var(--accent-color); margin: 10px auto;"></div>
+            <p style="color: var(--text-muted); max-width: 700px; margin: 0 auto;">Trabalhamos em aliança com fornecedores certificados e redes transfronteiriças, alinhados com iniciativas de desenvolvimento regional.</p>
+        </div>
+        <div class="route-visual-box">
+            <h3 style="margin-bottom: 10px;">Corredor Logístico Angola - Namíbia</h3>
+            <p style="font-size: 14px; opacity: 0.9;">Conectando Namacunde e Ondjiva aos mercados da Namíbia com agilidade e total segurança alfandegária.</p>
+            <div class="route-flex">
+                <div class="route-node"><i class="fas fa-map-marker-alt"></i> Namacunde (Cunene)</div>
+                <i class="fas fa-long-arrow-alt-right" style="font-size: 24px;"></i>
+                <div class="route-node"><i class="fas fa-exchange-alt"></i> Alfândega Fronteiriça</div>
+                <i class="fas fa-long-arrow-alt-right" style="font-size: 24px;"></i>
+                <div class="route-node"><i class="fas fa-store"></i> Namíbia (Mercados)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. SEÇÃO RECRUTAMENTO -->
+    <section id="recrutamento" class="content-section container" style="padding: 60px 20px;">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h2 style="font-size: 32px; color: var(--primary-color);">Carreiras e Recrutamento</h2>
+            <div style="width: 60px; height: 4px; background: var(--accent-color); margin: 10px auto;"></div>
+            <p style="color: var(--text-muted);">Junte-se à equipa da APSAN, LDA. Envie a sua candidatura espontânea ou currículo.</p>
+        </div>
+        <div style="max-width: 600px; margin: 0 auto; background: var(--card-bg); border: 1px solid var(--border-color); padding: 30px; border-radius: 12px;">
+            <form onsubmit="handleRecruitmentSubmit(event)">
+                <div class="modal-form-group">
+                    <label>Nome Completo</label>
+                    <input type="text" required placeholder="Insira o seu nome">
+                </div>
+                <div class="modal-form-group">
+                    <label>E-mail ou Telefone</label>
+                    <input type="text" required placeholder="ex: +244 900 000 000">
+                </div>
+                <div class="modal-form-group">
+                    <label>Área de Interesse</label>
+                    <select>
+                        <option>Logística e Compras</option>
+                        <option>Tecnologia e Sistemas</option>
+                        <option>Serviços Administrativos</option>
+                        <option>Outros</option>
+                    </select>
+                </div>
+                <div class="modal-form-group">
+                    <label>Anexar Currículo (PDF)</label>
+                    <input type="file" accept=".pdf,.doc,.docx">
+                </div>
+                <button type="submit" style="width: 100%; background: var(--primary-color); color: #fff; border: none; padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer;">Submeter Candidatura</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- 7. SEÇÃO CONSULTA EMPRESA -->
+    <section id="portal" class="content-section container" style="padding: 60px 20px;">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h2 style="font-size: 32px; color: var(--primary-color);">Consulta de Empresa & Verificação</h2>
+            <div style="width: 60px; height: 4px; background: var(--accent-color); margin: 10px auto;"></div>
+            <p style="color: var(--text-muted);">Dados corporativos oficiais da APSAN, LDA para validação de parceiros.</p>
+        </div>
+        <div style="max-width: 650px; margin: 0 auto; background: var(--card-bg); border: 1px solid var(--border-color); padding: 30px; border-radius: 12px; font-size: 15px;">
+            <p style="margin-bottom: 12px;"><strong>Denominação Social:</strong> APSAN, LDA</p>
+            <p style="margin-bottom: 12px;"><strong>NIF (Número de Identificação Fiscal):</strong> 5002085011</p>
+            <p style="margin-bottom: 12px;"><strong>Sede Oficial:</strong> Província do Cunene, Município do Namacunde</p>
+            <p style="margin-bottom: 12px;"><strong>Representação:</strong> Cidade de Ondjiva</p>
+            <p style="margin-bottom: 12px;"><strong>Email Oficial:</strong> apsanlda1@gmail.com</p>
+            <p style="margin-bottom: 0;"><strong>Contacto Telefónico:</strong> +244 931 057 760 / +244 934 437 739</p>
+        </div>
+    </section>
+
+    <!-- 8. SEÇÃO ÁREA DO CLIENTE -->
+    <section id="client-area" class="content-section container" style="padding: 60px 20px;">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h2 style="font-size: 32px; color: var(--primary-color);">Área do Cliente & Rastreio</h2>
+            <div style="width: 60px; height: 4px; background: var(--accent-color); margin: 10px auto;"></div>
+            <p style="color: var(--text-muted);">Acompanhe o estado das suas encomendas na Namíbia e simule prazos e custos logísticos.</p>
+        </div>
+        <div style="max-width: 600px; margin: 0 auto; background: var(--card-bg); border: 1px solid var(--border-color); padding: 30px; border-radius: 12px;">
+            <h3 style="color: var(--primary-color); margin-bottom: 15px;"><i class="fas fa-search"></i> Consultar Estado de Encomenda</h3>
+            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                <input type="text" id="trackingCodeInput" placeholder="Insira o Código de Rastreio (ex: APSAN-9821)" style="flex: 1; padding: 10px; border: 1px solid var(--border-color); border-radius: 6px;">
+                <button onclick="simulateTracking()" style="background: var(--primary-color); color: #fff; border: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer;">Pesquisar</button>
+            </div>
+            <div id="trackingResult" style="padding: 15px; background: var(--bg-color); border-radius: 6px; display: none; font-size: 14px;"></div>
+        </div>
+    </section>
+
+    <!-- 9. SEÇÃO FAQ -->
+    <section id="faq" class="content-section container" style="padding: 60px 20px;">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h2 style="font-size: 32px; color: var(--primary-color);">Perguntas Frequentes (FAQ)</h2>
+            <div style="width: 60px; height: 4px; background: var(--accent-color); margin: 10px auto;"></div>
+        </div>
+        <div class="faq-grid" style="max-width: 800px; margin: 0 auto;">
+            <div class="faq-card" onclick="toggleFaq(this)">
+                <h4>Como posso solicitar uma compra na Namíbia? <i class="fas fa-chevron-down"></i></h4>
+                <div class="faq-answer">Pode solicitar diretamente pelo nosso WhatsApp oficial, através da assistente virtual Azny Gabriel no canto inferior direito, ou preenchendo o formulário de contacto.</div>
+            </div>
+            <div class="faq-card" onclick="toggleFaq(this)">
+                <h4>Quais são as moedas aceites nas transações? <i class="fas fa-chevron-down"></i></h4>
+                <div class="faq-answer">Operamos com Kwanzas (AOA) para serviços locais em Angola e Dólar Namibiano (NAD) / Kwanza para compras e logística transfronteiriça com a Namíbia.</div>
+            </div>
+            <div class="faq-card" onclick="toggleFaq(this)">
+                <h4>Onde fica localizada a sede da APSAN, LDA? <i class="fas fa-chevron-down"></i></h4>
+                <div class="faq-answer">A nossa sede fica no Município do Namacunde, Província do Cunene, com representação ativa na Cidade de Ondjiva.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. SEÇÃO CONTACTOS -->
+    <section id="contact" class="content-section container" style="padding: 60px 20px;">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h2 style="font-size: 32px; color: var(--primary-color);">Fale Connosco</h2>
+            <div style="width: 60px; height: 4px; background: var(--accent-color); margin: 10px auto;"></div>
+        </div>
+        <div style="max-width: 600px; margin: 0 auto; background: var(--card-bg); border: 1px solid var(--border-color); padding: 30px; border-radius: 12px;">
+            <form onsubmit="handleContactSubmit(event)">
+                <div class="modal-form-group">
+                    <label>Seu Nome</label>
+                    <input type="text" id="contactName" required placeholder="Insira o seu nome">
+                </div>
+                <div class="modal-form-group">
+                    <label>Telefone / WhatsApp</label>
+                    <input type="text" required placeholder="+244 900 000 000">
+                </div>
+                <div class="modal-form-group">
+                    <label>Mensagem</label>
+                    <textarea rows="4" required placeholder="Escreva a sua mensagem ou pedido..."></textarea>
+                </div>
+                <button type="submit" style="width: 100%; background: var(--primary-color); color: #fff; border: none; padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer;">Enviar Mensagem</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- MODAL DE SERVIÇOS -->
+    <div class="service-modal-overlay" id="serviceModal">
+        <div class="service-modal-content">
+            <button class="service-modal-close" onclick="closeServiceModal()">&times;</button>
+            <h3 id="modalServiceTitle" style="color: var(--primary-color); margin-bottom: 15px;">Detalhes do Serviço</h3>
+            <p id="modalServiceDesc" style="color: var(--text-muted); margin-bottom: 20px; line-height: 1.6;"></p>
+            <form onsubmit="handleModalOrder(event)">
+                <div class="modal-form-group">
+                    <label>Nome Completo</label>
+                    <input type="text" required placeholder="Seu nome">
+                </div>
+                <div class="modal-form-group">
+                    <label>Contacto Telefónico</label>
+                    <input type="text" required placeholder="Seu telefone">
+                </div>
+                <button type="submit" style="background: var(--accent-color); color: #000; border: none; padding: 12px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; width: 100%;">Solicitar Serviço</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- WIDGET DA ASSISTENTE VIRTUAL AZNY GABRIEL -->
+    <div class="assistant-widget">
+        <div class="assistant-window" id="assistantWindow">
+            <div class="assistant-header">
+                <span>Assistente Azny Gabriel</span>
+                <button onclick="toggleAssistant()" style="background:none; border:none; color:#fff; font-size:16px; cursor:pointer;">&times;</button>
+            </div>
+            <div class="assistant-body" id="chatBody">
+                <div class="assistant-message">Olá! 😊 Sou a Azny Gabriel, assistente virtual da APSAN, LDA. Como posso ajudar hoje?</div>
+                <div class="chat-suggestions">
+                    <span class="chat-chip" onclick="sendChip('Comprar na Namíbia')">Comprar na Namíbia</span>
+                    <span class="chat-chip" onclick="sendChip('Serviços de Software')">Serviços de Software</span>
+                    <span class="chat-chip" onclick="sendChip('NIF da Empresa')">NIF da Empresa</span>
+                </div>
+            </div>
+            <div class="assistant-footer">
+                <input type="text" id="chatInput" placeholder="Escreva a sua mensagem...">
+                <button id="chatSendBtn"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+        <button class="assistant-btn" onclick="toggleAssistant()" title="Falar com Assistente Virtual">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Azny Gabriel">
+            <span class="online-dot"></span>
+        </button>
+    </div>
 
     <!-- RODAPÉ COMPLETO -->
     <footer>
         <div class="footer-container">
             <div class="footer-brand-col">
-                <!-- Usar o logo oficial local -->
                 <img src="assets/logo.png" alt="APSAN, LDA Logo">
                 <h4 style="margin: 0; color: var(--accent-color);">APSAN, LDA</h4>
                 <p>Soluções Integradas, Qualidade Que Transforma entre Angola e Namíbia.</p>
-                <div class="footer-flags-container" aria-hidden="false">
-                    <div class="footer-flag-item" title="República de Angola">
-                        <img src="assets/flag-ao.png" alt="Bandeira de Angola">
+                <div class="footer-flags-container">
+                    <div class="footer-flag-item">
+                        <img src="assets/flag-ao.png" alt="Angola">
                         <span>Angola</span>
                     </div>
-                    <div class="footer-flag-item" title="República da Namíbia">
-                        <img src="assets/flag-na.png" alt="Bandeira da Namíbia">
+                    <div class="footer-flag-item">
+                        <img src="assets/flag-na.png" alt="Namíbia">
                         <span>Namíbia</span>
                     </div>
                 </div>
@@ -412,19 +675,10 @@
         </div>
     </footer>
 
-    <!-- (scripts originais mantidos) -->
     <script>
-        // Apenas inclui o conjunto de funções necessárias — mantive o script tal como estava no ficheiro original.
         function toggleMenu() {
-            const navLinks = document.getElementById('navLinks');
-            const menuIcon = document.getElementById('menuIcon');
-            if (navLinks.style.display === 'flex') {
-                navLinks.style.display = 'none';
-                menuIcon.className = 'fas fa-bars';
-            } else {
-                navLinks.style.display = 'flex';
-                menuIcon.className = 'fas fa-times';
-            }
+            const links = document.getElementById('navLinks');
+            links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
         }
 
         function switchTab(tabId, event) {
@@ -452,6 +706,95 @@
                 body.setAttribute('data-theme', 'light');
                 icon.className = 'fas fa-moon';
             }
+        }
+
+        function toggleFaq(card) {
+            card.classList.toggle('active');
+        }
+
+        function openServiceModal(serviceName) {
+            document.getElementById('modalServiceTitle').textContent = serviceName;
+            document.getElementById('modalServiceDesc').textContent = `Serviço especializado prestado pela APSAN, LDA com total garantia de qualidade e suporte profissional para "${serviceName}".`;
+            document.getElementById('serviceModal').classList.add('active');
+        }
+
+        function closeServiceModal() {
+            document.getElementById('serviceModal').classList.remove('active');
+        }
+
+        function handleModalOrder(e) {
+            e.preventDefault();
+            alert('Pedido submetido com sucesso! A nossa equipa entrará em contacto brevemente.');
+            closeServiceModal();
+        }
+
+        function handleRecruitmentSubmit(e) {
+            e.preventDefault();
+            alert('Candidatura enviada com sucesso para a APSAN, LDA!');
+            e.target.reset();
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            alert('Mensagem enviada com sucesso! Obrigado pelo contacto.');
+            e.target.reset();
+        }
+
+        function simulateTracking() {
+            const code = document.getElementById('trackingCodeInput').value.trim();
+            const resBox = document.getElementById('trackingResult');
+            if(!code) {
+                alert('Por favor, insira um código de rastreio válido.');
+                return;
+            }
+            resBox.style.display = 'block';
+            resBox.innerHTML = `<strong>Estado para [${code}]:</strong> Em trânsito aduaneiro (Fronteira Namacunde / Namíbia). Previsão de entrega em 48h.`;
+        }
+
+        function toggleAssistant() {
+            const win = document.getElementById('assistantWindow');
+            win.classList.toggle('active');
+        }
+
+        function sendChip(text) {
+            document.getElementById('chatInput').value = text;
+            processUserMessage();
+        }
+
+        document.getElementById('chatSendBtn').addEventListener('click', processUserMessage);
+        document.getElementById('chatInput').addEventListener('keypress', function(e) {
+            if(e.key === 'Enter') processUserMessage();
+        });
+
+        function processUserMessage() {
+            const input = document.getElementById('chatInput');
+            const msg = input.value.trim();
+            if(!msg) return;
+
+            const chatBody = document.getElementById('chatBody');
+            const userDiv = document.createElement('div');
+            userDiv.className = 'assistant-message user';
+            userDiv.textContent = msg;
+            chatBody.appendChild(userDiv);
+            input.value = '';
+            chatBody.scrollTop = chatBody.scrollHeight;
+
+            setTimeout(() => {
+                const reply = document.createElement('div');
+                reply.className = 'assistant-message';
+                const lower = msg.toLowerCase();
+                if(lower.includes('namíbia') || lower.includes('comprar')) {
+                    reply.textContent = 'As compras e importações na Namíbia são geridas diretamente pela nossa equipa logística em Namacunde e Ondjiva com total segurança!';
+                } else if(lower.includes('software') || lower.includes('sistema')) {
+                    reply.textContent = 'Desenvolvemos soluções tecnológicas e sistemas de gestão personalizados para empresas em Angola.';
+                } else if(lower.includes('nif')) {
+                    reply.textContent = 'O NIF oficial da APSAN, LDA é 5002085011.';
+                } else {
+                    reply.textContent = `Recebi o seu pedido sobre "${msg}". Para atendimento imediato, pode contactar-nos pelo telefone +244 931 057 760 ou WhatsApp.`;
+                }
+                chatBody.appendChild(reply);
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }, 600);
         }
     </script>
 </body>
