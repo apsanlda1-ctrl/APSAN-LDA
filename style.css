@@ -88,12 +88,6 @@ body {
     cursor: pointer;
 }
 
-/* Logo header */
-.site-logo {
-    display: inline-block;
-    object-fit: contain;
-}
-
 /* Barra de Navegação Interna */
 .site-nav-bar {
     background-color: #001f3f;
