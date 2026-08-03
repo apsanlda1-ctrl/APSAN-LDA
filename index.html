@@ -872,7 +872,7 @@
         </div>
     </section>
 
-    <!-- WIDGET DE CHAT AZNY GABRIEL (COM NOVO MODELO DE INTERAÇÃO CONFIGURADO) -->
+    <!-- WIDGET DE CHAT AZNY GABRIEL (ATUALIZADO COM AS NOVAS CAPACIDADES INTERATIVAS) -->
     <div class="assistant-widget">
         <div class="assistant-window" id="assistantWindow">
             <div class="assistant-header">
@@ -887,14 +887,13 @@
             </div>
             <div class="assistant-body" id="assistantBody">
                 <div class="assistant-message">
-                    Olá, como posso ajudar?
+                    Olá! Sou a Azny Gabriel, assistente virtual da APSAN, LDA. Como posso ajudar hoje?
                     <div class="chat-suggestions">
-                        <span class="chat-chip" onclick="sendQuickQuery('olá')">Olá</span>
-                        <span class="chat-chip" onclick="sendQuickQuery('Olá? como estás')">Olá? Como estás</span>
+                        <span class="chat-chip" onclick="sendQuickQuery('Qual é o estado do meu pedido #AP-2026-089?')">Rastrear #AP-2026-089</span>
+                        <span class="chat-chip" onclick="sendQuickQuery('Quanto custa o aluguer de viaturas?')">Orçamento Aluguer</span>
+                        <span class="chat-chip" onclick="sendQuickQuery('Onde fica a vossa representação em Ondjiva?')">Localização Ondjiva</span>
+                        <span class="chat-chip" onclick="sendQuickQuery('Quero falar com um operador.')">Falar com Operador</span>
                         <span class="chat-chip" onclick="sendQuickQuery('serviços')">Serviços</span>
-                        <span class="chat-chip" onclick="sendQuickQuery('horários')">Horários</span>
-                        <span class="chat-chip" onclick="sendQuickQuery('Acompanhamento Hospitalar')">Acompanhamento Hospitalar</span>
-                        <span class="chat-chip" onclick="sendQuickQuery('Compras Na Namibia')">Compras Na Namibia</span>
                     </div>
                 </div>
             </div>
@@ -1231,7 +1230,7 @@
             sendAssistantMessage();
         }
 
-        // LÓGICA DO NOVO MODELO DE INTERAÇÃO DA ASSISTENTE VIRTUAL
+        // NOVA LÓGICA INTERATIVA AVANÇADA DA ASSISTENTE VIRTUAL AZNY GABRIEL
         function sendAssistantMessage() {
             const input = document.getElementById('assistantInput');
             const body = document.getElementById('assistantBody');
@@ -1245,24 +1244,45 @@
             const lowerText = text.toLowerCase();
             let reply = "";
 
-            // Modelo de Interação Configurado
-            if (lowerText === 'olá' || lowerText === 'ola') {
+            // 1. Rastreio Direto do Estado do Pedido
+            if (lowerText.includes('#ap-2026-089') || lowerText.includes('estado do meu pedido #ap-2026-089') || (lowerText.includes('rastrear') && lowerText.includes('089'))) {
+                reply = "O pedido #AP-2026-089 (Serviço de Limpeza Institucional) encontra-se atualmente com o estado: <strong>Em Revisão</strong>. Deseja atualizar algum detalhe?";
+            } else if (lowerText.includes('#ap-2026-072') || (lowerText.includes('rastrear') && lowerText.includes('072'))) {
+                reply = "O pedido #AP-2026-072 (Serviços de Catering) encontra-se atualmente com o estado: <strong>Em Operação</strong>.";
+            } else if (lowerText.includes('estado do meu pedido') || lowerText.includes('rastreio') || lowerText.includes('consultar pedido')) {
+                reply = "Para consultar o estado do seu pedido, por favor informe o número completo (ex: #AP-2026-089) ou aceda à nossa Área do Cliente.";
+
+            // 2. Assistente de Orçamentos Dinâmicos e Custos Estimados
+            } else if (lowerText.includes('quanto custa o aluguer de viaturas') || lowerText.includes('aluguer de viaturas') || lowerText.includes('aluguel de carros')) {
+                reply = "Os preços variam conforme o modelo e o tempo de missão. Gostaria de preencher os dados para receber um orçamento oficial detalhado no seu e-mail?";
+            } else if (lowerText.includes('orçamento') || lowerText.includes('orcamento') || lowerText.includes('quanto custa') || lowerText.includes('preço') || lowerText.includes('precos') || lowerText.includes('catering') || lowerText.includes('transfronteiriço')) {
+                reply = "Para serviços específicos (como catering, missões transfronteiriças ou aluguer de carros), fornecemos estimativas e orçamentos personalizados. Pode submeter a sua solicitação diretamente na secção de Serviços ou informar os detalhes por aqui para tratarmos com a equipa comercial.";
+
+            // 3. Agendamento Rápido de Reuniões ou Chamadas de Suporte
+            } else if (lowerText.includes('falar com um operador') || lowerText.includes('falar com operador') || lowerText.includes('atendente') || lowerText.includes('suporte')) {
+                reply = "Certamente! Posso agendar uma chamada para hoje ou prefere que a nossa equipa em Namacunde/Ondjiva lhe contacte agora?<div class='chat-suggestions' style='margin-top:8px;'><span class='chat-chip' onclick=\"sendQuickQuery('Sim, podem contactar-me agora!')\">Ligar agora</span><span class='chat-chip' onclick=\"sendQuickQuery('Agendar para mais logo')\">Agendar para hoje</span></div>";
+            } else if (lowerText.includes('ligar agora') || lowerText.includes('contactar-me agora')) {
+                reply = "Perfeito! O seu pedido de contacto imediato foi registado e a nossa equipa comercial irá ligar para o seu número nos próximos minutos.";
+            } else if (lowerText.includes('agendar')) {
+                reply = "Sem problemas. Pode também utilizar os nossos contactos telefónicos diretos (931 057 760 / 934 437 739) para agendar o melhor horário.";
+
+            // 4. Respostas Contextuais Baseadas no Local (Angola e Namíbia)
+            } else if (lowerText.includes('onde fica a vossa representação em ondjiva') || lowerText.includes('ondjiva') || lowerText.includes('sede') || lowerText.includes('namacunde')) {
+                reply = "A nossa sede principal fica em Namacunde e contamos com representações em Ondjiva, Província do Cunene. Precisa das coordenadas exatas ou contactos diretos?";
+            } else if (lowerText.includes('namíbia') || lowerText.includes('namibia') || lowerText.includes('alfândegas') || lowerText.includes('alfandegas') || lowerText.includes('taxas de câmbio') || lowerText.includes('fronteira')) {
+                reply = "Como atuamos de forma transfronteiriça entre Angola e a Namíbia, facilitamos trâmites aduaneiros, importação, exportação e compras na Namíbia (utilizando transações em NAD). Tem alguma dúvida específica sobre a documentação alfandegária?";
+
+            // Interações Padrão / Base
+            } else if (lowerText === 'olá' || lowerText === 'ola') {
                 reply = "Olá, como posso ajudar?";
             } else if (lowerText.includes('como estás') || lowerText.includes('como estas') || lowerText.includes('olá? como estás')) {
                 reply = "Olá, estou bem graças. Obrigada por perguntar. Como posso lhe ajudar hoje?";
-            } else if (lowerText.includes('serviço') || lowerText.includes('servicos') || lowerText.includes('serviços principais') || lowerText.includes('quais são os serviços')) {
-                reply = "Os nossos serviços principais são: Serviço de Limpeza Institucional, Fornecimento de Material de Escritório, Serviços de Catering e Gestão de Eventos Corporativos, Serviços de Internet e Cabling, Serviço de Criação de Software e Sistema de Gestão Empresarial, Serviço de Transportes e Aluguer de Carros, e Importação & Exportação. E os serviços extras são: Acompanhamento Hospitalar, Tradução Oficial Juramentada, Autorização de viagem pra menor, Guia, Compras Na Namibia, Encomendas, e Gestão de Redes Sociais.";
-            } else if (lowerText.includes('horário') || lowerText.includes('horario') || lowerText.includes('trabalham até quando') || lowerText.includes('dias de trabalho')) {
+            } else if (lowerText.includes('serviço') || lowerText.includes('servicos') || lowerText.includes('serviços principais')) {
+                reply = "Os nossos serviços principais incluem Limpeza Institucional, Material de Escritório, Catering, Internet e Cabling, Criação de Software, Transportes/Aluguer e Importação & Exportação.";
+            } else if (lowerText.includes('horário') || lowerText.includes('horario')) {
                 reply = "De segunda a sexta-feira trabalhamos das 08:00 até 18:00 e nos sábados das 08:00 até 16:00.";
-            } else if (lowerText.includes('acompanhamento hospitalar') || lowerText.includes('hospital') || lowerText.includes('tradução') || lowerText.includes('traducao')) {
-                reply = "Sim, prestamos esse serviço tanto para os hospitais públicos como privados.";
-            } else if (lowerText.includes('tratamento de saúde') || lowerText.includes('tratamento de saude') || lowerText.includes('deslocações') || lowerText.includes('deslocacoes')) {
-                reply = "Sem problemas, estamos aqui para lhe servir, basta entrar em contacto pelos nossos WhatsApp ou e-mail.";
-            } else if (lowerText.includes('compras na namibia') || lowerText.includes('namíbia') || lowerText.includes('namibia')) {
-                reply = "Sim, prestamos estes serviços, basta preencher o formulário de solicitação de serviços entre outros.";
             } else {
-                // Caso contrário / Dúvidas específicas não mapeadas diretamente
-                reply = "Para mais informações específicas sobre este serviço, por favor entre em contacto connosco pelo WhatsApp ou e-mail.";
+                reply = "Para mais informações específicas sobre este assunto, por favor entre em contacto connosco pelos nossos contactos telefónicos ou e-mail (apsanlda1@gmail.com).";
             }
 
             setTimeout(() => {
