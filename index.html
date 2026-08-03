@@ -348,7 +348,6 @@
                 <li><a href="#services" class="nav-tab" onclick="switchTab('services', event)" style="color:#fff; text-decoration:none; padding:10px; display:block;"><i class="fas fa-concierge-bell" style="width: 20px;"></i> Serviços Principais</a></li>
                 <li><a href="#extras" class="nav-tab" onclick="switchTab('extras', event)" style="color:#fff; text-decoration:none; padding:10px; display:block;"><i class="fas fa-plus-circle" style="width: 20px;"></i> Serviços Extras</a></li>
                 <li><a href="#parcerias" class="nav-tab" onclick="switchTab('parcerias', event)" style="color:#fff; text-decoration:none; padding:10px; display:block;"><i class="fas fa-handshake" style="width: 20px;"></i> Parcerias</a></li>
-                <li><a href="#recrutamento" class="nav-tab" onclick="switchTab('recrutamento', event)" style="color:#fff; text-decoration:none; padding:10px; display:block;"><i class="fas fa-user-tie" style="width: 20px;"></i> Carreiras e Recrutamento</a></li>
                 <li><a href="#portal" class="nav-tab" onclick="switchTab('portal', event)" style="color: #ffcc00; text-decoration:none; padding:10px; display:block;"><i class="fas fa-search-dollar" style="width: 20px;"></i> Consulta Empresa</a></li>
                 <li><a href="#client-area" class="nav-tab" onclick="switchTab('client-area', event)" style="background: var(--accent-color); color: #000 !important; text-decoration:none; padding:10px; border-radius:6px; display:block; font-weight:bold; margin-top:5px;"><i class="fas fa-user-lock" style="width: 20px;"></i> Área do Cliente</a></li>
                 <li><a href="#faq" class="nav-tab" onclick="switchTab('faq', event)" style="color:#fff; text-decoration:none; padding:10px; display:block;"><i class="fas fa-question-circle" style="width: 20px;"></i> FAQ</a></li>
@@ -704,66 +703,6 @@
         </div>
     </section>
 
-    <section id="recrutamento" class="content-section" style="padding: 40px 20px;">
-        <div class="container" style="max-width: 900px; margin: 0 auto;">
-            <div class="section-title" style="text-align: center; margin-bottom: 30px;">
-                <h2>Carreiras e Recrutamento</h2>
-                <div class="underline" style="width: 60px; height: 3px; background: var(--primary-color); margin: 8px auto 0 auto;"></div>
-                <p style="margin-top: 8px; font-size: 14px; color: var(--text-muted);">Consulte as nossas vagas abertas ou envie o seu currículo diretamente para a base de talentos da APSAN, LDA</p>
-            </div>
-
-            <div style="display: grid; grid-template-columns: 1fr; gap: 30px;">
-                <div class="portal-card" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px; border-left: 4px solid var(--accent-color);">
-                    <h3 style="color: var(--primary-color); font-size: 18px; margin-bottom: 10px;"><i class="fas fa-info-circle"></i> Estado Atual de Recrutamento</h3>
-                    <p style="font-size: 14px; color: var(--text-muted); line-height: 1.5;">Atualmente, a APSAN, LDA mantém o seu processo de <strong>recrutamento contínuo de talentos</strong> aberto para futuras oportunidades nas áreas de Limpeza Institucional, Tecnologia, Logística, Catering e Atendimento. Pode submeter o seu currículo a qualquer momento através do formulário abaixo</p>
-                </div>
-
-                <div class="portal-card" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 30px; border-radius: 10px;">
-                    <h3 style="color: var(--primary-color); font-size: 18px; margin-bottom: 15px;"><i class="fas fa-file-alt"></i> Formulário de Candidatura e Envio de Currículo</h3>
-                    <form action="https://formspree.io/f/xqerwzjq" method="POST" onsubmit="handleRecrutamentoSubmit(event)">
-                        <input type="hidden" name="_subject" value="Novo Currículo Submetido - APSAN, LDA">
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
-                            <div class="modal-form-group">
-                                <label>Nome Completo</label>
-                                <input type="text" name="nome_candidato" placeholder="O seu nome..." required>
-                            </div>
-                            <div class="modal-form-group">
-                                <label>E-mail de Contacto</label>
-                                <input type="email" name="email_candidato" placeholder="exemplo@dominio.com" required>
-                            </div>
-                        </div>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
-                            <div class="modal-form-group">
-                                <label>Telemóvel / WhatsApp</label>
-                                <input type="tel" name="telemovel_candidato" placeholder="+244..." required>
-                            </div>
-                            <div class="modal-form-group">
-                                <label>Área de Interesse Pretendida</label>
-                                <select name="area_candidatura" required>
-                                    <option value="">Selecione a área...</option>
-                                    <option value="Limpeza Institucional">Limpeza Institucional</option>
-                                    <option value="Catering e Eventos">Catering e Eventos</option>
-                                    <option value="Tecnologia e Software">Tecnologia e Software</option>
-                                    <option value="Logística e Transportes">Logística e Transportes</option>
-                                    <option value="Administrativo e Atendimento">Administrativo e Atendimento</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="modal-form-group">
-                            <label>Link do Currículo (LinkedIn, Google Drive ou Resumo Profissional)</label>
-                            <input type="text" name="link_curriculo" placeholder="Cole o link do seu CV ou descreva as suas qualificações..." required>
-                        </div>
-                        <div class="modal-form-group">
-                            <label>Apresentação / Carta de Motivação</label>
-                            <textarea name="motivacao_candidato" rows="4" placeholder="Fale resumidamente sobre a sua experiência profissional e competências..." required></textarea>
-                        </div>
-                        <button type="submit" id="recrutamentoSubmitBtn" style="width: 100%; padding: 12px; background-color: var(--primary-color); color: #fff; border: none; font-weight: bold; border-radius: 6px; cursor: pointer; transition: transform 0.2s;"><i class="fas fa-paper-plane"></i> Submeter Currículo Diretamente</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section id="portal" class="content-section" style="padding: 40px 20px;">
         <div class="container" style="max-width: 1200px; margin: 0 auto;">
             <div class="section-title" style="text-align: center; margin-bottom: 30px;">
@@ -917,7 +856,7 @@
                     <p style="margin-top: 15px; font-size: 14px; color: var(--text-muted);"><i class="fas fa-map-marker-alt"></i> <strong>Sede:</strong> Cunene, Namacunde (Repr. em Ondjiva)[cite: 1]</p>
                     <p style="margin-top: 10px; font-size: 14px; color: var(--text-muted);"><i class="fas fa-phone-alt"></i> <strong>Telemóveis:</strong> 931 057 760 / 934 437 739</p>
                     <p style="margin-top: 10px; font-size: 14px; color: var(--text-muted);"><i class="fas fa-envelope"></i> <strong>Email:</strong> apsanlda1@gmail.com</p>
-                    <p style="margin-top: 10px; font-size: 14px; color: var(--text-muted);"><i class="fas fa-id-card"></i> <strong>NIF:</strong> 5002085011[cite: 2]</p>
+                    <p style="margin-top: 10px; font-size: 14px; color: var(--text-muted);"><i class="fas fa-id-card"></i> <strong>NIF:</strong> 5002085011</p>
                 </div>
                 <div class="contact-form-box" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px; cursor: default;">
                     <h3>Envie uma Mensagem</h3>
@@ -1082,14 +1021,13 @@
     </style>
 
     <script>
-        const sectionsList = ['home', 'about', 'services', 'extras', 'parcerias', 'recrutamento', 'portal', 'client-area', 'faq', 'posts', 'contact'];
+        const sectionsList = ['home', 'about', 'services', 'extras', 'parcerias', 'portal', 'client-area', 'faq', 'posts', 'contact'];
         const sectionNamesMap = {
             'home': 'Início',
             'about': 'Quem Somos',
             'services': 'Serviços Principais',
             'extras': 'Serviços Extras',
             'parcerias': 'Parcerias',
-            'recrutamento': 'Carreiras e Recrutamento',
             'portal': 'Consulta Empresa',
             'client-area': 'Área do Cliente',
             'faq': 'FAQ',
@@ -1206,10 +1144,7 @@
             sendAssistantMessage();
         }
 
-        // ==========================================
-        // CONFIGURAÇÃO DA API DO GEMINI PARA A AZNY GABRIEL
-        // ==========================================
-        const GEMINI_API_KEY = 'SUA_API_KEY_DO_GEMINI'; // Insere aqui a tua chave de API do Gemini
+        const GEMINI_API_KEY = 'SUA_API_KEY_DO_GEMINI';
 
         const generation_config = {
             temperature: 1,
@@ -1243,7 +1178,7 @@
                 - E-mail: apsanlda1@gmail.com
                 - Serviços Principais: 1. Serviço de Limpeza Institucional, 2. Fornecimento de Material de Escritório, 3. Serviços de Catering e Gestão de Eventos Corporativos, 4. Serviços de Internet e Cabling, 5. Serviço de Criação de Software e Sistema de Gestão Empresarial, 6. Serviço de Transportes e Aluguer de Carros, 7. Importação & Exportação.
                 - Serviços Extras: Acompanhamento Hospitalar, Tradução Oficial Juramentada, Autorização de viagem pra menor, Guia, Compras Na Namibia, Encomendas, Gestão de Redes Sociais.
-                - Recursos Especiais: A empresa dispõe de canais dedicados para Parcerias, Carreiras e Recrutamento, Área do Cliente e um Canal de Denúncias e Abusos seguro.
+                - Recursos Especiais: A empresa dispõe de canais dedicados para Parcerias, Área do Cliente e um Canal de Denúncias e Abusos seguro.
                 Responde sempre em português de forma clara, prestativa e institucional baseando-te nestes dados.
             `;
 
@@ -1320,29 +1255,6 @@
                 alert('Erro de conexão.');
             } finally {
                 submitBtn.innerHTML = '<i class="fas fa-handshake"></i> Submeter Proposta de Parceria';
-                submitBtn.disabled = false;
-            }
-        }
-
-        async function handleRecrutamentoSubmit(event) {
-            event.preventDefault();
-            const form = event.target;
-            const submitBtn = document.getElementById('recrutamentoSubmitBtn');
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> A enviar currículo...';
-            submitBtn.disabled = true;
-
-            try {
-                const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
-                if (response.ok) {
-                    showToast("Currículo Submetido!", "O seu CV foi integrado com sucesso na nossa base de talentos.");
-                    form.reset();
-                } else {
-                    alert('Erro ao enviar currículo.');
-                }
-            } catch (error) {
-                alert('Erro de conexão.');
-            } finally {
-                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submeter Currículo Diretamente';
                 submitBtn.disabled = false;
             }
         }
