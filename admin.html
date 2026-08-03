@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo - APSAN, LDA</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <div class="admin-container">
+        <!-- Menu Lateral -->
+        <aside class="admin-sidebar">
+            <h2>Painel Admin</h2>
+            <ul>
+                <li><a href="#fundo" class="active">Imagens de Fundo</a></li>
+                <li><a href="#excel">Excel</a></li>
+                <li><a href="#word">Word</a></li>
+            </ul>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="admin-content">
+            <header>
+                <h1>Gestão do Site</h1>
+                <span class="user-info">Administrador</span>
+            </header>
+
+            <!-- Secção de Gestão de Imagens de Fundo -->
+            <section id="fundo" class="admin-section">
+                <h3>Gerir Carrossel de Fundo (Home)</h3>
+                <p>Selecione as imagens do seu computador para atualizar o fundo principal do site:</p>
+                
+                <div class="upload-box">
+                    <input type="file" id="adminInputImagens" accept="image/*" multiple>
+                    <button id="btnSalvarImagens" class="btn-primary">Guardar e Aplicar Imagens</button>
+                </div>
+
+                <div id="previewContainer" class="preview-grid">
+                    <!-- Pré-visualização das imagens carregadas aparecerão aqui -->
+                </div>
+            </section>
+
+            <!-- Outras Ferramentas -->
+            <section id="excel" class="admin-section">
+                <h3>Excel</h3>
+                <p>Área de gestão de documentos Excel.</p>
+            </section>
+
+            <section id="word" class="admin-section">
+                <h3>Word</h3>
+                <p>Área de gestão de documentos Word.</p>
+            </section>
+        </main>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
