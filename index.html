@@ -350,7 +350,6 @@
                 <li><a href="#parcerias" class="nav-tab" onclick="switchTab('parcerias', event)" style="color:#fff; text-decoration:none; padding:10px; display:block;"><i class="fas fa-handshake" style="width: 20px;"></i> Parcerias</a></li>
                 <li><a href="#portal" class="nav-tab" onclick="switchTab('portal', event)" style="color: #ffcc00; text-decoration:none; padding:10px; display:block;"><i class="fas fa-search-dollar" style="width: 20px;"></i> Consulta Empresa</a></li>
                 <li><a href="#client-area" class="nav-tab" onclick="switchTab('client-area', event)" style="background: var(--accent-color); color: #000 !important; text-decoration:none; padding:10px; border-radius:6px; display:block; font-weight:bold; margin-top:5px;"><i class="fas fa-user-lock" style="width: 20px;"></i> Área do Cliente</a></li>
-                <li><a href="#admin-area" class="nav-tab" onclick="switchTab('admin-area', event)" style="background: #dc3545; color: #fff !important; text-decoration:none; padding:10px; border-radius:6px; display:block; font-weight:bold; margin-top:5px;"><i class="fas fa-user-shield" style="width: 20px;"></i> Área Admin (Eduardo)</a></li>
                 <li><a href="#faq" class="nav-tab" onclick="switchTab('faq', event)" style="color:#fff; text-decoration:none; padding:10px; display:block;"><i class="fas fa-question-circle" style="width: 20px;"></i> FAQ</a></li>
                 <li><a href="#posts" class="nav-tab" onclick="switchTab('posts', event)" style="color:#fff; text-decoration:none; padding:10px; display:block;"><i class="fas fa-newspaper" style="width: 20px;"></i> Posts</a></li>
                 <li><a href="#contact" class="nav-tab" onclick="switchTab('contact', event)" style="color:#fff; text-decoration:none; padding:10px; display:block;"><i class="fas fa-envelope" style="width: 20px;"></i> Contactos</a></li>
@@ -800,62 +799,6 @@
         </div>
     </section>
 
-    <!-- ÁREA ADMINISTRATIVA EXCLUSIVA DO EDUARDO -->
-    <section id="admin-area" class="content-section" style="padding: 40px 20px;">
-        <div class="container" style="max-width: 900px; margin: 0 auto;">
-            <div class="section-title" style="text-align: center; margin-bottom: 30px;">
-                <h2>Área Administrativa</h2>
-                <div class="underline" style="width: 60px; height: 3px; background: #dc3545; margin: 8px auto 0 auto;"></div>
-                <p style="margin-top: 8px; font-size: 14px; color: var(--text-muted);">Painel de Gestão Restrito - Acesso Exclusivo para Administração (Eduardo)</p>
-            </div>
-
-            <!-- Dashboard Admin com Upload Direto e Gestão de Posts -->
-            <div class="portal-card" id="adminDashboardCard" style="display: block; background: var(--card-bg); border: 1px solid var(--border-color); padding: 30px; border-radius: 10px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px;">
-                    <h3 style="color: #dc3545;"><i class="fas fa-cogs"></i> Painel de Controlo - Gestão de Conteúdos</h3>
-                    <span style="background: #28a745; color: #fff; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: bold;">Acesso Direto Ativo</span>
-                </div>
-
-                <form id="adminPostForm" onsubmit="handleAdminUpload(event)" style="display: flex; flex-direction: column; gap: 20px;">
-                    <input type="hidden" id="adminEditIndex" value="-1">
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
-                        <div class="modal-form-group">
-                            <label>Tipo de Conteúdo</label>
-                            <select id="adminContentType" onchange="toggleUploadFields()" required>
-                                <option value="post">Novo Post / Notícia</option>
-                                <option value="imagem">Carregar Imagem</option>
-                                <option value="video">Carregar Vídeo</option>
-                            </select>
-                        </div>
-                        <div class="modal-form-group">
-                            <label>Título do Conteúdo</label>
-                            <input type="text" id="adminTitle" placeholder="Título descritivo..." required>
-                        </div>
-                    </div>
-
-                    <div class="modal-form-group" id="fileInputGroup">
-                        <label id="fileInputLabel">Carregar Foto ou Vídeo Diretamente do PC</label>
-                        <input type="file" id="adminFile" accept="image/*,video/*" required>
-                    </div>
-
-                    <div class="modal-form-group">
-                        <label>Descrição Completa / Conteúdo</label>
-                        <textarea id="adminContentBody" rows="4" placeholder="Escreva o texto ou detalhes do post/conteúdo..." required></textarea>
-                    </div>
-
-                    <button type="submit" id="adminSubmitBtn" style="padding: 12px; background-color: #dc3545; color: #fff; border: none; font-weight: bold; border-radius: 6px; cursor: pointer; transition: transform 0.2s;"><i class="fas fa-upload"></i> Publicar Conteúdo no Site</button>
-                </form>
-
-                <div style="margin-top: 30px; border-top: 1px solid var(--border-color); padding-top: 20px;">
-                    <h4 style="color: var(--primary-color); margin-bottom: 15px;"><i class="fas fa-history"></i> Gerir Posts Publicados (Editar / Eliminar)</h4>
-                    <div id="adminContentList" style="display: flex; flex-direction: column; gap: 12px; font-size: 14px; color: var(--text-muted);">
-                        <p>Nenhum conteúdo personalizado adicionado nesta sessão.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section id="faq" class="content-section" style="padding: 40px 20px;">
         <div class="container" style="max-width: 900px; margin: 0 auto;">
             <div class="section-title" style="text-align: center; margin-bottom: 30px;">
@@ -1080,7 +1023,7 @@
     </style>
 
     <script>
-        const sectionsList = ['home', 'about', 'services', 'extras', 'parcerias', 'portal', 'client-area', 'admin-area', 'faq', 'posts', 'contact'];
+        const sectionsList = ['home', 'about', 'services', 'extras', 'parcerias', 'portal', 'client-area', 'faq', 'posts', 'contact'];
         const sectionNamesMap = {
             'home': 'Início',
             'about': 'Quem Somos',
@@ -1089,13 +1032,10 @@
             'parcerias': 'Parcerias',
             'portal': 'Consulta Empresa',
             'client-area': 'Área do Cliente',
-            'admin-area': 'Área Admin (Eduardo)',
             'faq': 'FAQ',
             'posts': 'Posts',
             'contact': 'Contactos'
         };
-
-        let adminPostsStore = [];
 
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
@@ -1384,112 +1324,6 @@
             showToast("Sessão Encerrada", "Terminou a sessão com sucesso.");
         }
 
-        function toggleUploadFields() {
-            const type = document.getElementById('adminContentType').value;
-            const label = document.getElementById('fileInputLabel');
-            if (type === 'post') {
-                label.textContent = "Carregar Imagem de Destaque do PC (Opcional)";
-            } else if (type === 'imagem') {
-                label.textContent = "Carregar Fotografia do PC";
-            } else if (type === 'video') {
-                label.textContent = "Carregar Vídeo do PC";
-            }
-        }
-
-        function handleAdminUpload(event) {
-            event.preventDefault();
-            const type = document.getElementById('adminContentType').value;
-            const title = document.getElementById('adminTitle').value;
-            const body = document.getElementById('adminContentBody').value;
-            const fileInput = document.getElementById('adminFile');
-            const editIndex = parseInt(document.getElementById('adminEditIndex').value);
-
-            let mediaName = fileInput.files.length > 0 ? fileInput.files[0].name : "Sem ficheiro";
-
-            if (editIndex > -1) {
-                // Atualizar post existente
-                adminPostsStore[editIndex] = { type, title, body, mediaName };
-                document.getElementById('adminEditIndex').value = -1;
-                document.getElementById('adminSubmitBtn').innerHTML = `<i class="fas fa-upload"></i> Publicar Conteúdo no Site`;
-                showToast("Post Atualizado", "As alterações foram salvas com sucesso.");
-            } else {
-                // Adicionar novo post
-                adminPostsStore.push({ type, title, body, mediaName });
-                showToast("Conteúdo Publicado!", "O novo conteúdo foi adicionado e está visível no site.");
-            }
-
-            event.target.reset();
-            renderAdminAndPublicPosts();
-        }
-
-        function renderAdminAndPublicPosts() {
-            const adminListContainer = document.getElementById('adminContentList');
-            const postsContainer = document.getElementById('dynamicPostsContainer');
-
-            adminListContainer.innerHTML = '';
-            
-            // Manter o post padrão inicial e adicionar os novos dinamicamente
-            let publicHtml = `
-                <article class="post-card" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px; cursor: default;">
-                    <span style="font-size: 12px; color: var(--text-muted);"><i class="far fa-calendar-alt"></i> 26 de Julho, 2026</span>
-                    <h3 style="margin: 10px 0; font-size: 18px;">Expansão de Serviços e Nosso Crescimento</h3>
-                    <p style="font-size: 14px; color: var(--text-muted);">A APSAN, LDA continua a alargar o seu leque de soluções integradas para melhor servir Angola e Namíbia</p>
-                </article>
-            `;
-
-            if (adminPostsStore.length === 0) {
-                adminListContainer.innerHTML = `<p>Nenhum conteúdo personalizado adicionado nesta sessão.</p>`;
-            } else {
-                adminPostsStore.forEach((post, index) => {
-                    // Painel Admin Item
-                    const itemDiv = document.createElement('div');
-                    itemDiv.style.cssText = "background: var(--bg-color); padding: 15px; border-radius: 6px; border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;";
-                    itemDiv.innerHTML = `
-                        <div>
-                            <strong style="color: #dc3545; text-transform: uppercase; font-size: 11px;">[${post.type}] - Ficheiro: ${post.mediaName}</strong>
-                            <h5 style="color: var(--text-color); font-size: 15px; margin: 4px 0;">${post.title}</h5>
-                            <p style="font-size: 13px; color: var(--text-muted); margin: 0;">${post.body.substring(0, 70)}...</p>
-                        </div>
-                        <div style="display: flex; gap: 8px;">
-                            <button onclick="editAdminPost(${index})" style="background: var(--primary-color); color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px;"><i class="fas fa-edit"></i> Editar</button>
-                            <button onclick="deleteAdminPost(${index})" style="background: #dc3545; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px;"><i class="fas fa-trash"></i> Eliminar</button>
-                        </div>
-                    `;
-                    adminListContainer.appendChild(itemDiv);
-
-                    // Public Post Item
-                    publicHtml += `
-                        <article class="post-card" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px; cursor: default;">
-                            <span style="font-size: 12px; color: var(--text-muted);"><i class="far fa-calendar-alt"></i> Hoje &nbsp;|&nbsp; <i class="fas fa-paperclip"></i> ${post.mediaName}</span>
-                            <h3 style="margin: 10px 0; font-size: 18px;">${post.title}</h3>
-                            <p style="font-size: 14px; color: var(--text-muted);">${post.body}</p>
-                        </article>
-                    `;
-                });
-            }
-            postsContainer.innerHTML = publicHtml;
-        }
-
-        function editAdminPost(index) {
-            const post = adminPostsStore[index];
-            document.getElementById('adminContentType').value = post.type;
-            document.getElementById('adminTitle').value = post.title;
-            document.getElementById('adminContentBody').value = post.body;
-            document.getElementById('adminEditIndex').value = index;
-            document.getElementById('adminSubmitBtn').innerHTML = `<i class="fas fa-save"></i> Atualizar Post`;
-            toggleUploadFields();
-            window.scrollTo({ top: document.getElementById('admin-area').offsetTop, behavior: 'smooth' });
-            showToast("Modo de Edição", "Altere os campos e clique em Atualizar Post.");
-        }
-
-        function deleteAdminPost(index) {
-            if (confirm("Tem certeza que deseja eliminar este post permanentemente do site?")) {
-                adminPostsStore.splice(index, 1);
-                renderAdminAndPublicPosts();
-                showToast("Post Eliminado", "O conteúdo foi removido com sucesso.");
-            }
-        }
-
         function toggleAssistant() {
             const win = document.getElementById('assistantWindow');
             win.classList.toggle('active');
@@ -1539,16 +1373,18 @@
 
         function processBotReply(query) {
             const q = query.toLowerCase();
-            let reply = "Obrigado pelo contacto com a APSAN, LDA. Como posso ajudar com os nossos serviços principais ou extras?";
+            let reply = "A APSAN, LDA está à sua inteira disposição para prestar serviços de excelência entre Angola e Namíbia. Pode contactar-nos pelo 931 057 760 ou através do e-mail apsanlda1@gmail.com.";
             
-            if(q.includes('extras') || q.includes('serviços extras')) {
-                reply = "Oferecemos vários serviços extras: Acompanhamento Hospitalar, Tradução Oficial Juramentada, Autorização de viagem pra menor, Guia, Compras na Namíbia, Encomendas e Gestão de Redes Sociais.";
+            if(q.includes('extra') || q.includes('serviços extras')) {
+                reply = "Oferecemos vários serviços extras especializados, tais como: Acompanhamento Hospitalar, Tradução Oficial Juramentada, Autorização de Viagem para Menor, Guia, Compras na Namíbia, Encomendas e Gestão de Redes Sociais.";
             } else if(q.includes('namibia') || q.includes('compras')) {
-                reply = "Facilitamos compras e trâmites de mercadorias diretamente na Namíbia com total segurança e entrega rápida!";
-            } else if(q.includes('tradução')) {
-                reply = "A nossa Tradução Oficial Juramentada garante validade legal, rigor linguístico e confidencialidade total para os seus documentos.";
-            } else if(q.includes('operador') || q.includes('falar')) {
-                reply = "Pode ligar diretamente para os nossos contactos oficiais: <strong>931 057 760 / 934 437 739</strong> ou enviar email para apsanlda1@gmail.com";
+                reply = "O nosso serviço de <strong>Compras na Namíbia</strong> facilita a aquisição, transação e transporte seguro de mercadorias diretamente da Namíbia para Angola, com total comodidade e confiança.";
+            } else if(q.includes('tradução') || q.includes('juramentada')) {
+                reply = "A <strong>Tradução Oficial Juramentada</strong> garante tradução e interpretação de documentos com validade legal, rigor linguístico e confidencialidade total.";
+            } else if(q.includes('hospitalar') || q.includes('encomendas')) {
+                reply = "O <strong>Acompanhamento Hospitalar</strong> oferece apoio humanizado a doentes, enquanto o serviço de <strong>Encomendas</strong> assegura a recepção e envio rápido de volumes com total segurança.";
+            } else if(q.includes('operador') || q.includes('contacto') || q.includes('falar')) {
+                reply = "Pode falar diretamente com um operador pelos telemóveis: <strong>931 057 760 / 934 437 739 / 946 195 402</strong> ou pelo email <strong>apsanlda1@gmail.com</strong>.";
             }
             appendBotMsg(reply);
         }
