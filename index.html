@@ -60,7 +60,7 @@
         }
         .theme-toggle-btn:hover { transform: rotate(180deg); }
 
-        /* Carrossel do Hero */
+        /* Carrossel do Hero com Brilho Ajustado para as Imagens ficarem Claras */
         .hero-custom-bg {
             position: relative;
             min-height: 520px;
@@ -331,7 +331,7 @@
         </div>
     </div>
 
-    <!-- Main Navigation Bar -->
+    <!-- Main Navigation Bar com Área do Cliente Integrada -->
     <nav class="main-nav">
         <div class="container nav-container" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; max-width: 1200px; margin: 0 auto;">
             <div class="logo">
@@ -366,14 +366,14 @@
         </div>
     </nav>
 
-    <!-- BARRA DE TEXTOS DESLIZANTES NO TOPO -->
+    <!-- BARRA DE TEXTOS DESLIZANTES LOGO ABAIXO DO NOME DA EMPRESA (NO TOPO) -->
     <div class="top-slider-bar" style="background: var(--nav-bg); border-bottom: 1px solid rgba(255, 255, 255, 0.15); overflow: hidden; white-space: nowrap; padding: 8px 0;">
         <div class="slider-text-track" style="display: inline-block; animation: marqueeSlide 26s linear infinite; color: var(--accent-color); font-weight: bold; font-size: 13px;">
-            APSAN, LDA &nbsp;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&nbsp; Soluções Integradas, Qualidade Que Transforma! &nbsp;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&nbsp; Sede: Namacunde, Cunene &nbsp;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&nbsp; Representações em Ondjiva &nbsp;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&nbsp; NIF: 5002085011 &nbsp;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&nbsp; Contactos: 931 057 760 / 934 437 739 / 946 195 402
+            APSAN, LDA &nbsp;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&nbsp; Soluções Integradas, Qualidade Que Transforma! &nbsp;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&nbsp; Sede: Namacunde, Cunene &nbsp;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&nbsp; Representações em Ondjiva &nbsp;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&nbsp; NIF: 5002085011 &nbsp;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&nbsp; Contactos: 931 057 760 / 934 437 739/ 946 195 402
         </div>
     </div>
 
-    <!-- BARRA DE NAVEGAÇÃO INTERNA -->
+    <!-- BARRA DE NAVEGAÇÃO INTERNA (Com visibilidade condicional baseada na página) -->
     <div class="site-nav-bar" id="siteNavBar" style="display: none; justify-content: space-between; align-items: center; background: var(--card-bg); padding: 10px 20px; border-bottom: 1px solid var(--border-color); overflow: hidden; position: relative;">
         <button class="site-nav-btn" onclick="navigateHistory(-1)" style="background: var(--primary-color); color: #fff; border: none; padding: 6px 14px; border-radius: 4px; cursor: pointer; z-index: 5; flex-shrink: 0;">
             <i class="fas fa-arrow-left"></i> Recuar
@@ -392,7 +392,7 @@
         </button>
     </div>
 
-    <!-- SEÇÃO 1: INÍCIO -->
+    <!-- SEÇÃO 1: INÍCIO (Com Slide Rotativo de mais de 10 imagens) -->
     <section id="home" class="content-section active-section" style="padding: 0;">
         <div class="hero-custom-bg">
             <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1920&q=80');"></div>
@@ -413,7 +413,7 @@
                 <div class="hero-text" style="max-width: 700px;">
                     <span class="badge-tag" style="background: var(--accent-color); color: #000; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 12px; text-transform: uppercase;">Soluções Integradas</span>
                     <h2 style="font-size: 3rem; margin: 15px 0; font-weight: 800;">Qualidade Que Transforma!</h2>
-                    <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 25px;">A <strong>APSAN, LDA</strong> é uma empresa angolana prestadora de serviços que atua entre Angola e Namíbia e fornecedora de soluções integradas, especializada em atender instituições públicas e privadas, organizações não-governamentais e agências de cooperação, com foco estratégico na modernização e excelência tecnológica. Com sede oficial no Município de Namacunde, Província do Cunene, e representações em Ondjiva.</p>
+                    <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 25px;">A <strong>APSAN, LDA</strong> é uma empresa angolana prestadora de serviços que atua entre Angola e Namíbia e fornecedora de soluções integradas, especializada em atender instituições públicas e privadas, organizações não-governamentais e agências de cooperação, com um foco estratégico na modernização, eficiência operacional e excelência tecnológica. com sede oficial no Município de Namacunde, Província do Cunene, e representações em Ondjiva</p>
                     <div class="hero-buttons" style="display: flex; gap: 15px; flex-wrap: wrap;">
                         <button class="btn btn-primary" onclick="switchTab('services', event)" style="background-color: var(--accent-color); color: #000; border: none; padding: 12px 24px; font-weight: bold; border-radius: 5px; cursor: pointer;">Ver Serviços Principais</button>
                         <button class="btn btn-outline" onclick="openDenunciaModal()" style="background-color: #dc3545; border: 2px solid #dc3545; color: #fff; padding: 12px 24px; font-weight: bold; border-radius: 5px; cursor: pointer;"><i class="fas fa-shield-alt"></i> Denúncias e Abusos</button>
@@ -454,12 +454,12 @@
                 </div>
             </div>
 
-            <!-- SEÇÃO DE EXPERIÊNCIAS / TESTEMUNHOS -->
+            <!-- SEÇÃO DE EXPERIÊNCIAS / TESTEMUNHOS DOS CLIENTES COM FORMULÁRIO DE SUBMISSÃO PÚBLICA -->
             <div id="experiencias-section" style="margin: 60px 0 20px 0; background: var(--card-bg); border: 1px solid var(--border-color); padding: 40px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
                 <div style="text-align: center; margin-bottom: 25px;">
                     <h2 style="color: var(--primary-color); font-size: 24px; margin-bottom: 8px;"><i class="fas fa-comments"></i> Experiências dos Nossos Clientes</h2>
                     <div class="underline" style="width: 60px; height: 3px; background: var(--primary-color); margin: 0 auto 10px auto;"></div>
-                    <p style="font-size: 14px; color: var(--text-muted); max-width: 700px; margin: 0 auto 20px auto;">Partilhe connosco a sua experiência com a APSAN, LDA. O seu depoimento ficará publicamente visível no site após a submissão!</p>
+                    <p style="font-size: 14px; color: var(--text-muted); max-width: 700px; margin: 0 auto 20px auto;">Partilhe connosco a sua experiência com a APSAN, LDA O seu depoimento ficará publicamente visível no site após a submissão!</p>
                     
                     <button type="button" onclick="toggleTestimonialForm()" id="btnToggleTestimonialForm" style="padding: 10px 20px; background-color: var(--primary-color); color: #fff; border: none; font-weight: bold; border-radius: 6px; cursor: pointer; transition: transform 0.2s;">
                         <i class="fas fa-pen"></i> Publicar Testemunho
@@ -498,7 +498,7 @@
                         </div>
                         <div class="client-info">
                             <div class="client-avatar">JN</div>
-                            <div><h4 style="font-size: 14px; margin: 0;">João Namandje</h4></div>
+                            <div><h4 style="font-size: 14px; margin: 0;">João Namandje</h4><span style="font-size: 12px; color: var(--text-muted);"</span></div>
                         </div>
                     </div>
                     <div class="testimonial-card">
@@ -508,7 +508,7 @@
                         </div>
                         <div class="client-info">
                             <div class="client-avatar">MC</div>
-                            <div><h4 style="font-size: 14px; margin: 0;">Maria Chilova</h4></div>
+                            <div><h4 style="font-size: 14px; margin: 0;">Maria Chilova</h4><span style="font-size: 12px; color: var(--text-muted);"></span></div>
                         </div>
                     </div>
                     <div class="testimonial-card">
@@ -518,7 +518,7 @@
                         </div>
                         <div class="client-info">
                             <div class="client-avatar">AP</div>
-                            <div><h4 style="font-size: 14px; margin: 0;">António Petiker</h4></div>
+                            <div><h4 style="font-size: 14px; margin: 0;">António Petiker</h4><span style="font-size: 12px; color: var(--text-muted);"></span></div>
                         </div>
                     </div>
                 </div>
@@ -535,7 +535,7 @@
             </div>
             <div class="about-grid">
                 <div class="about-text" style="text-align: center; max-width: 800px; margin: 0 auto 40px auto;">
-                    <p style="font-size: 16px; line-height: 1.6;">A <strong>APSAN, LDA</strong> destaca-se pela prestação de serviços diversificados com elevado padrão de qualidade, respondendo com rigor às necessidades institucionais, logísticas, tecnológicas e comerciais.</p>
+                    <p style="font-size: 16px; line-height: 1.6;">A <strong>APSAN, LDA</strong>destaca-se pela prestação de serviços diversificados com elevado padrão de qualidade, respondendo com rigor às necessidades institucionais, logísticas, tecnológicas e comerciais.</p>
                 </div>
                 <div class="mvv-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
                     <div class="mvv-card" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px;">
@@ -608,7 +608,7 @@
                 <div class="service-card" onclick="openServiceDetail('Importação & Exportação', 'Facilitamos o comércio internacional com processos aduaneiros seguros entre Angola e Namíbia', ['Gestão integrada de trâmites de importação e exportação.', 'Logística aduaneira eficiente e segura.', 'Apoio documental completo para operações comerciais transfronteiriças.'])" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px; cursor: pointer;">
                     <div class="serv-icon" style="font-size: 28px; color: var(--primary-color); margin-bottom: 15px;"><i class="fas fa-globe"></i></div>
                     <h3>7. Importação & Exportação</h3>
-                    <p style="margin-top: 10px; font-size: 14px; color: var(--text-muted);">Serviços especializados em comércio internacional, trâmites aduaneiros e transações logísticas entre fronteiras.</p>
+                    <p style="margin-top: 10px; font-size: 14px; color: var(--text-muted);">Serviços especializados em comércio internacional, trâmites aduaneiros e transações logísticas entre fronteiras</p>
                 </div>
             </div>
         </div>
@@ -644,12 +644,12 @@
                     <h3>3. Autorização de viagem pra menor</h3>
                     <p style="margin-top: 10px; font-size: 14px; color: var(--text-muted);">Tratamento de autorizações e documentação legal para viagens de menores com total segurança.</p>
                 </div>
-                <div class="service-card" onclick="openServiceDetail('Guia', 'Serviço de acompanhamento turístico e profissional para orientação segura.', ['Guia especializado para deslocações e passeios.', 'Conhecimento aprofundado das rotas locais entre Angola e Namíbia.', 'Segurança e apoio logístico constante.'])" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px; cursor: pointer;">
+                <div class="service-card" onclick="openServiceDetail('Guia', 'Serviço de acompanhamento turístico e profissional para orientação segura.', ['Guia especializado para deslocações e passeios.', 'Conhecimento aprofundado das rotas locais entre Angola e Namíbia', 'Segurança e apoio logístico constante.'])" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px; cursor: pointer;">
                     <div class="serv-icon" style="font-size: 28px; color: var(--primary-color); margin-bottom: 15px;"><i class="fas fa-map-signs"></i></div>
                     <h3>4. Guia</h3>
                     <p style="margin-top: 10px; font-size: 14px; color: var(--text-muted);">Serviços de orientação e acompanhamento especializado para viagens e deslocações.</p>
                 </div>
-                <div class="service-card" onclick="openServiceDetail('Compras Na Namibia', 'Facilitamos a aquisição, transação e transporte seguro de mercadorias na Namíbia.', ['Apoio direto na seleção e compra de produtos na Namíbia.', 'Gestão de transporte e trâmites de entrega segura.', 'Conveniência e confiança em cada transação.'])" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px; cursor: pointer;">
+                <div class="service-card" onclick="openServiceDetail('Compras Na Namibia', 'Facilitamos a aquisição, transação e transporte seguro de mercadorias na Namíbia', ['Apoio direto na seleção e compra de produtos na Namíbia', 'Gestão de transporte e trâmites de entrega segura.', 'Conveniência e confiança em cada transação.'])" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px; cursor: pointer;">
                     <div class="serv-icon" style="font-size: 28px; color: var(--primary-color); margin-bottom: 15px;"><i class="fas fa-shopping-cart"></i></div>
                     <h3>5. Compras Na Namibia</h3>
                     <p style="margin-top: 10px; font-size: 14px; color: var(--text-muted);">Facilitamos a aquisição e o transporte seguro de mercadorias diretamente da Namíbia.</p>
@@ -668,7 +668,7 @@
         </div>
     </section>
 
-    <!-- SEÇÃO: PARCERIAS -->
+    <!-- SEÇÃO NOVA: PARCERIAS -->
     <section id="parcerias" class="content-section" style="padding: 40px 20px;">
         <div class="container" style="max-width: 900px; margin: 0 auto;">
             <div class="section-title" style="text-align: center; margin-bottom: 30px;">
@@ -720,21 +720,23 @@
         </div>
     </section>
 
-    <!-- SEÇÃO: CARREIRAS E RECRUTAMENTO -->
+    <!-- SEÇÃO NOVA: CARREIRAS E RECRUTAMENTO -->
     <section id="recrutamento" class="content-section" style="padding: 40px 20px;">
         <div class="container" style="max-width: 900px; margin: 0 auto;">
             <div class="section-title" style="text-align: center; margin-bottom: 30px;">
                 <h2>Carreiras e Recrutamento</h2>
                 <div class="underline" style="width: 60px; height: 3px; background: var(--primary-color); margin: 8px auto 0 auto;"></div>
-                <p style="margin-top: 8px; font-size: 14px; color: var(--text-muted);">Consulte as nossas vagas abertas ou envie o seu currículo diretamente para a base de talentos da APSAN, LDA.</p>
+                <p style="margin-top: 8px; font-size: 14px; color: var(--text-muted);">Consulte as nossas vagas abertas ou envie o seu currículo diretamente para a base de talentos da APSAN, LDA</p>
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr; gap: 30px;">
+                <!-- Caixa de verificação de recrutamento (Clientes saberem se a empresa recruta) -->
                 <div class="portal-card" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px; border-left: 4px solid var(--accent-color);">
                     <h3 style="color: var(--primary-color); font-size: 18px; margin-bottom: 10px;"><i class="fas fa-info-circle"></i> Estado Atual de Recrutamento</h3>
-                    <p style="font-size: 14px; color: var(--text-muted); line-height: 1.5;">Atualmente, a APSAN, LDA mantém o seu processo de <strong>recrutamento contínuo de talentos</strong> aberto para futuras oportunidades nas áreas de Limpeza Institucional, Tecnologia, Logística, Catering e Atendimento. Pode submeter o seu currículo a qualquer momento através do formulário abaixo.</p>
+                    <p style="font-size: 14px; color: var(--text-muted); line-height: 1.5;">Atualmente, a APSAN, LDA mantém o seu processo de <strong>recrutamento contínuo de talentos</strong> aberto para futuras oportunidades nas áreas de Limpeza Institucional, Tecnologia, Logística, Catering e Atendimento. Pode submeter o seu currículo a qualquer momento através do formulário abaixo</p>
                 </div>
 
+                <!-- Formulário de Currículo / Candidatura -->
                 <div class="portal-card" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 30px; border-radius: 10px;">
                     <h3 style="color: var(--primary-color); font-size: 18px; margin-bottom: 15px;"><i class="fas fa-file-alt"></i> Formulário de Candidatura e Envio de Currículo</h3>
                     <form action="https://formspree.io/f/xqerwzjq" method="POST" onsubmit="handleRecrutamentoSubmit(event)">
@@ -781,7 +783,7 @@
         </div>
     </section>
 
-    <!-- SEÇÃO 5: PORTAL DE CONSULTA -->
+    <!-- SEÇÃO 5: PORTAL DE CONSULTA E TESTEMUNHOS -->
     <section id="portal" class="content-section" style="padding: 40px 20px;">
         <div class="container" style="max-width: 1200px; margin: 0 auto;">
             <div class="section-title" style="text-align: center; margin-bottom: 30px;">
@@ -794,18 +796,18 @@
                 <div class="portal-card" style="background: var(--card-bg); border: 1px solid var(--border-color); border-top: 4px solid var(--primary-color); padding: 25px; border-radius: 10px;">
                     <h3><i class="fas fa-id-card" style="color: var(--primary-color);"></i> Dados Fiscais e Legais</h3>
                     <p style="margin-top: 15px; color: var(--text-muted);"><strong>Nome Oficial:</strong> APSAN, LDA</p>
-                    <p style="color: var(--text-muted);"><strong>NIF:</strong> 5002085011[cite: 2]</p>
+                    <p style="color: var(--text-muted);"><strong>NIF:</strong> 5002085011</p>
                     <p style="color: var(--text-muted);"><strong>Estado:</strong> Empresa Registada e Ativa</p>
                 </div>
                 <div class="portal-card" style="background: var(--card-bg); border: 1px solid var(--border-color); border-top: 4px solid var(--primary-color); padding: 25px; border-radius: 10px;">
                     <h3><i class="fas fa-map-marked-alt" style="color: var(--primary-color);"></i> Localização Geográfica</h3>
                     <p style="margin-top: 15px; color: var(--text-muted);"><strong>País:</strong> República de Angola</p>
                     <p style="color: var(--text-muted);"><strong>Província:</strong> Cunene</p>
-                    <p style="color: var(--text-muted);"><strong>Município:</strong> Namacunde (Ondjiva)[cite: 1]</p>
+                    <p style="color: var(--text-muted);"><strong>Município:</strong> Namacunde (Ondjiva)</p>
                 </div>
                 <div class="portal-card" style="background: var(--card-bg); border: 1px solid var(--border-color); border-top: 4px solid var(--primary-color); padding: 25px; border-radius: 10px;">
                     <h3><i class="fas fa-headset" style="color: var(--primary-color);"></i> Atendimento</h3>
-                    <p style="margin-top: 15px; color: var(--text-muted);"><strong>Telemóveis:</strong> 931 057 760 / 934 437 739 / 946 195 402</p>
+                    <p style="margin-top: 15px; color: var(--text-muted);"><strong>Telemóveis:</strong> 931 057 760 / 934 437 739</ 946195402 p>
                     <p style="color: var(--text-muted);"><strong>Email:</strong> apsanlda1@gmail.com</p>
                 </div>
             </div>
@@ -885,17 +887,17 @@
             <div class="section-title" style="text-align: center; margin-bottom: 30px;">
                 <h2>Perguntas Frequentes (FAQ)</h2>
                 <div class="underline" style="width: 60px; height: 3px; background: var(--primary-color); margin: 8px auto 0 auto;"></div>
-                <p style="margin-top: 8px; font-size: 14px; color: var(--text-muted);">Tire as suas dúvidas sobre os nossos serviços e operações entre Angola e Namíbia.</p>
+                <p style="margin-top: 8px; font-size: 14px; color: var(--text-muted);">Tire as suas dúvidas sobre os nossos serviços e operações entre Angola e Namíbia</p>
             </div>
 
             <div class="faq-grid">
                 <div class="faq-card" onclick="toggleFaq(this)">
                     <h4><span>Qual é o NIF oficial da APSAN, LDA?</span> <i class="fas fa-chevron-down"></i></h4>
-                    <div class="faq-answer">O NIF oficial e registado da empresa é <strong>5002085011</strong>[cite: 2]</div>
+                    <div class="faq-answer">O NIF oficial e registado da empresa é <strong>5002085011</strong></div>
                 </div>
                 <div class="faq-card" onclick="toggleFaq(this)">
                     <h4><span>Onde está localizada a sede da empresa?</span> <i class="fas fa-chevron-down"></i></h4>
-                    <div class="faq-answer">A sede oficial fica no Município de Namacunde, Província do Cunene, em Angola, contando também com representações em Ondjiva[cite: 1].</div>
+                    <div class="faq-answer">A sede oficial fica no Município de Namacunde, Província do Cunene, em Angola, contando também com representações em Ondjiva.</div>
                 </div>
                 <div class="faq-card" onclick="toggleFaq(this)">
                     <h4><span>Como funcionam as operações entre Angola e Namíbia?</span> <i class="fas fa-chevron-down"></i></h4>
@@ -920,7 +922,7 @@
                 <article class="post-card" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px; cursor: default;">
                     <span style="font-size: 12px; color: var(--text-muted);"><i class="far fa-calendar-alt"></i> 26 de Julho, 2026</span>
                     <h3 style="margin: 10px 0; font-size: 18px;">Expansão de Serviços e Nosso Crescimento</h3>
-                    <p style="font-size: 14px; color: var(--text-muted);">A APSAN, LDA continua a alargar o seu leque de soluções integradas para melhor servir Angola e Namíbia.</p>
+                    <p style="font-size: 14px; color: var(--text-muted);">A APSAN, LDA continua a alargar o seu leque de soluções integradas para melhor servir Angola e Namíbia</p>
                 </article>
             </div>
         </div>
@@ -937,7 +939,7 @@
                 <div class="contact-info-box" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px; cursor: default;">
                     <h3>Informações de Contacto</h3>
                     <p style="margin-top: 15px; font-size: 14px; color: var(--text-muted);"><i class="fas fa-map-marker-alt"></i> <strong>Sede:</strong> Cunene, Namacunde (Repr. em Ondjiva)[cite: 1]</p>
-                    <p style="margin-top: 10px; font-size: 14px; color: var(--text-muted);"><i class="fas fa-phone-alt"></i> <strong>Telemóveis:</strong> 931 057 760 / 934 437 739 / 946 195 402</p>
+                    <p style="margin-top: 10px; font-size: 14px; color: var(--text-muted);"><i class="fas fa-phone-alt"></i> <strong>Telemóveis:</strong> 931 057 760 / 934 437 739</p>
                     <p style="margin-top: 10px; font-size: 14px; color: var(--text-muted);"><i class="fas fa-envelope"></i> <strong>Email:</strong> apsanlda1@gmail.com</p>
                     <p style="margin-top: 10px; font-size: 14px; color: var(--text-muted);"><i class="fas fa-id-card"></i> <strong>NIF:</strong> 5002085011[cite: 2]</p>
                 </div>
@@ -961,7 +963,7 @@
             <div class="assistant-header">
                 <div class="profile-info" style="display: flex; align-items: center; gap: 10px;">
                     <div style="position: relative; width: 35px; height: 35px;">
-                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" alt="Azny Gabriel" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">
+                        <img src="avatar.png" alt="Azny Gabriel" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">
                         <span class="online-dot" style="width: 10px; height: 10px; bottom: -2px; right: -2px;"></span>
                     </div>
                     <span>Azny Gabriel</span>
@@ -985,7 +987,7 @@
             </div>
         </div>
         <button class="assistant-btn" onclick="toggleAssistant()" title="Abrir Chat Azny Gabriel">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" alt="Azny Gabriel">
+            <img src="avatar.png" alt="Azny Gabriel">
             <span class="online-dot"></span>
         </button>
     </div>
@@ -1038,7 +1040,7 @@
         </div>
     </div>
 
-    <!-- RODAPÉ -->
+    <!-- RODAPÉ COM NOTÍCIAS SOBRE A EMPRESA, CARIMBOS DE BANDEIRAS E BARRA DESLIZANTE -->
     <footer>
         <div class="footer-container">
             <div class="footer-brand-col">
@@ -1046,8 +1048,9 @@
                     <img src="logo.png" alt="APSAN, LDA Logo">
                     <h3 style="color: #fff; font-size: 1.25rem; margin:0;">APSAN, <span style="color: var(--accent-color);">LDA</span></h3>
                 </div>
-                <p>Soluções Integradas, Qualidade Que Transforma! Prestação de serviços de excelência entre Angola e Namíbia.</p>
+                <p>Soluções Integradas, Qualidade Que Transforma! Prestação de serviços de excelência entre Angola e Namíbia</p>
                 
+                <!-- Carimbo com bandeiras de Angola e Namíbia -->
                 <div style="display: flex; align-items: center; gap: 15px; margin-top: 15px; background: rgba(255,255,255,0.05); padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); width: fit-content;">
                     <div style="display: flex; align-items: center; gap: 6px;" title="República de Angola">
                         <span style="font-size: 20px;">🇦🇴</span> <span style="font-size: 12px; font-weight: bold; color: #fff;">Angola</span>
@@ -1062,26 +1065,27 @@
             <div class="footer-col">
                 <h4><i class="fas fa-newspaper"></i> Notícias Recentes</h4>
                 <p><i class="fas fa-angle-right"></i> APSAN, LDA expande frota logística transfronteiriça</p>
-                <p><i class="fas fa-angle-right"></i> Novos padrões de limpeza institucional implementados</p>
+                <p><i class="fas fa-angle-right"></i> Novos padrões de limpeza institucional implementados.</p>
                 <p><i class="fas fa-angle-right"></i> Parcerias estratégicas reforçadas em Ondjiva e Namacunde</p>
             </div>
 
             <div class="footer-col">
                 <h4><i class="fas fa-id-card"></i> Dados Fiscais & Sede</h4>
-                <p><i class="fas fa-file-invoice"></i> <strong>NIF:</strong> 5002085011[cite: 2]</p>
-                <p><i class="fas fa-building"></i> Sede: Namacunde, Cunene[cite: 1]</p>
-                <p><i class="fas fa-map-pin"></i> Representações em Ondjiva[cite: 1]</p>
+                <p><i class="fas fa-file-invoice"></i> <strong>NIF:</strong> 5002085011</p>
+                <p><i class="fas fa-building"></i> Sede: Namacunde, Cunene</p>
+                <p><i class="fas fa-map-pin"></i> Representações em Ondjiva</p>
             </div>
 
             <div class="footer-col">
                 <h4><i class="fas fa-address-book"></i> Contactos</h4>
                 <p><i class="fas fa-phone-alt"></i> +244 931 057 760</p>
                 <p><i class="fas fa-phone-alt"></i> +244 934 437 739</p>
-                <p><i class="fas fa-phone-alt"></i> +244 946 195 402</p>
+                 <p><i class="fas fa-phone-alt"></i> +244 946 195 402</p>
                 <p><i class="fas fa-envelope"></i> apsanlda1@gmail.com</p>
             </div>
         </div>
 
+        <!-- BARRA DESLIZANTE COM NOTÍCIAS DA EMPRESA NO RODAPÉ -->
         <div class="footer-slider-bar" style="background: rgba(0, 0, 0, 0.3); overflow: hidden; white-space: nowrap; padding: 10px 0; margin-top: 25px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
             <div class="slider-text-track" style="display: inline-block; animation: marqueeSlide 26s linear infinite; color: var(--accent-color); font-weight: bold; font-size: 13px;">
                 Notícia: APSAN, LDA reforça apoio logístico transfronteiriço &nbsp;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&nbsp; Notícia: Novos contratos institucionais assinados no Cunene &nbsp;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&nbsp; Notícia: Expansão tecnológica e portais corporativos ativos
@@ -1095,7 +1099,7 @@
                 <a href="#portal" title="Portal"><i class="fas fa-search-dollar"></i></a>
                 <a href="#" onclick="openDenunciaModal(); return false;" title="Denúncias e Abusos"><i class="fas fa-shield-alt"></i></a>
             </div>
-            <p>&copy; 2026 <strong>APSAN, LDA</strong>. Todos os direitos reservados.</p>
+            <p>&copy; 2026 <strong>APSAN, LDA</strong>. Todos os direitos reservados</p>
         </div>
     </footer>
 
@@ -1106,7 +1110,7 @@
         }
     </style>
 
-    <!-- Scripts JavaScript Completos -->
+    <!-- Scripts -->
     <script>
         const sectionsList = ['home', 'about', 'services', 'extras', 'parcerias', 'recrutamento', 'portal', 'client-area', 'faq', 'posts', 'contact'];
         const sectionNamesMap = {
@@ -1123,8 +1127,6 @@
             'contact': 'Contactos'
         };
 
-        let currentSectionIndex = 0;
-
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
             const menuIcon = document.getElementById('menuIcon');
@@ -1137,50 +1139,77 @@
             }
         }
 
-        function switchTab(targetId, event) {
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        function nextSlide() {
+            if(slides.length === 0) return;
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        if(slides.length > 0) {
+            setInterval(nextSlide, 5000);
+        }
+
+        function switchTab(sectionId, event, pushHistory = true) {
             if (event) event.preventDefault();
-            
+
+            const targetSection = document.getElementById(sectionId);
+            if (!targetSection) return;
+
             document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active-section'));
+            targetSection.classList.add('active-section');
+            
             document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
-
-            const targetSec = document.getElementById(targetId);
-            if (targetSec) {
-                targetSec.classList.add('active-section');
-            }
-
-            const activeTab = document.querySelector(`.nav-tab[onclick*="${targetId}"]`);
-            if (activeTab) {
-                activeTab.classList.add('active');
-            }
-
-            const navLinks = document.getElementById('navLinks');
-            const menuIcon = document.getElementById('menuIcon');
-            if (navLinks) {
-                navLinks.style.display = 'none';
-                if (menuIcon) menuIcon.className = 'fas fa-bars';
-            }
+            const activeLink = document.querySelector(`.nav-tab[href="#${sectionId}"]`);
+            if (activeLink) activeLink.classList.add('active');
 
             const siteNavBar = document.getElementById('siteNavBar');
-            const indicator = document.getElementById('currentSectionIndicator');
-            if (targetId !== 'home') {
-                siteNavBar.style.display = 'flex';
-                indicator.style.display = 'inline-block';
-                indicator.innerText = 'Secção: ' + (sectionNamesMap[targetId] || targetId);
-            } else {
+            if (sectionId === 'home') {
                 siteNavBar.style.display = 'none';
+            } else {
+                siteNavBar.style.display = 'flex';
             }
 
-            currentSectionIndex = sectionsList.indexOf(targetId);
+            document.getElementById('currentSectionIndicator').textContent = "Secção: " + (sectionNamesMap[sectionId] || sectionId);
+
+            if (pushHistory) {
+                history.pushState({ section: sectionId }, "", `#${sectionId}`);
+            }
+
+            document.getElementById('navLinks').style.display = 'none';
+            document.getElementById('menuIcon').className = 'fas fa-bars';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function navigateHistory(direction) {
-            currentSectionIndex += direction;
-            if (currentSectionIndex < 0) currentSectionIndex = sectionsList.length - 1;
-            if (currentSectionIndex >= sectionsList.length) currentSectionIndex = 0;
-            const targetId = sectionsList[currentSectionIndex];
-            switchTab(targetId, null);
+            const currentHash = window.location.hash.replace('#', '') || 'home';
+            let currentIndex = sectionsList.indexOf(currentHash);
+            if (currentIndex === -1) currentIndex = 0;
+
+            let newIndex = currentIndex + direction;
+            if (newIndex >= 0 && newIndex < sectionsList.length) {
+                switchTab(sectionsList[newIndex], null, true);
+            }
         }
+
+        window.addEventListener('popstate', function(event) {
+            let section = event.state ? event.state.section : null;
+            if (!section) {
+                const hash = window.location.hash.replace('#', '');
+                section = hash ? hash : 'home';
+            }
+            switchTab(section, null, false);
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.replace('#', '');
+            if (hash && document.getElementById(hash)) {
+                switchTab(hash, null, false);
+            } else {
+                switchTab('home', null, false);
+            }
+        });
 
         function toggleTheme() {
             const body = document.body;
@@ -1194,164 +1223,186 @@
             }
         }
 
-        // Carrossel Rotativo do Hero
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.hero-slide');
-        function nextHeroSlide() {
-            if (slides.length === 0) return;
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].classList.add('active');
-        }
-        setInterval(nextHeroSlide, 4500);
-
-        // Toast de Notificação
-        function showToast(title, message) {
-            const toast = document.getElementById('toastNotification');
-            document.getElementById('toastTitle').innerText = title;
-            document.getElementById('toastMessage').innerText = message;
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 4000);
+        function toggleFaq(card) {
+            card.classList.toggle('active');
         }
 
-        // Filtro de Serviços
-        function filterServices(gridId, inputId) {
-            const query = document.getElementById(inputId).value.toLowerCase();
-            const cards = document.querySelectorAll(`#${gridId} .service-card`);
-            cards.forEach(card => {
-                const text = card.innerText.toLowerCase();
-                card.style.display = text.includes(query) ? 'block' : 'none';
-            });
+        function toggleAssistant() {
+            document.getElementById('assistantWindow').classList.toggle('active');
         }
 
-        // Modal de Detalhes de Serviço com Orçamento Integrado
-        function openServiceDetail(title, description, features) {
-            const modal = document.getElementById('serviceModal');
-            const content = document.getElementById('modalBodyContent');
-            
-            let featuresHtml = features.map(f => `<li style="margin-bottom: 6px;"><i class="fas fa-check-circle" style="color: var(--accent-color);"></i> ${f}</li>`).join('');
-            
-            content.innerHTML = `
-                <h2 style="color: var(--primary-color); font-size: 20px; margin-bottom: 10px;">${title}</h2>
-                <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 15px; line-height: 1.5;">${description}</p>
-                <div style="background: rgba(0,64,128,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                    <strong style="font-size: 14px; display: block; margin-bottom: 8px; color: var(--primary-color);">Principais Vantagens / Atributos:</strong>
-                    <ul style="list-style: none; padding-left: 0; font-size: 13px;">${featuresHtml}</ul>
-                </div>
-                <hr style="border: none; border-top: 1px solid var(--border-color); margin: 20px 0;">
-                <h3 style="font-size: 16px; color: var(--primary-color); margin-bottom: 12px;"><i class="fas fa-file-invoice-dollar"></i> Solicitar Orçamento / Contratar Este Serviço</h3>
-                <form action="https://formspree.io/f/xqerwzjq" method="POST" onsubmit="handleModalServiceSubmit(event, '${title}')">
-                    <input type="hidden" name="servico_solicitado" value="${title}">
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
-                        <div class="modal-form-group">
-                            <label>O seu Nome / Empresa</label>
-                            <input type="text" name="nome_cliente" placeholder="Nome completo..." required>
-                        </div>
-                        <div class="modal-form-group">
-                            <label>Telemóvel / WhatsApp</label>
-                            <input type="tel" name="telemovel_cliente" placeholder="+244..." required>
-                        </div>
-                    </div>
-                    <div class="modal-form-group">
-                        <label>E-mail de Contacto</label>
-                        <input type="email" name="email_cliente" placeholder="exemplo@dominio.com" required>
-                    </div>
-                    <div class="modal-form-group">
-                        <label>Detalhes Adicionais do Pedido</label>
-                        <textarea name="detalhes_pedido" rows="3" placeholder="Especifique prazos, quantidades ou local de execução..." required></textarea>
-                    </div>
-                    <button type="submit" style="width: 100%; padding: 12px; background-color: var(--primary-color); color: #fff; border: none; font-weight: bold; border-radius: 6px; cursor: pointer; transition: transform 0.2s;"><i class="fas fa-paper-plane"></i> Enviar Solicitação do Serviço</button>
-                </form>
-            `;
-            modal.classList.add('active');
+        function sendQuickQuery(text) {
+            document.getElementById('assistantInput').value = text;
+            sendAssistantMessage();
         }
 
-        function closeServiceModal() {
-            document.getElementById('serviceModal').classList.remove('active');
-        }
-        function closeServiceDetail(event) {
-            if (event.target.id === 'serviceModal') closeServiceModal();
+        async function sendAssistantMessage() {
+            const input = document.getElementById('assistantInput');
+            const body = document.getElementById('assistantBody');
+            const text = input.value.trim();
+            if (!text) return;
+
+            body.innerHTML += `<div class="assistant-message user">${text}</div>`;
+            input.value = '';
+            body.scrollTop = body.scrollHeight;
+
+            const lowerQuery = text.toLowerCase();
+            let reply = "";
+
+            if (lowerQuery.match(/nif|fiscal/)) {
+                reply = "O NIF oficial da APSAN, LDA é <strong>5002085011</strong>";
+            } else if (lowerQuery.match(/contacto|telemóvel|telefone|email/)) {
+                reply = "Podes contactar-nos através dos telemóveis <strong>931 057 760 / 934 437 739</strong> ou pelo e-mail <strong>apsanlda1@gmail.com</strong>.";
+            } else if (lowerQuery.match(/denúncia|abuso|reclamação/)) {
+                reply = "Podes abrir o formulário de denúncias e abusos clicando no botão dedicado no site.";
+                openDenunciaModal();
+            } else if (lowerQuery.match(/parceria|parcerias/)) {
+                reply = "Podes aceder à nossa área de parcerias no menu para submeter a tua proposta de colaboração!";
+                switchTab('parcerias');
+            } else if (lowerQuery.match(/recrutamento|carreira|emprego|vaga|vagas|curriculo|cv/)) {
+                reply = "Podes consultar a nossa área de carreiras e preencher o formulário de currículo diretamente no site";
+                switchTab('recrutamento');
+            } else {
+                reply = `Olá! Como assistente da APSAN, LDA[cite: 1], estou pronta para ajudar com dúvidas sobre os nossos serviços integrados, parcerias, recrutamento ou contactos!`;
+            }
+
+            body.innerHTML += `<div class="assistant-message">${reply}</div>`;
+            body.scrollTop = body.scrollHeight;
         }
 
-        function handleModalServiceSubmit(e, serviceTitle) {
+        function handleAssistantKey(e) {
+            if (e.key === 'Enter') sendAssistantMessage();
+        }
+
+        function handleClientLogin(e) {
             e.preventDefault();
-            const form = e.target;
-            const formData = new FormData(form);
-            fetch(form.action, {
-                method: 'POST',
-                body: formData,
-                headers: { 'Accept': 'application/json' }
-            }).then(response => {
-                if (response.ok) {
-                    showToast('Solicitação Enviada!', `O seu pedido para "${serviceTitle}" foi registado com sucesso.`);
-                    form.reset();
-                    closeServiceModal();
-                } else {
-                    showToast('Erro', 'Ocorreu um erro ao enviar. Tente novamente.');
-                }
-            }).catch(() => {
-                showToast('Erro de Conexão', 'Verifique a sua ligação à internet.');
-            });
+            document.getElementById('clientAuthCard').style.display = 'none';
+            document.getElementById('clientDashboardCard').style.display = 'block';
+            showToast("Sessão Iniciada", "Bem-vindo à Área do Cliente APSAN, LDA.");
         }
 
-        // Modal de Denúncias
+        function handleClientLogout() {
+            document.getElementById('clientDashboardCard').style.display = 'none';
+            document.getElementById('clientAuthCard').style.display = 'block';
+            showToast("Sessão Terminada", "Saiu da sua conta com segurança.");
+        }
+
+        // Funções para submissão de Parcerias
+        async function handleParceriaSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const submitBtn = document.getElementById('parceriaSubmitBtn');
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> A submeter parceria...';
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
+                if (response.ok) {
+                    showToast("Proposta Registada!", "A sua proposta de parceria foi enviada com sucesso para a APSAN, LDA.");
+                    form.reset();
+                } else {
+                    alert('Erro ao submeter proposta.');
+                }
+            } catch (error) {
+                alert('Erro de conexão.');
+            } finally {
+                submitBtn.innerHTML = '<i class="fas fa-handshake"></i> Submeter Proposta de Parceria';
+                submitBtn.disabled = false;
+            }
+        }
+
+        // Funções para submissão de Recrutamento / Currículo
+        async function handleRecrutamentoSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const submitBtn = document.getElementById('recrutamentoSubmitBtn');
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> A enviar currículo...';
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
+                if (response.ok) {
+                    showToast("Currículo Submetido!", "O seu CV foi integrado com sucesso na nossa base de talentos.");
+                    form.reset();
+                } else {
+                    alert('Erro ao enviar currículo.');
+                }
+            } catch (error) {
+                alert('Erro de conexão.');
+            } finally {
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submeter Currículo Diretamente';
+                submitBtn.disabled = false;
+            }
+        }
+
+        // Funções para o Modal de Denúncias
         function openDenunciaModal() {
             document.getElementById('denunciaModal').classList.add('active');
         }
+
         function closeDenunciaModal() {
             document.getElementById('denunciaModal').classList.remove('active');
         }
-        function closeDenunciaModalOnClick(e) {
-            if (e.target.id === 'denunciaModal') closeDenunciaModal();
+
+        function closeDenunciaModalOnClick(event) {
+            if (event.target.id === 'denunciaModal') {
+                closeDenunciaModal();
+            }
         }
-        function handleDenunciaSubmit(e) {
-            e.preventDefault();
-            const form = e.target;
-            const formData = new FormData(form);
-            fetch(form.action, {
-                method: 'POST',
-                body: formData,
-                headers: { 'Accept': 'application/json' }
-            }).then(response => {
+
+        async function handleDenunciaSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const submitBtn = document.getElementById('denunciaModalSubmitBtn');
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> A submeter com segurança...';
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
                 if (response.ok) {
-                    showToast('Denúncia Submetida', 'O seu relato foi enviado com total sigilo e segurança.');
+                    showToast("Denúncia Registada", "O seu relato foi submetido com total sigilo e segurança.");
                     form.reset();
                     closeDenunciaModal();
                 } else {
-                    showToast('Erro', 'Não foi possível enviar a denúncia. Tente novamente.');
+                    alert('Erro ao submeter denúncia.');
                 }
-            }).catch(() => {
-                showToast('Erro de Conexão', 'Verifique a sua ligação à internet.');
-            });
+            } catch (error) {
+                alert('Erro de conexão.');
+            } finally {
+                submitBtn.innerHTML = 'Submeter Denúncia com Segurança';
+                submitBtn.disabled = false;
+            }
         }
 
-        // Testemunhos e Formulário Público
+        // Função para alternar a visibilidade do formulário de testemunhos
         function toggleTestimonialForm() {
             const container = document.getElementById('testimonialFormContainer');
             const btn = document.getElementById('btnToggleTestimonialForm');
             if (container.style.display === 'none' || container.style.display === '') {
                 container.style.display = 'block';
-                btn.style.display = 'none';
+                btn.innerHTML = '<i class="fas fa-times"></i> Fechar Formulário';
+                container.scrollIntoView({ behavior: 'smooth' });
             } else {
                 container.style.display = 'none';
-                btn.style.display = 'inline-block';
+                btn.innerHTML = '<i class="fas fa-pen"></i> Publicar Testemunho';
             }
         }
 
-        function handleExperienciaSubmit(e) {
-            e.preventDefault();
-            const nome = document.getElementById('expNome').value;
-            const cargo = document.getElementById('expCargo').value || 'Cliente / Parceiro';
-            const mensagem = document.getElementById('expMensagem').value;
-            
+        // Função para submeter e exibir publicamente as experiências dos clientes na hora
+        function handleExperienciaSubmit(event) {
+            event.preventDefault();
+            const nome = document.getElementById('expNome').value.trim();
+            const cargo = document.getElementById('expCargo').value.trim() || 'Cliente APSAN, LDA';
+            const mensagem = document.getElementById('expMensagem').value.trim();
+
+            if (!nome || !mensagem) return;
+
             const initials = nome.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
-            
+
             const grid = document.getElementById('publicTestimonialsGrid');
-            const newCard = document.createElement('div');
-            newCard.className = 'testimonial-card';
-            newCard.innerHTML = `
+            const card = document.createElement('div');
+            card.className = 'testimonial-card';
+            card.innerHTML = `
                 <div>
                     <div class="stars" style="color: #ffc107;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                     <p style="font-size: 14px; font-style: italic; color: var(--text-muted);">"${mensagem}"</p>
@@ -1361,152 +1412,30 @@
                     <div><h4 style="font-size: 14px; margin: 0;">${nome}</h4><span style="font-size: 12px; color: var(--text-muted);">${cargo}</span></div>
                 </div>
             `;
-            grid.insertBefore(newCard, grid.firstChild);
-            showToast('Testemunho Publicado!', 'Obrigado por partilhar a sua experiência com a APSAN, LDA.');
-            e.target.reset();
+
+            grid.insertBefore(card, grid.firstChild);
+
+            showToast("Experiência Publicada!", "O seu testemunho já está visível publicamente no site.");
+            document.getElementById('expNome').value = '';
+            document.getElementById('expCargo').value = '';
+            document.getElementById('expMensagem').value = '';
+            
             toggleTestimonialForm();
         }
 
-        // Submissão de Contacto Geral
-        function handleContactSubmit(e) {
-            e.preventDefault();
-            const form = e.target;
-            const formData = new FormData(form);
-            fetch(form.action, {
-                method: 'POST',
-                body: formData,
-                headers: { 'Accept': 'application/json' }
-            }).then(response => {
-                if (response.ok) {
-                    showToast('Mensagem Enviada!', 'A nossa equipa entrará em contacto brevemente.');
-                    form.reset();
+        function filterServices(gridId, inputId) {
+            const input = document.getElementById(inputId);
+            const filter = input.value.toLowerCase();
+            const cards = document.getElementById(gridId).getElementsByClassName('service-card');
+            for (let i = 0; i < cards.length; i++) {
+                const title = cards[i].getElementsByTagName('h3')[0].textContent.toLowerCase();
+                const desc = cards[i].getElementsByTagName('p')[0].textContent.toLowerCase();
+                if (title.includes(filter) || desc.includes(filter)) {
+                    cards[i].style.display = "";
                 } else {
-                    showToast('Erro', 'Ocorreu um erro. Tente novamente.');
+                    cards[i].style.display = "none";
                 }
-            }).catch(() => {
-                showToast('Erro de Conexão', 'Verifique a sua ligação à internet.');
-            });
-        }
-
-        function handleParceriaSubmit(e) {
-            e.preventDefault();
-            const form = e.target;
-            const formData = new FormData(form);
-            fetch(form.action, {
-                method: 'POST',
-                body: formData,
-                headers: { 'Accept': 'application/json' }
-            }).then(response => {
-                if (response.ok) {
-                    showToast('Proposta Submetida!', 'Agradecemos o seu interesse em estabelecer parceria com a APSAN, LDA.');
-                    form.reset();
-                } else {
-                    showToast('Erro', 'Ocorreu um erro ao enviar.');
-                }
-            }).catch(() => {
-                showToast('Erro de Conexão', 'Verifique a sua ligação à internet.');
-            });
-        }
-
-        function handleRecrutamentoSubmit(e) {
-            e.preventDefault();
-            const form = e.target;
-            const formData = new FormData(form);
-            fetch(form.action, {
-                method: 'POST',
-                body: formData,
-                headers: { 'Accept': 'application/json' }
-            }).then(response => {
-                if (response.ok) {
-                    showToast('Currículo Submetido!', 'A sua candidatura foi adicionada à base de talentos da APSAN, LDA.');
-                    form.reset();
-                } else {
-                    showToast('Erro', 'Ocorreu um erro ao enviar.');
-                }
-            }).catch(() => {
-                showToast('Erro de Conexão', 'Verifique a sua ligação à internet.');
-            });
-        }
-
-        // Área do Cliente Simulação
-        function handleClientLogin(e) {
-            e.preventDefault();
-            const user = document.getElementById('clientUser').value;
-            if(user) {
-                document.getElementById('clientAuthCard').style.display = 'none';
-                document.getElementById('clientDashboardCard').style.display = 'block';
-                showToast('Sessão Iniciada', 'Bem-vindo(a) à Área do Cliente da APSAN, LDA.');
             }
-        }
-        function handleClientLogout() {
-            document.getElementById('clientDashboardCard').style.display = 'none';
-            document.getElementById('clientAuthCard').style.display = 'block';
-            document.getElementById('clientUser').value = '';
-            document.getElementById('clientPass').value = '';
-            showToast('Sessão Terminada', 'Saiu com segurança da sua conta.');
-        }
-
-        // FAQ Toggle
-        function toggleFaq(card) {
-            card.classList.toggle('active');
-            const icon = card.querySelector('i');
-            if (card.classList.contains('active')) {
-                icon.className = 'fas fa-chevron-up';
-            } else {
-                icon.className = 'fas fa-chevron-down';
-            }
-        }
-
-        // Widget de Chat Azny Gabriel
-        function toggleAssistant() {
-            const win = document.getElementById('assistantWindow');
-            win.classList.toggle('active');
-        }
-
-        function sendQuickQuery(text) {
-            const input = document.getElementById('assistantInput');
-            input.value = text;
-            sendAssistantMessage();
-        }
-
-        function handleAssistantKey(e) {
-            if (e.key === 'Enter') sendAssistantMessage();
-        }
-
-        function sendAssistantMessage() {
-            const input = document.getElementById('assistantInput');
-            const text = input.value.trim();
-            if (!text) return;
-
-            const body = document.getElementById('assistantBody');
-            
-            const userMsg = document.createElement('div');
-            userMsg.className = 'assistant-message user';
-            userMsg.innerText = text;
-            body.appendChild(userMsg);
-            input.value = '';
-            body.scrollTop = body.scrollHeight;
-
-            setTimeout(() => {
-                const botMsg = document.createElement('div');
-                botMsg.className = 'assistant-message';
-                
-                const lower = text.toLowerCase();
-                if (lower.includes('nif') || lower.includes('registro')) {
-                    botMsg.innerHTML = 'O NIF oficial da <strong>APSAN, LDA</strong> é <strong>5002085011</strong>[cite: 2], empresa registada e ativa!';
-                } else if (lower.includes('serviço') || lower.includes('servicos')) {
-                    botMsg.innerHTML = 'Prestamos serviços de Limpeza Institucional, Material de Escritório, Catering, Internet e Cabling, Criação de Software, Transportes, Importação & Exportação, entre outros!';
-                } else if (lower.includes('contacto') || lower.includes('telefone') || lower.includes('email')) {
-                    botMsg.innerHTML = 'Pode contactar-nos através dos telemóveis <strong>931 057 760 / 934 437 739 / 946 195 402</strong> ou pelo email <strong>apsanlda1@gmail.com</strong>.';
-                } else if (lower.includes('sede') || lower.includes('onde')) {
-                    botMsg.innerHTML = 'A nossa sede oficial fica no Município de Namacunde, Província do Cunene, com representações em Ondjiva[cite: 1].';
-                } else {
-                    botMsg.innerHTML = `Compreendi a sua questão sobre "${text}". Para assistência detalhada ou orçamentos, recomendo enviar uma mensagem na secção de Contactos ou utilizar os formulários diretos do site!`;
-                }
-
-                body.appendChild(botMsg);
-                body.scrollTop = body.scrollHeight;
-            }, 600);
         }
     </script>
 </body>
