@@ -348,6 +348,7 @@
                 <li><a href="#services" class="nav-tab" onclick="switchTab('services', event)" style="color:#fff; text-decoration:none; padding:10px; display:block;"><i class="fas fa-concierge-bell" style="width: 20px;"></i> Serviços Principais</a></li>
                 <li><a href="#extras" class="nav-tab" onclick="switchTab('extras', event)" style="color:#fff; text-decoration:none; padding:10px; display:block;"><i class="fas fa-plus-circle" style="width: 20px;"></i> Serviços Extras</a></li>
                 <li><a href="#parcerias" class="nav-tab" onclick="switchTab('parcerias', event)" style="color:#fff; text-decoration:none; padding:10px; display:block;"><i class="fas fa-handshake" style="width: 20px;"></i> Parcerias</a></li>
+                <li><a href="#recrutamento" class="nav-tab" onclick="switchTab('recrutamento', event)" style="color:#fff; text-decoration:none; padding:10px; display:block;"><i class="fas fa-user-tie" style="width: 20px;"></i> Carreiras e Recrutamento</a></li>
                 <li><a href="#portal" class="nav-tab" onclick="switchTab('portal', event)" style="color: #ffcc00; text-decoration:none; padding:10px; display:block;"><i class="fas fa-search-dollar" style="width: 20px;"></i> Consulta Empresa</a></li>
                 <li><a href="#client-area" class="nav-tab" onclick="switchTab('client-area', event)" style="background: var(--accent-color); color: #000 !important; text-decoration:none; padding:10px; border-radius:6px; display:block; font-weight:bold; margin-top:5px;"><i class="fas fa-user-lock" style="width: 20px;"></i> Área do Cliente</a></li>
                 <li><a href="#faq" class="nav-tab" onclick="switchTab('faq', event)" style="color:#fff; text-decoration:none; padding:10px; display:block;"><i class="fas fa-question-circle" style="width: 20px;"></i> FAQ</a></li>
@@ -703,6 +704,66 @@
         </div>
     </section>
 
+    <section id="recrutamento" class="content-section" style="padding: 40px 20px;">
+        <div class="container" style="max-width: 900px; margin: 0 auto;">
+            <div class="section-title" style="text-align: center; margin-bottom: 30px;">
+                <h2>Carreiras e Recrutamento</h2>
+                <div class="underline" style="width: 60px; height: 3px; background: var(--primary-color); margin: 8px auto 0 auto;"></div>
+                <p style="margin-top: 8px; font-size: 14px; color: var(--text-muted);">Consulte as nossas vagas abertas ou envie o seu currículo diretamente para a base de talentos da APSAN, LDA</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr; gap: 30px;">
+                <div class="portal-card" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px; border-left: 4px solid var(--accent-color);">
+                    <h3 style="color: var(--primary-color); font-size: 18px; margin-bottom: 10px;"><i class="fas fa-info-circle"></i> Estado Atual de Recrutamento</h3>
+                    <p style="font-size: 14px; color: var(--text-muted); line-height: 1.5;">Atualmente, a APSAN, LDA mantém o seu processo de <strong>recrutamento contínuo de talentos</strong> aberto para futuras oportunidades nas áreas de Limpeza Institucional, Tecnologia, Logística, Catering e Atendimento. Pode submeter o seu currículo a qualquer momento através do formulário abaixo</p>
+                </div>
+
+                <div class="portal-card" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 30px; border-radius: 10px;">
+                    <h3 style="color: var(--primary-color); font-size: 18px; margin-bottom: 15px;"><i class="fas fa-file-alt"></i> Formulário de Candidatura e Envio de Currículo</h3>
+                    <form action="https://formspree.io/f/xqerwzjq" method="POST" onsubmit="handleRecrutamentoSubmit(event)">
+                        <input type="hidden" name="_subject" value="Novo Currículo Submetido - APSAN, LDA">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
+                            <div class="modal-form-group">
+                                <label>Nome Completo</label>
+                                <input type="text" name="nome_candidato" placeholder="O seu nome..." required>
+                            </div>
+                            <div class="modal-form-group">
+                                <label>E-mail de Contacto</label>
+                                <input type="email" name="email_candidato" placeholder="exemplo@dominio.com" required>
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
+                            <div class="modal-form-group">
+                                <label>Telemóvel / WhatsApp</label>
+                                <input type="tel" name="telemovel_candidato" placeholder="+244..." required>
+                            </div>
+                            <div class="modal-form-group">
+                                <label>Área de Interesse Pretendida</label>
+                                <select name="area_candidatura" required>
+                                    <option value="">Selecione a área...</option>
+                                    <option value="Limpeza Institucional">Limpeza Institucional</option>
+                                    <option value="Catering e Eventos">Catering e Eventos</option>
+                                    <option value="Tecnologia e Software">Tecnologia e Software</option>
+                                    <option value="Logística e Transportes">Logística e Transportes</option>
+                                    <option value="Administrativo e Atendimento">Administrativo e Atendimento</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-form-group">
+                            <label>Link do Currículo (LinkedIn, Google Drive ou Resumo Profissional)</label>
+                            <input type="text" name="link_curriculo" placeholder="Cole o link do seu CV ou descreva as suas qualificações..." required>
+                        </div>
+                        <div class="modal-form-group">
+                            <label>Apresentação / Carta de Motivação</label>
+                            <textarea name="motivacao_candidato" rows="4" placeholder="Fale resumidamente sobre a sua experiência profissional e competências..." required></textarea>
+                        </div>
+                        <button type="submit" id="recrutamentoSubmitBtn" style="width: 100%; padding: 12px; background-color: var(--primary-color); color: #fff; border: none; font-weight: bold; border-radius: 6px; cursor: pointer; transition: transform 0.2s;"><i class="fas fa-paper-plane"></i> Submeter Currículo Diretamente</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="portal" class="content-section" style="padding: 40px 20px;">
         <div class="container" style="max-width: 1200px; margin: 0 auto;">
             <div class="section-title" style="text-align: center; margin-bottom: 30px;">
@@ -853,7 +914,7 @@
             <div class="contact-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
                 <div class="contact-info-box" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px; cursor: default;">
                     <h3>Informações de Contacto</h3>
-                    <p style="margin-top: 15px; font-size: 14px; color: var(--text-muted);"><i class="fas fa-map-marker-alt"></i> <strong>Sede:</strong> Cunene, Namacunde (Repr. em Ondjiva)[cite: 1]</p>
+                    <p style="margin-top: 15px; font-size: 14px; color: var(--text-muted);"><i class="fas fa-map-marker-alt"></i> <strong>Sede:</strong> Cunene, Namacunde (Repr. em Ondjiva)</p>
                     <p style="margin-top: 10px; font-size: 14px; color: var(--text-muted);"><i class="fas fa-phone-alt"></i> <strong>Telemóveis:</strong> 931 057 760 / 934 437 739</p>
                     <p style="margin-top: 10px; font-size: 14px; color: var(--text-muted);"><i class="fas fa-envelope"></i> <strong>Email:</strong> apsanlda1@gmail.com</p>
                     <p style="margin-top: 10px; font-size: 14px; color: var(--text-muted);"><i class="fas fa-id-card"></i> <strong>NIF:</strong> 5002085011</p>
@@ -872,7 +933,7 @@
         </div>
     </section>
 
-    <!-- WIDGET DE CHAT AZNY GABRIEL (INTEGRADO COM API DO GEMINI) -->
+    <!-- WIDGET DE CHAT AZNY GABRIEL (INTEGRADO COM RESPOSTAS CURTAS E DIRETAS) -->
     <div class="assistant-widget">
         <div class="assistant-window" id="assistantWindow">
             <div class="assistant-header">
@@ -887,17 +948,17 @@
             </div>
             <div class="assistant-body" id="assistantBody">
                 <div class="assistant-message">
-                    Olá! Sou a <strong>Azny Gabriel</strong>, assistente virtual inteligente da <strong>APSAN, LDA</strong>. Como posso ajudar com os nossos serviços, portfólio ou informações corporativas hoje?
+                    Olá! Sou a <strong>Azny Gabriel</strong>, assistente virtual da <strong>APSAN, LDA</strong>. Como posso ajudar? Faça uma pergunta direta (ex: "Qual o NIF?").
                     <div class="chat-suggestions">
-                        <span class="chat-chip" onclick="sendQuickQuery('Qual o NIF da empresa?')">Qual o NIF?</span>
-                        <span class="chat-chip" onclick="sendQuickQuery('Quais são os serviços principais?')">Serviços</span>
-                        <span class="chat-chip" onclick="sendQuickQuery('Como funcionam as operações em Angola e Namíbia?')">Angola & Namíbia</span>
-                        <span class="chat-chip" onclick="openDenunciaModal()">Denúncias e Abusos</span>
+                        <span class="chat-chip" onclick="sendQuickQuery('Qual o NIF?')">Qual o NIF?</span>
+                        <span class="chat-chip" onclick="sendQuickQuery('Quais são os contactos?')">Contactos</span>
+                        <span class="chat-chip" onclick="sendQuickQuery('Onde fica a sede?')">Sede</span>
+                        <span class="chat-chip" onclick="sendQuickQuery('Compras na Namíbia')">Compras Namíbia</span>
                     </div>
                 </div>
             </div>
             <div class="assistant-footer">
-                <input type="text" id="assistantInput" placeholder="Faça uma pergunta livre à Azny Gabriel..." onkeypress="handleAssistantKey(event)">
+                <input type="text" id="assistantInput" placeholder="Digite a sua mensagem..." onkeypress="handleAssistantKey(event)">
                 <button onclick="sendAssistantMessage()"><i class="fas fa-paper-plane"></i></button>
             </div>
         </div>
@@ -1021,13 +1082,14 @@
     </style>
 
     <script>
-        const sectionsList = ['home', 'about', 'services', 'extras', 'parcerias', 'portal', 'client-area', 'faq', 'posts', 'contact'];
+        const sectionsList = ['home', 'about', 'services', 'extras', 'parcerias', 'recrutamento', 'portal', 'client-area', 'faq', 'posts', 'contact'];
         const sectionNamesMap = {
             'home': 'Início',
             'about': 'Quem Somos',
             'services': 'Serviços Principais',
             'extras': 'Serviços Extras',
             'parcerias': 'Parcerias',
+            'recrutamento': 'Carreiras e Recrutamento',
             'portal': 'Consulta Empresa',
             'client-area': 'Área do Cliente',
             'faq': 'FAQ',
@@ -1140,83 +1202,124 @@
         }
 
         function sendQuickQuery(text) {
-            document.getElementById('assistantInput').value = text;
-            sendAssistantMessage();
+            const inputEl = document.getElementById('assistantInput');
+            if (inputEl) {
+                inputEl.value = text;
+                sendAssistantMessage();
+            }
         }
 
-        const GEMINI_API_KEY = 'SUA_API_KEY_DO_GEMINI';
+        /* ---------- Chat assistant: respostas curtas e diretas ---------- */
 
-        const generation_config = {
-            temperature: 1,
-            max_output_tokens: 65536,
-            top_p: 0.95
-        };
-
-        async function sendAssistantMessage() {
-            const input = document.getElementById('assistantInput');
-            const body = document.getElementById('assistantBody');
-            const text = input.value.trim();
-            if (!text) return;
-
-            body.innerHTML += `<div class="assistant-message user">${text}</div>`;
-            input.value = '';
-            body.scrollTop = body.scrollHeight;
-
-            const loadingId = 'loading-' + Date.now();
-            body.innerHTML += `<div class="assistant-message" id="${loadingId}"><i class="fas fa-spinner fa-spin"></i> Azny Gabriel está a pensar...</div>`;
-            body.scrollTop = body.scrollHeight;
-
-            const companyContext = `
-                És a Azny Gabriel, assistente virtual inteligente, simpática e profissional da APSAN, LDA.
-                Respondes de forma fluida, natural, inteligente e prestável a qualquer pergunta colocada pelo cliente sobre a empresa.
-                Aqui está todo o contexto e portfólio da APSAN, LDA:
-                - Nome da Empresa: APSAN, LDA
-                - Sede: Município de Namacunde, Província do Cunene, Angola.
-                - Representações: Ondjiva e atuação transfronteiriça entre Angola e Namíbia.
-                - NIF: 5002085011
-                - Contactos: +244 931 057 760 / +244 934 437 739 / +244 946 195 402
-                - E-mail: apsanlda1@gmail.com
-                - Serviços Principais: 1. Serviço de Limpeza Institucional, 2. Fornecimento de Material de Escritório, 3. Serviços de Catering e Gestão de Eventos Corporativos, 4. Serviços de Internet e Cabling, 5. Serviço de Criação de Software e Sistema de Gestão Empresarial, 6. Serviço de Transportes e Aluguer de Carros, 7. Importação & Exportação.
-                - Serviços Extras: Acompanhamento Hospitalar, Tradução Oficial Juramentada, Autorização de viagem pra menor, Guia, Compras Na Namibia, Encomendas, Gestão de Redes Sociais.
-                - Recursos Especiais: A empresa dispõe de canais dedicados para Parcerias, Área do Cliente e um Canal de Denúncias e Abusos seguro.
-                Responde sempre em português de forma clara, prestativa e institucional baseando-te nestes dados.
-            `;
-
+        /* Remove marcas {cite: ...} espalhadas no HTML para não aparecerem nas respostas */
+        (function removeCiteTokens() {
             try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [
-                            { role: "user", parts: [{ text: companyContext + "\n\nPergunta do Cliente: " + text }] }
-                        ],
-                        generationConfig: generation_config
-                    })
+                const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+                const nodes = [];
+                while(walker.nextNode()) nodes.push(walker.currentNode);
+                nodes.forEach(n => {
+                    if (n.nodeValue && n.nodeValue.match(/\{?\[?cite[:\s]*[^\]\}]+\]?\}?/i)) {
+                        n.nodeValue = n.nodeValue.replace(/\{?\[?cite[:\s]*[^\]\}]+\]?\}?/ig, '').trim();
+                    }
                 });
+            } catch (err) {
+                console.warn('removeCiteTokens error', err);
+            }
+        })();
 
-                const data = await response.json();
-                const loadingElement = document.getElementById(loadingId);
-                if (loadingElement) loadingElement.remove();
+        /* Função utilitária para acrescentar uma única resposta ao chat */
+        function appendAssistantReply(text) {
+            const chatBody = document.getElementById('chatBody') || document.getElementById('assistantBody') || document.querySelector('.assistant-body');
+            if (!chatBody) return;
+            const reply = document.createElement('div');
+            reply.className = 'assistant-message';
+            reply.innerHTML = text.replace(/\n/g, '<br>');
+            chatBody.appendChild(reply);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
 
-                if (data && data.candidates && data.candidates[0].content.parts[0].text) {
-                    const reply = data.candidates[0].content.parts[0].text;
-                    body.innerHTML += `<div class="assistant-message">${reply.replace(/\n/g, '<br>')}</div>`;
+        /* Função utilitária para acrescentar mensagem de utilizador (apenas visual) */
+        function appendUserMessage(text) {
+            const chatBody = document.getElementById('chatBody') || document.getElementById('assistantBody') || document.querySelector('.assistant-body');
+            if (!chatBody) return;
+            const userDiv = document.createElement('div');
+            userDiv.className = 'assistant-message user';
+            userDiv.textContent = text;
+            chatBody.appendChild(userDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        /* Main handler — uma resposta direta por pergunta */
+        function sendAssistantMessage() {
+            const inputEl = document.getElementById('chatInput') || document.getElementById('assistantInput') || document.querySelector('.assistant-footer input');
+            if (!inputEl) return;
+            const raw = inputEl.value || '';
+            const msg = raw.trim();
+            if (!msg) return;
+
+            // Mostrar a mensagem do utilizador
+            appendUserMessage(msg);
+
+            // Limpar campo de input
+            inputEl.value = '';
+
+            // Normalizar para análise
+            const lower = msg.toLowerCase();
+
+            // Respostas diretas (curtas). Acrescente regras conforme necessário.
+            let answer = '';
+
+            // Perguntas diretas sobre NIF
+            if (/\b(nif|número de identificação|numero fiscal)\b/.test(lower)) {
+                answer = 'O NIF oficial da APSAN, LDA é 5002085011.';
+            }
+            // Perguntas sobre contactos / telefone / whatsapp / email
+            else if (/\b(telefone|telemovel|whatsapp|contacto|contactos|email|mail)\b/.test(lower)) {
+                answer = 'Telemóveis: +244 931 057 760 / +244 934 437 739 — Email: apsanlda1@gmail.com';
+            }
+            // Perguntas sobre sede / localização
+            else if (/\b(sede|onde|localiza|onde fica|provincia|namacunde|ondjiva|cunene)\b/.test(lower)) {
+                answer = 'Sede: Município de Namacunde, Província do Cunene. Representação em Ondjiva.';
+            }
+            // Perguntas sobre serviços de compra na Namíbia
+            else if (/\b(namíbi|namibia|compras na namibia|compras|importaç)/i.test(lower)) {
+                answer = 'Sim — fazemos compras e importações na Namíbia com gestão integral do transporte e trâmites aduaneiros.';
+            }
+            // Perguntas sobre preços / orçamento
+            else if (/\b(preço|precos|quanto custa|orçamento|valor)\b/.test(lower)) {
+                answer = 'Para um orçamento personalizado, por favor envie detalhes do pedido (produto/quantidade/destino) ou contacte-nos no WhatsApp para resposta imediata.';
+            }
+            // Perguntas sobre horários / dias de funcionamento
+            else if (/\b(horário|horarios|aberto|dia|domingo|sábado|fim de semana)\b/.test(lower)) {
+                answer = 'Operamos geralmente de segunda a sábado; para urgências contacte o nosso número para verificar disponibilidade fora do horário.';
+            }
+            // Perguntas sobre recrutamento / candidaturas
+            else if (/\b(recrut|vagas|emprego|candidatura|curricul)/.test(lower)) {
+                answer = 'Pode submeter o seu currículo através do formulário de Carreiras / Recrutamento na secção correspondente do site ou enviar por email.';
+            }
+            // Pedido de rastreio
+            else if (/\b(rastreio|rastrear|encomend|tracking|codigo de rastreio)\b/.test(lower)) {
+                // Tentar extrair código simples
+                const codeMatch = msg.match(/([A-Za-z0-9\-]{5,})/);
+                if (codeMatch) {
+                    answer = `Estado para ${codeMatch[1]}: Em trânsito aduaneiro. Previsão de entrega: 48h (exemplo).`;
                 } else {
-                    body.innerHTML += `<div class="assistant-message">Desculpa, ocorreu um pequeno erro ao processar a tua resposta. Podes tentar novamente? Podes também contactar-nos diretamente pelo 931 057 760.</div>`;
+                    answer = 'Por favor forneça o código de rastreio (ex: APSAN-9821) para que eu consulte o estado.';
                 }
-            } catch (error) {
-                const loadingElement = document.getElementById(loadingId);
-                if (loadingElement) loadingElement.remove();
-                
-                let fallbackReply = `Olá! Como assistente da APSAN, LDA, estou pronta para ajudar! Podes contactar-nos pelo 931 057 760 ou consultar o nosso NIF oficial: 5002085011.`;
-                const lower = text.toLowerCase();
-                if (lower.match(/nif/)) fallbackReply = "O NIF oficial da APSAN, LDA é **5002085011**.";
-                else if (lower.match(/contacto|telefone|email/)) fallbackReply = "Podes contactar-nos através dos telemóveis **931 057 760 / 934 437 739** ou pelo e-mail **apsanlda1@gmail.com**.";
-                
-                body.innerHTML += `<div class="assistant-message">${fallbackReply}</div>`;
+            }
+            // Pedidos muito curtos tipo "olá" -> resposta curta e direta
+            else if (/^\b(ol[áa]|oi|ola|bom dia|boa tarde|boa noite)\b/.test(lower)) {
+                answer = 'Olá — como posso ajudar? Faça uma pergunta direta (ex: "Qual o NIF?").';
+            }
+            // Quando não sabemos responder de forma segura
+            else {
+                answer = 'Desculpe — não disponho da informação precisa para essa pergunta. Pode contactar-nos pelo +244 931 057 760 ou enviar e-mail para apsanlda1@gmail.com.';
             }
 
-            body.scrollTop = body.scrollHeight;
+            // Garantir uma única resposta — adicionar pequena latência para UX
+            setTimeout(() => {
+                appendAssistantReply(answer);
+            }, 350);
         }
 
         function handleAssistantKey(e) {
@@ -1259,6 +1362,29 @@
             }
         }
 
+        async function handleRecrutamentoSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const submitBtn = document.getElementById('recrutamentoSubmitBtn');
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> A enviar currículo...';
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
+                if (response.ok) {
+                    showToast("Currículo Submetido!", "O seu CV foi integrado com sucesso na nossa base de talentos.");
+                    form.reset();
+                } else {
+                    alert('Erro ao enviar currículo.');
+                }
+            } catch (error) {
+                alert('Erro de conexão.');
+            } finally {
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submeter Currículo Diretamente';
+                submitBtn.disabled = false;
+            }
+        }
+
         function openDenunciaModal() {
             document.getElementById('denunciaModal').classList.add('active');
         }
@@ -1283,7 +1409,7 @@
             try {
                 const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
                 if (response.ok) {
-                    showToast("Denúncia Registada", "O seu relato foi submetido com total sigilo e segurança.");
+                    showToast("Denúncia Registada", "O seu relato foi enviado com total sigilo e segurança.");
                     form.reset();
                     closeDenunciaModal();
                 } else {
@@ -1295,50 +1421,6 @@
                 submitBtn.innerHTML = 'Submeter Denúncia com Segurança';
                 submitBtn.disabled = false;
             }
-        }
-
-        function toggleTestimonialForm() {
-            const container = document.getElementById('testimonialFormContainer');
-            const btn = document.getElementById('btnToggleTestimonialForm');
-            if (container.style.display === 'none' || container.style.display === '') {
-                container.style.display = 'block';
-                btn.innerHTML = '<i class="fas fa-times"></i> Fechar Formulário';
-                container.scrollIntoView({ behavior: 'smooth' });
-            } else {
-                container.style.display = 'none';
-                btn.innerHTML = '<i class="fas fa-pen"></i> Publicar Testemunho';
-            }
-        }
-
-        function handleExperienciaSubmit(event) {
-            event.preventDefault();
-            const nome = document.getElementById('expNome').value.trim();
-            const cargo = document.getElementById('expCargo').value.trim() || 'Cliente APSAN, LDA';
-            const mensagem = document.getElementById('expMensagem').value.trim();
-
-            if (!nome || !mensagem) return;
-
-            const initials = nome.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
-
-            const grid = document.getElementById('publicTestimonialsGrid');
-            const card = document.createElement('div');
-            card.className = 'testimonial-card';
-            card.innerHTML = `
-                <div>
-                    <div class="stars" style="color: #ffc107;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p style="font-size: 14px; font-style: italic; color: var(--text-muted);">"${mensagem}"</p>
-                </div>
-                <div class="client-info">
-                    <div class="client-avatar">${initials}</div>
-                    <div><h4 style="font-size: 14px; margin: 0;">${nome}</h4><span style="font-size: 12px; color: var(--text-muted);">${cargo}</span></div>
-                </div>
-            `;
-
-            grid.insertBefore(card, grid.firstChild);
-            showToast("Testemunho Publicado!", "Obrigado por partilhar a sua experiência.");
-            document.getElementById('testimonialFormContainer').style.display = 'none';
-            document.getElementById('btnToggleTestimonialForm').innerHTML = '<i class="fas fa-pen"></i> Publicar Testemunho';
-            event.target.reset();
         }
 
         function showToast(title, message) {
