@@ -381,31 +381,31 @@
         </button>
     </div>
 
+    <!-- PÁGINA PRINCIPAL MODIFICADA COM NOVO ESTILO E LAYOUT MODERNO -->
     <section id="home" class="content-section active-section" style="padding: 0;">
-        <div class="hero-custom-bg">
-            <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1920&q=80');"></div>
-            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1920&q=80');"></div>
-            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=1920&q=80');"></div>
-            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1920&q=80');"></div>
-            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1920&q=80');"></div>
-            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=1920&q=80');"></div>
-            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1920&q=80');"></div>
-            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=1920&q=80');"></div>
-            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1920&q=80');"></div>
-            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1920&q=80');"></div>
-            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1920&q=80');"></div>
-
-            <div class="hero-overlay"></div>
+        <div class="hero-custom-bg" style="min-height: 600px; background: linear-gradient(135deg, var(--nav-bg), var(--primary-color)); display: flex; align-items: center; position: relative; overflow: hidden;">
+            <div class="hero-overlay" style="background: rgba(0,0,0,0.4); z-index: 1;"></div>
             
-            <div class="container" style="max-width: 1200px; margin: 0 auto; width: 100%; position: relative; z-index: 4; color: #fff;">
-                <div class="hero-text" style="max-width: 700px;">
-                    <span class="badge-tag" style="background: var(--accent-color); color: #000; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 12px; text-transform: uppercase;">Soluções Integradas</span>
-                    <h2 style="font-size: 3rem; margin: 15px 0; font-weight: 800;">Qualidade Que Transforma!</h2>
-                    <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 25px;">A <strong>APSAN, LDA</strong> é uma empresa angolana prestadora de serviços que atua entre Angola e Namíbia e fornecedora de soluções integradas, especializada em atender instituições públicas e privadas, organizações não-governamentais e agências de cooperação, com um foco estratégico na modernização, eficiência operacional e excelência tecnológica. com sede oficial no Município de Namacunde, Província do Cunene, e representações em Ondjiva</p>
+            <div class="container" style="max-width: 1200px; margin: 0 auto; width: 100%; position: relative; z-index: 4; color: #fff; padding: 40px 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; align-items: center;">
+                <div class="hero-text">
+                    <span class="badge-tag" style="background: var(--accent-color); color: #000; padding: 6px 16px; border-radius: 30px; font-weight: bold; font-size: 13px; text-transform: uppercase; display: inline-block; margin-bottom: 15px;"><i class="fas fa-star"></i> Inovação e Excelência</span>
+                    <h2 style="font-size: 3.2rem; margin: 0 0 20px 0; font-weight: 800; line-height: 1.2;">Soluções Integradas, Qualidade Que Transforma!</h2>
+                    <p style="font-size: 1.15rem; line-height: 1.7; margin-bottom: 30px; color: #e2e8f0;">A <strong>APSAN, LDA</strong> é a sua parceira estratégica entre Angola e Namíbia. Fornecemos serviços de alto padrão para instituições públicas, privadas e organizações com total eficiência e modernização tecnológica.</p>
                     <div class="hero-buttons" style="display: flex; gap: 15px; flex-wrap: wrap;">
-                        <button class="btn btn-primary" onclick="switchTab('services', event)" style="background-color: var(--accent-color); color: #000; border: none; padding: 12px 24px; font-weight: bold; border-radius: 5px; cursor: pointer;">Ver Serviços Principais</button>
-                        <button class="btn btn-outline" onclick="openDenunciaModal()" style="background-color: #dc3545; border: 2px solid #dc3545; color: #fff; padding: 12px 24px; font-weight: bold; border-radius: 5px; cursor: pointer;"><i class="fas fa-shield-alt"></i> Denúncias e Abusos</button>
+                        <button class="btn btn-primary" onclick="switchTab('services', event)" style="background-color: var(--accent-color); color: #000; border: none; padding: 14px 28px; font-weight: bold; border-radius: 8px; cursor: pointer; font-size: 1rem; transition: transform 0.2s;"><i class="fas fa-concierge-bell"></i> Explorar Serviços</button>
+                        <button class="btn btn-outline" onclick="openDenunciaModal()" style="background-color: transparent; border: 2px solid #fff; color: #fff; padding: 14px 28px; font-weight: bold; border-radius: 8px; cursor: pointer; font-size: 1rem; transition: background 0.2s;"><i class="fas fa-shield-alt"></i> Canal de Denúncias</button>
                     </div>
+                </div>
+
+                <div class="hero-card-highlight" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); padding: 35px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+                    <h3 style="font-size: 1.5rem; color: var(--accent-color); margin-bottom: 20px;"><i class="fas fa-building"></i> Painel Institucional</h3>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 15px; font-size: 15px;">
+                        <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 10px;"></i> <strong>Sede:</strong> Namacunde, Cunene (Angola)[span_0](start_span)[span_0](end_span)</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 10px;"></i> <strong>Representações:</strong> Ondjiva e Namíbia</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 10px;"></i> <strong>NIF Oficial:</strong> 5002085011</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 10px;"></i> <strong>Atuação:</strong> Transfronteiriça e Tecnológica</li>
+                    </ul>
+                    <button onclick="switchTab('portal', event)" style="width: 100%; margin-top: 25px; padding: 12px; background: var(--primary-color); color: #fff; border: none; font-weight: bold; border-radius: 8px; cursor: pointer; transition: background 0.2s;">Ver Dados Completos</button>
                 </div>
             </div>
         </div>
@@ -853,7 +853,7 @@
             <div class="contact-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
                 <div class="contact-info-box" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px; cursor: default;">
                     <h3>Informações de Contacto</h3>
-                    <p style="margin-top: 15px; font-size: 14px; color: var(--text-muted);"><i class="fas fa-map-marker-alt"></i> <strong>Sede:</strong> Cunene, Namacunde (Repr. em Ondjiva)[span_0](start_span)[span_0](end_span)</p>
+                    <p style="margin-top: 15px; font-size: 14px; color: var(--text-muted);"><i class="fas fa-map-marker-alt"></i> <strong>Sede:</strong> Cunene, Namacunde (Repr. em Ondjiva)[cite: 4]</p>
                     <p style="margin-top: 10px; font-size: 14px; color: var(--text-muted);"><i class="fas fa-phone-alt"></i> <strong>Telemóveis:</strong> 931 057 760 / 934 437 739</p>
                     <p style="margin-top: 10px; font-size: 14px; color: var(--text-muted);"><i class="fas fa-envelope"></i> <strong>Email:</strong> apsanlda1@gmail.com</p>
                     <p style="margin-top: 10px; font-size: 14px; color: var(--text-muted);"><i class="fas fa-id-card"></i> <strong>NIF:</strong> 5002085011</p>
@@ -872,37 +872,29 @@
         </div>
     </section>
 
-    <!-- WIDGET DE CHAT AZNY GABRIEL (INTEGRADO COM API DO GEMINI) -->
+    <!-- WIDGET DE CHAT ASNI GABRIEL RECONFIGURADO -->
     <div class="assistant-widget">
         <div class="assistant-window" id="assistantWindow">
             <div class="assistant-header">
                 <div class="profile-info" style="display: flex; align-items: center; gap: 10px;">
                     <div style="position: relative; width: 35px; height: 35px;">
-                        <img src="avatar.png" alt="Azny Gabriel" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">
+                        <img src="avatar.png" alt="Asni Gabriel" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">
                         <span class="online-dot" style="width: 10px; height: 10px; bottom: -2px; right: -2px;"></span>
                     </div>
-                    <span>Azny Gabriel</span>
+                    <span>Asni Gabriel</span>
                 </div>
                 <button onclick="toggleAssistant()" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer;">&times;</button>
             </div>
             <div class="assistant-body" id="assistantBody">
-                <div class="assistant-message">
-                    Olá! Sou a <strong>Azny Gabriel</strong>, assistente virtual inteligente da <strong>APSAN, LDA</strong>. Como posso ajudar com os nossos serviços, portfólio ou informações corporativas hoje?
-                    <div class="chat-suggestions">
-                        <span class="chat-chip" onclick="sendQuickQuery('Qual o NIF da empresa?')">Qual o NIF?</span>
-                        <span class="chat-chip" onclick="sendQuickQuery('Quais são os serviços principais?')">Serviços</span>
-                        <span class="chat-chip" onclick="sendQuickQuery('Como funcionam as operações em Angola e Namíbia?')">Angola & Namíbia</span>
-                        <span class="chat-chip" onclick="openDenunciaModal()">Denúncias e Abusos</span>
-                    </div>
-                </div>
+                <!-- A mensagem inicial automática será injetada via JavaScript ao abrir ou carregar -->
             </div>
             <div class="assistant-footer">
-                <input type="text" id="assistantInput" placeholder="Faça uma pergunta livre à Azny Gabriel..." onkeypress="handleAssistantKey(event)">
+                <input type="text" id="assistantInput" placeholder="Escreva a sua mensagem..." onkeypress="handleAssistantKey(event)">
                 <button onclick="sendAssistantMessage()"><i class="fas fa-paper-plane"></i></button>
             </div>
         </div>
-        <button class="assistant-btn" onclick="toggleAssistant()" title="Abrir Chat Azny Gabriel">
-            <img src="avatar.png" alt="Azny Gabriel">
+        <button class="assistant-btn" onclick="toggleAssistant()" title="Abrir Chat Asni Gabriel">
+            <img src="avatar.png" alt="Asni Gabriel">
             <span class="online-dot"></span>
         </button>
     </div>
@@ -1117,6 +1109,8 @@
             } else {
                 switchTab('home', null, false);
             }
+            // Inicializar a mensagem automática da Asni Gabriel no chat
+            initAsniChat();
         });
 
         function toggleTheme() {
@@ -1221,21 +1215,17 @@
         }
 
         function toggleAssistant() {
-            document.getElementById('assistantWindow').classList.toggle('active');
+            const windowEl = document.getElementById('assistantWindow');
+            windowEl.classList.toggle('active');
         }
 
-        function sendQuickQuery(text) {
-            document.getElementById('assistantInput').value = text;
-            sendAssistantMessage();
+        // SISTEMA DE CHAT INTEGRADO DA ASNI GABRIEL
+        function initAsniChat() {
+            const body = document.getElementById('assistantBody');
+            if (body && body.children.length === 0) {
+                body.innerHTML = `<div class="assistant-message">Olá, saudações. Aqui fala Asni Gabriel, a partir da empresa Apsan Limitada. Em que posso lhe ajudar?</div>`;
+            }
         }
-
-        const GEMINI_API_KEY = 'SUA_API_KEY_DO_GEMINI';
-
-        const generation_config = {
-            temperature: 1,
-            max_output_tokens: 65536,
-            top_p: 0.95
-        };
 
         async function sendAssistantMessage() {
             const input = document.getElementById('assistantInput');
@@ -1243,65 +1233,47 @@
             const text = input.value.trim();
             if (!text) return;
 
+            // Mensagem do usuário
             body.innerHTML += `<div class="assistant-message user">${text}</div>`;
             input.value = '';
             body.scrollTop = body.scrollHeight;
 
-            const loadingId = 'loading-' + Date.now();
-            body.innerHTML += `<div class="assistant-message" id="${loadingId}"><i class="fas fa-spinner fa-spin"></i> Azny Gabriel está a pensar...</div>`;
-            body.scrollTop = body.scrollHeight;
+            const lower = text.toLowerCase();
+            let reply = "";
 
-            const companyContext = `
-                És a Azny Gabriel, assistente virtual inteligente, simpática e profissional da APSAN, LDA.
-                Respondes de forma fluida, natural, inteligente e prestável a qualquer pergunta colocada pelo utilizador sobre a empresa.
-                Aqui está todo o contexto e portfólio da APSAN, LDA:
-                - Nome da Empresa: APSAN, LDA
-                - Sede: Município de Namacunde, Província do Cunene, Angola.
-                - Representações: Ondjiva e atuação transfronteiriça entre Angola e Namíbia.
-                - NIF: 5002085011
-                - Contactos: +244 931 057 760 / +244 934 437 739 / +244 946 195 402
-                - E-mail: apsanlda1@gmail.com
-                - Serviços Principais: 1. Serviço de Limpeza Institucional, 2. Fornecimento de Material de Escritório, 3. Serviços de Catering e Gestão de Eventos Corporativos, 4. Serviços de Internet e Cabling, 5. Serviço de Criação de Software e Sistema de Gestão Empresarial, 6. Serviço de Transportes e Aluguer de Carros, 7. Importação & Exportação.
-                - Serviços Extras: Acompanhamento Hospitalar, Tradução Oficial Juramentada, Autorização de viagem pra menor, Guia, Compras Na Namibia, Encomendas, Gestão de Redes Sociais.
-                - Recursos Especiais: A empresa dispõe de canais dedicados para Parcerias, Área do Cliente e um Canal de Denúncias e Abusos seguro.
-                Responde sempre em português de forma clara, prestativa e institucional baseando-te nestes dados.
-            `;
-
-            try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [
-                            { role: "user", parts: [{ text: companyContext + "\n\nPergunta do Cliente: " + text }] }
-                        ],
-                        generationConfig: generation_config
-                    })
-                });
-
-                const data = await response.json();
-                const loadingElement = document.getElementById(loadingId);
-                if (loadingElement) loadingElement.remove();
-
-                if (data && data.candidates && data.candidates[0].content.parts[0].text) {
-                    const reply = data.candidates[0].content.parts[0].text;
-                    body.innerHTML += `<div class="assistant-message">${reply.replace(/\n/g, '<br>')}</div>`;
-                } else {
-                    body.innerHTML += `<div class="assistant-message">Desculpa, ocorreu um pequeno erro ao processar a tua resposta. Podes tentar novamente? Podes também contactar-nos diretamente pelo 931 057 760.</div>`;
-                }
-            } catch (error) {
-                const loadingElement = document.getElementById(loadingId);
-                if (loadingElement) loadingElement.remove();
-                
-                let fallbackReply = `Olá! Como assistente da APSAN, LDA, estou pronta para ajudar! Podes contactar-nos pelo 931 057 760 ou consultar o nosso NIF oficial: 5002085011.`;
-                const lower = text.toLowerCase();
-                if (lower.match(/nif/)) fallbackReply = "O NIF oficial da APSAN, LDA é **5002085011**.";
-                else if (lower.match(/contacto|telefone|email/)) fallbackReply = "Podes contactar-nos através dos telemóveis **931 057 760 / 934 437 739** ou pelo e-mail **apsanlda1@gmail.com**.";
-                
-                body.innerHTML += `<div class="assistant-message">${fallbackReply}</div>`;
+            // Lógica de resposta baseada nas diretrizes do utilizador
+            if (lower.match(/bem|tudo bem|olá|ola|bom saber/)) {
+                reply = "Olá, bom saber que estás bem, eu também estou bem. Gostaria de saber mais ou menos sobre os vossos serviços?";
+            } else if (lower.match(/serviço|servicos|vossos serviços|serviços principais|servicos extras/)) {
+                reply = "Na APSAN, LDA dispomos dos seguintes serviços principais e extras:<br><br>" +
+                        "<strong>Serviços Principais:</strong><br>" +
+                        "1. Serviço de Limpeza Institucional<br>" +
+                        "2. Fornecimento de Material de Escritório<br>" +
+                        "3. Serviços de Catering e Gestão de Eventos Corporativos<br>" +
+                        "4. Serviços de Internet e Cabling<br>" +
+                        "5. Serviço de Criação de Software e Sistema de Gestão Empresarial<br>" +
+                        "6. Serviço de Transportes e Aluguer de Carros<br>" +
+                        "7. Importação & Exportação<br><br>" +
+                        "<strong>Serviços Extras:</strong><br>" +
+                        "1. Acompanhamento Hospitalar<br>" +
+                        "2. Tradução Oficial Juramentada<br>" +
+                        "3. Autorização de viagem pra menor<br>" +
+                        "4. Guia<br>" +
+                        "5. Compras Na Namibia<br>" +
+                        "6. Encomendas<br>" +
+                        "7. Gestão de Redes Sociais";
+            } else if (lower.match(/como funciona|funciona|detalhe|específico|especifico|limpeza|catering|software|transporte|importação|compras|encomendas/)) {
+                reply = "Este serviço é assim, funciona assim, funciona assim, funciona assim, assim, assim, assim, sucessivamente, ya? Prestamos todo o suporte operacional, técnico e logístico com total rigor, qualidade e eficiência para garantir a sua plena satisfação.";
+            } else {
+                // Caso não consiga responder de forma direta, usa a resposta educada padrão solicitada
+                reply = "Para mais informações sobre este assunto ou este serviço, entra em contacto com a nossa equipa via WhatsApp ou via e-mail, ok? Estamos sempre disponíveis para ajudar!";
             }
 
-            body.scrollTop = body.scrollHeight;
+            // Simula pequeno delay de fluidez
+            setTimeout(() => {
+                body.innerHTML += `<div class="assistant-message">${reply}</div>`;
+                body.scrollTop = body.scrollHeight;
+            }, 400);
         }
 
         function handleAssistantKey(e) {
