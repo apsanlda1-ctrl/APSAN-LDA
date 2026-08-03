@@ -6,6 +6,8 @@
     <title>APSAN, LDA - Soluções Integradas, Qualidade Que Transforma!</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Biblioteca Marked para renderizar Markdown nas respostas da IA -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         :root {
             --bg-color: #f4f7f6;
@@ -917,7 +919,7 @@
                     <p style="margin-top: 15px; font-size: 14px; color: var(--text-muted);"><i class="fas fa-map-marker-alt"></i> <strong>Sede:</strong> Cunene, Namacunde (Repr. em Ondjiva)[cite: 1]</p>
                     <p style="margin-top: 10px; font-size: 14px; color: var(--text-muted);"><i class="fas fa-phone-alt"></i> <strong>Telemóveis:</strong> 931 057 760 / 934 437 739</p>
                     <p style="margin-top: 10px; font-size: 14px; color: var(--text-muted);"><i class="fas fa-envelope"></i> <strong>Email:</strong> apsanlda1@gmail.com</p>
-                    <p style="margin-top: 10px; font-size: 14px; color: var(--text-muted);"><i class="fas fa-id-card"></i> <strong>NIF:</strong> 5002085011[cite: 2]</p>
+                    <p style="margin-top: 10px; font-size: 14px; color: var(--text-muted);"><i class="fas fa-id-card"></i> <strong>NIF:</strong> 5002085011</p>
                 </div>
                 <div class="contact-form-box" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px; cursor: default;">
                     <h3>Envie uma Mensagem</h3>
@@ -1259,7 +1261,7 @@
 
                 if (data && data.candidates && data.candidates[0].content.parts[0].text) {
                     const reply = data.candidates[0].content.parts[0].text;
-                    body.innerHTML += `<div class="assistant-message">${marked ? marked.parse(reply) : reply}</div>`;
+                    body.innerHTML += `<div class="assistant-message">${typeof marked !== 'undefined' ? marked.parse(reply) : reply}</div>`;
                 } else {
                     body.innerHTML += `<div class="assistant-message">Desculpa, ocorreu um pequeno erro ao processar a tua resposta. Podes tentar novamente? Podes também contactar-nos diretamente pelo 931 057 760.</div>`;
                 }
