@@ -412,7 +412,7 @@
 
         <div class="stats-container">
             <div class="stat-card">
-                <h3>+2.300</h3>
+                <h3>+1.600</h3>
                 <p>Clientes Satisfeitos</p>
             </div>
             <div class="stat-card">
@@ -434,9 +434,9 @@
                 <h3 style="font-size: 22px; color: var(--accent-color);">Ponte Operacional e Logística</h3>
                 <p style="margin-top: 8px; font-size: 14px; color: #e2e8f0;">Conectando mercados e prestando serviços de excelência entre fronteiras</p>
                 <div class="route-flex">
-                    <div class="route-node"><i class="fas fa-map-marker-alt"></i> Município de Namacunde (Sede)</div>
+                    <div class="route-node"><i class="fas fa-map-marker-alt"></i> Município de Namacunde Santa-Clara (Sede)</div>
                     <i class="fas fa-exchange-alt" style="font-size: 20px; color: var(--accent-color);"></i>
-                    <div class="route-node"><i class="fas fa-building"></i> Representações em Ondjiva</div>
+                    <div class="route-node"><i class="fas fa-building"></i> Representação em Ondjiva</div>
                     <i class="fas fa-exchange-alt" style="font-size: 20px; color: var(--accent-color);"></i>
                     <div class="route-node"><i class="fas fa-globe-americas"></i> Operações na Namíbia</div>
                 </div>
@@ -722,11 +722,11 @@
                     <h3><i class="fas fa-map-marked-alt" style="color: var(--primary-color);"></i> Localização Geográfica</h3>
                     <p style="margin-top: 15px; color: var(--text-muted);"><strong>País:</strong> República de Angola</p>
                     <p style="color: var(--text-muted);"><strong>Província:</strong> Cunene</p>
-                    <p style="color: var(--text-muted);"><strong>Município:</strong> Namacunde (Ondjiva)</p>
+                    <p style="color: var(--text-muted);"><strong>Município:</strong> Namacunde Santa-Santa-Clara (Ondjiva)</p>
                 </div>
                 <div class="portal-card" style="background: var(--card-bg); border: 1px solid var(--border-color); border-top: 4px solid var(--primary-color); padding: 25px; border-radius: 10px;">
                     <h3><i class="fas fa-headset" style="color: var(--primary-color);"></i> Atendimento</h3>
-                    <p style="margin-top: 15px; color: var(--text-muted);"><strong>Telemóveis:</strong> 931 057 760 / 934 437 739</p>
+                    <p style="margin-top: 15px; color: var(--text-muted);"><strong>Telemóveis:</strong> 931 057 760 / 934 437 739 / 946 195 402</p>
                     <p style="color: var(--text-muted);"><strong>Email:</strong> apsanlda1@gmail.com</p>
                 </div>
             </div>
@@ -735,7 +735,7 @@
                 <div class="testimonials-header-box">
                     <div class="stars" style="font-size: 18px; color: #ffc107;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                     <h3 style="margin: 5px 0; font-size: 20px;">Avaliação Média de 800.0 Estrelas</h3>
-                    <p style="font-size: 14px; color: var(--text-muted); margin: 0;">Comprovado e validado por mais de <strong>1.300 clientes e parceiros</strong>.</p>
+                    <p style="font-size: 14px; color: var(--text-muted); margin: 0;">Comprovado e validado por mais de <strong>1.600 clientes e parceiros</strong>.</p>
                 </div>
             </div>
         </div>
@@ -878,10 +878,10 @@
             <div class="assistant-header">
                 <div class="profile-info" style="display: flex; align-items: center; gap: 10px;">
                     <div style="position: relative; width: 35px; height: 35px;">
-                        <img src="avatar.png" alt="Asni Gabriel" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">
+                        <img src="avatar.png" alt="Azny Gabriel" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">
                         <span class="online-dot" style="width: 10px; height: 10px; bottom: -2px; right: -2px;"></span>
                     </div>
-                    <span>Asni Gabriel</span>
+                    <span>Azny Gabriel</span>
                 </div>
                 <button onclick="toggleAssistant()" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer;">&times;</button>
             </div>
@@ -894,7 +894,7 @@
             </div>
         </div>
         <button class="assistant-btn" onclick="toggleAssistant()" title="Abrir Chat Asni Gabriel">
-            <img src="avatar.png" alt="Asni Gabriel">
+            <img src="avatar.png" alt="Azny Gabriel">
             <span class="online-dot"></span>
         </button>
     </div>
@@ -1220,10 +1220,10 @@
         }
 
         // SISTEMA DE CHAT INTEGRADO DA ASNI GABRIEL
-        function initAsniChat() {
+        function initAznyChat() {
             const body = document.getElementById('assistantBody');
             if (body && body.children.length === 0) {
-                body.innerHTML = `<div class="assistant-message">Olá, saudações. Aqui fala Asni Gabriel, a partir da empresa Apsan Limitada. Em que posso lhe ajudar?</div>`;
+                body.innerHTML = `<div class="assistant-message">Olá, saudações. Aqui fala Azny Gabriel, a partir da empresa APSAN,LDA. Em que posso lhe ajudar?</div>`;
             }
         }
 
@@ -1242,7 +1242,7 @@
             let reply = "";
 
             // Lógica de resposta baseada nas diretrizes do utilizador
-            if (lower.match(/bem|tudo bem|olá|ola|bom saber/)) {
+            if (lower.match(/Olá,espero estares bem/)) {
                 reply = "Olá, bom saber que estás bem, eu também estou bem. Gostaria de saber mais ou menos sobre os vossos serviços?";
             } else if (lower.match(/serviço|servicos|vossos serviços|serviços principais|servicos extras/)) {
                 reply = "Na APSAN, LDA dispomos dos seguintes serviços principais e extras:<br><br>" +
