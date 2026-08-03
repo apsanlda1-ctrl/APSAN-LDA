@@ -1595,5 +1595,124 @@
             }, 4000);
         }
     </script>
+    <!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APSAN, LDA</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --accent-color: #3b82f6;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.25;
+        }
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        main {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        h2 {
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .post-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .post-card h3 {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        .post-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+        .post-card img {
+            width: 100%;
+            max-height: 250px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+        .date {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>APSAN, LDA</h1>
+        <p style="color: var(--text-muted); margin: 5px 0 0 0;">Bem-vindo ao nosso portal institucional</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Últimas Atualizações</h2>
+            <div id="dynamicPostsContainer">
+                <!-- Conteúdos padrão ou estáticos iniciais caso o admin esteja vazio -->
+                <article class="post-card">
+                    <span class="date">Portal Oficial</span>
+                    <h3>Bem-vindo à APSAN, LDA</h3>
+                    <p>Este é o canal oficial de atualizações e publicações institucionais da empresa.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const conteudosSalvos = JSON.parse(localStorage.getItem('apsan_admin_contents'));
+            
+            if (conteudosSalvos && conteudosSalvos.length > 0) {
+                const containerPosts = document.getElementById('dynamicPostsContainer');
+                let htmlDinamico = '';
+                
+                conteudosSalvos.forEach(item => {
+                    htmlDinamico += `
+                        <article class="post-card">
+                            <span class="date">${item.data || ''}</span>
+                            <h3>${item.titulo || ''}</h3>
+                            <p>${item.corpo || ''}</p>
+                            ${item.url ? `<img src="${item.url}" alt="${item.titulo || ''}">` : ''}
+                        </article>
+                    `;
+                });
+
+                if (htmlDinamico) {
+                    containerPosts.innerHTML = htmlDinamico + containerPosts.innerHTML;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
 </body>
 </html>
