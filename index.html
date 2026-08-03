@@ -890,7 +890,7 @@
                     Olá! Sou a Azny Gabriel, assistente virtual da APSAN, LDA. Como posso ajudar hoje?
                     <div class="chat-suggestions">
                         <span class="chat-chip" onclick="sendQuickQuery('Qual é o estado do meu pedido #AP-2026-089?')">Rastrear #AP-2026-089</span>
-                        <span class="chat-chip" onclick="sendQuickQuery('Quanto custa o aluguel de viatura?')">Orçamento Aluguerd de carro </span>
+                        <span class="chat-chip" onclick="sendQuickQuery('Quanto custa o aluguel de viatura?')">Orçamento Aluguer de carro</span>
                         <span class="chat-chip" onclick="sendQuickQuery('Onde fica a vossa representação?')">Localização Ondjiva</span>
                         <span class="chat-chip" onclick="sendQuickQuery('Quero falar com um operador.')">Falar com Operador</span>
                         <span class="chat-chip" onclick="sendQuickQuery('serviços')">Serviços</span>
@@ -1230,7 +1230,7 @@
             sendAssistantMessage();
         }
 
-        // NOVA LÓGICA INTERATIVA AVANÇADA DA ASSISTENTE VIRTUAL AZNY GABRIEL
+        // LÓGICA INTERATIVA DO CHAT (ERRO DE SINTAXE CORRIGIDO)
         function sendAssistantMessage() {
             const input = document.getElementById('assistantInput');
             const body = document.getElementById('assistantBody');
@@ -1253,7 +1253,7 @@
                 reply = "Para consultar o estado do seu pedido, por favor informe o número completo (ex: #AP-2026-089) ou aceda à nossa Área do Cliente.";
 
             // 2. Assistente de Orçamentos Dinâmicos e Custos Estimados
-            } else if (lowerText.includes('quanto custa o aluguer de viaturas') || lowerText.includes('aluguer de viaturas') || lowerText.includes('aluguel de carros')) {
+            } else if (lowerText.includes('quanto custa o aluguel de viaturas') || lowerText.includes('aluguer de viaturas') || lowerText.includes('aluguel de carros')) {
                 reply = "Os preços variam conforme o modelo e o tempo de missão. Gostaria de preencher os dados para receber um orçamento oficial detalhado no seu e-mail?";
             } else if (lowerText.includes('orçamento') || lowerText.includes('orcamento') || lowerText.includes('quanto custa') || lowerText.includes('preço') || lowerText.includes('precos') || lowerText.includes('catering') || lowerText.includes('transfronteiriço')) {
                 reply = "Para serviços específicos (como catering, missões transfronteiriças ou aluguer de carros), fornecemos estimativas e orçamentos personalizados. Pode submeter a sua solicitação diretamente na secção de Serviços ou informar os detalhes por aqui para tratarmos com a equipa comercial.";
@@ -1279,7 +1279,8 @@
                 reply = "Olá, estou bem graças. Obrigada por perguntar. Como posso lhe ajudar hoje?";
             } else if (lowerText.includes('serviço') || lowerText.includes('servicos') || lowerText.includes('serviços principais')) {
                 reply = "Os nossos serviços principais incluem Limpeza Institucional, Material de Escritório, Catering, Internet e Cabling, Criação de Software, Transportes/Aluguer e Importação & Exportação.";
-                reply = "Os nossos serviços extras são: Acompanhamento Hospitalar,Guia,Autorização de viagem para menor,Compras na Namibia,Encomendas,Gestão de Redes sociais,Tradução Oficial Juramentada
+            } else if (lowerText.includes('extras') || lowerText.includes('serviços extras')) {
+                reply = "Os nossos serviços extras são: Acompanhamento Hospitalar, Guia, Autorização de viagem para menor, Compras na Namibia, Encomendas, Gestão de Redes Sociais e Tradução Oficial Juramentada.";
             } else if (lowerText.includes('horário') || lowerText.includes('horario')) {
                 reply = "De segunda a sexta-feira trabalhamos das 08:00 até 18:00 e nos sábados das 08:00 até 16:00.";
             } else {
