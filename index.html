@@ -350,6 +350,7 @@
                 <li><a href="#parcerias" class="nav-tab" onclick="switchTab('parcerias', event)" style="color:#fff; text-decoration:none; padding:10px; display:block;"><i class="fas fa-handshake" style="width: 20px;"></i> Parcerias</a></li>
                 <li><a href="#portal" class="nav-tab" onclick="switchTab('portal', event)" style="color: #ffcc00; text-decoration:none; padding:10px; display:block;"><i class="fas fa-search-dollar" style="width: 20px;"></i> Consulta Empresa</a></li>
                 <li><a href="#client-area" class="nav-tab" onclick="switchTab('client-area', event)" style="background: var(--accent-color); color: #000 !important; text-decoration:none; padding:10px; border-radius:6px; display:block; font-weight:bold; margin-top:5px;"><i class="fas fa-user-lock" style="width: 20px;"></i> Área do Cliente</a></li>
+                <li><a href="#admin-area" class="nav-tab" onclick="switchTab('admin-area', event)" style="background: #dc3545; color: #fff !important; text-decoration:none; padding:10px; border-radius:6px; display:block; font-weight:bold; margin-top:5px;"><i class="fas fa-user-shield" style="width: 20px;"></i> Área Admin (Eduardo)</a></li>
                 <li><a href="#faq" class="nav-tab" onclick="switchTab('faq', event)" style="color:#fff; text-decoration:none; padding:10px; display:block;"><i class="fas fa-question-circle" style="width: 20px;"></i> FAQ</a></li>
                 <li><a href="#posts" class="nav-tab" onclick="switchTab('posts', event)" style="color:#fff; text-decoration:none; padding:10px; display:block;"><i class="fas fa-newspaper" style="width: 20px;"></i> Posts</a></li>
                 <li><a href="#contact" class="nav-tab" onclick="switchTab('contact', event)" style="color:#fff; text-decoration:none; padding:10px; display:block;"><i class="fas fa-envelope" style="width: 20px;"></i> Contactos</a></li>
@@ -799,6 +800,77 @@
         </div>
     </section>
 
+    <!-- ÁREA ADMINISTRATIVA EXCLUSIVA DO EDUARDO -->
+    <section id="admin-area" class="content-section" style="padding: 40px 20px;">
+        <div class="container" style="max-width: 900px; margin: 0 auto;">
+            <div class="section-title" style="text-align: center; margin-bottom: 30px;">
+                <h2>Área Administrativa</h2>
+                <div class="underline" style="width: 60px; height: 3px; background: #dc3545; margin: 8px auto 0 auto;"></div>
+                <p style="margin-top: 8px; font-size: 14px; color: var(--text-muted);">Painel de Gestão Restrito - Acesso Exclusivo para Administração</p>
+            </div>
+
+            <!-- Login Admin -->
+            <div class="portal-card" id="adminAuthCard" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 30px; border-radius: 10px; max-width: 500px; margin: 0 auto;">
+                <h3 style="margin-bottom: 15px; color: #dc3545;"><i class="fas fa-user-shield"></i> Autenticação de Administrador</h3>
+                <form onsubmit="handleAdminLogin(event)">
+                    <div class="modal-form-group">
+                        <label>E-mail Administrativo</label>
+                        <input type="email" id="adminEmailInput" placeholder="O seu email..." required>
+                    </div>
+                    <div class="modal-form-group">
+                        <label>Palavra-passe</label>
+                        <input type="password" id="adminPassInput" placeholder="A sua senha..." required>
+                    </div>
+                    <button type="submit" style="width: 100%; padding: 12px; background-color: #dc3545; color: #fff; border: none; font-weight: bold; border-radius: 6px; cursor: pointer; margin-top: 10px;">Entrar no Painel Admin</button>
+                </form>
+            </div>
+
+            <!-- Dashboard Admin (Carregar Imagens, Vídeos e Posts) -->
+            <div class="portal-card" id="adminDashboardCard" style="display: none; background: var(--card-bg); border: 1px solid var(--border-color); padding: 30px; border-radius: 10px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px;">
+                    <h3 style="color: #dc3545;"><i class="fas fa-cogs"></i> Painel de Controlo - Gestão de Conteúdos</h3>
+                    <button onclick="handleAdminLogout()" style="background: #dc3545; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 13px;">Terminar Sessão</button>
+                </div>
+
+                <form onsubmit="handleAdminUpload(event)" style="display: flex; flex-direction: column; gap: 20px;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
+                        <div class="modal-form-group">
+                            <label>Tipo de Conteúdo</label>
+                            <select id="adminContentType" onchange="toggleUploadFields()" required>
+                                <option value="post">Novo Post / Notícia</option>
+                                <option value="imagem">Carregar Imagem</option>
+                                <option value="video">Carregar Vídeo (Link URL)</option>
+                            </select>
+                        </div>
+                        <div class="modal-form-group">
+                            <label>Título do Conteúdo</label>
+                            <input type="text" id="adminTitle" placeholder="Título descritivo..." required>
+                        </div>
+                    </div>
+
+                    <div class="modal-form-group" id="fileInputGroup">
+                        <label id="fileInputLabel">Ficheiro / Link da Imagem ou Média</label>
+                        <input type="text" id="adminMediaUrl" placeholder="Insira o URL da imagem, vídeo ou descrição..." required>
+                    </div>
+
+                    <div class="modal-form-group">
+                        <label>Descrição Completa / Conteúdo</label>
+                        <textarea id="adminContentBody" rows="4" placeholder="Escreva o texto ou detalhes do post/conteúdo..." required></textarea>
+                    </div>
+
+                    <button type="submit" style="padding: 12px; background-color: #dc3545; color: #fff; border: none; font-weight: bold; border-radius: 6px; cursor: pointer; transition: transform 0.2s;"><i class="fas fa-upload"></i> Publicar Conteúdo no Site</button>
+                </form>
+
+                <div style="margin-top: 30px; border-top: 1px solid var(--border-color); padding-top: 20px;">
+                    <h4 style="color: var(--primary-color); margin-bottom: 10px;"><i class="fas fa-history"></i> Conteúdos Geridos Recentemente</h4>
+                    <div id="adminContentList" style="font-size: 14px; color: var(--text-muted);">
+                        <p>Nenhum conteúdo personalizado adicionado nesta sessão.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="faq" class="content-section" style="padding: 40px 20px;">
         <div class="container" style="max-width: 900px; margin: 0 auto;">
             <div class="section-title" style="text-align: center; margin-bottom: 30px;">
@@ -834,7 +906,7 @@
                 <h2>Últimos Posts & Notícias</h2>
                 <div class="underline" style="width: 60px; height: 3px; background: var(--primary-color); margin: 8px auto 0 auto;"></div>
             </div>
-            <div class="posts-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+            <div class="posts-grid" id="dynamicPostsContainer" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
                 <article class="post-card" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px; cursor: default;">
                     <span style="font-size: 12px; color: var(--text-muted);"><i class="far fa-calendar-alt"></i> 26 de Julho, 2026</span>
                     <h3 style="margin: 10px 0; font-size: 18px;">Expansão de Serviços e Nosso Crescimento</h3>
@@ -954,7 +1026,7 @@
         </div>
     </div>
 
-    <!-- FOOTER INTEGRADO (PASTA footer.html) -->
+    <!-- FOOTER INTEGRADO -->
     <footer>
         <div class="footer-container">
             <div class="footer-brand-col">
@@ -1023,7 +1095,7 @@
     </style>
 
     <script>
-        const sectionsList = ['home', 'about', 'services', 'extras', 'parcerias', 'portal', 'client-area', 'faq', 'posts', 'contact'];
+        const sectionsList = ['home', 'about', 'services', 'extras', 'parcerias', 'portal', 'client-area', 'admin-area', 'faq', 'posts', 'contact'];
         const sectionNamesMap = {
             'home': 'Início',
             'about': 'Quem Somos',
@@ -1032,6 +1104,7 @@
             'parcerias': 'Parcerias',
             'portal': 'Consulta Empresa',
             'client-area': 'Área do Cliente',
+            'admin-area': 'Área Admin (Eduardo)',
             'faq': 'FAQ',
             'posts': 'Posts',
             'contact': 'Contactos'
@@ -1231,7 +1304,6 @@
             sendAssistantMessage();
         }
 
-        // LÓGICA INTERATIVA DO CHAT (ATUALIZADA COM OS SERVIÇOS EXTRAS)
         function sendAssistantMessage() {
             const input = document.getElementById('assistantInput');
             const body = document.getElementById('assistantBody');
@@ -1245,46 +1317,14 @@
             const lowerText = text.toLowerCase();
             let reply = "";
 
-            if (lowerText.includes('#ap-2026-089') || lowerText.includes('estado do meu pedido #ap-2026-089') || (lowerText.includes('rastrear') && lowerText.includes('089'))) {
-                reply = "O pedido #AP-2026-089 (Serviço de Limpeza Institucional) encontra-se atualmente com o estado: <strong>Em Revisão</strong>. Deseja atualizar algum detalhe?";
-            } else if (lowerText.includes('#ap-2026-072') || (lowerText.includes('rastrear') && lowerText.includes('072'))) {
-                reply = "O pedido #AP-2026-072 (Serviços de Catering) encontra-se atualmente com o estado: <strong>Em Operação</strong>.";
-            } else if (lowerText.includes('estado do meu pedido') || lowerText.includes('rastreio') || lowerText.includes('consultar pedido')) {
-                reply = "Para consultar o estado do seu pedido, por favor informe o número completo (ex: #AP-2026-089) ou aceda à nossa Área do Cliente.";
-
-            // SERVIÇOS EXTRAS RECUPERADOS E INTEGRADOS NO CHAT
-            } else if (lowerText.includes('serviços extras') || lowerText.includes('servicos extras') || lowerText.includes('extras')) {
-                reply = "Os nossos serviços extras incluem: <ul><li><strong>Acompanhamento Hospitalar</strong></li><li><strong>Tradução Oficial Juramentada</strong></li><li><strong>Autorização de viagem pra menor</strong></li><li><strong>Guia</strong></li><li><strong>Compras Na Namibia</strong></li><li><strong>Encomendas</strong></li><li><strong>Gestão de Redes Sociais</strong></li></ul>Pode selecioná-los na barra de navegação para mais detalhes!";
-            } else if (lowerText.includes('compras na namibia') || lowerText.includes('compras namibia') || lowerText.includes('namíbia')) {
-                reply = "Facilitamos a aquisição, transação e transporte seguro de mercadorias na Namíbia (utilizando transações em NAD). Pretende ajuda com alguma encomenda ou compra específica?";
-            } else if (lowerText.includes('tradução') || lowerText.includes('traducao') || lowerText.includes('juramentada')) {
-                reply = "Oferecemos serviços de Tradução Oficial Juramentada e interpretação de documentos com validade legal e confidencialidade rigorosa.";
-            } else if (lowerText.includes('acompanhamento hospitalar') || lowerText.includes('hospital')) {
-                reply = "O serviço de Acompanhamento Hospitalar garante apoio humanizado, assistência e acompanhamento contínuo a doentes e familiares em unidades de saúde.";
-            } else if (lowerText.includes('autorização de viagem') || lowerText.includes('autorizacao de viagem') || lowerText.includes('menor')) {
-                reply = "Tratamos de autorizações e documentação legal para viagens de menores com total segurança jurídica e apoio consular.";
-            } else if (lowerText.includes('encomendas') || lowerText.includes('encomenda')) {
-                reply = "Realizamos a recepção, triagem e envio rápido de encomendas com segurança e organização ponto a ponto.";
-            } else if (lowerText.includes('redes sociais') || lowerText.includes('marketing')) {
-                reply = "A Gestão de Redes Sociais potencia a sua presença digital com criação de conteúdos criativos, planeamento de campanhas e relatórios de desempenho.";
-            } else if (lowerText.includes('guia')) {
-                reply = "O serviço de Guia oferece acompanhamento turístico e profissional para orientação segura em deslocações entre Angola e Namíbia.";
-
-            // OUTRAS CONSULTAS
-            } else if (lowerText.includes('aluguer de viaturas') || lowerText.includes('aluguel de carros')) {
-                reply = "Os preços variam conforme o modelo e o tempo de missão. Gostaria de preencher os dados para receber um orçamento oficial detalhado no seu e-mail?";
-            } else if (lowerText.includes('orçamento') || lowerText.includes('orcamento') || lowerText.includes('quanto custa') || lowerText.includes('preço') || lowerText.includes('catering')) {
-                reply = "Para serviços específicos, fornecemos estimativas e orçamentos personalizados. Pode submeter a sua solicitação diretamente na secção respetiva do site.";
-            } else if (lowerText.includes('falar com um operador') || lowerText.includes('falar com operador') || lowerText.includes('atendente') || lowerText.includes('suporte')) {
-                reply = "Certamente! Posso agendar uma chamada ou pode contactar-nos diretamente via telemóvel (931 057 760 / 934 437 739).";
-            } else if (lowerText === 'olá' || lowerText === 'ola') {
-                reply = "Olá, como posso ajudar?";
-            } else if (lowerText.includes('serviço') || lowerText.includes('servicos') || lowerText.includes('serviços principais')) {
-                reply = "Os nossos serviços principais incluem Limpeza Institucional, Material de Escritório, Catering, Internet e Cabling, Criação de Software, Transportes/Aluguer e Importação & Exportação.";
-            } else if (lowerText.includes('horário') || lowerText.includes('horario')) {
-                reply = "De segunda a sexta-feira trabalhamos das 08:00 até 18:00 e nos sábados das 08:00 até 16:00.";
+            if (lowerText.includes('serviços extras') || lowerText.includes('servicos extras') || lowerText.includes('extras')) {
+                reply = "Os nossos serviços extras incluem: <ul><li><strong>Acompanhamento Hospitalar</strong></li><li><strong>Tradução Oficial Juramentada</strong></li><li><strong>Autorização de viagem pra menor</strong></li><li><strong>Guia</strong></li><li><strong>Compras Na Namibia</strong></li><li><strong>Encomendas</strong></li><li><strong>Gestão de Redes Sociais</strong></li></ul>";
+            } else if (lowerText.includes('compras na namibia') || lowerText.includes('compras namibia')) {
+                reply = "Facilitamos a aquisição, transação e transporte seguro de mercadorias na Namíbia (utilizando transações em NAD).";
+            } else if (lowerText.includes('falar com um operador') || lowerText.includes('suporte')) {
+                reply = "Pode contactar-nos diretamente via telemóvel (931 057 760 / 934 437 739) ou email (apsanlda1@gmail.com).";
             } else {
-                reply = "Para mais informações específicas sobre este assunto, por favor entre em contacto connosco pelos nossos contactos telefónicos ou e-mail (apsanlda1@gmail.com).";
+                reply = "Para mais informações, por favor entre em contacto connosco através dos contactos disponíveis no site.";
             }
 
             setTimeout(() => {
@@ -1308,6 +1348,113 @@
             document.getElementById('clientDashboardCard').style.display = 'none';
             document.getElementById('clientAuthCard').style.display = 'block';
             showToast("Sessão Terminada", "Saiu da sua conta com segurança.");
+        }
+
+        // LÓGICA DE AUTENTICAÇÃO E GESTÃO ADMIN (EDUARDO)
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('adminEmailInput').value.trim();
+            const pass = document.getElementById('adminPassInput').value.trim();
+
+            if (email === 'eduardongongoyovegabriel@gmail.com' && pass === '12eduardo45') {
+                document.getElementById('adminAuthCard').style.display = 'none';
+                document.getElementById('adminDashboardCard').style.display = 'block';
+                showToast("Acesso Autorizado", "Bem-vindo ao Painel Administrativo, Eduardo!");
+            } else {
+                alert('Credenciais incorretas! Acesso restrito a eduardongongoyovegabriel@gmail.com.');
+            }
+        }
+
+        function handleAdminLogout() {
+            document.getElementById('adminDashboardCard').style.display = 'none';
+            document.getElementById('adminAuthCard').style.display = 'block';
+            document.getElementById('adminEmailInput').value = '';
+            document.getElementById('adminPassInput').value = '';
+            showToast("Sessão Terminada", "Saiu do painel administrativo com segurança.");
+        }
+
+        function toggleUploadFields() {
+            const type = document.getElementById('adminContentType').value;
+            const label = document.getElementById('fileInputLabel');
+            const input = document.getElementById('adminMediaUrl');
+            if (type === 'post') {
+                label.textContent = "URL da Imagem de Capa do Post (Opcional)";
+                input.placeholder = "https://exemplo.com/imagem.jpg";
+            } else if (type === 'imagem') {
+                label.textContent = "URL ou Caminho da Imagem";
+                input.placeholder = "https://exemplo.com/foto.jpg";
+            } else if (type === 'video') {
+                label.textContent = "URL do Vídeo (YouTube / MP4)";
+                input.placeholder = "https://www.youtube.com/embed/...";
+            }
+        }
+
+        function handleAdminUpload(e) {
+            e.preventDefault();
+            const type = document.getElementById('adminContentType').value;
+            const title = document.getElementById('adminTitle').value;
+            const mediaUrl = document.getElementById('adminMediaUrl').value;
+            const bodyText = document.getElementById('adminContentBody').value;
+            const currentDate = new Date().toLocaleDateString('pt-PT');
+
+            if (type === 'post') {
+                const postsContainer = document.getElementById('dynamicPostsContainer');
+                const newArticle = document.createElement('article');
+                newArticle.className = 'post-card';
+                newArticle.style.cssText = "background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px;";
+                newArticle.innerHTML = `
+                    ${mediaUrl ? `<img src="${mediaUrl}" alt="${title}" style="width:100%; height:180px; object-fit:cover; border-radius:6px; margin-bottom:12px;">` : ''}
+                    <span style="font-size: 12px; color: var(--text-muted);"><i class="far fa-calendar-alt"></i> ${currentDate}</span>
+                    <h3 style="margin: 10px 0; font-size: 18px;">${title}</h3>
+                    <p style="font-size: 14px; color: var(--text-muted);">${bodyText}</p>
+                `;
+                postsContainer.prepend(newArticle);
+            } else if (type === 'imagem') {
+                const homeSection = document.getElementById('home');
+                const imgBox = document.createElement('div');
+                imgBox.style.cssText = "max-width: 1200px; margin: 30px auto; padding: 0 20px;";
+                imgBox.innerHTML = `
+                    <div style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 20px; border-radius: 10px; text-align: center;">
+                        <h3 style="color: var(--primary-color); margin-bottom: 10px;">${title}</h3>
+                        <img src="${mediaUrl}" alt="${title}" style="max-width: 100%; max-height: 400px; border-radius: 8px; object-fit: contain;">
+                        <p style="font-size: 14px; color: var(--text-muted); margin-top: 10px;">${bodyText}</p>
+                    </div>
+                `;
+                homeSection.appendChild(imgBox);
+            } else if (type === 'video') {
+                const homeSection = document.getElementById('home');
+                let embedUrl = mediaUrl;
+                if(mediaUrl.includes('watch?v=')) {
+                    embedUrl = mediaUrl.replace('watch?v=', 'embed/');
+                }
+                const videoBox = document.createElement('div');
+                videoBox.style.cssText = "max-width: 1200px; margin: 30px auto; padding: 0 20px;";
+                videoBox.innerHTML = `
+                    <div style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 20px; border-radius: 10px; text-align: center;">
+                        <h3 style="color: var(--primary-color); margin-bottom: 10px;">${title}</h3>
+                        <div style="position: relative; padding-bottom: 56.15%; height: 0; overflow: hidden; border-radius: 8px;">
+                            <iframe src="${embedUrl}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen></iframe>
+                        </div>
+                        <p style="font-size: 14px; color: var(--text-muted); margin-top: 10px;">${bodyText}</p>
+                    </div>
+                `;
+                homeSection.appendChild(videoBox);
+            }
+
+            // Atualizar lista de registos no painel admin
+            const listContainer = document.getElementById('adminContentList');
+            if(listContainer.querySelector('p')) {
+                listContainer.innerHTML = '';
+            }
+            const itemEntry = document.createElement('div');
+            itemEntry.style.cssText = "padding: 8px 0; border-bottom: 1px solid var(--border-color);";
+            itemEntry.innerHTML = `<strong>[${type.toUpperCase()}]</strong> ${title} - <em>Adicionado em ${currentDate}</em>`;
+            listContainer.prepend(itemEntry);
+
+            showToast("Conteúdo Publicado!", `O seu ${type} foi carregado e publicado com sucesso no site.`);
+            document.getElementById('adminTitle').value = '';
+            document.getElementById('adminMediaUrl').value = '';
+            document.getElementById('adminContentBody').value = '';
         }
 
         async function handleParceriaSubmit(event) {
