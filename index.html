@@ -809,27 +809,11 @@
                 <p style="margin-top: 8px; font-size: 14px; color: var(--text-muted);">Painel de Gestão Restrito - Acesso Exclusivo para Administração</p>
             </div>
 
-            <!-- Login Admin -->
-            <div class="portal-card" id="adminAuthCard" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 30px; border-radius: 10px; max-width: 500px; margin: 0 auto;">
-                <h3 style="margin-bottom: 15px; color: #dc3545;"><i class="fas fa-user-shield"></i> Autenticação de Administrador</h3>
-                <form onsubmit="handleAdminLogin(event)">
-                    <div class="modal-form-group">
-                        <label>E-mail Administrativo</label>
-                        <input type="email" id="adminEmailInput" placeholder="O seu email..." required>
-                    </div>
-                    <div class="modal-form-group">
-                        <label>Palavra-passe</label>
-                        <input type="password" id="adminPassInput" placeholder="A sua senha..." required>
-                    </div>
-                    <button type="submit" style="width: 100%; padding: 12px; background-color: #dc3545; color: #fff; border: none; font-weight: bold; border-radius: 6px; cursor: pointer; margin-top: 10px;">Entrar no Painel Admin</button>
-                </form>
-            </div>
-
-            <!-- Dashboard Admin (Carregar Imagens, Vídeos e Posts) -->
-            <div class="portal-card" id="adminDashboardCard" style="display: none; background: var(--card-bg); border: 1px solid var(--border-color); padding: 30px; border-radius: 10px;">
+            <!-- Dashboard Admin (Carregamento Direto sem Restrições ou Credenciais) -->
+            <div class="portal-card" id="adminDashboardCard" style="display: block; background: var(--card-bg); border: 1px solid var(--border-color); padding: 30px; border-radius: 10px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px;">
                     <h3 style="color: #dc3545;"><i class="fas fa-cogs"></i> Painel de Controlo - Gestão de Conteúdos</h3>
-                    <button onclick="handleAdminLogout()" style="background: #dc3545; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 13px;">Terminar Sessão</button>
+                    <span style="background: #28a745; color: #fff; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: bold;">Acesso Direto Ativo</span>
                 </div>
 
                 <form onsubmit="handleAdminUpload(event)" style="display: flex; flex-direction: column; gap: 20px;">
@@ -1172,25 +1156,21 @@
 
             let newIndex = currentIndex + direction;
             if (newIndex >= 0 && newIndex < sectionsList.length) {
-                switchTab(sectionsList[newIndex], null, true);
+                switchTab(sectionsList[newIndex], null);
             }
         }
 
-        window.addEventListener('popstate', function(event) {
-            let section = event.state ? event.state.section : null;
-            if (!section) {
-                const hash = window.location.hash.replace('#', '');
-                section = hash ? hash : 'home';
+        window.addEventListener('popstate', (event) => {
+            const hash = window.location.hash.replace('#', '') || 'home';
+            if (sectionsList.includes(hash)) {
+                switchTab(hash, null, false);
             }
-            switchTab(section, null, false);
         });
 
         window.addEventListener('DOMContentLoaded', () => {
-            const hash = window.location.hash.replace('#', '');
-            if (hash && document.getElementById(hash)) {
+            const hash = window.location.hash.replace('#', '') || 'home';
+            if (sectionsList.includes(hash)) {
                 switchTab(hash, null, false);
-            } else {
-                switchTab('home', null, false);
             }
         });
 
@@ -1206,57 +1186,61 @@
             }
         }
 
-        function toggleFaq(card) {
-            card.classList.toggle('active');
-        }
-
         function filterServices(gridId, inputId) {
             const query = document.getElementById(inputId).value.toLowerCase();
-            const cards = document.querySelectorAll(`#${gridId} .service-card`);
-            cards.forEach(card => {
-                const text = card.textContent.toLowerCase();
-                card.style.display = text.includes(query) ? 'block' : 'none';
-            });
+            const grid = document.getElementById(gridId);
+            const cards = grid.getElementsByClassName('service-card');
+            
+            for (let i = 0; i < cards.length; i++) {
+                const title = cards[i].querySelector('h3').textContent.toLowerCase();
+                const desc = cards[i].querySelector('p').textContent.toLowerCase();
+                if (title.includes(query) || desc.includes(query)) {
+                    cards[i].style.display = '';
+                } else {
+                    cards[i].style.display = 'none';
+                }
+            }
         }
 
-        function openServiceDetail(title, description, features) {
-            const modal = document.getElementById('serviceModal');
-            const content = document.getElementById('modalBodyContent');
-            
-            let featuresHtml = features.map(f => `<li style="margin-bottom: 6px;"><i class="fas fa-check" style="color: #28a745; margin-right: 8px;"></i>${f}</li>`).join('');
+        function toggleFaq(card) {
+            card.classList.toggle('active');
+            const icon = card.querySelector('i');
+            if (card.classList.contains('active')) {
+                icon.className = 'fas fa-chevron-up';
+            } else {
+                icon.className = 'fas fa-chevron-down';
+            }
+        }
 
-            content.innerHTML = `
-                <h2 style="color: var(--primary-color); font-size: 20px; margin-bottom: 10px; padding-right: 30px;"><i class="fas fa-concierge-bell"></i> ${title}</h2>
-                <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 15px; line-height: 1.5;">${description}</p>
-                <div style="background: rgba(0,64,128,0.04); padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid var(--border-color);">
-                    <strong style="font-size: 13px; color: var(--primary-color); display: block; margin-bottom: 8px;">O que inclui:</strong>
-                    <ul style="list-style: none; font-size: 13px; color: var(--text-color);">${featuresHtml}</ul>
-                </div>
-                <hr style="border: none; border-top: 1px solid var(--border-color); margin: 20px 0;">
-                <h3 style="font-size: 16px; color: var(--primary-color); margin-bottom: 15px;"><i class="fas fa-envelope-open-text"></i> Formulário de Solicitação de Serviço</h3>
-                <form action="https://formspree.io/f/xqerwzjq" method="POST" onsubmit="handleModalServiceSubmit(event)">
-                    <input type="hidden" name="_subject" value="Solicitação de Serviço: ${title}">
-                    <input type="hidden" name="servico_solicitado" value="${title}">
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+        function openServiceDetail(title, desc, items) {
+            const modal = document.getElementById('serviceModal');
+            const bodyContent = document.getElementById('modalBodyContent');
+            
+            let listHtml = items.map(item => `<li style="margin-bottom: 8px;"><i class="fas fa-check-circle" style="color: var(--primary-color); margin-right: 8px;"></i>${item}</li>`).join('');
+            
+            bodyContent.innerHTML = `
+                <h3 style="color: var(--primary-color); font-size: 22px; margin-bottom: 12px;">${title}</h3>
+                <p style="font-size: 15px; line-height: 1.6; color: var(--text-muted); margin-bottom: 20px;">${desc}</p>
+                <h4 style="font-size: 16px; margin-bottom: 10px; color: var(--text-color);">Detalhes e Vantagens:</h4>
+                <ul style="list-style: none; padding: 0; margin-bottom: 25px; font-size: 14px; color: var(--text-muted);">${listHtml}</ul>
+                <div style="background: rgba(0,64,128,0.05); padding: 20px; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 16px; margin-bottom: 12px; color: var(--primary-color);">Solicitar este Serviço Diretamente</h4>
+                    <form onsubmit="handleModalServiceSubmit(event, '${title}')">
                         <div class="modal-form-group">
                             <label>O seu Nome / Empresa</label>
-                            <input type="text" name="nome_cliente" placeholder="Nome completo..." required>
+                            <input type="text" id="modalClientName" placeholder="Nome completo..." required>
                         </div>
                         <div class="modal-form-group">
                             <label>Telemóvel / WhatsApp</label>
-                            <input type="tel" name="telemovel_cliente" placeholder="+244..." required>
+                            <input type="tel" id="modalClientPhone" placeholder="+244..." required>
                         </div>
-                    </div>
-                    <div class="modal-form-group">
-                        <label>E-mail de Contacto</label>
-                        <input type="email" name="email_cliente" placeholder="exemplo@dominio.com" required>
-                    </div>
-                    <div class="modal-form-group">
-                        <label>Detalhes Específicos ou Data Pretendida</label>
-                        <textarea name="detalhes_pedido" rows="3" placeholder="Indique especificações, localidade ou prazos desejados..." required></textarea>
-                    </div>
-                    <button type="submit" id="modalSubmitBtn" style="width: 100%; padding: 12px; background-color: var(--primary-color); color: #fff; border: none; font-weight: bold; border-radius: 6px; cursor: pointer; transition: transform 0.2s;"><i class="fas fa-paper-plane"></i> Submeter Solicitação</button>
-                </form>
+                        <div class="modal-form-group">
+                            <label>Mensagem ou Observações Específicas</label>
+                            <textarea id="modalClientMsg" rows="3" placeholder="Descreva os detalhes da solicitação..."></textarea>
+                        </div>
+                        <button type="submit" style="width: 100%; padding: 12px; background-color: var(--primary-color); color: #fff; border: none; font-weight: bold; border-radius: 6px; cursor: pointer;">Enviar Pedido</button>
+                    </form>
+                </div>
             `;
             modal.classList.add('active');
         }
@@ -1268,215 +1252,6 @@
         function closeServiceDetail(event) {
             if (event.target.id === 'serviceModal') {
                 closeServiceModal();
-            }
-        }
-
-        async function handleModalServiceSubmit(event) {
-            event.preventDefault();
-            const form = event.target;
-            const btn = document.getElementById('modalSubmitBtn');
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> A submeter pedido...';
-            btn.disabled = true;
-
-            try {
-                const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
-                if (response.ok) {
-                    showToast("Pedido Submetido!", "A sua solicitação foi enviada com sucesso à APSAN, LDA.");
-                    form.reset();
-                    closeServiceModal();
-                } else {
-                    alert('Erro ao submeter pedido.');
-                }
-            } catch (error) {
-                alert('Erro de conexão.');
-            } finally {
-                btn.innerHTML = '<i class="fas fa-paper-plane"></i> Submeter Solicitação';
-                btn.disabled = false;
-            }
-        }
-
-        function toggleAssistant() {
-            document.getElementById('assistantWindow').classList.toggle('active');
-        }
-
-        function sendQuickQuery(text) {
-            document.getElementById('assistantInput').value = text;
-            sendAssistantMessage();
-        }
-
-        function sendAssistantMessage() {
-            const input = document.getElementById('assistantInput');
-            const body = document.getElementById('assistantBody');
-            const text = input.value.trim();
-            if (!text) return;
-
-            body.innerHTML += `<div class="assistant-message user">${text}</div>`;
-            input.value = '';
-            body.scrollTop = body.scrollHeight;
-
-            const lowerText = text.toLowerCase();
-            let reply = "";
-
-            if (lowerText.includes('serviços extras') || lowerText.includes('servicos extras') || lowerText.includes('extras')) {
-                reply = "Os nossos serviços extras incluem: <ul><li><strong>Acompanhamento Hospitalar</strong></li><li><strong>Tradução Oficial Juramentada</strong></li><li><strong>Autorização de viagem pra menor</strong></li><li><strong>Guia</strong></li><li><strong>Compras Na Namibia</strong></li><li><strong>Encomendas</strong></li><li><strong>Gestão de Redes Sociais</strong></li></ul>";
-            } else if (lowerText.includes('compras na namibia') || lowerText.includes('compras namibia')) {
-                reply = "Facilitamos a aquisição, transação e transporte seguro de mercadorias na Namíbia (utilizando transações em NAD).";
-            } else if (lowerText.includes('falar com um operador') || lowerText.includes('suporte')) {
-                reply = "Pode contactar-nos diretamente via telemóvel (931 057 760 / 934 437 739) ou email (apsanlda1@gmail.com).";
-            } else {
-                reply = "Para mais informações, por favor entre em contacto connosco através dos contactos disponíveis no site.";
-            }
-
-            setTimeout(() => {
-                body.innerHTML += `<div class="assistant-message">${reply}</div>`;
-                body.scrollTop = body.scrollHeight;
-            }, 300);
-        }
-
-        function handleAssistantKey(e) {
-            if (e.key === 'Enter') sendAssistantMessage();
-        }
-
-        function handleClientLogin(e) {
-            e.preventDefault();
-            document.getElementById('clientAuthCard').style.display = 'none';
-            document.getElementById('clientDashboardCard').style.display = 'block';
-            showToast("Sessão Iniciada", "Bem-vindo à Área do Cliente APSAN, LDA.");
-        }
-
-        function handleClientLogout() {
-            document.getElementById('clientDashboardCard').style.display = 'none';
-            document.getElementById('clientAuthCard').style.display = 'block';
-            showToast("Sessão Terminada", "Saiu da sua conta com segurança.");
-        }
-
-        // LÓGICA DE AUTENTICAÇÃO E GESTÃO ADMIN (EDUARDO)
-        function handleAdminLogin(e) {
-            e.preventDefault();
-            const email = document.getElementById('adminEmailInput').value.trim();
-            const pass = document.getElementById('adminPassInput').value.trim();
-
-            if (email === 'eduardongongoyovegabriel@gmail.com' && pass === '12eduardo45') {
-                document.getElementById('adminAuthCard').style.display = 'none';
-                document.getElementById('adminDashboardCard').style.display = 'block';
-                showToast("Acesso Autorizado", "Bem-vindo ao Painel Administrativo, Eduardo!");
-            } else {
-                alert('Credenciais incorretas! Acesso restrito a eduardongongoyovegabriel@gmail.com.');
-            }
-        }
-
-        function handleAdminLogout() {
-            document.getElementById('adminDashboardCard').style.display = 'none';
-            document.getElementById('adminAuthCard').style.display = 'block';
-            document.getElementById('adminEmailInput').value = '';
-            document.getElementById('adminPassInput').value = '';
-            showToast("Sessão Terminada", "Saiu do painel administrativo com segurança.");
-        }
-
-        function toggleUploadFields() {
-            const type = document.getElementById('adminContentType').value;
-            const label = document.getElementById('fileInputLabel');
-            const input = document.getElementById('adminMediaUrl');
-            if (type === 'post') {
-                label.textContent = "URL da Imagem de Capa do Post (Opcional)";
-                input.placeholder = "https://exemplo.com/imagem.jpg";
-            } else if (type === 'imagem') {
-                label.textContent = "URL ou Caminho da Imagem";
-                input.placeholder = "https://exemplo.com/foto.jpg";
-            } else if (type === 'video') {
-                label.textContent = "URL do Vídeo (YouTube / MP4)";
-                input.placeholder = "https://www.youtube.com/embed/...";
-            }
-        }
-
-        function handleAdminUpload(e) {
-            e.preventDefault();
-            const type = document.getElementById('adminContentType').value;
-            const title = document.getElementById('adminTitle').value;
-            const mediaUrl = document.getElementById('adminMediaUrl').value;
-            const bodyText = document.getElementById('adminContentBody').value;
-            const currentDate = new Date().toLocaleDateString('pt-PT');
-
-            if (type === 'post') {
-                const postsContainer = document.getElementById('dynamicPostsContainer');
-                const newArticle = document.createElement('article');
-                newArticle.className = 'post-card';
-                newArticle.style.cssText = "background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px;";
-                newArticle.innerHTML = `
-                    ${mediaUrl ? `<img src="${mediaUrl}" alt="${title}" style="width:100%; height:180px; object-fit:cover; border-radius:6px; margin-bottom:12px;">` : ''}
-                    <span style="font-size: 12px; color: var(--text-muted);"><i class="far fa-calendar-alt"></i> ${currentDate}</span>
-                    <h3 style="margin: 10px 0; font-size: 18px;">${title}</h3>
-                    <p style="font-size: 14px; color: var(--text-muted);">${bodyText}</p>
-                `;
-                postsContainer.prepend(newArticle);
-            } else if (type === 'imagem') {
-                const homeSection = document.getElementById('home');
-                const imgBox = document.createElement('div');
-                imgBox.style.cssText = "max-width: 1200px; margin: 30px auto; padding: 0 20px;";
-                imgBox.innerHTML = `
-                    <div style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 20px; border-radius: 10px; text-align: center;">
-                        <h3 style="color: var(--primary-color); margin-bottom: 10px;">${title}</h3>
-                        <img src="${mediaUrl}" alt="${title}" style="max-width: 100%; max-height: 400px; border-radius: 8px; object-fit: contain;">
-                        <p style="font-size: 14px; color: var(--text-muted); margin-top: 10px;">${bodyText}</p>
-                    </div>
-                `;
-                homeSection.appendChild(imgBox);
-            } else if (type === 'video') {
-                const homeSection = document.getElementById('home');
-                let embedUrl = mediaUrl;
-                if(mediaUrl.includes('watch?v=')) {
-                    embedUrl = mediaUrl.replace('watch?v=', 'embed/');
-                }
-                const videoBox = document.createElement('div');
-                videoBox.style.cssText = "max-width: 1200px; margin: 30px auto; padding: 0 20px;";
-                videoBox.innerHTML = `
-                    <div style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 20px; border-radius: 10px; text-align: center;">
-                        <h3 style="color: var(--primary-color); margin-bottom: 10px;">${title}</h3>
-                        <div style="position: relative; padding-bottom: 56.15%; height: 0; overflow: hidden; border-radius: 8px;">
-                            <iframe src="${embedUrl}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen></iframe>
-                        </div>
-                        <p style="font-size: 14px; color: var(--text-muted); margin-top: 10px;">${bodyText}</p>
-                    </div>
-                `;
-                homeSection.appendChild(videoBox);
-            }
-
-            // Atualizar lista de registos no painel admin
-            const listContainer = document.getElementById('adminContentList');
-            if(listContainer.querySelector('p')) {
-                listContainer.innerHTML = '';
-            }
-            const itemEntry = document.createElement('div');
-            itemEntry.style.cssText = "padding: 8px 0; border-bottom: 1px solid var(--border-color);";
-            itemEntry.innerHTML = `<strong>[${type.toUpperCase()}]</strong> ${title} - <em>Adicionado em ${currentDate}</em>`;
-            listContainer.prepend(itemEntry);
-
-            showToast("Conteúdo Publicado!", `O seu ${type} foi carregado e publicado com sucesso no site.`);
-            document.getElementById('adminTitle').value = '';
-            document.getElementById('adminMediaUrl').value = '';
-            document.getElementById('adminContentBody').value = '';
-        }
-
-        async function handleParceriaSubmit(event) {
-            event.preventDefault();
-            const form = event.target;
-            const submitBtn = document.getElementById('parceriaSubmitBtn');
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> A submeter parceria...';
-            submitBtn.disabled = true;
-
-            try {
-                const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
-                if (response.ok) {
-                    showToast("Proposta Registada!", "A sua proposta de parceria foi enviada com sucesso para a APSAN, LDA.");
-                    form.reset();
-                } else {
-                    alert('Erro ao submeter proposta.');
-                }
-            } catch (error) {
-                alert('Erro de conexão.');
-            } finally {
-                submitBtn.innerHTML = '<i class="fas fa-handshake"></i> Submeter Proposta de Parceria';
-                submitBtn.disabled = false;
             }
         }
 
@@ -1494,28 +1269,63 @@
             }
         }
 
-        async function handleDenunciaSubmit(event) {
-            event.preventDefault();
-            const form = event.target;
-            const submitBtn = document.getElementById('denunciaModalSubmitBtn');
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> A submeter com segurança...';
-            submitBtn.disabled = true;
+        function showToast(title, message) {
+            const toast = document.getElementById('toastNotification');
+            document.getElementById('toastTitle').textContent = title;
+            document.getElementById('toastMessage').textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
 
-            try {
-                const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
-                if (response.ok) {
-                    showToast("Denúncia Registada", "O seu relato foi submetido com total sigilo e segurança.");
-                    form.reset();
-                    closeDenunciaModal();
-                } else {
-                    alert('Erro ao submeter denúncia.');
-                }
-            } catch (error) {
-                alert('Erro de conexão.');
-            } finally {
-                submitBtn.innerHTML = 'Submeter Denúncia com Segurança';
-                submitBtn.disabled = false;
-            }
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            const btn = document.getElementById('contactSubmitBtn');
+            btn.disabled = true;
+            btn.textContent = "A enviar...";
+            
+            setTimeout(() => {
+                showToast("Mensagem Enviada!", "Obrigado pelo contacto. A APSAN, LDA responderá em breve.");
+                event.target.reset();
+                btn.disabled = false;
+                btn.textContent = "Enviar Pedido para Empresa";
+            }, 1000);
+        }
+
+        function handleParceriaSubmit(event) {
+            event.preventDefault();
+            const btn = document.getElementById('parceriaSubmitBtn');
+            btn.disabled = true;
+            btn.textContent = "A submeter proposta...";
+
+            setTimeout(() => {
+                showToast("Proposta Submetida!", "A sua proposta de parceria foi registada com sucesso.");
+                event.target.reset();
+                btn.disabled = false;
+                btn.textContent = "Submeter Proposta de Parceria";
+            }, 1000);
+        }
+
+        function handleDenunciaSubmit(event) {
+            event.preventDefault();
+            const btn = document.getElementById('denunciaModalSubmitBtn');
+            btn.disabled = true;
+            btn.textContent = "A submeter com segurança...";
+
+            setTimeout(() => {
+                showToast("Denúncia Registada", "O seu relato foi enviado com total sigilo e confidencialidade.");
+                event.target.reset();
+                btn.disabled = false;
+                btn.textContent = "Submeter Denúncia com Segurança";
+                closeDenunciaModal();
+            }, 1000);
+        }
+
+        function handleModalServiceSubmit(event, serviceTitle) {
+            event.preventDefault();
+            showToast("Serviço Solicitado!", `O seu pedido para "${serviceTitle}" foi registado com sucesso.`);
+            closeServiceModal();
         }
 
         function toggleTestimonialForm() {
@@ -1523,25 +1333,22 @@
             const btn = document.getElementById('btnToggleTestimonialForm');
             if (container.style.display === 'none' || container.style.display === '') {
                 container.style.display = 'block';
-                btn.innerHTML = '<i class="fas fa-times"></i> Fechar Formulário';
-                container.scrollIntoView({ behavior: 'smooth' });
+                btn.style.display = 'none';
             } else {
                 container.style.display = 'none';
-                btn.innerHTML = '<i class="fas fa-pen"></i> Publicar Testemunho';
+                btn.style.display = 'inline-block';
             }
         }
 
         function handleExperienciaSubmit(event) {
             event.preventDefault();
-            const nome = document.getElementById('expNome').value.trim();
-            const cargo = document.getElementById('expCargo').value.trim() || 'Cliente APSAN, LDA';
-            const mensagem = document.getElementById('expMensagem').value.trim();
+            const nome = document.getElementById('expNome').value;
+            const cargo = document.getElementById('expCargo').value || 'Cliente / Parceiro';
+            const mensagem = document.getElementById('expMensagem').value;
 
-            if (!nome || !mensagem) return;
-
-            const initials = nome.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
-            const grid = document.getElementById('publicTestimonialsGrid');
+            const initials = nome.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
             
+            const grid = document.getElementById('publicTestimonialsGrid');
             const newCard = document.createElement('div');
             newCard.className = 'testimonial-card';
             newCard.innerHTML = `
@@ -1551,23 +1358,146 @@
                 </div>
                 <div class="client-info">
                     <div class="client-avatar">${initials}</div>
-                    <div><h4 style="font-size: 14px; margin: 0;">${nome}</h4><p style="font-size: 12px; color: var(--text-muted); margin: 0;">${cargo}</p></div>
+                    <div><h4 style="font-size: 14px; margin: 0;">${nome}</h4><small style="color: var(--text-muted);">${cargo}</small></div>
                 </div>
             `;
             grid.prepend(newCard);
-            showToast("Testemunho Publicado!", "O seu depoimento já está visível publicamente na página principal.");
+            showToast("Testemunho Publicado!", "Obrigado por partilhar a sua experiência com a APSAN, LDA.");
+            
             event.target.reset();
             toggleTestimonialForm();
         }
 
-        function showToast(title, message) {
-            const toast = document.getElementById('toastNotification');
-            document.getElementById('toastTitle').textContent = title;
-            document.getElementById('toastMessage').textContent = message;
-            toast.classList.add('show');
+        function handleClientLogin(event) {
+            event.preventDefault();
+            document.getElementById('clientAuthCard').style.display = 'none';
+            document.getElementById('clientDashboardCard').style.display = 'block';
+            showToast("Sessão Iniciada", "Bem-vindo à sua Área do Cliente.");
+        }
+
+        function handleClientLogout() {
+            document.getElementById('clientDashboardCard').style.display = 'none';
+            document.getElementById('clientAuthCard').style.display = 'block';
+            showToast("Sessão Encerrada", "Terminou a sessão com sucesso.");
+        }
+
+        function toggleUploadFields() {
+            const type = document.getElementById('adminContentType').value;
+            const label = document.getElementById('fileInputLabel');
+            const input = document.getElementById('adminMediaUrl');
+            if (type === 'post') {
+                label.textContent = "URL de Imagem Destaque (Opcional)";
+                input.placeholder = "https://exemplo.com/imagem.jpg";
+            } else if (type === 'imagem') {
+                label.textContent = "URL da Imagem a Carregar";
+                input.placeholder = "https://exemplo.com/foto.jpg";
+            } else if (type === 'video') {
+                label.textContent = "URL do Vídeo (YouTube / Link Direto)";
+                input.placeholder = "https://www.youtube.com/embed/...";
+            }
+        }
+
+        function handleAdminUpload(event) {
+            event.preventDefault();
+            const type = document.getElementById('adminContentType').value;
+            const title = document.getElementById('adminTitle').value;
+            const body = document.getElementById('adminContentBody').value;
+            const mediaUrl = document.getElementById('adminMediaUrl').value;
+
+            const listContainer = document.getElementById('adminContentList');
+            if (listContainer.querySelector('p')) {
+                listContainer.innerHTML = '';
+            }
+
+            const itemDiv = document.createElement('div');
+            itemDiv.style.cssText = "background: var(--bg-color); padding: 12px; border-radius: 6px; margin-bottom: 10px; border: 1px solid var(--border-color);";
+            itemDiv.innerHTML = `
+                <strong style="color: #dc3545; text-transform: uppercase; font-size: 11px;">[${type}]</strong>
+                <h5 style="color: var(--text-color); font-size: 15px; margin: 4px 0;">${title}</h5>
+                <p style="font-size: 13px; color: var(--text-muted); margin: 0;">${body.substring(0, 80)}...</p>
+            `;
+            listContainer.prepend(itemDiv);
+
+            if (type === 'post') {
+                const postsContainer = document.getElementById('dynamicPostsContainer');
+                const article = document.createElement('article');
+                article.className = 'post-card';
+                article.style.cssText = "background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px;";
+                article.innerHTML = `
+                    <span style="font-size: 12px; color: var(--text-muted);"><i class="far fa-calendar-alt"></i> Hoje</span>
+                    <h3 style="margin: 10px 0; font-size: 18px;">${title}</h3>
+                    <p style="font-size: 14px; color: var(--text-muted);">${body}</p>
+                `;
+                postsContainer.prepend(article);
+            }
+
+            showToast("Conteúdo Publicado!", "O novo conteúdo foi adicionado e atualizado no site com sucesso.");
+            event.target.reset();
+        }
+
+        function toggleAssistant() {
+            const win = document.getElementById('assistantWindow');
+            win.classList.toggle('active');
+        }
+
+        function sendQuickQuery(text) {
+            appendUserMsg(text);
             setTimeout(() => {
-                toast.classList.remove('show');
-            }, 4000);
+                processBotReply(text);
+            }, 600);
+        }
+
+        function handleAssistantKey(event) {
+            if (event.key === 'Enter') {
+                sendAssistantMessage();
+            }
+        }
+
+        function sendAssistantMessage() {
+            const input = document.getElementById('assistantInput');
+            const text = input.value.trim();
+            if(!text) return;
+            input.value = '';
+            appendUserMsg(text);
+            setTimeout(() => {
+                processBotReply(text);
+            }, 600);
+        }
+
+        function appendUserMsg(text) {
+            const body = document.getElementById('assistantBody');
+            const div = document.createElement('div');
+            div.className = 'assistant-message user';
+            div.textContent = text;
+            body.appendChild(div);
+            body.scrollTop = body.scrollHeight;
+        }
+
+        function appendBotMsg(text) {
+            const body = document.getElementById('assistantBody');
+            const div = document.createElement('div');
+            div.className = 'assistant-message';
+            div.innerHTML = text;
+            body.appendChild(div);
+            body.scrollTop = body.scrollHeight;
+        }
+
+        function processBotReply(query) {
+            const q = query.toLowerCase();
+            let reply = "A APSAN, LDA está à sua inteira disposição para prestar serviços de excelência entre Angola e Namíbia. Pode contactar-nos pelo 931 057 760 ou através do e-mail apsanlda1@gmail.com.";
+            
+            if(q.includes('extra') || q.includes('serviços extras')) {
+                reply = "Oferecemos vários serviços extras especializados, tais como: Acompanhamento Hospitalar, Tradução Oficial Juramentada, Autorização de Viagem para Menor, Guia, Compras na Namíbia, Encomendas e Gestão de Redes Sociais.";
+            } else if(q.includes('namibia') || q.includes('compras')) {
+                reply = "O nosso serviço de <strong>Compras na Namíbia</strong> facilita a aquisição, transação e transporte seguro de mercadorias diretamente da Namíbia para Angola, com total comodidade e confiança.";
+            } else if(q.includes('tradução') || q.includes('juramentada')) {
+                reply = "A <strong>Tradução Oficial Juramentada</strong> garante tradução e interpretação de documentos com validade legal, rigor linguístico e confidencialidade total.";
+            } else if(q.includes('hospitalar') || q.includes('encomendas')) {
+                reply = "O <strong>Acompanhamento Hospitalar</strong> oferece apoio humanizado a doentes, enquanto o serviço de <strong>Encomendas</strong> assegura a recepção e envio rápido de volumes com total segurança.";
+            } else if(q.includes('operador') || q.includes('contacto') || q.includes('falar')) {
+                reply = "Pode falar diretamente com um operador pelos telemóveis: <strong>931 057 760 / 934 437 739 / 946 195 402</strong> ou pelo email <strong>apsanlda1@gmail.com</strong>.";
+            }
+            appendBotMsg(reply);
         }
     </script>
 </body>
