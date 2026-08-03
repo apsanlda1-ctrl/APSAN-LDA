@@ -6,8 +6,6 @@
     <title>APSAN, LDA - Soluções Integradas, Qualidade Que Transforma!</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Biblioteca Marked para renderizar Markdown nas respostas da IA -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         :root {
             --bg-color: #f4f7f6;
@@ -919,7 +917,7 @@
                     <p style="margin-top: 15px; font-size: 14px; color: var(--text-muted);"><i class="fas fa-map-marker-alt"></i> <strong>Sede:</strong> Cunene, Namacunde (Repr. em Ondjiva)[cite: 1]</p>
                     <p style="margin-top: 10px; font-size: 14px; color: var(--text-muted);"><i class="fas fa-phone-alt"></i> <strong>Telemóveis:</strong> 931 057 760 / 934 437 739</p>
                     <p style="margin-top: 10px; font-size: 14px; color: var(--text-muted);"><i class="fas fa-envelope"></i> <strong>Email:</strong> apsanlda1@gmail.com</p>
-                    <p style="margin-top: 10px; font-size: 14px; color: var(--text-muted);"><i class="fas fa-id-card"></i> <strong>NIF:</strong> 5002085011</p>
+                    <p style="margin-top: 10px; font-size: 14px; color: var(--text-muted);"><i class="fas fa-id-card"></i> <strong>NIF:</strong> 5002085011[cite: 2]</p>
                 </div>
                 <div class="contact-form-box" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px; cursor: default;">
                     <h3>Envie uma Mensagem</h3>
@@ -1209,9 +1207,15 @@
         }
 
         // ==========================================
-        // INTEGRAÇÃO DA API DO GEMINI PARA A AZNY GABRIEL
+        // CONFIGURAÇÃO DA API DO GEMINI PARA A AZNY GABRIEL
         // ==========================================
-        const GEMINI_API_KEY = 'SUA_API_KEY_DO_GEMINI'; // Substitui pela tua chave oficial da API do Gemini
+        const GEMINI_API_KEY = 'SUA_API_KEY_DO_GEMINI'; // Insere aqui a tua chave de API do Gemini
+
+        const generation_config = {
+            temperature: 1,
+            max_output_tokens: 65536,
+            top_p: 0.95
+        };
 
         async function sendAssistantMessage() {
             const input = document.getElementById('assistantInput');
@@ -1223,7 +1227,6 @@
             input.value = '';
             body.scrollTop = body.scrollHeight;
 
-            // Indicador de "A digitar..."
             const loadingId = 'loading-' + Date.now();
             body.innerHTML += `<div class="assistant-message" id="${loadingId}"><i class="fas fa-spinner fa-spin"></i> Azny Gabriel está a pensar...</div>`;
             body.scrollTop = body.scrollHeight;
@@ -1245,13 +1248,14 @@
             `;
 
             try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         contents: [
                             { role: "user", parts: [{ text: companyContext + "\n\nPergunta do Cliente: " + text }] }
-                        ]
+                        ],
+                        generationConfig: generation_config
                     })
                 });
 
@@ -1261,7 +1265,7 @@
 
                 if (data && data.candidates && data.candidates[0].content.parts[0].text) {
                     const reply = data.candidates[0].content.parts[0].text;
-                    body.innerHTML += `<div class="assistant-message">${typeof marked !== 'undefined' ? marked.parse(reply) : reply}</div>`;
+                    body.innerHTML += `<div class="assistant-message">${reply.replace(/\n/g, '<br>')}</div>`;
                 } else {
                     body.innerHTML += `<div class="assistant-message">Desculpa, ocorreu um pequeno erro ao processar a tua resposta. Podes tentar novamente? Podes também contactar-nos diretamente pelo 931 057 760.</div>`;
                 }
@@ -1269,7 +1273,6 @@
                 const loadingElement = document.getElementById(loadingId);
                 if (loadingElement) loadingElement.remove();
                 
-                // Fallback inteligente caso ocorra erro na rede ou chave API em falta
                 let fallbackReply = `Olá! Como assistente da APSAN, LDA, estou pronta para ajudar! Podes contactar-nos pelo 931 057 760 ou consultar o nosso NIF oficial: 5002085011.`;
                 const lower = text.toLowerCase();
                 if (lower.match(/nif/)) fallbackReply = "O NIF oficial da APSAN, LDA é **5002085011**.";
@@ -1420,28 +1423,20 @@
             `;
 
             grid.insertBefore(card, grid.firstChild);
-
-            showToast("Experiência Publicada!", "O seu testemunho já está visível publicamente no site.");
-            document.getElementById('expNome').value = '';
-            document.getElementById('expCargo').value = '';
-            document.getElementById('expMensagem').value = '';
-            
-            toggleTestimonialForm();
+            showToast("Testemunho Publicado!", "Obrigado por partilhar a sua experiência.");
+            document.getElementById('testimonialFormContainer').style.display = 'none';
+            document.getElementById('btnToggleTestimonialForm').innerHTML = '<i class="fas fa-pen"></i> Publicar Testemunho';
+            event.target.reset();
         }
 
-        function filterServices(gridId, inputId) {
-            const input = document.getElementById(inputId);
-            const filter = input.value.toLowerCase();
-            const cards = document.getElementById(gridId).getElementsByClassName('service-card');
-            for (let i = 0; i < cards.length; i++) {
-                const title = cards[i].getElementsByTagName('h3')[0].textContent.toLowerCase();
-                const desc = cards[i].getElementsByTagName('p')[0].textContent.toLowerCase();
-                if (title.includes(filter) || desc.includes(filter)) {
-                    cards[i].style.display = "";
-                } else {
-                    cards[i].style.display = "none";
-                }
-            }
+        function showToast(title, message) {
+            const toast = document.getElementById('toastNotification');
+            document.getElementById('toastTitle').textContent = title;
+            document.getElementById('toastMessage').textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
         }
     </script>
 </body>
