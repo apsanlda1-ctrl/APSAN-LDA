@@ -908,6 +908,7 @@
         </button>
     </div>
 
+    <!-- MODAL DE DETALHES E PEDIDO DE SERVIÇOS -->
     <div class="service-modal-overlay" id="serviceModal" onclick="closeServiceDetail(event)">
         <div class="service-modal-content">
             <button class="service-modal-close" onclick="closeServiceModal()">&times;</button>
@@ -915,6 +916,7 @@
         </div>
     </div>
 
+    <!-- MODAL DE DENÚNCIAS -->
     <div class="service-modal-overlay" id="denunciaModal" onclick="closeDenunciaModalOnClick(event)">
         <div class="service-modal-content" style="max-width: 650px;">
             <button class="service-modal-close" onclick="closeDenunciaModal()">&times;</button>
@@ -947,7 +949,7 @@
                 </div>
                 <div class="modal-form-group">
                     <label>Descrição Detalhada dos Factos e Abusos</label>
-                    <textarea name="detalhes_denuncia" rows="4" placeholder="Descreva o que aconteceu com o máximo de detalhes possível (dates, locais, pessoas envolvidas)..." required></textarea>
+                    <textarea name="detalhes_denuncia" rows="4" placeholder="Descreva o que aconteceu com o máximo de detalhes possível..." required></textarea>
                 </div>
                 <button type="submit" id="denunciaModalSubmitBtn" style="width: 100%; padding: 12px; background-color: #dc3545; color: #fff; border: none; font-weight: bold; border-radius: 6px; cursor: pointer; transition: transform 0.2s;">Submeter Denúncia com Segurança</button>
             </form>
@@ -993,7 +995,7 @@
                 <h4><i class="fas fa-address-book"></i> Contactos</h4>
                 <p><i class="fas fa-phone-alt"></i> +244 946 195 402</p>
                 <p><i class="fas fa-phone-alt"></i> +244 934 437 739</p>
-                 <p><i class="fas fa-phone-alt"></i> +244 931 057 760</p>
+                <p><i class="fas fa-phone-alt"></i> +244 931 057 760</p>
                 <p><i class="fas fa-envelope"></i> info@apsanlda.com</p>
             </div>
         </div>
@@ -1155,7 +1157,282 @@
             }
         }
 
-        // Funções adicionais como openServiceDetail, handleSubmit, etc. seriam mantidas aqui.
+        function showToast(title, message) {
+            const toast = document.getElementById('toastNotification');
+            document.getElementById('toastTitle').textContent = title;
+            document.getElementById('toastMessage').textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+
+        // Modais de Serviços
+        function openServiceDetail(serviceName, description, features) {
+            const modal = document.getElementById('serviceModal');
+            const bodyContent = document.getElementById('modalBodyContent');
+            
+            let featuresHtml = '';
+            features.forEach(f => {
+                featuresHtml += `<li style="margin-bottom: 6px;"><i class="fas fa-check-circle" style="color: var(--primary-color);"></i> ${f}</li>`;
+            });
+
+            bodyContent.innerHTML = `
+                <h2 style="color: var(--primary-color); font-size: 22px; margin-bottom: 10px;">${serviceName}</h2>
+                <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 15px; line-height: 1.5;">${description}</p>
+                <div style="background: rgba(0,64,128,0.04); border: 1px solid var(--border-color); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <h4 style="font-size: 14px; color: var(--primary-color); margin-bottom: 8px;">O que inclui:</h4>
+                    <ul style="list-style: none; font-size: 13px; color: var(--text-color);">${featuresHtml}</ul>
+                </div>
+                <h3 style="font-size: 16px; color: var(--primary-color); margin-bottom: 12px;"><i class="fas fa-paper-plane"></i> Solicitar este Serviço</h3>
+                <form action="https://formspree.io/f/xqerwzjq" method="POST" onsubmit="handleModalServiceSubmit(event)">
+                    <input type="hidden" name="_subject" value="Solicitação de Serviço: ${serviceName}">
+                    <input type="hidden" name="servico_solicitado" value="${serviceName}">
+                    <div class="modal-form-group">
+                        <label>O seu Nome / Empresa</label>
+                        <input type="text" name="nome_cliente" placeholder="Nome completo..." required>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
+                        <div class="modal-form-group">
+                            <label>Telemóvel / WhatsApp</label>
+                            <input type="tel" name="telemovel_cliente" placeholder="+244..." required>
+                        </div>
+                        <div class="modal-form-group">
+                            <label>E-mail de Contacto</label>
+                            <input type="email" name="email_cliente" placeholder="exemplo@dominio.com" required>
+                        </div>
+                    </div>
+                    <div class="modal-form-group">
+                        <label>Detalhes Adicionais ou Observações</label>
+                        <textarea name="detalhes_pedido" rows="3" placeholder="Especifique prazos, quantidades ou necessidades específicas..."></textarea>
+                    </div>
+                    <button type="submit" style="width: 100%; padding: 12px; background-color: var(--primary-color); color: #fff; border: none; font-weight: bold; border-radius: 6px; cursor: pointer;">Enviar Pedido Imediato</button>
+                </form>
+            `;
+            modal.classList.add('active');
+        }
+
+        function closeServiceModal() {
+            document.getElementById('serviceModal').classList.remove('active');
+        }
+
+        function closeServiceDetail(event) {
+            if (event.target.id === 'serviceModal') {
+                closeServiceModal();
+            }
+        }
+
+        // Canal de Denúncias
+        function openDenunciaModal() {
+            document.getElementById('denunciaModal').classList.add('active');
+        }
+
+        function closeDenunciaModal() {
+            document.getElementById('denunciaModal').classList.remove('active');
+        }
+
+        function closeDenunciaModalOnClick(event) {
+            if (event.target.id === 'denunciaModal') {
+                closeDenunciaModal();
+            }
+        }
+
+        function handleDenunciaSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const btn = document.getElementById('denunciaModalSubmitBtn');
+            btn.disabled = true;
+            btn.textContent = "A submeter denúncia...";
+
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            }).then(response => {
+                if (response.ok) {
+                    showToast('Denúncia Enviada', 'O seu relato foi submetido com total segurança e sigilo.');
+                    form.reset();
+                    closeDenunciaModal();
+                } else {
+                    showToast('Erro', 'Ocorreu um erro ao enviar. Tente novamente.');
+                }
+                btn.disabled = false;
+                btn.textContent = "Submeter Denúncia com Segurança";
+            }).catch(error => {
+                showToast('Erro', 'Falha na ligação com o servidor.');
+                btn.disabled = false;
+                btn.textContent = "Submeter Denúncia com Segurança";
+            });
+        }
+
+        function handleModalServiceSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            }).then(response => {
+                if (response.ok) {
+                    showToast('Pedido Enviado!', 'A sua solicitação foi enviada com sucesso à APSAN, LDA.');
+                    closeServiceModal();
+                } else {
+                    showToast('Erro', 'Ocorreu um erro ao enviar o pedido.');
+                }
+            }).catch(() => {
+                showToast('Erro', 'Falha na ligação.');
+            });
+        }
+
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const btn = document.getElementById('contactSubmitBtn');
+            btn.disabled = true;
+            btn.textContent = "A enviar...";
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            }).then(response => {
+                if (response.ok) {
+                    showToast('Mensagem Enviada!', 'Entraremos em contacto brevemente.');
+                    form.reset();
+                } else {
+                    showToast('Erro', 'Erro ao enviar mensagem.');
+                }
+                btn.disabled = false;
+                btn.textContent = "Enviar Pedido para Empresa";
+            }).catch(() => {
+                showToast('Erro', 'Falha de conexão.');
+                btn.disabled = false;
+                btn.textContent = "Enviar Pedido para Empresa";
+            });
+        }
+
+        function handleParceriaSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const btn = document.getElementById('parceriaSubmitBtn');
+            btn.disabled = true;
+            btn.textContent = "A submeter proposta...";
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            }).then(response => {
+                if (response.ok) {
+                    showToast('Proposta Submetida!', 'Agradecemos o seu interesse em ser nosso parceiro.');
+                    form.reset();
+                } else {
+                    showToast('Erro', 'Erro ao submeter proposta.');
+                }
+                btn.disabled = false;
+                btn.textContent = "Submeter Proposta de Parceria";
+            }).catch(() => {
+                showToast('Erro', 'Falha de conexão.');
+                btn.disabled = false;
+                btn.textContent = "Submeter Proposta de Parceria";
+            });
+        }
+
+        // Testemunhos
+        function toggleTestimonialForm() {
+            const container = document.getElementById('testimonialFormContainer');
+            if (container.style.display === 'none' || container.style.display === '') {
+                container.style.display = 'block';
+            } else {
+                container.style.display = 'none';
+            }
+        }
+
+        function handleExperienciaSubmit(event) {
+            event.preventDefault();
+            const nome = document.getElementById('expNome').value;
+            const cargo = document.getElementById('expCargo').value || 'Cliente / Parceiro';
+            const mensagem = document.getElementById('expMensagem').value;
+
+            const grid = document.getElementById('publicTestimonialsGrid');
+            const initials = nome.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
+
+            const newCard = document.createElement('div');
+            newCard.className = 'testimonial-card';
+            newCard.innerHTML = `
+                <div>
+                    <div class="stars" style="color: #ffc107;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p style="font-size: 14px; font-style: italic; color: var(--text-muted);">"${mensagem}"</p>
+                </div>
+                <div class="client-info">
+                    <div class="client-avatar">${initials}</div>
+                    <div><h4 style="font-size: 14px; margin: 0;">${nome}</h4><small style="color: var(--text-muted);">${cargo}</small></div>
+                </div>
+            `;
+            grid.prepend(newCard);
+            showToast('Testemunho Publicado!', 'Obrigado por partilhar a sua experiência.');
+            toggleTestimonialForm();
+            event.target.reset();
+        }
+
+        // Área do Cliente Simulada
+        function handleClientLogin(event) {
+            event.preventDefault();
+            document.getElementById('clientAuthCard').style.display = 'none';
+            document.getElementById('clientDashboardCard').style.display = 'block';
+            showToast('Sessão Iniciada', 'Bem-vindo à sua área de cliente.');
+        }
+
+        function handleClientLogout() {
+            document.getElementById('clientDashboardCard').style.display = 'none';
+            document.getElementById('clientAuthCard').style.display = 'block';
+            showToast('Sessão Terminada', 'Até breve!');
+        }
+
+        // Assistente Virtual Azny Gabriel
+        function toggleAssistant() {
+            const win = document.getElementById('assistantWindow');
+            win.classList.toggle('active');
+        }
+
+        function sendQuickQuery(text) {
+            const body = document.getElementById('assistantBody');
+            const userMsg = document.createElement('div');
+            userMsg.className = 'assistant-message user';
+            userMsg.textContent = text;
+            body.appendChild(userMsg);
+
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.className = 'assistant-message';
+                if (text.includes('Extras')) {
+                    botMsg.innerHTML = 'Temos vários serviços extras como: Acompanhamento Hospitalar, Tradução Juramentada, Autorização de viagem para menor, Guia, Compras na Namíbia, Encomendas e Gestão de Redes Sociais. Pode clicar na aba "Serviços Extras" no menu!';
+                } else if (text.includes('Compras')) {
+                    botMsg.innerHTML = 'Facilitamos a aquisição, transação e transporte seguro de mercadorias diretamente da Namíbia com total segurança e rigor.';
+                } else if (text.includes('Tradução')) {
+                    botMsg.innerHTML = 'A Tradução Oficial Juramentada abrange certificados, diplomas e contratos com validade legal e total confidencialidade.';
+                } else if (text.includes('operador')) {
+                    botMsg.innerHTML = 'Pode contactar diretamente a nossa equipa através dos telemóveis: <strong>946 195 402 / 934 437 739 / 931 057 760</strong> ou pelo email <strong>info@apsanlda.com</strong>.';
+                } else {
+                    botMsg.innerHTML = 'A APSAN, LDA está sediada em Namacunde Santa-Clara (Cunene) com representações em Ondjiva. NIF: 5002085011. Como posso ajudar mais?';
+                }
+                body.appendChild(botMsg);
+                body.scrollTop = body.scrollHeight;
+            }, 600);
+            body.scrollTop = body.scrollHeight;
+        }
+
+        function sendAssistantMessage() {
+            const input = document.getElementById('assistantInput');
+            const text = input.value.trim();
+            if(!text) return;
+            sendQuickQuery(text);
+            input.value = '';
+        }
+
+        function handleAssistantKey(event) {
+            if(event.key === 'Enter') {
+                sendAssistantMessage();
+            }
+        }
     </script>
 </body>
 </html>
