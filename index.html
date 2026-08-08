@@ -442,19 +442,21 @@
                 </div>
             </div>
 
-            <!-- POST ADICIONADO LOGO APÓS A PONTE OPERACIONAL E LOGÍSTICA -->
-            <div class="home-featured-post" style="margin: 40px 0; background: var(--card-bg); border: 1px solid var(--border-color); border-left: 5px solid var(--accent-color); padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
-                    <span style="background: rgba(255, 204, 0, 0.15); color: var(--primary-color); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold;"><i class="fas fa-bullhorn"></i> Post em Destaque</span>
-                    <span style="font-size: 12px; color: var(--text-muted);"><i class="far fa-calendar-alt"></i> 8 de Agosto, 2026</span>
+            <!-- POST ADICIONADO DINAMICAMENTE NO HOME -->
+            <div id="homeFeaturedPostContainer">
+                <div class="home-featured-post" style="margin: 40px 0; background: var(--card-bg); border: 1px solid var(--border-color); border-left: 5px solid var(--accent-color); padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+                        <span style="background: rgba(255, 204, 0, 0.15); color: var(--primary-color); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold;"><i class="fas fa-bullhorn"></i> Post em Destaque</span>
+                        <span style="font-size: 12px; color: var(--text-muted);"><i class="far fa-calendar-alt"></i> A carregar...</span>
+                    </div>
+                    <h3 style="font-size: 20px; color: var(--primary-color); margin-bottom: 10px;">Inovação e Rigor nas Operações Transfronteiriças APSAN, LDA</h3>
+                    <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
+                        Continuamos a consolidar a nossa ponte logística entre Angola e Namíbia, garantindo serviços rápidos, seguros e com elevado padrão de qualidade para instituições e parceiros.
+                    </p>
+                    <button onclick="switchTab('posts', event)" style="background: none; border: none; color: var(--primary-color); font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 0; font-size: 14px;">
+                        Ver todos os posts <i class="fas fa-arrow-right"></i>
+                    </button>
                 </div>
-                <h3 style="font-size: 20px; color: var(--primary-color); margin-bottom: 10px;">Inovação e Rigor nas Operações Transfronteiriças APSAN, LDA</h3>
-                <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
-                    Continuamos a consolidar a nossa ponte logística entre Angola e Namíbia, garantindo serviços rápidos, seguros e com elevado padrão de qualidade para instituições e parceiros. Acompanhe as nossas atualizações diárias e conte com uma equipa dedicada ao sucesso do seu negócio.
-                </p>
-                <button onclick="switchTab('posts', event)" style="background: none; border: none; color: var(--primary-color); font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 0; font-size: 14px;">
-                    Ver todos os posts <i class="fas fa-arrow-right"></i>
-                </button>
             </div>
 
             <div id="experiencias-section" style="margin: 60px 0 20px 0; background: var(--card-bg); border: 1px solid var(--border-color); padding: 40px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
@@ -506,7 +508,7 @@
                     <div class="testimonial-card">
                         <div>
                             <div class="stars" style="color: #ffc107;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                            <p style="font-size: 14px; font-style: italic; color: var(--text-muted);">"Serviço de limpeza institucional impecável. Profissionais altamente qualificados e rigorosos."</p>
+                            <p style="font-size: 14px; font-style: italic; color: var(--text-muted);">"Serviço de limpeza institucional impecável. Profissionais highly qualificados e rigorosos."</p>
                         </div>
                         <div class="client-info">
                             <div class="client-avatar">MC</div>
@@ -850,11 +852,7 @@
                 <div class="underline" style="width: 60px; height: 3px; background: var(--primary-color); margin: 8px auto 0 auto;"></div>
             </div>
             <div class="posts-grid" id="dynamicPostsContainer" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
-                <article class="post-card" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px; cursor: default;">
-                    <span style="font-size: 12px; color: var(--text-muted);"><i class="far fa-calendar-alt"></i> 26 de Julho, 2026</span>
-                    <h3 style="margin: 10px 0; font-size: 18px;">Expansão de Serviços e Nosso Crescimento</h3>
-                    <p style="font-size: 14px; color: var(--text-muted);">A APSAN, LDA continua a alargar o seu leque de soluções integradas para melhor servir Angola e Namíbia</p>
-                </article>
+                <p style="text-align:center; grid-column: 1/-1; color: var(--text-muted);"><i class="fas fa-spinner fa-spin"></i> A carregar publicações do CMS...</p>
             </div>
         </div>
     </section>
@@ -1127,14 +1125,6 @@
             }
         });
 
-        window.addEventListener('DOMContentLoaded', () => {
-            const hash = window.location.hash.replace('#', '') || 'home';
-            if (sectionsList.includes(hash)) {
-                switchTab(hash, null, false);
-            }
-            loadDynamicPosts();
-        });
-
         function toggleTheme() {
             const body = document.body;
             const themeIcon = document.getElementById('themeIcon');
@@ -1183,45 +1173,129 @@
             }, 4000);
         }
 
-        // Integração Dinâmica de Posts do painel/armazenamento local
-        function loadDynamicPosts() {
+        // --- SISTEMA DINÂMICO DE POSTS DO CMS (GITHUB REPO API) ---
+        async function loadCMSPosts() {
             const container = document.getElementById('dynamicPostsContainer');
-            if (!container) return;
+            const homeFeaturedContainer = document.getElementById('homeFeaturedPostContainer');
+            const repoUser = 'apsanlda1-ctrl';
+            const repoName = 'apsan-lda';
+            const branch = 'main';
 
-            // Recupera posts salvos no localStorage (ou exibe padrão se não houver)
-            let posts = [];
             try {
-                const saved = localStorage.getItem('apsan_posts');
-                if (saved) {
-                    posts = JSON.parse(saved);
+                const response = await fetch(`https://api.github.com/repos/${repoUser}/${repoName}/contents/_posts?ref=${branch}`);
+                
+                if (!response.ok) throw new Error('Não foi possível aceder à pasta _posts.');
+
+                const files = await response.json();
+                if (!files || files.length === 0) {
+                    container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">Nenhum post publicado até ao momento.</p>';
+                    return;
                 }
-            } catch (e) {
-                console.error("Erro ao carregar posts", e);
-            }
 
-            // Posts padrão iniciais caso o array esteja vazio
-            if (!posts || posts.length === 0) {
-                posts = [
-                    {
-                        title: "Expansão de Serviços e Nosso Crescimento",
-                        date: "26 de Julho, 2026",
-                        content: "A APSAN, LDA continua a alargar o seu leque de soluções integradas para melhor servir Angola e Namíbia"
+                container.innerHTML = '';
+                let latestPostData = null;
+
+                // Ordenar do mais recente para o mais antigo (se houver timestamps no nome)
+                files.reverse();
+
+                for (const file of files) {
+                    if (file.name.endsWith('.md') || file.name.endsWith('.markdown') || file.name.endsWith('.html') || file.name.endsWith('.json')) {
+                        const rawRes = await fetch(file.download_url);
+                        const contentText = await rawRes.text();
+
+                        let title = file.name.replace(/\.[^/.]+$/, "");
+                        let date = '';
+                        let excerpt = '';
+                        let coverImage = '';
+                        let bodyText = contentText;
+
+                        // Parse do YAML Frontmatter se existir
+                        if (contentText.startsWith('---')) {
+                            const parts = contentText.split('---');
+                            if (parts.length >= 3) {
+                                const yamlLines = parts[1].split('\n');
+                                bodyText = parts.slice(2).join('---').trim();
+
+                                yamlLines.forEach(line => {
+                                    const matchTitle = line.match(/^title:\s*["']?(.*?)["']?$/);
+                                    if (matchTitle) title = matchTitle[1];
+
+                                    const matchDate = line.match(/^date:\s*["']?(.*?)["']?$/);
+                                    if (matchDate) date = matchDate[1];
+
+                                    const matchExcerpt = line.match(/^excerpt:\s*["']?(.*?)["']?$/);
+                                    if (matchExcerpt) excerpt = matchExcerpt[1];
+
+                                    const matchCover = line.match(/^coverImage:\s*["']?(.*?)["']?$/);
+                                    if (matchCover) coverImage = matchCover[1];
+                                });
+                            }
+                        }
+
+                        if (!excerpt) {
+                            excerpt = bodyText.replace(/<[^>]*>?/gm, '').substring(0, 160) + '...';
+                        }
+
+                        let formattedDate = 'Recente';
+                        if (date) {
+                            const parsedDate = new Date(date);
+                            if (!isNaN(parsedDate.getTime())) {
+                                formattedDate = parsedDate.toLocaleDateString('pt-PT', { day: 'numeric', month: 'long', year: 'numeric' });
+                            }
+                        }
+
+                        if (!latestPostData) {
+                            latestPostData = { title, date: formattedDate, excerpt, coverImage };
+                        }
+
+                        // Criar card do post
+                        const postCard = document.createElement('article');
+                        postCard.className = 'post-card';
+                        postCard.style.cssText = 'background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px; display: flex; flex-direction: column; gap: 10px;';
+                        
+                        postCard.innerHTML = `
+                            ${coverImage ? `<img src="${coverImage}" alt="${title}" style="width:100%; height:180px; object-fit:cover; border-radius:6px; margin-bottom: 5px;">` : ''}
+                            <span style="font-size: 12px; color: var(--text-muted);"><i class="far fa-calendar-alt"></i> ${formattedDate}</span>
+                            <h3 style="font-size: 18px; color: var(--primary-color); margin: 0;">${title}</h3>
+                            <p style="font-size: 14px; color: var(--text-muted); line-height: 1.5;">${excerpt}</p>
+                        `;
+
+                        container.appendChild(postCard);
                     }
-                ];
-            }
+                }
 
-            let html = '';
-            posts.forEach(p => {
-                html += `
-                    <article class="post-card" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px; cursor: default;">
-                        <span style="font-size: 12px; color: var(--text-muted);"><i class="far fa-calendar-alt"></i> ${p.date || 'Agosto, 2026'}</span>
-                        <h3 style="margin: 10px 0; font-size: 18px; color: var(--primary-color);">${p.title}</h3>
-                        <p style="font-size: 14px; color: var(--text-muted); line-height: 1.5;">${p.content}</p>
-                    </article>
-                `;
-            });
-            container.innerHTML = html;
+                // Atualizar o Destaque na Página Inicial (Home)
+                if (latestPostData && homeFeaturedContainer) {
+                    homeFeaturedContainer.innerHTML = `
+                        <div class="home-featured-post" style="margin: 40px 0; background: var(--card-bg); border: 1px solid var(--border-color); border-left: 5px solid var(--accent-color); padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+                                <span style="background: rgba(255, 204, 0, 0.15); color: var(--primary-color); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold;"><i class="fas fa-bullhorn"></i> Post em Destaque</span>
+                                <span style="font-size: 12px; color: var(--text-muted);"><i class="far fa-calendar-alt"></i> ${latestPostData.date}</span>
+                            </div>
+                            <h3 style="font-size: 20px; color: var(--primary-color); margin-bottom: 10px;">${latestPostData.title}</h3>
+                            <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
+                                ${latestPostData.excerpt}
+                            </p>
+                            <button onclick="switchTab('posts', event)" style="background: none; border: none; color: var(--primary-color); font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 0; font-size: 14px;">
+                                Ver todos os posts <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    `;
+                }
+
+            } catch (err) {
+                console.error("Erro ao carregar posts:", err);
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">Não foi possível carregar os posts dinâmicos no momento.</p>';
+            }
         }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.replace('#', '') || 'home';
+            if (sectionsList.includes(hash)) {
+                switchTab(hash, null, false);
+            }
+            loadCMSPosts();
+        });
 
         // Modais de Serviços
         function openServiceDetail(serviceName, description, features) {
