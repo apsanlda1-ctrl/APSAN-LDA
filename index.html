@@ -283,18 +283,18 @@
             gap: 5px;
         }
 
-        /* WORKFLOW / PROCESSO EM 3 PASSOS (ESTILO BANNER 3D SOLICITADO) */
+        /* WORKFLOW / PROCESSO IDÊNTICO AO PRINT (ESTILO BANNER 3D) */
         .workflow-section {
-            margin: 50px auto;
+            margin: 60px auto;
             max-width: 1200px;
             padding: 0 20px;
         }
         .workflow-title-box {
             text-align: center;
-            margin-bottom: 35px;
+            margin-bottom: 40px;
         }
         .workflow-title-box h2 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: var(--text-color);
             font-weight: 800;
         }
@@ -307,87 +307,91 @@
         .workflow-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
+            gap: 30px;
         }
 
-        .workflow-card {
+        /* Cartão base igual ao print */
+        .replica-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.06);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 0 0 20px 0;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            position: relative;
             display: flex;
             flex-direction: column;
-            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .workflow-card:hover {
+        .replica-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.12);
+            box-shadow: 0 25px 40px rgba(0,0,0,0.15);
         }
 
-        .workflow-top-btn {
+        /* Botão superior arredondado e gradiente (ex: VIEW MORE) */
+        .replica-top-btn {
+            margin: -1px -1px 0 -1px;
             padding: 16px;
             text-align: center;
             color: #ffffff;
             font-weight: 800;
             font-size: 1.1rem;
-            letter-spacing: 0.5px;
-            box-shadow: inset 0 -4px 0 rgba(0,0,0,0.15);
+            letter-spacing: 1px;
+            border-top-left-radius: 16px;
+            border-top-right-radius: 16px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        .workflow-body {
-            padding: 25px;
-            flex: 1;
+        /* Corpo com lista e vistos/circulos */
+        .replica-body {
+            padding: 25px 25px 15px 25px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 16px;
         }
 
-        .workflow-item-row {
+        .replica-item {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             justify-content: space-between;
-            gap: 12px;
-            font-size: 0.92rem;
+            font-size: 0.9rem;
             color: var(--text-muted);
             padding-bottom: 12px;
             border-bottom: 1px solid var(--border-color);
         }
-        .workflow-item-row:last-child {
+        .replica-item:last-child {
             border-bottom: none;
             padding-bottom: 0;
         }
-        .workflow-item-row span {
+        .replica-item span {
+            flex: 1;
+            padding-right: 10px;
             line-height: 1.4;
         }
-        .workflow-item-row i {
-            margin-top: 2px;
-            font-size: 1rem;
-        }
 
-        /* CAIXA 3D INFERIOR */
-        .workflow-3d-box {
-            margin: 0 20px 25px 20px;
-            padding: 16px;
-            border-radius: 10px;
+        /* Bloco 3D Inferior flutuante em perspetiva */
+        .replica-3d-banner {
+            margin: 15px 20px 0 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
             color: #ffffff;
             display: flex;
             align-items: center;
             justify-content: space-between;
             font-weight: 700;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-            transform: perspective(600px) rotateX(3deg);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transform: perspective(700px) rotateX(4deg);
+            transform-style: preserve-3d;
         }
-        .workflow-3d-box span {
-            font-size: 0.9rem;
+        .replica-3d-banner .banner-text {
+            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
+            opacity: 0.95;
         }
-        .workflow-3d-box .step-number {
-            font-size: 1.8rem;
+        .replica-3d-banner .banner-number {
+            font-size: 2rem;
             font-weight: 900;
-            opacity: 0.9;
+            line-height: 1;
         }
 
         .stats-container {
@@ -747,80 +751,80 @@
             </div>
         </div>
 
-        <!-- SECÇÃO DE PROCESSO EM 3 PASSOS (ESTILO BANNER 3D SOLICITADO) -->
+        <!-- SECÇÃO DE PROCESSO EM 3 PASSOS (REPLICAÇÃO EXATA DO ESTILO 3D DO PRINT) -->
         <div class="workflow-section">
             <div class="workflow-title-box">
                 <h2>Como Trabalhamos</h2>
-                <p>O nosso fluxo operacional estruturado do início ao fim para garantir total excelência e transparência.</p>
+                <p>O nosso fluxo operacional estruturado do início ao fim para garantir total excelência.</p>
             </div>
 
             <div class="workflow-grid">
-                <!-- PASSO 01 -->
-                <div class="workflow-card">
-                    <div class="workflow-top-btn" style="background: #0284c7;">SOLICITAR SERVIÇO</div>
-                    <div class="workflow-body">
-                        <div class="workflow-item-row">
+                <!-- CARTÃO 01 -->
+                <div class="replica-card">
+                    <div class="replica-top-btn" style="background: linear-gradient(135deg, #0d9488, #0f766e);">SOLICITAR SERVIÇO</div>
+                    <div class="replica-body">
+                        <div class="replica-item">
                             <span>Submissão online do pedido ou formulário corporativo.</span>
-                            <i class="fas fa-check-circle" style="color: #0284c7;"></i>
+                            <i class="fas fa-check" style="color: #0d9488; font-weight: bold;"></i>
                         </div>
-                        <div class="workflow-item-row">
-                            <span>Avaliação rápida das necessidades específicas (orçamento e prazos).</span>
-                            <i class="fas fa-check-circle" style="color: #0284c7;"></i>
+                        <div class="replica-item">
+                            <span>Avaliação rápida das necessidades específicas (orçamento).</span>
+                            <i class="fas fa-check" style="color: #0d9488; font-weight: bold;"></i>
                         </div>
-                        <div class="workflow-item-row">
-                            <span>Confirmação imediata via canais de atendimento e WhatsApp.</span>
-                            <i class="fas fa-check-circle" style="color: #0284c7;"></i>
-                        </div>
-                    </div>
-                    <div class="workflow-3d-box" style="background: linear-gradient(135deg, #0284c7, #0f172a);">
-                        <span>Diagnóstico</span>
-                        <span class="step-number">01</span>
-                    </div>
-                </div>
-
-                <!-- PASSO 02 -->
-                <div class="workflow-card">
-                    <div class="workflow-top-btn" style="background: #16a34a;">GESTÃO & LOGÍSTICA</div>
-                    <div class="workflow-body">
-                        <div class="workflow-item-row">
-                            <span>Mobilização de equipas locais (Namacunde / Ondjiva) ou parceiros na Namíbia.</span>
-                            <i class="fas fa-check-circle" style="color: #16a34a;"></i>
-                        </div>
-                        <div class="workflow-item-row">
-                            <span>Execução rigorosa do serviço (Limpeza, Cablagem, Software ou Compras).</span>
-                            <i class="fas fa-check-circle" style="color: #16a34a;"></i>
-                        </div>
-                        <div class="workflow-item-row">
-                            <span>Acompanhamento técnico contínuo e garantia de qualidade.</span>
-                            <i class="fas fa-check-circle" style="color: #16a34a;"></i>
+                        <div class="replica-item">
+                            <span>Confirmação imediata via canais de atendimento.</span>
+                            <i class="fas fa-check" style="color: #0d9488; font-weight: bold;"></i>
                         </div>
                     </div>
-                    <div class="workflow-3d-box" style="background: linear-gradient(135deg, #16a34a, #0f172a);">
-                        <span>Operação</span>
-                        <span class="step-number">02</span>
+                    <div class="replica-3d-banner" style="background: linear-gradient(135deg, #0d9488, #115e59);">
+                        <span class="banner-text">Diagnóstico</span>
+                        <span class="banner-number">01</span>
                     </div>
                 </div>
 
-                <!-- PASSO 03 -->
-                <div class="workflow-card">
-                    <div class="workflow-top-btn" style="background: #9333ea;">SUCESSO & CONCLUSÃO</div>
-                    <div class="workflow-body">
-                        <div class="workflow-item-row">
-                            <span>Validação final e entrega do produto, documento ou obra concluída.</span>
-                            <i class="fas fa-check-circle" style="color: #9333ea;"></i>
+                <!-- CARTÃO 02 -->
+                <div class="replica-card">
+                    <div class="replica-top-btn" style="background: linear-gradient(135deg, #65a30d, #4d7c0f);">GESTÃO & LOGÍSTICA</div>
+                    <div class="replica-body">
+                        <div class="replica-item">
+                            <span>Mobilização de equipas locais (Namacunde / Ondjiva).</span>
+                            <i class="fas fa-check" style="color: #65a30d; font-weight: bold;"></i>
                         </div>
-                        <div class="workflow-item-row">
-                            <span>Emissão de Factura/Recibo oficial e certificado com NIF.</span>
-                            <i class="fas fa-check-circle" style="color: #9333ea;"></i>
+                        <div class="replica-item">
+                            <span>Execução rigorosa do serviço contratado.</span>
+                            <i class="fas fa-check" style="color: #65a30d; font-weight: bold;"></i>
                         </div>
-                        <div class="workflow-item-row">
-                            <span>Suporte pós-serviço e avaliação de satisfação do cliente.</span>
-                            <i class="fas fa-check-circle" style="color: #9333ea;"></i>
+                        <div class="replica-item">
+                            <span>Acompanhamento técnico contínuo e qualidade.</span>
+                            <i class="fas fa-check" style="color: #65a30d; font-weight: bold;"></i>
                         </div>
                     </div>
-                    <div class="workflow-3d-box" style="background: linear-gradient(135deg, #9333ea, #0f172a);">
-                        <span>Entrega</span>
-                        <span class="step-number">03</span>
+                    <div class="replica-3d-banner" style="background: linear-gradient(135deg, #65a30d, #3f6212);">
+                        <span class="banner-text">Operação</span>
+                        <span class="banner-number">02</span>
+                    </div>
+                </div>
+
+                <!-- CARTÃO 03 -->
+                <div class="replica-card">
+                    <div class="replica-top-btn" style="background: linear-gradient(135deg, #c026d3, #a21caf);">SUCESSO & CONCLUSÃO</div>
+                    <div class="replica-body">
+                        <div class="replica-item">
+                            <span>Validação final e entrega do produto ou obra concluída.</span>
+                            <i class="fas fa-check" style="color: #c026d3; font-weight: bold;"></i>
+                        </div>
+                        <div class="replica-item">
+                            <span>Emissão de Factura/Recibo oficial e certificado NIF.</span>
+                            <i class="fas fa-check" style="color: #c026d3; font-weight: bold;"></i>
+                        </div>
+                        <div class="replica-item">
+                            <span>Suporte pós-serviço e avaliação de satisfação.</span>
+                            <i class="fas fa-check" style="color: #c026d3; font-weight: bold;"></i>
+                        </div>
+                    </div>
+                    <div class="replica-3d-banner" style="background: linear-gradient(135deg, #c026d3, #86198f);">
+                        <span class="banner-text">Entrega</span>
+                        <span class="banner-number">03</span>
                     </div>
                 </div>
             </div>
