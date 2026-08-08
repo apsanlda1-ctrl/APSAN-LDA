@@ -1226,9 +1226,17 @@
                                     const matchExcerpt = line.match(/^excerpt:\s*["']?(.*?)["']?$/);
                                     if (matchExcerpt) excerpt = matchExcerpt[1];
 
-                                    const matchCover = line.match(/^coverImage:\s*["']?(.*?)["']?$/);
-                                    if (matchCover) coverImage = matchCover[1];
+                                    const matchCover = line.match(/^(?:coverImage|image|cover):\s*["']?(.*?)["']?$/);
+                                    if (matchCover) coverImage = matchCover[1].trim();
                                 });
+                            }
+                        }
+
+                        // CORREÇÃO DOS PATHS DAS IMAGENS DO CMS:
+                        // Garante que o caminho da imagem seja absoluto a partir da raiz do repositório
+                        if (coverImage) {
+                            if (!coverImage.startsWith('http://') && !coverImage.startsWith('https://') && !coverImage.startsWith('/')) {
+                                coverImage = '/' + coverImage;
                             }
                         }
 
