@@ -1132,6 +1132,7 @@
             if (sectionsList.includes(hash)) {
                 switchTab(hash, null, false);
             }
+            loadDynamicPosts();
         });
 
         function toggleTheme() {
@@ -1180,6 +1181,46 @@
             setTimeout(() => {
                 toast.classList.remove('show');
             }, 4000);
+        }
+
+        // Integração Dinâmica de Posts do painel/armazenamento local
+        function loadDynamicPosts() {
+            const container = document.getElementById('dynamicPostsContainer');
+            if (!container) return;
+
+            // Recupera posts salvos no localStorage (ou exibe padrão se não houver)
+            let posts = [];
+            try {
+                const saved = localStorage.getItem('apsan_posts');
+                if (saved) {
+                    posts = JSON.parse(saved);
+                }
+            } catch (e) {
+                console.error("Erro ao carregar posts", e);
+            }
+
+            // Posts padrão iniciais caso o array esteja vazio
+            if (!posts || posts.length === 0) {
+                posts = [
+                    {
+                        title: "Expansão de Serviços e Nosso Crescimento",
+                        date: "26 de Julho, 2026",
+                        content: "A APSAN, LDA continua a alargar o seu leque de soluções integradas para melhor servir Angola e Namíbia"
+                    }
+                ];
+            }
+
+            let html = '';
+            posts.forEach(p => {
+                html += `
+                    <article class="post-card" style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px; cursor: default;">
+                        <span style="font-size: 12px; color: var(--text-muted);"><i class="far fa-calendar-alt"></i> ${p.date || 'Agosto, 2026'}</span>
+                        <h3 style="margin: 10px 0; font-size: 18px; color: var(--primary-color);">${p.title}</h3>
+                        <p style="font-size: 14px; color: var(--text-muted); line-height: 1.5;">${p.content}</p>
+                    </article>
+                `;
+            });
+            container.innerHTML = html;
         }
 
         // Modais de Serviços
