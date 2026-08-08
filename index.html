@@ -351,7 +351,6 @@
                 <li><a href="#portal" class="nav-tab" onclick="switchTab('portal', event)" style="color: #ffcc00; text-decoration:none; padding:10px; display:block;"><i class="fas fa-search-dollar" style="width: 20px;"></i> Consulta Empresa</a></li>
                 <li><a href="#client-area" class="nav-tab" onclick="switchTab('client-area', event)" style="background: var(--accent-color); color: #000 !important; text-decoration:none; padding:10px; border-radius:6px; display:block; font-weight:bold; margin-top:5px;"><i class="fas fa-user-lock" style="width: 20px;"></i> Área do Cliente</a></li>
                 <li><a href="#faq" class="nav-tab" onclick="switchTab('faq', event)" style="color:#fff; text-decoration:none; padding:10px; display:block;"><i class="fas fa-question-circle" style="width: 20px;"></i> FAQ</a></li>
-                <li><a href="#posts" class="nav-tab" onclick="switchTab('posts', event)" style="color:#fff; text-decoration:none; padding:10px; display:block;"><i class="fas fa-newspaper" style="width: 20px;"></i> Posts</a></li>
                 <li><a href="#contact" class="nav-tab" onclick="switchTab('contact', event)" style="color:#fff; text-decoration:none; padding:10px; display:block;"><i class="fas fa-envelope" style="width: 20px;"></i> Contactos</a></li>
             </ul>
         </div>
@@ -442,19 +441,10 @@
                 </div>
             </div>
 
+            <!-- CONTENTOR DOS POSTS DENTRO DA PÁGINA INÍCIAL -->
             <div id="homeFeaturedPostContainer">
-                <div class="home-featured-post" style="margin: 40px 0; background: var(--card-bg); border: 1px solid var(--border-color); border-left: 5px solid var(--accent-color); padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
-                        <span style="background: rgba(255, 204, 0, 0.15); color: var(--primary-color); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold;"><i class="fas fa-bullhorn"></i> Post em Destaque</span>
-                        <span style="font-size: 12px; color: var(--text-muted);"><i class="far fa-calendar-alt"></i> A carregar...</span>
-                    </div>
-                    <h3 style="font-size: 20px; color: var(--primary-color); margin-bottom: 10px;">Inovação e Rigor nas Operações Transfronteiriças APSAN, LDA</h3>
-                    <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
-                        Continuamos a consolidar a nossa ponte logística entre Angola e Namíbia, garantindo serviços rápidos, seguros e com elevado padrão de qualidade para instituições e parceiros.
-                    </p>
-                    <button onclick="switchTab('posts', event)" style="background: none; border: none; color: var(--primary-color); font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 0; font-size: 14px;">
-                        Ver todos os posts <i class="fas fa-arrow-right"></i>
-                    </button>
+                <div style="text-align: center; padding: 40px 0; color: var(--text-muted);">
+                    <i class="fas fa-spinner fa-spin"></i> A carregar publicação completa...
                 </div>
             </div>
 
@@ -844,18 +834,6 @@
         </div>
     </section>
 
-    <section id="posts" class="content-section" style="padding: 40px 20px;">
-        <div class="container" style="max-width: 1200px; margin: 0 auto;">
-            <div class="section-title" style="text-align: center; margin-bottom: 30px;">
-                <h2>Últimos Posts & Notícias</h2>
-                <div class="underline" style="width: 60px; height: 3px; background: var(--primary-color); margin: 8px auto 0 auto;"></div>
-            </div>
-            <div class="posts-grid" id="dynamicPostsContainer" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
-                <p style="text-align:center; grid-column: 1/-1; color: var(--text-muted);"><i class="fas fa-spinner fa-spin"></i> A carregar publicações do CMS...</p>
-            </div>
-        </div>
-    </section>
-
     <section id="contact" class="content-section" style="padding: 40px 20px;">
         <div class="container" style="max-width: 1200px; margin: 0 auto;">
             <div class="section-title" style="text-align: center; margin-bottom: 30px;">
@@ -1037,7 +1015,7 @@
     </style>
 
     <script>
-        const sectionsList = ['home', 'about', 'services', 'extras', 'parcerias', 'portal', 'client-area', 'faq', 'posts', 'contact'];
+        const sectionsList = ['home', 'about', 'services', 'extras', 'parcerias', 'portal', 'client-area', 'faq', 'contact'];
         const sectionNamesMap = {
             'home': 'Início',
             'about': 'Quem Somos',
@@ -1047,7 +1025,6 @@
             'portal': 'Consulta Empresa',
             'client-area': 'Área do Cliente',
             'faq': 'FAQ',
-            'posts': 'Posts',
             'contact': 'Contactos'
         };
 
@@ -1172,9 +1149,8 @@
             }, 4000);
         }
 
-        // --- CARREGAMENTO DE POSTS COM RECURSO A FALLBACK SE A API FALHAR ---
+        // --- CARREGAMENTO E EXIBIÇÃO COMPLETA DOS POSTS NA PÁGINA INICIAL ---
         async function loadCMSPosts() {
-            const container = document.getElementById('dynamicPostsContainer');
             const homeFeaturedContainer = document.getElementById('homeFeaturedPostContainer');
             const repoUser = 'apsanlda1-ctrl';
             const repoName = 'apsan-lda';
@@ -1186,49 +1162,37 @@
                     date: "8 de Agosto de 2026",
                     excerpt: "Continuamos a consolidar a nossa ponte logística entre Angola e Namíbia, garantindo serviços rápidos, seguros e com elevado padrão de qualidade para instituições e parceiros.",
                     coverImage: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80"
-                },
-                {
-                    title: "APSAN, LDA Expande Serviços de Limpeza Institucional e Catering",
-                    date: "1 de Agosto de 2026",
-                    excerpt: "Reforçamos as nossas equipas e protocolos de higienização e catering corporativo para melhor atender empresas públicas e privadas no Cunene.",
-                    coverImage: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80"
                 }
             ];
 
             function renderPosts(posts) {
-                container.innerHTML = '';
-                posts.forEach(post => {
-                    const postCard = document.createElement('article');
-                    postCard.className = 'post-card';
-                    postCard.style.cssText = 'background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px; display: flex; flex-direction: column; gap: 10px;';
-                    
-                    postCard.innerHTML = `
-                        ${post.coverImage ? `<img src="${post.coverImage}" alt="${post.title}" onerror="this.style.display='none'" style="width:100%; height:220px; object-fit:cover; border-radius:6px; margin-bottom: 5px;">` : ''}
-                        <span style="font-size: 12px; color: var(--text-muted);"><i class="far fa-calendar-alt"></i> ${post.date}</span>
-                        <h3 style="font-size: 18px; color: var(--primary-color); margin: 0;">${post.title}</h3>
-                        <p style="font-size: 14px; color: var(--text-muted); line-height: 1.5;">${post.excerpt}</p>
-                    `;
-                    container.appendChild(postCard);
-                });
+                if (!homeFeaturedContainer) return;
+                
+                if (posts.length === 0) {
+                    homeFeaturedContainer.innerHTML = '';
+                    return;
+                }
 
-                if (posts.length > 0 && homeFeaturedContainer) {
-                    const featured = posts[0];
-                    homeFeaturedContainer.innerHTML = `
-                        <div class="home-featured-post" style="margin: 40px 0; background: var(--card-bg); border: 1px solid var(--border-color); border-left: 5px solid var(--accent-color); padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
-                                <span style="background: rgba(255, 204, 0, 0.15); color: var(--primary-color); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold;"><i class="fas fa-bullhorn"></i> Post em Destaque</span>
-                                <span style="font-size: 12px; color: var(--text-muted);"><i class="far fa-calendar-alt"></i> ${featured.date}</span>
+                let htmlContent = '';
+                posts.forEach(featured => {
+                    htmlContent += `
+                        <div class="home-featured-post" style="margin: 40px 0; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); overflow: hidden;">
+                            ${featured.coverImage ? `<img src="${featured.coverImage}" alt="${featured.title}" onerror="this.style.display='none'" style="width:100%; max-height:450px; object-fit:cover; display:block;">` : ''}
+                            <div style="padding: 30px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+                                    <span style="background: rgba(255, 204, 0, 0.15); color: var(--primary-color); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold;"><i class="fas fa-bullhorn"></i> Publicação Oficial</span>
+                                    <span style="font-size: 12px; color: var(--text-muted);"><i class="far fa-calendar-alt"></i> ${featured.date}</span>
+                                </div>
+                                <h3 style="font-size: 24px; color: var(--primary-color); margin-bottom: 15px; font-weight: bold;">${featured.title}</h3>
+                                <p style="font-size: 15px; color: var(--text-muted); line-height: 1.7; margin-bottom: 0;">
+                                    ${featured.excerpt}
+                                </p>
                             </div>
-                            <h3 style="font-size: 20px; color: var(--primary-color); margin-bottom: 10px;">${featured.title}</h3>
-                            <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
-                                ${featured.excerpt}
-                            </p>
-                            <button onclick="switchTab('posts', event)" style="background: none; border: none; color: var(--primary-color); font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 0; font-size: 14px;">
-                                Ver todos os posts <i class="fas fa-arrow-right"></i>
-                            </button>
                         </div>
                     `;
-                }
+                });
+
+                homeFeaturedContainer.innerHTML = htmlContent;
             }
 
             try {
@@ -1282,7 +1246,6 @@
                             }
                         }
 
-                        // CORREÇÃO APLICADA AQUI (OPÇÃO 1)
                         if (coverImage) {
                             let cleanPath = coverImage.replace(/^\/+/, '');
                             if (!cleanPath.startsWith('http://') && !cleanPath.startsWith('https://')) {
@@ -1294,7 +1257,7 @@
                         }
 
                         if (!excerpt) {
-                            excerpt = bodyText.replace(/<[^>]*>?/gm, '').substring(0, 160) + '...';
+                            excerpt = bodyText.replace(/<[^>]*>?/gm, '');
                         }
 
                         cmsPosts.push({ title, date, excerpt, coverImage });
