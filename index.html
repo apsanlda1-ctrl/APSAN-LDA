@@ -366,15 +366,138 @@
         }
         #toastNotification.show { transform: translateY(0); opacity: 1; }
 
-        /* TESTEMUNHOS & FOOTER */
+        /* TESTEMUNHOS */
         .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
         .client-info { display: flex; align-items: center; gap: 12px; margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 12px; }
         .client-avatar { width: 36px; height: 36px; border-radius: 50%; background-color: var(--primary-color); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; }
 
-        footer { background-color: #0f172a; color: #fff; padding: 40px 20px 20px 20px; margin-top: 50px; }
-        .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; padding-bottom: 30px; border-bottom: 1px solid rgba(255, 255, 255, 0.15); }
-        .footer-col h4 { color: #38bdf8; margin-bottom: 15px; font-size: 16px; }
-        .footer-col p { font-size: 14px; color: #cbd5e1; margin-bottom: 8px; line-height: 1.5; }
+        /* RODAPÉ MODERNO E ESTRUTURADO */
+        .footer-modern {
+            background-color: #0b1329;
+            color: #f1f5f9;
+            padding: 60px 20px 0 20px;
+            margin-top: 60px;
+            border-top: 4px solid var(--primary-color);
+        }
+        .footer-grid-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .footer-col-brand h3 {
+            font-size: 1.5rem;
+            color: #ffffff;
+            font-weight: 800;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .footer-col-brand p {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .footer-col h4 {
+            color: #38bdf8;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 8px;
+        }
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 35px;
+            height: 2px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+        .footer-links-list {
+            list-style: none;
+        }
+        .footer-links-list li {
+            margin-bottom: 12px;
+        }
+        .footer-links-list a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s, padding-left 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .footer-links-list a:hover {
+            color: #38bdf8;
+            padding-left: 5px;
+        }
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+        }
+        .footer-contact-item i {
+            color: #38bdf8;
+            margin-top: 3px;
+            font-size: 1rem;
+            width: 18px;
+        }
+        .footer-social-icons {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        .footer-social-btn {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .footer-social-btn:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        .footer-bottom-bar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+        .footer-bottom-links {
+            display: flex;
+            gap: 20px;
+        }
+        .footer-bottom-links a {
+            color: #64748b;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-bottom-links a:hover {
+            color: #94a3b8;
+        }
 
         /* MEDIA QUERIES PARA TELEMÓVEL */
         @media (max-width: 900px) {
@@ -409,6 +532,10 @@
                 width: 100%;
                 padding: 10px 0;
                 font-size: 16px;
+            }
+            .footer-bottom-bar {
+                flex-direction: column;
+                text-align: center;
             }
         }
     </style>
@@ -525,7 +652,7 @@
                     <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" style="width:100%; max-height:350px; object-fit:cover;" alt="Operações APSAN">
                     <div style="padding: 25px;">
                         <span style="font-size: 12px; color: var(--primary-color); font-weight: bold;">Publicação em Destaque • 8 de Agosto de 2026</span>
-                        <h3 style="color: var(--text-color); margin: 10px 0; font-size: 1.4rem;">How Do I Develop My Portfolio Website & Blog</h3>
+                        <h3 style="color: var(--text-color); margin: 10px 0; font-size: 1.4rem;">Consolidação e Expansão Logística no Cunene</h3>
                         <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
                             Continuamos a consolidar a nossa ponte logística e tecnológica entre Angola e Namíbia, garantindo serviços rápidos, seguros e com elevado padrão de qualidade institucional.
                         </p>
@@ -587,7 +714,7 @@
     <!-- SECÇÃO SERVIÇOS PRINCIPAIS -->
     <section id="services" class="content-section" style="padding: 40px 20px; max-width: 1200px; margin: 0 auto;">
         <h2>Serviços Principais</h2>
-        <p style="margin-top: 8px; font-size: 14px; color: var(--text-muted); margin-bottom: 25px;">Clique em qualquer serviço para ver os detalhes e solicitar orçamento.</p>
+        <p style="margin-top: 8px; font-size: 14px; color: var(--text-muted); margin-bottom: 25px;">Clique em qualquer serviço para ver os detalhes e submeter a sua solicitação.</p>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
             <div class="service-card" onclick="openServiceDetail('Serviço de Limpeza Institucional', 'Garantimos ambientes de trabalho impecáveis, saudáveis e seguros.', ['Limpeza profunda e desinfeção.', 'Gestão de resíduos.', 'Equipas qualificadas.'])" style="cursor: pointer;">
@@ -683,14 +810,14 @@
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px;">
             <div class="portal-card">
                 <h3><i class="fas fa-id-card" style="color: var(--primary-color);"></i> Registo Fiscal</h3>
-                <p style="margin-top: 10px;"><strong>Nome:</strong> APSAN, LDA</p>
-                <p><strong>NIF:</strong> 5002085011</p>
-                <p><strong>Estado:</strong> Ativa e Regularizada</p>
+                <p style="margin-top: 10px;"><strong>Nome Comercial:</strong> APSAN, LDA</p>
+                <p><strong>NIF Oficial:</strong> 5002085011</p>
+                <p><strong>Estado Operacional:</strong> Ativa e Regularizada</p>
             </div>
             <div class="portal-card">
                 <h3><i class="fas fa-map-marked-alt" style="color: var(--primary-color);"></i> Sede & Instalações</h3>
-                <p style="margin-top: 10px;"><strong>Sede:</strong> Namacunde Santa-Clara, Cunene</p>
-                <p><strong>Representação:</strong> Ondjiva, Angola</p>
+                <p style="margin-top: 10px;"><strong>Sede Principal:</strong> Namacunde Santa-Clara, Cunene</p>
+                <p><strong>Representação Regional:</strong> Ondjiva, Angola</p>
             </div>
         </div>
     </section>
@@ -725,26 +852,51 @@
                 <h4><span>Onde prestam serviços?</span> <i class="fas fa-chevron-down"></i></h4>
                 <div class="faq-answer">Atuamos em Angola (Cunene, Namacunde, Ondjiva e restantes províncias) e em operações com a Namíbia.</div>
             </div>
+            <div class="faq-card" onclick="toggleFaq(this)">
+                <h4><span>Quais são os contactos diretos de atendimento?</span> <i class="fas fa-chevron-down"></i></h4>
+                <div class="faq-answer">Pode falar connosco pelos números <strong>+244 946 195 402</strong>, <strong>+244 934 437 739</strong> ou <strong>+244 931 057 760</strong> (também disponíveis no WhatsApp).</div>
+            </div>
         </div>
     </section>
 
-    <!-- CONTACTOS -->
+    <!-- CONTACTOS AMPLIADOS -->
     <section id="contact" class="content-section" style="padding: 40px 20px; max-width: 1200px; margin: 0 auto;">
         <h2>Contacte-nos</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 20px;">
+        <p style="margin-top: 8px; font-size: 14px; color: var(--text-muted); margin-bottom: 25px;">Estamos à disposição para atender o seu pedido corporativo ou individual.</p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
             <div class="portal-card">
-                <h3>Informações Diretas</h3>
-                <p style="margin-top: 15px;"><i class="fas fa-phone-alt"></i> +244 946 195 402 / 934 437 739 / 931 057 760</p>
-                <p style="margin-top: 10px;"><i class="fas fa-envelope"></i> info@apsanlda.com</p>
-                <p style="margin-top: 10px;"><i class="fas fa-map-marker-alt"></i> Namacunde / Ondjiva - Cunene</p>
+                <h3 style="color: var(--primary-color); margin-bottom: 15px;"><i class="fas fa-headset"></i> Linhas Diretas de Atendimento</h3>
+                
+                <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 15px;">
+                    <div>
+                        <strong style="font-size: 13px; color: var(--text-muted); text-transform: uppercase;">Telemóvel & WhatsApp:</strong>
+                        <p style="font-size: 15px; margin-top: 3px;"><i class="fas fa-phone-alt" style="color: var(--primary-color);"></i> +244 946 195 402</p>
+                        <p style="font-size: 15px;"><i class="fas fa-phone-alt" style="color: var(--primary-color);"></i> +244 934 437 739</p>
+                        <p style="font-size: 15px;"><i class="fas fa-phone-alt" style="color: var(--primary-color);"></i> +244 931 057 760</p>
+                    </div>
+
+                    <div>
+                        <strong style="font-size: 13px; color: var(--text-muted); text-transform: uppercase;">E-mail Oficial:</strong>
+                        <p style="font-size: 15px; margin-top: 3px;"><i class="fas fa-envelope" style="color: var(--primary-color);"></i> info@apsanlda.com</p>
+                    </div>
+
+                    <div>
+                        <strong style="font-size: 13px; color: var(--text-muted); text-transform: uppercase;">Localização das Instalações:</strong>
+                        <p style="font-size: 14px; margin-top: 3px;"><i class="fas fa-map-marker-alt" style="color: var(--primary-color);"></i> <strong>Sede:</strong> Namacunde / Santa Clara, Cunene - Angola</p>
+                        <p style="font-size: 14px;"><i class="fas fa-building" style="color: var(--primary-color);"></i> <strong>Escritório / Representação:</strong> Ondjiva, Cunene - Angola</p>
+                    </div>
+                </div>
             </div>
+
             <div class="portal-card">
-                <h3>Envie Mensagem</h3>
+                <h3 style="color: var(--primary-color); margin-bottom: 15px;"><i class="fas fa-paper-plane"></i> Envie uma Mensagem Direta</h3>
                 <form action="https://formspree.io/f/mwlevprv" method="POST" enctype="multipart/form-data" onsubmit="handleContactSubmit(event)">
-                    <div class="modal-form-group"><input type="text" name="nome" placeholder="Seu Nome" required></div>
-                    <div class="modal-form-group"><input type="tel" name="telemovel" placeholder="Seu Contacto" required></div>
-                    <div class="modal-form-group"><textarea name="mensagem" rows="3" placeholder="Mensagem..." required></textarea></div>
-                    <button type="submit" id="contactSubmitBtn" style="width: 100%; padding: 10px; background-color: var(--primary-color); color: #fff; border: none; font-weight: bold; border-radius: 6px; cursor: pointer;">Enviar Mensagem</button>
+                    <div class="modal-form-group"><input type="text" name="nome" placeholder="Seu Nome Completo" required></div>
+                    <div class="modal-form-group"><input type="tel" name="telemovel" placeholder="Seu Contacto / WhatsApp" required></div>
+                    <div class="modal-form-group"><input type="email" name="email" placeholder="Seu E-mail (Opcional)"></div>
+                    <div class="modal-form-group"><textarea name="mensagem" rows="4" placeholder="Escreva a sua mensagem ou dúvida..." required></textarea></div>
+                    <button type="submit" id="contactSubmitBtn" style="width: 100%; padding: 12px; background-color: var(--primary-color); color: #fff; border: none; font-weight: bold; border-radius: 6px; cursor: pointer;">Enviar Mensagem</button>
                 </form>
             </div>
         </div>
@@ -810,25 +962,81 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-container">
-            <div>
-                <h3>APSAN, LDA</h3>
-                <p>Soluções Integradas, Qualidade Que Transforma! Prestação de serviços de excelência entre Angola e Namíbia.</p>
+    <!-- RODAPÉ MODERNO E BEM ESTRUTURADO -->
+    <footer class="footer-modern">
+        <div class="footer-grid-container">
+            <!-- COLUNA 1: MARCA & SOBRE -->
+            <div class="footer-col-brand">
+                <h3><i class="fas fa-building" style="color: #38bdf8;"></i> APSAN, LDA</h3>
+                <p>Soluções Integradas, Qualidade Que Transforma! Prestação de serviços corporativos, soluções tecnológicas e suporte logístico de excelência entre Angola e Namíbia.</p>
+                <div class="footer-social-icons">
+                    <a href="#" class="footer-social-btn" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="footer-social-btn" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="footer-social-btn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="footer-social-btn" title="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
             </div>
+
+            <!-- COLUNA 2: NAVEGAÇÃO RÁPIDA -->
             <div class="footer-col">
-                <h4>Contactos</h4>
-                <p>+244 946 195 402 / 934 437 739</p>
-                <p>info@apsanlda.com</p>
+                <h4>Navegação</h4>
+                <ul class="footer-links-list">
+                    <li><a href="#home" onclick="switchTab('home', event)"><i class="fas fa-chevron-right"></i> Início</a></li>
+                    <li><a href="#about" onclick="switchTab('about', event)"><i class="fas fa-chevron-right"></i> Quem Somos</a></li>
+                    <li><a href="#services" onclick="switchTab('services', event)"><i class="fas fa-chevron-right"></i> Serviços Principais</a></li>
+                    <li><a href="#extras" onclick="switchTab('extras', event)"><i class="fas fa-chevron-right"></i> Serviços Extras</a></li>
+                    <li><a href="#parcerias" onclick="switchTab('parcerias', event)"><i class="fas fa-chevron-right"></i> Parcerias</a></li>
+                    <li><a href="#portal" onclick="switchTab('portal', event)"><i class="fas fa-chevron-right"></i> Dados da Empresa</a></li>
+                </ul>
             </div>
+
+            <!-- COLUNA 3: DADOS DE CONTACTO -->
             <div class="footer-col">
-                <h4>Dados Fiscais</h4>
-                <p>NIF: 5002085011</p>
-                <p>Namacunde / Ondjiva, Angola</p>
+                <h4>Contactos Diretos</h4>
+                <div class="footer-contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <div>
+                        +244 946 195 402<br>
+                        +244 934 437 739<br>
+                        +244 931 057 760
+                    </div>
+                </div>
+                <div class="footer-contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>info@apsanlda.com</div>
+                </div>
+                <div class="footer-contact-item">
+                    <i class="fas fa-clock"></i>
+                    <div>Segunda a Sábado: 08h00 - 18h00</div>
+                </div>
+            </div>
+
+            <!-- COLUNA 4: DADOS FISCAIS & LOCALIZAÇÃO -->
+            <div class="footer-col">
+                <h4>Sede & Informação Fiscal</h4>
+                <div class="footer-contact-item">
+                    <i class="fas fa-file-invoice"></i>
+                    <div><strong>NIF:</strong> 5002085011</div>
+                </div>
+                <div class="footer-contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>Namacunde / Santa Clara, Cunene - Angola</div>
+                </div>
+                <div class="footer-contact-item">
+                    <i class="fas fa-city"></i>
+                    <div>Ondjiva, Cunene - Angola</div>
+                </div>
             </div>
         </div>
-        <p style="text-align: center; margin-top: 20px; font-size: 13px; color: #94a3b8;">&copy; 2026 APSAN, LDA. Todos os direitos reservados.</p>
+
+        <div class="footer-bottom-bar">
+            <div>&copy; 2026 APSAN, LDA. Todos os direitos reservados.</div>
+            <div class="footer-bottom-links">
+                <a href="#portal" onclick="switchTab('portal', event)">Empresa Registada</a>
+                <a href="#" onclick="openDenunciaModal()">Canal de Denúncias</a>
+                <a href="#faq" onclick="switchTab('faq', event)">FAQ</a>
+            </div>
+        </div>
     </footer>
 
     <!-- SCRIPTS INTEGRADOS -->
@@ -911,7 +1119,7 @@
             setTimeout(() => toast.classList.remove('show'), 4000);
         }
 
-        // MODAL DE SERVIÇOS EXPANDIDO E DETALHADO
+        // MODAL DE SERVIÇOS EXPANDIDO (SEM OPÇÃO DE ORÇAMENTO)
         function openServiceDetail(name, desc, features) {
             const modal = document.getElementById('serviceModal');
             const content = document.getElementById('modalBodyContent');
@@ -931,7 +1139,7 @@
                 <form action="https://formspree.io/f/mwlevprv" method="POST" enctype="multipart/form-data" onsubmit="handleModalServiceSubmit(event)">
                     <input type="hidden" name="servico_solicitado" value="${name}">
                     
-                    <h3 style="font-size: 15px; margin-bottom: 15px; color: var(--text-color); border-left: 3px solid var(--primary-color); padding-left: 8px;">Formulário de Pedido de Serviço / Orçamento</h3>
+                    <h3 style="font-size: 15px; margin-bottom: 15px; color: var(--text-color); border-left: 3px solid var(--primary-color); padding-left: 8px;">Formulário de Solicitção de Serviço</h3>
 
                     <div class="modal-form-grid">
                         <div class="modal-form-group">
@@ -940,7 +1148,7 @@
                         </div>
                         <div class="modal-form-group">
                             <label><i class="fas fa-id-card"></i> NIF / BI (Opcional)</label>
-                            <input type="text" name="nif_cliente" placeholder="NIF para emissão da factura">
+                            <input type="text" name="nif_cliente" placeholder="NIF para emissão de factura">
                         </div>
                         <div class="modal-form-group">
                             <label><i class="fas fa-envelope"></i> E-mail de Contacto *</label>
@@ -964,11 +1172,7 @@
                             <label><i class="fas fa-calendar-alt"></i> Data Pretendida de Início</label>
                             <input type="date" name="data_pretendida">
                         </div>
-                        <div class="modal-form-group">
-                            <label><i class="fas fa-money-bill-wave"></i> Orçamento Estimado / Teto (AOA)</label>
-                            <input type="text" name="orcamento_estimado" placeholder="Ex: 150.000 AOA">
-                        </div>
-                        <div class="modal-form-group">
+                        <div class="modal-form-group full-width">
                             <label><i class="fas fa-flag"></i> Urgência do Pedido</label>
                             <select name="nivel_urgencia">
                                 <option value="Normal">Normal (Até 3 dias)</option>
@@ -981,7 +1185,7 @@
                     <div class="modal-form-group full-width">
                         <label><i class="fas fa-paperclip"></i> Anexar Documentos / Caderno de Encargos / Imagens (PDF, PNG, JPG)</label>
                         <input type="file" name="anexo_ficheiro" accept=".pdf,image/*">
-                        <span style="font-size: 11px; color: var(--text-muted);">Pode anexar listas de compras, fotos do local, termos de referência ou documentos de especificação.</span>
+                        <span style="font-size: 11px; color: var(--text-muted);">Pode anexar listas de compras, fotos do local ou documentos de especificação.</span>
                     </div>
 
                     <div class="modal-form-group full-width">
@@ -1073,4 +1277,4 @@
         });
     </script>
 </body>
-</html>      
+</html>
