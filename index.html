@@ -717,10 +717,11 @@
                 </div>
 
                 <div id="testimonialFormContainer" style="display: none; margin-bottom: 30px;">
-                    <form onsubmit="handleExperienciaSubmit(event)" style="background: rgba(2, 132, 199, 0.03); border: 1px solid var(--border-color); padding: 20px; border-radius: 10px;">
-                        <div class="modal-form-group"><label>Nome Completo</label><input type="text" id="expNome" required></div>
-                        <div class="modal-form-group"><label>Cargo / Função</label><input type="text" id="expCargo"></div>
-                        <div class="modal-form-group"><label>Comentário</label><textarea id="expMensagem" rows="3" required></textarea></div>
+                    <form action="https://formspree.io/f/mwlevprv" method="POST" onsubmit="handleExperienciaSubmit(event)" style="background: rgba(2, 132, 199, 0.03); border: 1px solid var(--border-color); padding: 20px; border-radius: 10px;">
+                        <input type="hidden" name="_subject" value="Novo Testemunho do Site - APSAN LDA">
+                        <div class="modal-form-group"><label>Nome Completo</label><input type="text" name="nome_testemunho" id="expNome" required></div>
+                        <div class="modal-form-group"><label>Cargo / Função</label><input type="text" name="cargo_testemunho" id="expCargo"></div>
+                        <div class="modal-form-group"><label>Comentário</label><textarea name="mensagem_testemunho" id="expMensagem" rows="3" required></textarea></div>
                         <button type="submit" style="padding: 10px 20px; background-color: var(--primary-color); color: #fff; border: none; font-weight: bold; border-radius: 6px; cursor: pointer;">Publicar</button>
                     </form>
                 </div>
@@ -837,6 +838,7 @@
 
         <div class="portal-card">
             <form action="https://formspree.io/f/mwlevprv" method="POST" enctype="multipart/form-data" onsubmit="handleParceriaSubmit(event)">
+                <input type="hidden" name="_subject" value="Nova Proposta de Parceria - APSAN LDA">
                 <div class="modal-form-grid">
                     <div class="modal-form-group"><label>Nome do Representante</label><input type="text" name="nome_parceiro" required></div>
                     <div class="modal-form-group"><label>Empresa / Instituição</label><input type="text" name="empresa_parceiro"></div>
@@ -987,6 +989,7 @@
             <div class="portal-card">
                 <h3 style="color: var(--primary-color); margin-bottom: 15px;"><i class="fas fa-paper-plane"></i> Envie uma Mensagem Direta</h3>
                 <form action="https://formspree.io/f/mwlevprv" method="POST" enctype="multipart/form-data" onsubmit="handleContactSubmit(event)">
+                    <input type="hidden" name="_subject" value="Nova Mensagem de Contacto Geral - APSAN LDA">
                     <div class="modal-form-group"><input type="text" name="nome" placeholder="Seu Nome Completo" required></div>
                     <div class="modal-form-group"><input type="tel" name="telemovel" placeholder="Seu Contacto / WhatsApp" required></div>
                     <div class="modal-form-group"><input type="email" name="email" placeholder="Seu E-mail (Opcional)"></div>
@@ -1042,6 +1045,7 @@
             <button class="service-modal-close" onclick="closeDenunciaModal()">&times;</button>
             <h2 style="color: #dc3545; font-size: 20px; margin-bottom: 10px;"><i class="fas fa-shield-alt"></i> Canal de Denúncias</h2>
             <form action="https://formspree.io/f/mwlevprv" method="POST" enctype="multipart/form-data" onsubmit="handleDenunciaSubmit(event)">
+                <input type="hidden" name="_subject" value="NOVA DENÚNCIA SUBMETIDA - APSAN LDA">
                 <div class="modal-form-group">
                     <label>Assunto</label>
                     <select name="tipo_denuncia" required>
@@ -1275,6 +1279,7 @@
                 </div>
 
                 <form action="https://formspree.io/f/mwlevprv" method="POST" enctype="multipart/form-data" onsubmit="handleModalServiceSubmit(event)">
+                    <input type="hidden" name="_subject" value="Novo Pedido de Serviço: ${name} - APSAN LDA">
                     <input type="hidden" name="servico_solicitado" value="${name}">
                     
                     <h3 style="font-size: 15px; margin-bottom: 15px; color: var(--text-color); border-left: 3px solid var(--primary-color); padding-left: 8px;">Formulário de Solicitação de Serviço</h3>
@@ -1347,28 +1352,50 @@
         function closeDenunciaModal() { document.getElementById('denunciaModal').classList.remove('active'); }
         function closeDenunciaModalOnClick(e) { if(e.target.id === 'denunciaModal') closeDenunciaModal(); }
 
+        // MANIPULAÇÃO DE SUBMISSÃO VIA FETCH AJAX PARA EVITAR RECARREGAR A PÁGINA
+        async function submitFormAjax(formElement, successTitle, successMsg, callbackAfter) {
+            const formData = new FormData(formElement);
+            try {
+                const response = await fetch(formElement.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (response.ok) {
+                    showToast(successTitle, successMsg);
+                    formElement.reset();
+                    if (callbackAfter) callbackAfter();
+                } else {
+                    showToast('Erro', 'Ocorreu um problema ao enviar. Tente novamente.');
+                }
+            } catch (error) {
+                showToast('Erro', 'Verifique a sua ligação à internet.');
+            }
+        }
+
         function handleDenunciaSubmit(e) {
             e.preventDefault();
-            showToast('Denúncia Enviada', 'A sua mensagem foi registada de forma segura.');
-            closeDenunciaModal();
+            submitFormAjax(e.target, 'Denúncia Enviada', 'A sua denúncia foi enviada com sucesso para o e-mail oficial.', closeDenunciaModal);
         }
 
         function handleModalServiceSubmit(e) {
             e.preventDefault();
-            showToast('Pedido Registado', 'Recebemos o seu pedido detalhado com sucesso. Entraremos em contacto brevemente.');
-            closeServiceModal();
+            submitFormAjax(e.target, 'Pedido Registado', 'O seu pedido foi enviado com sucesso para o e-mail oficial.', closeServiceModal);
         }
 
         function handleContactSubmit(e) {
             e.preventDefault();
-            showToast('Mensagem Enviada', 'Obrigado pelo contacto!');
-            e.target.reset();
+            submitFormAjax(e.target, 'Mensagem Enviada', 'A sua mensagem foi enviada diretamente para o e-mail oficial.');
         }
 
         function handleParceriaSubmit(e) {
             e.preventDefault();
-            showToast('Proposta Recebida', 'Agradecemos o seu interesse.');
-            e.target.reset();
+            submitFormAjax(e.target, 'Proposta Recebida', 'A sua proposta foi enviada para o e-mail oficial da empresa.');
+        }
+
+        function handleExperienciaSubmit(e) {
+            e.preventDefault();
+            submitFormAjax(e.target, 'Obrigado!', 'O seu testemunho foi enviado com sucesso.', toggleTestimonialForm);
         }
 
         // CHATBOT AZNY GABRIEL
@@ -1392,11 +1419,7 @@
             const f = document.getElementById('testimonialFormContainer');
             f.style.display = f.style.display === 'none' ? 'block' : 'none';
         }
-        function handleExperienciaSubmit(e) {
-            e.preventDefault();
-            showToast('Obrigado!', 'Testemunho submetido com sucesso.');
-            toggleTestimonialForm();
-        }
+
         function handleClientLogin(e) {
             e.preventDefault();
             document.getElementById('clientAuthCard').style.display = 'none';
