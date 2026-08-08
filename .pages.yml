@@ -1,3 +1,11 @@
+backend:
+  name: github
+  repo: apsanlda1-ctrl/APSAN-LDA
+  branch: main
+
+media_folder: "content/posts"
+public_folder: "/content/posts"
+
 collections:
   - name: "posts"
     label: "Posts"
