@@ -121,10 +121,10 @@
         }
         .mobile-overlay.active { display: block; }
 
-        /* HERO LAYOUT & CARROSSEL SLIDER - MARGEM AJUSTADA MAIS DURA/PRÓXIMA */
+        /* HERO LAYOUT & CARROSSEL SLIDER */
         .hero-layout-section {
             max-width: 1200px;
-            margin: 5px auto 20px auto; /* Reduzido para 5px para aproximar ainda mais do cabeçalho */
+            margin: 5px auto 20px auto;
             padding: 0 20px;
         }
         .hero-grid {
@@ -427,23 +427,37 @@
         .client-info { display: flex; align-items: center; gap: 12px; margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 12px; }
         .client-avatar { width: 36px; height: 36px; border-radius: 50%; background-color: var(--primary-color); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; }
 
-        /* RODAPÉ LIMPO E MODERNO */
-        .footer-clean-redesigned {
+        /* RODAPÉ ESTILO BANNER ONDULADO (BASEADO NO PRIMEIRO MODELO DA IMAGEM) */
+        .footer-wavy-container {
+            position: relative;
+            margin-top: 80px;
             background-color: #0b1329;
             color: #f1f5f9;
-            padding: 50px 20px 20px 20px;
-            margin-top: 60px;
-            border-top: 4px solid var(--primary-color);
         }
+
+        .footer-wavy-svg {
+            position: absolute;
+            top: -65px;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            overflow: hidden;
+            line-height: 0;
+            z-index: 1;
+        }
+
         .footer-clean-grid {
+            position: relative;
+            z-index: 2;
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 40px;
-            padding-bottom: 30px;
+            padding: 40px 20px 30px 20px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
+
         .footer-brand-info h3 {
             font-size: 1.5rem;
             color: #ffffff;
@@ -473,7 +487,7 @@
             left: 0;
             width: 35px;
             height: 2px;
-            background: var(--primary-color);
+            background: #ff7700;
             border-radius: 2px;
         }
         .footer-contact-item {
@@ -508,13 +522,13 @@
             transition: background 0.2s, transform 0.2s;
         }
         .footer-social-btn:hover {
-            background: var(--primary-color);
+            background: #0284c7;
             transform: translateY(-3px);
         }
         .footer-copyright-bottom {
             max-width: 1200px;
             margin: 0 auto;
-            padding-top: 20px;
+            padding: 20px;
             text-align: center;
             font-size: 0.9rem;
             color: #94a3b8;
@@ -915,7 +929,7 @@
 
             <div class="faq-card" onclick="toggleFaq(this)">
                 <h4><span>8. Como funciona a criação de software e suporte em redes de internet?</span> <i class="fas fa-chevron-down"></i></h4>
-                <div class="faq-answer">Analisamos os processos da sua organização para criar sistemas por medida (web/desktop) ou estruturar a sua rede de dados (cablagem, routers, estabilidade). Oferecemos também contratos de manutenção técnica contínua.</div>
+                <div class="faq-answer">Analisamos os processos da sua organização para criar sistemas por medida (web/desktop) ou estruturar a sua rede de dados (cablagem, routers, estruturação de rede). Oferecemos também contratos de manutenção técnica contínua.</div>
             </div>
 
             <div class="faq-card" onclick="toggleFaq(this)">
@@ -1043,8 +1057,33 @@
         </div>
     </div>
 
-    <!-- RODAPÉ REESTRUTURADO -->
-    <footer class="footer-clean-redesigned">
+    <!-- RODAPÉ ESTILO BANNER ONDULADO (1º MODELO DO PRINT) -->
+    <footer class="footer-wavy-container">
+        <!-- SVG ONDULADO AZUL E LARANJA (ESTILO BANNER VECTORIAL) -->
+        <div class="footer-wavy-svg">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" style="width: 100%; height: 100%;">
+                <defs>
+                    <!-- GRADIENTE AZUL -->
+                    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#0284c7" />
+                        <stop offset="50%" stop-color="#0284c7" />
+                        <stop offset="100%" stop-color="#0b1329" />
+                    </linearGradient>
+                    <!-- GRADIENTE LARANJA/AMARELO -->
+                    <linearGradient id="orangeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#ff9900" />
+                        <stop offset="100%" stop-color="#ff5500" />
+                    </linearGradient>
+                </defs>
+                <!-- Curva Laranja de Fundo -->
+                <path d="M0,40 C300,10 600,100 1200,20 L1200,120 L0,120 Z" fill="url(#orangeGrad)" opacity="0.9"></path>
+                <!-- Curva Branca Intermédia -->
+                <path d="M0,50 C350,15 650,90 1200,30 L1200,120 L0,120 Z" fill="#ffffff" opacity="0.3"></path>
+                <!-- Curva Azul Principal (1º Modelo) -->
+                <path d="M0,65 C400,25 700,95 1200,45 L1200,120 L0,120 Z" fill="url(#blueGrad)"></path>
+            </svg>
+        </div>
+
         <div class="footer-clean-grid">
             <!-- COLUNA 1: MARCA & SOBRE -->
             <div class="footer-brand-info">
