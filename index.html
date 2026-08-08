@@ -124,7 +124,7 @@
         }
         .mobile-overlay.active { display: block; }
 
-        /* HERO LAYOUT NOVO (PRINT) */
+        /* HERO LAYOUT */
         .hero-layout-section {
             max-width: 1200px;
             margin: 40px auto 20px auto;
@@ -293,11 +293,6 @@
             box-shadow: 0 12px 25px rgba(0,0,0,0.08);
         }
 
-        .read-more-btn {
-            background: none; border: none; color: var(--primary-color); font-weight: bold;
-            cursor: pointer; padding: 0; font-size: 14px; display: inline-flex; align-items: center; gap: 5px; margin-top: 10px;
-        }
-
         /* FAQ */
         .faq-grid { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
         .faq-card { cursor: pointer; }
@@ -305,7 +300,7 @@
         .faq-answer { margin-top: 10px; font-size: 14px; color: var(--text-muted); display: none; line-height: 1.5; }
         .faq-card.active .faq-answer { display: block; }
 
-        /* MODAIS */
+        /* MODAIS E FORMULÁRIOS EXPANDIDOS */
         .service-modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.75); display: none; justify-content: center; align-items: center; z-index: 9999; padding: 20px;
@@ -315,10 +310,27 @@
             width: 100%; max-width: 750px; border-radius: 12px; padding: 30px; position: relative; max-height: 90vh; overflow-y: auto; background-color: var(--card-bg); color: var(--text-color); box-shadow: 0 15px 35px rgba(0,0,0,0.3); 
         }
         .service-modal-close { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-color); }
+        
+        .modal-form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        @media (max-width: 650px) {
+            .modal-form-grid { grid-template-columns: 1fr; }
+        }
+
         .modal-form-group { margin-bottom: 15px; }
-        .modal-form-group label { display: block; margin-bottom: 5px; font-weight: bold; color: var(--primary-color); font-size: 14px; }
+        .modal-form-group.full-width { grid-column: 1 / -1; }
+        .modal-form-group label { display: block; margin-bottom: 5px; font-weight: bold; color: var(--primary-color); font-size: 13px; }
         .modal-form-group input, .modal-form-group select, .modal-form-group textarea {
             width: 100%; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 14px; background-color: var(--bg-color); color: var(--text-color); outline: none;
+        }
+        .modal-form-group input[type="file"] {
+            padding: 8px;
+            background: var(--bg-color);
+            border: 1px dashed var(--primary-color);
+            cursor: pointer;
         }
 
         /* CHATBOT WIDGET AZNY GABRIEL */
@@ -651,11 +663,14 @@
         <p style="margin-top: 8px; font-size: 14px; color: var(--text-muted); margin-bottom: 25px;">Submeta a sua proposta de cooperação comercial ou institucional.</p>
 
         <div class="portal-card">
-            <form action="https://formspree.io/f/mwlevprv" method="POST" onsubmit="handleParceriaSubmit(event)">
-                <div class="modal-form-group"><label>Nome do Representante</label><input type="text" name="nome_parceiro" required></div>
-                <div class="modal-form-group"><label>Empresa / Instituição</label><input type="text" name="empresa_parceiro"></div>
-                <div class="modal-form-group"><label>E-mail de Contacto</label><input type="email" name="email_parceiro" required></div>
-                <div class="modal-form-group"><label>Telemóvel / WhatsApp</label><input type="tel" name="telemovel_parceiro" required></div>
+            <form action="https://formspree.io/f/mwlevprv" method="POST" enctype="multipart/form-data" onsubmit="handleParceriaSubmit(event)">
+                <div class="modal-form-grid">
+                    <div class="modal-form-group"><label>Nome do Representante</label><input type="text" name="nome_parceiro" required></div>
+                    <div class="modal-form-group"><label>Empresa / Instituição</label><input type="text" name="empresa_parceiro"></div>
+                    <div class="modal-form-group"><label>E-mail de Contacto</label><input type="email" name="email_parceiro" required></div>
+                    <div class="modal-form-group"><label>Telemóvel / WhatsApp</label><input type="tel" name="telemovel_parceiro" required></div>
+                </div>
+                <div class="modal-form-group"><label>Proposta / Apresentação da Empresa (PDF/Imagem)</label><input type="file" name="anexo_parceria" accept=".pdf,image/*"></div>
                 <div class="modal-form-group"><label>Detalhes da Proposta</label><textarea name="detalhes_parceria" rows="4" required></textarea></div>
                 <button type="submit" id="parceriaSubmitBtn" style="width: 100%; padding: 12px; background-color: var(--primary-color); color: #fff; border: none; font-weight: bold; border-radius: 6px; cursor: pointer;">Submeter Proposta</button>
             </form>
@@ -725,7 +740,7 @@
             </div>
             <div class="portal-card">
                 <h3>Envie Mensagem</h3>
-                <form action="https://formspree.io/f/mwlevprv" method="POST" onsubmit="handleContactSubmit(event)">
+                <form action="https://formspree.io/f/mwlevprv" method="POST" enctype="multipart/form-data" onsubmit="handleContactSubmit(event)">
                     <div class="modal-form-group"><input type="text" name="nome" placeholder="Seu Nome" required></div>
                     <div class="modal-form-group"><input type="tel" name="telemovel" placeholder="Seu Contacto" required></div>
                     <div class="modal-form-group"><textarea name="mensagem" rows="3" placeholder="Mensagem..." required></textarea></div>
@@ -766,7 +781,7 @@
         </button>
     </div>
 
-    <!-- MODAL DE SERVIÇOS -->
+    <!-- MODAL DE SERVIÇOS EXPANDIDO -->
     <div class="service-modal-overlay" id="serviceModal" onclick="closeServiceDetail(event)">
         <div class="service-modal-content">
             <button class="service-modal-close" onclick="closeServiceModal()">&times;</button>
@@ -779,7 +794,7 @@
         <div class="service-modal-content" style="max-width: 600px;">
             <button class="service-modal-close" onclick="closeDenunciaModal()">&times;</button>
             <h2 style="color: #dc3545; font-size: 20px; margin-bottom: 10px;"><i class="fas fa-shield-alt"></i> Canal de Denúncias</h2>
-            <form action="https://formspree.io/f/mwlevprv" method="POST" onsubmit="handleDenunciaSubmit(event)">
+            <form action="https://formspree.io/f/mwlevprv" method="POST" enctype="multipart/form-data" onsubmit="handleDenunciaSubmit(event)">
                 <div class="modal-form-group">
                     <label>Assunto</label>
                     <select name="tipo_denuncia" required>
@@ -788,6 +803,7 @@
                         <option value="Outros">Outros</option>
                     </select>
                 </div>
+                <div class="modal-form-group"><label>Anexar Prova / Documento (PDF/Imagem)</label><input type="file" name="anexo_denuncia" accept=".pdf,image/*"></div>
                 <div class="modal-form-group"><label>Descrição dos Factos</label><textarea name="detalhes_denuncia" rows="4" required></textarea></div>
                 <button type="submit" id="denunciaModalSubmitBtn" style="width: 100%; padding: 10px; background-color: #dc3545; color: #fff; border: none; font-weight: bold; border-radius: 6px; cursor: pointer;">Submeter Denúncia</button>
             </form>
@@ -829,7 +845,6 @@
             const activeLink = document.querySelector(`.nav-links-clean a[href="#${sectionId}"]`);
             if(activeLink) activeLink.classList.add('active');
 
-            // Fechar menu de telemóvel e overlay se estiverem abertos
             closeMobileMenu();
 
             if (pushToHistory && window.location.hash !== `#${sectionId}`) {
@@ -896,21 +911,87 @@
             setTimeout(() => toast.classList.remove('show'), 4000);
         }
 
-        // MODAL DE SERVIÇOS
+        // MODAL DE SERVIÇOS EXPANDIDO E DETALHADO
         function openServiceDetail(name, desc, features) {
             const modal = document.getElementById('serviceModal');
             const content = document.getElementById('modalBodyContent');
-            let fList = features.map(f => `<li><i class="fas fa-check" style="color:var(--primary-color);"></i> ${f}</li>`).join('');
+            let fList = features.map(f => `<li><i class="fas fa-check-circle" style="color:var(--primary-color);"></i> ${f}</li>`).join('');
             
             content.innerHTML = `
-                <h2 style="color: var(--primary-color); margin-bottom: 10px;">${name}</h2>
-                <p style="font-size: 14px; color: var(--text-muted);">${desc}</p>
-                <ul style="list-style:none; margin: 15px 0; font-size:13px;">${fList}</ul>
-                <form action="https://formspree.io/f/mwlevprv" method="POST" onsubmit="handleModalServiceSubmit(event)">
-                    <input type="hidden" name="servico" value="${name}">
-                    <div class="modal-form-group"><label>Seu Nome / Empresa</label><input type="text" name="nome" required></div>
-                    <div class="modal-form-group"><label>Telemóvel</label><input type="tel" name="telemovel" required></div>
-                    <button type="submit" style="width:100%; padding:10px; background-color:var(--primary-color); color:#fff; border:none; border-radius:6px; font-weight:bold;">Solicitar Orçamento</button>
+                <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 15px; margin-bottom: 20px;">
+                    <h2 style="color: var(--primary-color); font-size: 1.5rem;"><i class="fas fa-file-contract"></i> ${name}</h2>
+                    <p style="font-size: 14px; color: var(--text-muted); margin-top: 5px;">${desc}</p>
+                </div>
+
+                <div style="background: rgba(2, 132, 199, 0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <strong style="font-size: 13px; color: var(--primary-color); text-transform: uppercase;">Destaques do Serviço:</strong>
+                    <ul style="list-style:none; margin-top: 8px; font-size:13px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px;">${fList}</ul>
+                </div>
+
+                <form action="https://formspree.io/f/mwlevprv" method="POST" enctype="multipart/form-data" onsubmit="handleModalServiceSubmit(event)">
+                    <input type="hidden" name="servico_solicitado" value="${name}">
+                    
+                    <h3 style="font-size: 15px; margin-bottom: 15px; color: var(--text-color); border-left: 3px solid var(--primary-color); padding-left: 8px;">Formulário de Pedido de Serviço / Orçamento</h3>
+
+                    <div class="modal-form-grid">
+                        <div class="modal-form-group">
+                            <label><i class="fas fa-user"></i> Nome Completo / Empresa *</label>
+                            <input type="text" name="nome_cliente" placeholder="Ex: Manuel Silva ou Empresa X" required>
+                        </div>
+                        <div class="modal-form-group">
+                            <label><i class="fas fa-id-card"></i> NIF / BI (Opcional)</label>
+                            <input type="text" name="nif_cliente" placeholder="NIF para emissão da factura">
+                        </div>
+                        <div class="modal-form-group">
+                            <label><i class="fas fa-envelope"></i> E-mail de Contacto *</label>
+                            <input type="email" name="email_cliente" placeholder="exemplo@email.com" required>
+                        </div>
+                        <div class="modal-form-group">
+                            <label><i class="fas fa-phone"></i> Telemóvel / WhatsApp *</label>
+                            <input type="tel" name="telefone_cliente" placeholder="+244 9XX XXX XXX" required>
+                        </div>
+                        <div class="modal-form-group">
+                            <label><i class="fas fa-map-marker-alt"></i> Local de Execução *</label>
+                            <select name="local_execucao" required>
+                                <option value="Ondjiva">Ondjiva</option>
+                                <option value="Namacunde / Santa Clara">Namacunde / Santa Clara</option>
+                                <option value="Outra localização no Cunene">Outra localização no Cunene</option>
+                                <option value="Outra Província de Angola">Outra Província de Angola</option>
+                                <option value="Namíbia">Namíbia</option>
+                            </select>
+                        </div>
+                        <div class="modal-form-group">
+                            <label><i class="fas fa-calendar-alt"></i> Data Pretendida de Início</label>
+                            <input type="date" name="data_pretendida">
+                        </div>
+                        <div class="modal-form-group">
+                            <label><i class="fas fa-money-bill-wave"></i> Orçamento Estimado / Teto (AOA)</label>
+                            <input type="text" name="orcamento_estimado" placeholder="Ex: 150.000 AOA">
+                        </div>
+                        <div class="modal-form-group">
+                            <label><i class="fas fa-flag"></i> Urgência do Pedido</label>
+                            <select name="nivel_urgencia">
+                                <option value="Normal">Normal (Até 3 dias)</option>
+                                <option value="Urgente">Urgente (Até 24h)</option>
+                                <option value="Imediata">Imediata / Prioritária</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="modal-form-group full-width">
+                        <label><i class="fas fa-paperclip"></i> Anexar Documentos / Caderno de Encargos / Imagens (PDF, PNG, JPG)</label>
+                        <input type="file" name="anexo_ficheiro" accept=".pdf,image/*">
+                        <span style="font-size: 11px; color: var(--text-muted);">Pode anexar listas de compras, fotos do local, termos de referência ou documentos de especificação.</span>
+                    </div>
+
+                    <div class="modal-form-group full-width">
+                        <label><i class="fas fa-align-left"></i> Especificações Detalhadas do Pedido *</label>
+                        <textarea name="detalhes_pedido" rows="4" placeholder="Descreva pormenorizadamente o que necessita (quantidades, dimensões, horários, necessidades específicas)..." required></textarea>
+                    </div>
+
+                    <button type="submit" style="width:100%; padding:12px; background-color:var(--primary-color); color:#fff; border:none; border-radius:6px; font-weight:bold; font-size:15px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;">
+                        <i class="fas fa-paper-plane"></i> Submeter Pedido de Serviço
+                    </button>
                 </form>
             `;
             modal.classList.add('active');
@@ -932,7 +1013,7 @@
 
         function handleModalServiceSubmit(e) {
             e.preventDefault();
-            showToast('Pedido Enviado', 'Entraremos em contacto brevemente.');
+            showToast('Pedido Registado', 'Recebemos o seu pedido detalhado com sucesso. Entraremos em contacto brevemente.');
             closeServiceModal();
         }
 
@@ -992,4 +1073,4 @@
         });
     </script>
 </body>
-</html>
+</html>      
