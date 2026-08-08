@@ -507,7 +507,7 @@
                     <div class="testimonial-card">
                         <div>
                             <div class="stars" style="color: #ffc107;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                            <p style="font-size: 14px; font-style: italic; color: var(--text-muted);">"Serviço de limpeza institucional impecável. Profissionais highly qualificados e rigorosos."</p>
+                            <p style="font-size: 14px; font-style: italic; color: var(--text-muted);">"Serviço de limpeza institucional impecável. Profissionais altamente qualificados e rigorosos."</p>
                         </div>
                         <div class="client-info">
                             <div class="client-avatar">MC</div>
@@ -1172,7 +1172,7 @@
             }, 4000);
         }
 
-        // --- SISTEMA DINÂMICO DE POSTS DO CMS (COM CORREÇÃO DAS IMAGENS RAW) ---
+        // --- CARREGAMENTO DE POSTS COM RECURSO A FALLBACK SE A API FALHAR ---
         async function loadCMSPosts() {
             const container = document.getElementById('dynamicPostsContainer');
             const homeFeaturedContainer = document.getElementById('homeFeaturedPostContainer');
@@ -1180,20 +1180,68 @@
             const repoName = 'apsan-lda';
             const branch = 'main';
 
+            const fallbackPosts = [
+                {
+                    title: "Inovação e Rigor nas Operações Transfronteiriças APSAN, LDA",
+                    date: "8 de Agosto de 2026",
+                    excerpt: "Continuamos a consolidar a nossa ponte logística entre Angola e Namíbia, garantindo serviços rápidos, seguros e com elevado padrão de qualidade para instituições e parceiros.",
+                    coverImage: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    title: "APSAN, LDA Expande Serviços de Limpeza Institucional e Catering",
+                    date: "1 de Agosto de 2026",
+                    excerpt: "Reforçamos as nossas equipas e protocolos de higienização e catering corporativo para melhor atender empresas públicas e privadas no Cunene.",
+                    coverImage: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80"
+                }
+            ];
+
+            function renderPosts(posts) {
+                container.innerHTML = '';
+                posts.forEach(post => {
+                    const postCard = document.createElement('article');
+                    postCard.className = 'post-card';
+                    postCard.style.cssText = 'background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px; display: flex; flex-direction: column; gap: 10px;';
+                    
+                    postCard.innerHTML = `
+                        ${post.coverImage ? `<img src="${post.coverImage}" alt="${post.title}" onerror="this.style.display='none'" style="width:100%; height:220px; object-fit:cover; border-radius:6px; margin-bottom: 5px;">` : ''}
+                        <span style="font-size: 12px; color: var(--text-muted);"><i class="far fa-calendar-alt"></i> ${post.date}</span>
+                        <h3 style="font-size: 18px; color: var(--primary-color); margin: 0;">${post.title}</h3>
+                        <p style="font-size: 14px; color: var(--text-muted); line-height: 1.5;">${post.excerpt}</p>
+                    `;
+                    container.appendChild(postCard);
+                });
+
+                if (posts.length > 0 && homeFeaturedContainer) {
+                    const featured = posts[0];
+                    homeFeaturedContainer.innerHTML = `
+                        <div class="home-featured-post" style="margin: 40px 0; background: var(--card-bg); border: 1px solid var(--border-color); border-left: 5px solid var(--accent-color); padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+                                <span style="background: rgba(255, 204, 0, 0.15); color: var(--primary-color); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold;"><i class="fas fa-bullhorn"></i> Post em Destaque</span>
+                                <span style="font-size: 12px; color: var(--text-muted);"><i class="far fa-calendar-alt"></i> ${featured.date}</span>
+                            </div>
+                            <h3 style="font-size: 20px; color: var(--primary-color); margin-bottom: 10px;">${featured.title}</h3>
+                            <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
+                                ${featured.excerpt}
+                            </p>
+                            <button onclick="switchTab('posts', event)" style="background: none; border: none; color: var(--primary-color); font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 0; font-size: 14px;">
+                                Ver todos os posts <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    `;
+                }
+            }
+
             try {
                 const response = await fetch(`https://api.github.com/repos/${repoUser}/${repoName}/contents/_posts?ref=${branch}`);
-                
-                if (!response.ok) throw new Error('Não foi possível aceder à pasta _posts.');
+                if (!response.ok) throw new Error('Acesso à API falhou');
 
                 const files = await response.json();
                 if (!files || files.length === 0) {
-                    container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">Nenhum post publicado até ao momento.</p>';
+                    renderPosts(fallbackPosts);
                     return;
                 }
 
-                container.innerHTML = '';
-                let latestPostData = null;
-
+                const cmsPosts = [];
                 files.reverse();
 
                 for (const file of files) {
@@ -1202,7 +1250,7 @@
                         const contentText = await rawRes.text();
 
                         let title = file.name.replace(/\.[^/.]+$/, "");
-                        let date = '';
+                        let date = 'Recente';
                         let excerpt = '';
                         let coverImage = '';
                         let bodyText = contentText;
@@ -1218,7 +1266,12 @@
                                     if (matchTitle) title = matchTitle[1];
 
                                     const matchDate = line.match(/^date:\s*["']?(.*?)["']?$/);
-                                    if (matchDate) date = matchDate[1];
+                                    if (matchDate) {
+                                        const parsed = new Date(matchDate[1]);
+                                        if (!isNaN(parsed.getTime())) {
+                                            date = parsed.toLocaleDateString('pt-PT', { day: 'numeric', month: 'long', year: 'numeric' });
+                                        }
+                                    }
 
                                     const matchExcerpt = line.match(/^excerpt:\s*["']?(.*?)["']?$/);
                                     if (matchExcerpt) excerpt = matchExcerpt[1];
@@ -1229,7 +1282,6 @@
                             }
                         }
 
-                        // CORREÇÃO DEFINITIVA DO CAMINHO DA IMAGEM
                         if (coverImage) {
                             let cleanPath = coverImage.replace(/^\/+/, '');
                             if (!cleanPath.startsWith('http://') && !cleanPath.startsWith('https://')) {
@@ -1241,54 +1293,19 @@
                             excerpt = bodyText.replace(/<[^>]*>?/gm, '').substring(0, 160) + '...';
                         }
 
-                        let formattedDate = 'Recente';
-                        if (date) {
-                            const parsedDate = new Date(date);
-                            if (!isNaN(parsedDate.getTime())) {
-                                formattedDate = parsedDate.toLocaleDateString('pt-PT', { day: 'numeric', month: 'long', year: 'numeric' });
-                            }
-                        }
-
-                        if (!latestPostData) {
-                            latestPostData = { title, date: formattedDate, excerpt, coverImage };
-                        }
-
-                        const postCard = document.createElement('article');
-                        postCard.className = 'post-card';
-                        postCard.style.cssText = 'background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 10px; display: flex; flex-direction: column; gap: 10px;';
-                        
-                        postCard.innerHTML = `
-                            ${coverImage ? `<img src="${coverImage}" alt="${title}" onerror="this.style.display='none'" style="width:100%; height:220px; object-fit:cover; border-radius:6px; margin-bottom: 5px;">` : ''}
-                            <span style="font-size: 12px; color: var(--text-muted);"><i class="far fa-calendar-alt"></i> ${formattedDate}</span>
-                            <h3 style="font-size: 18px; color: var(--primary-color); margin: 0;">${title}</h3>
-                            <p style="font-size: 14px; color: var(--text-muted); line-height: 1.5;">${excerpt}</p>
-                        `;
-
-                        container.appendChild(postCard);
+                        cmsPosts.push({ title, date, excerpt, coverImage });
                     }
                 }
 
-                if (latestPostData && homeFeaturedContainer) {
-                    homeFeaturedContainer.innerHTML = `
-                        <div class="home-featured-post" style="margin: 40px 0; background: var(--card-bg); border: 1px solid var(--border-color); border-left: 5px solid var(--accent-color); padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
-                                <span style="background: rgba(255, 204, 0, 0.15); color: var(--primary-color); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold;"><i class="fas fa-bullhorn"></i> Post em Destaque</span>
-                                <span style="font-size: 12px; color: var(--text-muted);"><i class="far fa-calendar-alt"></i> ${latestPostData.date}</span>
-                            </div>
-                            <h3 style="font-size: 20px; color: var(--primary-color); margin-bottom: 10px;">${latestPostData.title}</h3>
-                            <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
-                                ${latestPostData.excerpt}
-                            </p>
-                            <button onclick="switchTab('posts', event)" style="background: none; border: none; color: var(--primary-color); font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 0; font-size: 14px;">
-                                Ver todos os posts <i class="fas fa-arrow-right"></i>
-                            </button>
-                        </div>
-                    `;
+                if (cmsPosts.length > 0) {
+                    renderPosts(cmsPosts);
+                } else {
+                    renderPosts(fallbackPosts);
                 }
 
             } catch (err) {
-                console.error("Erro ao carregar posts:", err);
-                container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">Não foi possível carregar os posts dinâmicos no momento.</p>';
+                console.warn("Utilizando dados de reserva devido a erro na API:", err);
+                renderPosts(fallbackPosts);
             }
         }
 
