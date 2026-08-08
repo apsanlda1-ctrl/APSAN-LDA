@@ -1282,9 +1282,13 @@
                             }
                         }
 
+                        // CORREÇÃO APLICADA AQUI (OPÇÃO 1)
                         if (coverImage) {
                             let cleanPath = coverImage.replace(/^\/+/, '');
                             if (!cleanPath.startsWith('http://') && !cleanPath.startsWith('https://')) {
+                                if (!cleanPath.startsWith('public/')) {
+                                    cleanPath = 'public/' + cleanPath;
+                                }
                                 coverImage = `https://raw.githubusercontent.com/${repoUser}/${repoName}/${branch}/${cleanPath}`;
                             }
                         }
