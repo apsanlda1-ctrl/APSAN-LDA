@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>APSAN, LDA - Soluções Integradas</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -122,10 +121,10 @@
         }
         .mobile-overlay.active { display: block; }
 
-        /* HERO LAYOUT & CARROSSEL SLIDER DINÂMICO */
+        /* HERO LAYOUT & CARROSSEL SLIDER - AJUSTE DE DISTÂNCIA DO CABEÇALHO */
         .hero-layout-section {
             max-width: 1200px;
-            margin: 40px auto 20px auto;
+            margin: 15px auto 20px auto; /* Reduzido de 40px para 15px conforme o 2º print */
             padding: 0 20px;
         }
         .hero-grid {
@@ -178,7 +177,7 @@
             gap: 10px;
         }
         
-        /* INDICADORES (DOTS) DO SLIDER */
+        /* INDICADORES DO SLIDER */
         .slider-dots {
             position: absolute;
             bottom: 12px;
@@ -415,7 +414,7 @@
         .assistant-footer input { flex: 1; padding: 8px 12px; border: 1px solid var(--border-color); border-radius: 20px; outline: none; background-color: var(--bg-color); color: var(--text-color); font-size: 12px; }
         .assistant-footer button { background-color: var(--primary-color); color: #fff; border: none; padding: 8px 12px; border-radius: 20px; cursor: pointer; }
 
-        /* TOAST */
+        /* TOAST NOTIFICATION */
         #toastNotification {
             position: fixed; bottom: 30px; right: 30px; background: #28a745; color: #fff; padding: 15px 25px;
             border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 12px;
@@ -588,19 +587,19 @@
                 <!-- CARROSSEL / SLIDER DE FOTOS DOS SERVIÇOS -->
                 <div class="hero-slider-container" id="heroSlider">
                     <div class="hero-slide active">
-                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80" alt="Instalações Corporativas & Limpeza">
-                        <div class="hero-slide-caption">
-                            <i class="fas fa-broom" style="color: #38bdf8;"></i> Limpeza Institucional & Catering
-                        </div>
-                    </div>
-                    
-                    <div class="hero-slide">
                         <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1000&q=80" alt="Logística Transfronteiriça Angola e Namíbia">
                         <div class="hero-slide-caption">
                             <i class="fas fa-truck-loading" style="color: #38bdf8;"></i> Logística & Compras Angola-Namíbia
                         </div>
                     </div>
 
+                    <div class="hero-slide">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80" alt="Instalações Corporativas & Limpeza">
+                        <div class="hero-slide-caption">
+                            <i class="fas fa-broom" style="color: #38bdf8;"></i> Limpeza Institucional & Catering
+                        </div>
+                    </div>
+                    
                     <div class="hero-slide">
                         <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1000&q=80" alt="Sistemas, Redes e Desenvolvedores">
                         <div class="hero-slide-caption">
@@ -609,7 +608,7 @@
                     </div>
 
                     <div class="hero-slide">
-                        <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1000&q=80" alt="Aluguer de Carro Hyundai Elantra Preto">
+                        <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1000&q=80" alt="Aluguer de Carro">
                         <div class="hero-slide-caption">
                             <i class="fas fa-car" style="color: #38bdf8;"></i> Frota Transfronteiriça & Aluguer de Carros
                         </div>
@@ -679,7 +678,7 @@
                 </div>
             </div>
 
-            <!-- SECÇÃO DE POSTS / NOTÍCIAS FIXA E VISÍVEL -->
+            <!-- SECÇÃO DE POSTS / NOTÍCIAS VISÍVEL -->
             <div id="homeFeaturedPostContainer" style="margin: 30px 0;">
                 <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);">
                     <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" style="width:100%; max-height:350px; object-fit:cover;" alt="Operações APSAN">
@@ -873,7 +872,7 @@
         </div>
     </section>
 
-    <!-- FAQ (COM AS ATUALIZAÇÕES SOLICITADAS) -->
+    <!-- FAQ -->
     <section id="faq" class="content-section" style="padding: 40px 20px; max-width: 900px; margin: 0 auto;">
         <h2>Perguntas Frequentes (FAQ)</h2>
         <p style="margin-top: 8px; font-size: 14px; color: var(--text-muted); margin-bottom: 25px;">Encontre respostas rápidas sobre a nossa atuação, serviços, logística e faturação.</p>
@@ -894,7 +893,6 @@
                 <div class="faq-answer">Cuidamos de todo o processo: desde a cotação de produtos ou equipamentos no mercado namibiano, pagamento, recolha e despacho alfandegário, até à entrega direta no seu endereço em Angola.</div>
             </div>
 
-            <!-- PERGUNTA 4 ATUALIZADA: SEM MENÇÃO DE MARCA OU PARÂMETROS DE CIRCULAÇÃO -->
             <div class="faq-card" onclick="toggleFaq(this)">
                 <h4><span>4. Quais são as condições para o aluguer de viaturas corporativas?</span> <i class="fas fa-chevron-down"></i></h4>
                 <div class="faq-answer">Oferecemos serviços de aluguer executivo e operacional com opção de contratação com ou sem motorista profissional. As nossas viaturas contam com cobertura de seguro, plano de manutenção preventiva atualizado e toda a documentação legal devidamente regularizada.</div>
@@ -935,7 +933,6 @@
                 <div class="faq-answer">Tratamos todas as informações operacionais, corporativas e pessoais ao abrigo de rígidos acordos de confidencialidade (NDA), garantindo total sigilo em contratos de software, logística e documentação traduzida.</div>
             </div>
 
-            <!-- PERGUNTA 12 ATUALIZADA: NÚMERO DO WHATSAPP +244944403093 -->
             <div class="faq-card" onclick="toggleFaq(this)">
                 <h4><span>12. Como posso acompanhar o estado de uma encomenda ou serviço em curso?</span> <i class="fas fa-chevron-down"></i></h4>
                 <div class="faq-answer">Pode aceder à Área do Cliente no nosso portal ou contactar diretamente o seu gestor de conta através do nosso canal de suporte rápido no WhatsApp pelo número <strong>+244 944 403 093</strong>.</div>
@@ -943,7 +940,7 @@
         </div>
     </section>
 
-    <!-- CONTACTOS AMPLIADOS -->
+    <!-- CONTACTOS -->
     <section id="contact" class="content-section" style="padding: 40px 20px; max-width: 1200px; margin: 0 auto;">
         <h2>Contacte-nos</h2>
         <p style="margin-top: 8px; font-size: 14px; color: var(--text-muted); margin-bottom: 25px;">Estamos à disposição para atender o seu pedido corporativo ou individual.</p>
@@ -1046,7 +1043,7 @@
         </div>
     </div>
 
-    <!-- RODAPÉ REESTRUTURADO E ATUALIZADO (SEM MENUS) -->
+    <!-- RODAPÉ REESTRUTURADO -->
     <footer class="footer-clean-redesigned">
         <div class="footer-clean-grid">
             <!-- COLUNA 1: MARCA & SOBRE -->
@@ -1096,7 +1093,6 @@
             </div>
         </div>
 
-        <!-- BARRA INFERIOR COM O TEXTO DE COPYRIGHT SOLICITADO -->
         <div class="footer-copyright-bottom">
             2026@Todos os direitos reservados
         </div>
@@ -1174,7 +1170,7 @@
             }
         });
 
-        // ABRIR/FECHAR MENU MOBILE
+        // MENU MOBILE
         function toggleMobileMenu() {
             const nav = document.getElementById('navLinks');
             const overlay = document.getElementById('mobileOverlay');
