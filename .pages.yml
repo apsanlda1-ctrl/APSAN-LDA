@@ -1,0 +1,23 @@
+backend:
+  name: github
+  repo: apsanlda1-ctrl/APSAN-LDA
+  branch: main
+
+collections:
+  - name: posts
+    label: Posts
+    folder: content/posts
+    create: true
+    fields:
+      - name: title
+        label: Title
+        widget: string
+      - name: date
+        label: Date
+        widget: datetime
+      - name: image
+        label: Image
+        widget: image
+      - name: body
+        label: Body
+        widget: markdown
