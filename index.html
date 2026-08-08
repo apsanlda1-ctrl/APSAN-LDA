@@ -108,7 +108,21 @@
             cursor: pointer;
             align-items: center;
             justify-content: center;
+            z-index: 1002;
         }
+
+        /* OVERLAY E MENU LATERAL DIREITO */
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+        .mobile-overlay.active { display: block; }
 
         /* HERO LAYOUT NOVO (PRINT) */
         .hero-layout-section {
@@ -354,20 +368,35 @@
         @media (max-width: 900px) {
             .hero-grid, .featured-cards-grid { grid-template-columns: 1fr; }
             .menu-toggle-mobile { display: flex; }
+            
+            /* MENU LATERAL DIREITO SLIDE-IN */
             .nav-links-clean {
-                display: none;
-                position: absolute;
-                top: 70px;
-                left: 0;
-                width: 100%;
+                position: fixed;
+                top: 0;
+                right: -280px;
+                width: 260px;
+                height: 100vh;
                 background: var(--nav-bg);
                 flex-direction: column;
-                padding: 20px;
-                border-bottom: 1px solid var(--border-color);
-                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                padding: 80px 20px 20px 20px;
+                border-left: 1px solid var(--border-color);
+                box-shadow: -10px 0 25px rgba(0,0,0,0.15);
+                transition: right 0.3s ease-in-out;
+                z-index: 1001;
+                align-items: flex-start;
             }
             .nav-links-clean.mobile-active {
-                display: flex;
+                right: 0;
+            }
+            .nav-links-clean li {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+            .nav-links-clean a {
+                display: block;
+                width: 100%;
+                padding: 10px 0;
+                font-size: 16px;
             }
         }
     </style>
@@ -381,6 +410,8 @@
             <p id="toastMessage" style="font-size: 13px; margin: 0;">Mensagem enviada.</p>
         </div>
     </div>
+
+    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
 
     <!-- CABEÇALHO LIMPO -->
     <header class="header-clean">
@@ -476,10 +507,17 @@
                 </div>
             </div>
 
-            <!-- POSTS DO BLOG / CMS DENTRO DA HOME -->
-            <div id="homeFeaturedPostContainer">
-                <div style="text-align: center; padding: 40px 0; color: var(--text-muted);">
-                    <i class="fas fa-spinner fa-spin"></i> A carregar publicação completa...
+            <!-- SECÇÃO DE POSTS / NOTÍCIAS FIXA E VISÍVEL -->
+            <div id="homeFeaturedPostContainer" style="margin: 30px 0;">
+                <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);">
+                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" style="width:100%; max-height:350px; object-fit:cover;" alt="Operações APSAN">
+                    <div style="padding: 25px;">
+                        <span style="font-size: 12px; color: var(--primary-color); font-weight: bold;">Publicação em Destaque • 8 de Agosto de 2026</span>
+                        <h3 style="color: var(--text-color); margin: 10px 0; font-size: 1.4rem;">How Do I Develop My Portfolio Website & Blog</h3>
+                        <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
+                            Continuamos a consolidar a nossa ponte logística e tecnológica entre Angola e Namíbia, garantindo serviços rápidos, seguros e com elevado padrão de qualidade institucional.
+                        </p>
+                    </div>
                 </div>
             </div>
 
@@ -777,26 +815,23 @@
         <p style="text-align: center; margin-top: 20px; font-size: 13px; color: #94a3b8;">&copy; 2026 APSAN, LDA. Todos os direitos reservados.</p>
     </footer>
 
-    <!-- SCRIPTS INTEGRADOS COM HISTÓRICO RESPONSIVO -->
+    <!-- SCRIPTS INTEGRADOS -->
     <script>
-        // FUNÇÃO DE MUDANÇA DE ABA COM HISTÓRICO DO NAVEGADOR
+        // MUDANÇA DE ABA E HISTÓRICO
         function switchTab(sectionId, event, pushToHistory = true) {
             if (event) event.preventDefault();
 
-            // Ocultar todas as secções e ativar a selecionada
             document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active-section'));
             const target = document.getElementById(sectionId);
             if(target) target.classList.add('active-section');
 
-            // Atualizar links de navegação ativos
             document.querySelectorAll('.nav-links-clean a').forEach(link => link.classList.remove('active'));
             const activeLink = document.querySelector(`.nav-links-clean a[href="#${sectionId}"]`);
             if(activeLink) activeLink.classList.add('active');
 
-            // Fechar menu de telemóvel se estiver aberto
-            document.getElementById('navLinks').classList.remove('mobile-active');
+            // Fechar menu de telemóvel e overlay se estiverem abertos
+            closeMobileMenu();
 
-            // Registar navegação no histórico do navegador (botão voltar do telemóvel)
             if (pushToHistory && window.location.hash !== `#${sectionId}`) {
                 history.pushState({ sectionId: sectionId }, '', `#${sectionId}`);
             }
@@ -804,8 +839,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // ESCUTAR O BOTÃO VOLTAR DO TELEMÓVEL
-        window.addEventListener('popstate', function(event) {
+        window.addEventListener('popstate', function() {
             const hashSection = window.location.hash.replace('#', '');
             if (hashSection) {
                 switchTab(hashSection, null, false);
@@ -814,17 +848,30 @@
             }
         });
 
-        // ABRIR/FECHAR MENU MOBILE
+        // ABRIR/FECHAR MENU MOBILE LATERAL
         function toggleMobileMenu() {
             const nav = document.getElementById('navLinks');
+            const overlay = document.getElementById('mobileOverlay');
             const icon = document.getElementById('menuIcon');
-            nav.classList.toggle('mobile-active');
             
+            nav.classList.toggle('mobile-active');
+            overlay.classList.toggle('active');
+
             if(nav.classList.contains('mobile-active')) {
                 icon.className = 'fas fa-times';
             } else {
                 icon.className = 'fas fa-ellipsis-v';
             }
+        }
+
+        function closeMobileMenu() {
+            const nav = document.getElementById('navLinks');
+            const overlay = document.getElementById('mobileOverlay');
+            const icon = document.getElementById('menuIcon');
+            
+            if (nav) nav.classList.remove('mobile-active');
+            if (overlay) overlay.classList.remove('active');
+            if (icon) icon.className = 'fas fa-ellipsis-v';
         }
 
         function toggleTheme() {
@@ -839,9 +886,7 @@
             }
         }
 
-        function toggleFaq(card) {
-            card.classList.toggle('active');
-        }
+        function toggleFaq(card) { card.classList.toggle('active'); }
 
         function showToast(title, message) {
             const toast = document.getElementById('toastNotification');
@@ -849,69 +894,6 @@
             document.getElementById('toastMessage').textContent = message;
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 4000);
-        }
-
-        function togglePostExcerpt(index) {
-            const shortEl = document.getElementById(`post-short-${index}`);
-            const fullEl = document.getElementById(`post-full-${index}`);
-            const btn = document.getElementById(`btn-readmore-${index}`);
-            if (shortEl.style.display === 'none') {
-                shortEl.style.display = 'inline';
-                fullEl.style.display = 'none';
-                btn.innerHTML = 'Ver mais <i class="fas fa-chevron-down"></i>';
-            } else {
-                shortEl.style.display = 'none';
-                fullEl.style.display = 'inline';
-                btn.innerHTML = 'Ver menos <i class="fas fa-chevron-up"></i>';
-            }
-        }
-
-        // CARREGAR POSTS DO CMS/GITHUB
-        async function loadCMSPosts() {
-            const container = document.getElementById('homeFeaturedPostContainer');
-            const repoUser = 'apsanlda1-ctrl';
-            const repoName = 'apsan-lda';
-            const branch = 'main';
-
-            const fallback = [{
-                title: "Inovação e Rigor nas Operações Transfronteiriças APSAN, LDA",
-                date: "8 de Agosto de 2026",
-                excerpt: "Continuamos a consolidar a nossa ponte logística entre Angola e Namíbia, garantindo serviços rápidos, seguros e com elevado padrão de qualidade.",
-                coverImage: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80"
-            }];
-
-            function render(posts) {
-                if (!container) return;
-                let html = '';
-                posts.forEach((post, i) => {
-                    const isLong = post.excerpt.length > 180;
-                    const shortText = isLong ? post.excerpt.substring(0, 180) + '...' : post.excerpt;
-
-                    html += `
-                        <div style="margin: 30px 0; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden;">
-                            ${post.coverImage ? `<img src="${post.coverImage}" style="width:100%; max-height:350px; object-fit:cover;">` : ''}
-                            <div style="padding: 20px;">
-                                <span style="font-size: 12px; color: var(--text-muted);">${post.date}</span>
-                                <h3 style="color: var(--primary-color); margin: 8px 0;">${post.title}</h3>
-                                <p style="font-size: 14px; color: var(--text-muted);">
-                                    ${isLong ? `<span id="post-short-${i}">${shortText}</span><span id="post-full-${i}" style="display:none;">${post.excerpt}</span>` : post.excerpt}
-                                </p>
-                                ${isLong ? `<button class="read-more-btn" id="btn-readmore-${i}" onclick="togglePostExcerpt(${i})">Ver mais <i class="fas fa-chevron-down"></i></button>` : ''}
-                            </div>
-                        </div>
-                    `;
-                });
-                container.innerHTML = html;
-            }
-
-            try {
-                const res = await fetch(`https://api.github.com/repos/${repoUser}/${repoName}/contents/_posts?ref=${branch}`);
-                if (!res.ok) throw new Error();
-                const files = await res.json();
-                render(fallback);
-            } catch {
-                render(fallback);
-            }
         }
 
         // MODAL DE SERVIÇOS
@@ -1003,8 +985,6 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            loadCMSPosts();
-            // Verificar hash inicial ao carregar a página
             const initialHash = window.location.hash.replace('#', '');
             if (initialHash) {
                 switchTab(initialHash, null, false);
