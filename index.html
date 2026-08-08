@@ -428,24 +428,24 @@
         .client-info { display: flex; align-items: center; gap: 12px; margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 12px; }
         .client-avatar { width: 36px; height: 36px; border-radius: 50%; background-color: var(--primary-color); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; }
 
-        /* RODAPÉ MODERNO E ESTRUTURADO */
-        .footer-modern {
+        /* RODAPÉ LIMPO E MODERNO (SEM NAVEGAÇÃO) */
+        .footer-clean-redesigned {
             background-color: #0b1329;
             color: #f1f5f9;
-            padding: 60px 20px 0 20px;
+            padding: 50px 20px 20px 20px;
             margin-top: 60px;
             border-top: 4px solid var(--primary-color);
         }
-        .footer-grid-container {
+        .footer-clean-grid {
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 40px;
-            padding-bottom: 40px;
+            padding-bottom: 30px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .footer-col-brand h3 {
+        .footer-brand-info h3 {
             font-size: 1.5rem;
             color: #ffffff;
             font-weight: 800;
@@ -454,20 +454,20 @@
             align-items: center;
             gap: 10px;
         }
-        .footer-col-brand p {
+        .footer-brand-info p {
             font-size: 0.9rem;
             color: #94a3b8;
             line-height: 1.6;
             margin-bottom: 20px;
         }
-        .footer-col h4 {
+        .footer-column-title {
             color: #38bdf8;
             font-size: 1.1rem;
             margin-bottom: 20px;
             position: relative;
             padding-bottom: 8px;
         }
-        .footer-col h4::after {
+        .footer-column-title::after {
             content: '';
             position: absolute;
             bottom: 0;
@@ -477,25 +477,50 @@
             background: var(--primary-color);
             border-radius: 2px;
         }
-        .footer-links-list { list-style: none; }
-        .footer-links-list li { margin-bottom: 12px; }
-        .footer-links-list a {
-            color: #cbd5e1; text-decoration: none; font-size: 0.9rem; transition: color 0.2s, padding-left 0.2s; display: inline-flex; align-items: center; gap: 8px;
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px;
+            font-size: 0.9rem;
+            color: #cbd5e1;
         }
-        .footer-links-list a:hover { color: #38bdf8; padding-left: 5px; }
-        .footer-contact-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; font-size: 0.9rem; color: #cbd5e1; }
-        .footer-contact-item i { color: #38bdf8; margin-top: 3px; font-size: 1rem; width: 18px; }
-        .footer-social-icons { display: flex; gap: 12px; margin-top: 15px; }
+        .footer-contact-item i {
+            color: #38bdf8;
+            margin-top: 3px;
+            font-size: 1rem;
+            width: 18px;
+        }
+        .footer-social-icons {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
         .footer-social-btn {
-            width: 36px; height: 36px; background: rgba(255, 255, 255, 0.08); color: #fff; border-radius: 8px; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: background 0.2s, transform 0.2s;
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.2s;
         }
-        .footer-social-btn:hover { background: var(--primary-color); transform: translateY(-3px); }
-        .footer-bottom-bar {
-            max-width: 1200px; margin: 0 auto; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; font-size: 0.85rem; color: #64748b;
+        .footer-social-btn:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
         }
-        .footer-bottom-links { display: flex; gap: 20px; }
-        .footer-bottom-links a { color: #64748b; text-decoration: none; transition: color 0.2s; }
-        .footer-bottom-links a:hover { color: #94a3b8; }
+        .footer-copyright-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #94a3b8;
+            font-weight: 600;
+        }
 
         /* MEDIA QUERIES PARA TELEMÓVEL */
         @media (max-width: 900px) {
@@ -509,7 +534,6 @@
             .nav-links-clean.mobile-active { right: 0; }
             .nav-links-clean li { width: 100%; margin-bottom: 15px; }
             .nav-links-clean a { display: block; width: 100%; padding: 10px 0; font-size: 16px; }
-            .footer-bottom-bar { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
@@ -971,10 +995,11 @@
         </div>
     </div>
 
-    <!-- RODAPÉ MODERNO E BEM ESTRUTURADO -->
-    <footer class="footer-modern">
-        <div class="footer-grid-container">
-            <div class="footer-col-brand">
+    <!-- RODAPÉ REESTRUTURADO E ATUALIZADO (SEM MENUS) -->
+    <footer class="footer-clean-redesigned">
+        <div class="footer-clean-grid">
+            <!-- COLUNA 1: MARCA & SOBRE -->
+            <div class="footer-brand-info">
                 <h3><i class="fas fa-building" style="color: #38bdf8;"></i> APSAN, LDA</h3>
                 <p>Soluções Integradas, Qualidade Que Transforma! Prestação de serviços corporativos, soluções tecnológicas e suporte logístico de excelência entre Angola e Namíbia.</p>
                 <div class="footer-social-icons">
@@ -985,20 +1010,9 @@
                 </div>
             </div>
 
-            <div class="footer-col">
-                <h4>Navegação</h4>
-                <ul class="footer-links-list">
-                    <li><a href="#home" onclick="switchTab('home', event)"><i class="fas fa-chevron-right"></i> Início</a></li>
-                    <li><a href="#about" onclick="switchTab('about', event)"><i class="fas fa-chevron-right"></i> Quem Somos</a></li>
-                    <li><a href="#services" onclick="switchTab('services', event)"><i class="fas fa-chevron-right"></i> Serviços Principais</a></li>
-                    <li><a href="#extras" onclick="switchTab('extras', event)"><i class="fas fa-chevron-right"></i> Serviços Extras</a></li>
-                    <li><a href="#parcerias" onclick="switchTab('parcerias', event)"><i class="fas fa-chevron-right"></i> Parcerias</a></li>
-                    <li><a href="#portal" onclick="switchTab('portal', event)"><i class="fas fa-chevron-right"></i> Dados da Empresa</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-col">
-                <h4>Contactos Diretos</h4>
+            <!-- COLUNA 2: DADOS DE CONTACTO -->
+            <div>
+                <h4 class="footer-column-title">Linhas Diretas</h4>
                 <div class="footer-contact-item">
                     <i class="fas fa-phone-alt"></i>
                     <div>
@@ -1011,14 +1025,11 @@
                     <i class="fas fa-envelope"></i>
                     <div>info@apsanlda.com</div>
                 </div>
-                <div class="footer-contact-item">
-                    <i class="fas fa-clock"></i>
-                    <div>Segunda a Sábado: 08h00 - 18h00</div>
-                </div>
             </div>
 
-            <div class="footer-col">
-                <h4>Sede & Informação Fiscal</h4>
+            <!-- COLUNA 3: DADOS FISCAIS & LOCALIZAÇÃO -->
+            <div>
+                <h4 class="footer-column-title">Sede & Informação Fiscal</h4>
                 <div class="footer-contact-item">
                     <i class="fas fa-file-invoice"></i>
                     <div><strong>NIF:</strong> 5002085011</div>
@@ -1034,13 +1045,9 @@
             </div>
         </div>
 
-        <div class="footer-bottom-bar">
-            <div>&copy; 2026 APSAN, LDA. Todos os direitos reservados.</div>
-            <div class="footer-bottom-links">
-                <a href="#portal" onclick="switchTab('portal', event)">Empresa Registada</a>
-                <a href="#" onclick="openDenunciaModal()">Canal de Denúncias</a>
-                <a href="#faq" onclick="switchTab('faq', event)">FAQ</a>
-            </div>
+        <!-- BARRA INFERIOR COM O TEXTO DE COPYRIGHT SOLICITADO -->
+        <div class="footer-copyright-bottom">
+            2026@Todos os direitos reservados
         </div>
     </footer>
 
@@ -1050,7 +1057,7 @@
         let currentSlideIndex = 0;
         const slides = document.querySelectorAll('.hero-slide');
         const dots = document.querySelectorAll('.slider-dot');
-        let slideInterval = setInterval(nextSlide, 4000); // Troca a cada 4 segundos
+        let slideInterval = setInterval(nextSlide, 4000);
 
         function showSlide(index) {
             slides.forEach((slide, i) => {
@@ -1080,7 +1087,6 @@
             slideInterval = setInterval(nextSlide, 4000);
         }
 
-        // Pausa o carrossel quando o utilizador passa o rato por cima
         const sliderContainer = document.getElementById('heroSlider');
         if (sliderContainer) {
             sliderContainer.addEventListener('mouseenter', () => clearInterval(slideInterval));
