@@ -95,7 +95,6 @@
         }
         .theme-toggle-btn:hover { transform: rotate(180deg); }
 
-        /* BOTÃO DE MENU PARA TELEMÓVEL */
         .menu-toggle-mobile {
             display: none;
             background: none;
@@ -111,7 +110,6 @@
             z-index: 1002;
         }
 
-        /* OVERLAY E MENU LATERAL DIREITO */
         .mobile-overlay {
             display: none;
             position: fixed;
@@ -124,7 +122,7 @@
         }
         .mobile-overlay.active { display: block; }
 
-        /* HERO LAYOUT */
+        /* HERO LAYOUT & CARROSSEL SLIDER DINÂMICO */
         .hero-layout-section {
             max-width: 1200px;
             margin: 40px auto 20px auto;
@@ -136,13 +134,72 @@
             gap: 40px;
             align-items: center;
         }
-        .hero-banner-image {
+
+        /* CONTAINER DO SLIDER */
+        .hero-slider-container {
+            position: relative;
             width: 100%;
             height: 380px;
             border-radius: 20px;
-            object-fit: cover;
+            overflow: hidden;
             box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
         }
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            pointer-events: none;
+        }
+        .hero-slide.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .hero-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .hero-slide-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 20px;
+            background: linear-gradient(transparent, rgba(15, 23, 42, 0.85));
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* INDICADORES (DOTS) DO SLIDER */
+        .slider-dots {
+            position: absolute;
+            bottom: 12px;
+            right: 20px;
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+        .slider-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+        .slider-dot.active {
+            background: #38bdf8;
+            transform: scale(1.2);
+        }
+
         .hero-content h1 {
             font-size: 2.8rem;
             line-height: 1.15;
@@ -420,123 +477,39 @@
             background: var(--primary-color);
             border-radius: 2px;
         }
-        .footer-links-list {
-            list-style: none;
-        }
-        .footer-links-list li {
-            margin-bottom: 12px;
-        }
+        .footer-links-list { list-style: none; }
+        .footer-links-list li { margin-bottom: 12px; }
         .footer-links-list a {
-            color: #cbd5e1;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.2s, padding-left 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+            color: #cbd5e1; text-decoration: none; font-size: 0.9rem; transition: color 0.2s, padding-left 0.2s; display: inline-flex; align-items: center; gap: 8px;
         }
-        .footer-links-list a:hover {
-            color: #38bdf8;
-            padding-left: 5px;
-        }
-        .footer-contact-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 14px;
-            font-size: 0.9rem;
-            color: #cbd5e1;
-        }
-        .footer-contact-item i {
-            color: #38bdf8;
-            margin-top: 3px;
-            font-size: 1rem;
-            width: 18px;
-        }
-        .footer-social-icons {
-            display: flex;
-            gap: 12px;
-            margin-top: 15px;
-        }
+        .footer-links-list a:hover { color: #38bdf8; padding-left: 5px; }
+        .footer-contact-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; font-size: 0.9rem; color: #cbd5e1; }
+        .footer-contact-item i { color: #38bdf8; margin-top: 3px; font-size: 1rem; width: 18px; }
+        .footer-social-icons { display: flex; gap: 12px; margin-top: 15px; }
         .footer-social-btn {
-            width: 36px;
-            height: 36px;
-            background: rgba(255, 255, 255, 0.08);
-            color: #fff;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: background 0.2s, transform 0.2s;
+            width: 36px; height: 36px; background: rgba(255, 255, 255, 0.08); color: #fff; border-radius: 8px; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: background 0.2s, transform 0.2s;
         }
-        .footer-social-btn:hover {
-            background: var(--primary-color);
-            transform: translateY(-3px);
-        }
+        .footer-social-btn:hover { background: var(--primary-color); transform: translateY(-3px); }
         .footer-bottom-bar {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            font-size: 0.85rem;
-            color: #64748b;
+            max-width: 1200px; margin: 0 auto; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; font-size: 0.85rem; color: #64748b;
         }
-        .footer-bottom-links {
-            display: flex;
-            gap: 20px;
-        }
-        .footer-bottom-links a {
-            color: #64748b;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .footer-bottom-links a:hover {
-            color: #94a3b8;
-        }
+        .footer-bottom-links { display: flex; gap: 20px; }
+        .footer-bottom-links a { color: #64748b; text-decoration: none; transition: color 0.2s; }
+        .footer-bottom-links a:hover { color: #94a3b8; }
 
         /* MEDIA QUERIES PARA TELEMÓVEL */
         @media (max-width: 900px) {
             .hero-grid, .featured-cards-grid { grid-template-columns: 1fr; }
             .menu-toggle-mobile { display: flex; }
+            .hero-slider-container { height: 280px; }
             
-            /* MENU LATERAL DIREITO SLIDE-IN */
             .nav-links-clean {
-                position: fixed;
-                top: 0;
-                right: -280px;
-                width: 260px;
-                height: 100vh;
-                background: var(--nav-bg);
-                flex-direction: column;
-                padding: 80px 20px 20px 20px;
-                border-left: 1px solid var(--border-color);
-                box-shadow: -10px 0 25px rgba(0,0,0,0.15);
-                transition: right 0.3s ease-in-out;
-                z-index: 1001;
-                align-items: flex-start;
+                position: fixed; top: 0; right: -280px; width: 260px; height: 100vh; background: var(--nav-bg); flex-direction: column; padding: 80px 20px 20px 20px; border-left: 1px solid var(--border-color); box-shadow: -10px 0 25px rgba(0,0,0,0.15); transition: right 0.3s ease-in-out; z-index: 1001; align-items: flex-start;
             }
-            .nav-links-clean.mobile-active {
-                right: 0;
-            }
-            .nav-links-clean li {
-                width: 100%;
-                margin-bottom: 15px;
-            }
-            .nav-links-clean a {
-                display: block;
-                width: 100%;
-                padding: 10px 0;
-                font-size: 16px;
-            }
-            .footer-bottom-bar {
-                flex-direction: column;
-                text-align: center;
-            }
+            .nav-links-clean.mobile-active { right: 0; }
+            .nav-links-clean li { width: 100%; margin-bottom: 15px; }
+            .nav-links-clean a { display: block; width: 100%; padding: 10px 0; font-size: 16px; }
+            .footer-bottom-bar { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
@@ -552,7 +525,7 @@
 
     <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
 
-    <!-- CABEÇALHO LIMPO -->
+    <!-- CABEÇALHO -->
     <header class="header-clean">
         <div class="nav-container-clean">
             <a href="#home" onclick="switchTab('home', event)" class="brand-logo">
@@ -583,12 +556,48 @@
         </div>
     </header>
 
-    <!-- SECÇÃO PRINCIPAL (INÍCIO) -->
+    <!-- SECÇÃO PRINCIPAL (INÍCIO COM SLIDER EM MOVIMENTO) -->
     <section id="home" class="content-section active-section">
         <div class="hero-layout-section">
             <div class="hero-grid">
-                <div>
-                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80" alt="APSAN Edifício Corporativo" class="hero-banner-image">
+                
+                <!-- CARROSSEL / SLIDER DE FOTOS DOS SERVIÇOS -->
+                <div class="hero-slider-container" id="heroSlider">
+                    <div class="hero-slide active">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80" alt="Instalações Corporativas & Limpeza">
+                        <div class="hero-slide-caption">
+                            <i class="fas fa-broom" style="color: #38bdf8;"></i> Limpeza Institucional & Catering
+                        </div>
+                    </div>
+                    
+                    <div class="hero-slide">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1000&q=80" alt="Logística Transfronteiriça Angola e Namíbia">
+                        <div class="hero-slide-caption">
+                            <i class="fas fa-truck-loading" style="color: #38bdf8;"></i> Logística & Compras Angola-Namíbia
+                        </div>
+                    </div>
+
+                    <div class="hero-slide">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1000&q=80" alt="Sistemas, Redes e Cablagem">
+                        <div class="hero-slide-caption">
+                            <i class="fas fa-laptop-code" style="color: #38bdf8;"></i> Sistemas de Gestão & Infraestrutura de Redes
+                        </div>
+                    </div>
+
+                    <div class="hero-slide">
+                        <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1000&q=80" alt="Aluguer de Carros e Transporte">
+                        <div class="hero-slide-caption">
+                            <i class="fas fa-car" style="color: #38bdf8;"></i> Frota Transfronteiriça & Aluguer de Carros
+                        </div>
+                    </div>
+
+                    <!-- INDICADORES VISUAIS -->
+                    <div class="slider-dots">
+                        <span class="slider-dot active" onclick="goToSlide(0)"></span>
+                        <span class="slider-dot" onclick="goToSlide(1)"></span>
+                        <span class="slider-dot" onclick="goToSlide(2)"></span>
+                        <span class="slider-dot" onclick="goToSlide(3)"></span>
+                    </div>
                 </div>
 
                 <div class="hero-content">
@@ -965,7 +974,6 @@
     <!-- RODAPÉ MODERNO E BEM ESTRUTURADO -->
     <footer class="footer-modern">
         <div class="footer-grid-container">
-            <!-- COLUNA 1: MARCA & SOBRE -->
             <div class="footer-col-brand">
                 <h3><i class="fas fa-building" style="color: #38bdf8;"></i> APSAN, LDA</h3>
                 <p>Soluções Integradas, Qualidade Que Transforma! Prestação de serviços corporativos, soluções tecnológicas e suporte logístico de excelência entre Angola e Namíbia.</p>
@@ -977,7 +985,6 @@
                 </div>
             </div>
 
-            <!-- COLUNA 2: NAVEGAÇÃO RÁPIDA -->
             <div class="footer-col">
                 <h4>Navegação</h4>
                 <ul class="footer-links-list">
@@ -990,7 +997,6 @@
                 </ul>
             </div>
 
-            <!-- COLUNA 3: DADOS DE CONTACTO -->
             <div class="footer-col">
                 <h4>Contactos Diretos</h4>
                 <div class="footer-contact-item">
@@ -1011,7 +1017,6 @@
                 </div>
             </div>
 
-            <!-- COLUNA 4: DADOS FISCAIS & LOCALIZAÇÃO -->
             <div class="footer-col">
                 <h4>Sede & Informação Fiscal</h4>
                 <div class="footer-contact-item">
@@ -1041,6 +1046,47 @@
 
     <!-- SCRIPTS INTEGRADOS -->
     <script>
+        // LÓGICA DO SLIDER EM MOVIMENTO (HERO CAROUSEL)
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        let slideInterval = setInterval(nextSlide, 4000); // Troca a cada 4 segundos
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                dots[i].classList.remove('active');
+            });
+
+            currentSlideIndex = index;
+            if (currentSlideIndex >= slides.length) currentSlideIndex = 0;
+            if (currentSlideIndex < 0) currentSlideIndex = slides.length - 1;
+
+            slides[currentSlideIndex].classList.add('active');
+            dots[currentSlideIndex].classList.add('active');
+        }
+
+        function nextSlide() {
+            showSlide(currentSlideIndex + 1);
+        }
+
+        function goToSlide(index) {
+            showSlide(index);
+            resetInterval();
+        }
+
+        function resetInterval() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 4000);
+        }
+
+        // Pausa o carrossel quando o utilizador passa o rato por cima
+        const sliderContainer = document.getElementById('heroSlider');
+        if (sliderContainer) {
+            sliderContainer.addEventListener('mouseenter', () => clearInterval(slideInterval));
+            sliderContainer.addEventListener('mouseleave', () => resetInterval());
+        }
+
         // MUDANÇA DE ABA E HISTÓRICO
         function switchTab(sectionId, event, pushToHistory = true) {
             if (event) event.preventDefault();
@@ -1071,7 +1117,7 @@
             }
         });
 
-        // ABRIR/FECHAR MENU MOBILE LATERAL
+        // ABRIR/FECHAR MENU MOBILE
         function toggleMobileMenu() {
             const nav = document.getElementById('navLinks');
             const overlay = document.getElementById('mobileOverlay');
@@ -1119,7 +1165,7 @@
             setTimeout(() => toast.classList.remove('show'), 4000);
         }
 
-        // MODAL DE SERVIÇOS EXPANDIDO (SEM OPÇÃO DE ORÇAMENTO)
+        // MODAL DE SERVIÇOS
         function openServiceDetail(name, desc, features) {
             const modal = document.getElementById('serviceModal');
             const content = document.getElementById('modalBodyContent');
@@ -1139,7 +1185,7 @@
                 <form action="https://formspree.io/f/mwlevprv" method="POST" enctype="multipart/form-data" onsubmit="handleModalServiceSubmit(event)">
                     <input type="hidden" name="servico_solicitado" value="${name}">
                     
-                    <h3 style="font-size: 15px; margin-bottom: 15px; color: var(--text-color); border-left: 3px solid var(--primary-color); padding-left: 8px;">Formulário de Solicitção de Serviço</h3>
+                    <h3 style="font-size: 15px; margin-bottom: 15px; color: var(--text-color); border-left: 3px solid var(--primary-color); padding-left: 8px;">Formulário de Solicitação de Serviço</h3>
 
                     <div class="modal-form-grid">
                         <div class="modal-form-group">
