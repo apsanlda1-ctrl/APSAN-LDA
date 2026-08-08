@@ -34,7 +34,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: var(--bg-color); color: var(--text-color); transition: background-color 0.3s ease, color 0.3s ease; overflow-x: hidden; }
 
-        /* CABEÇALHO LIMPO E MODERNO */
+        /* CABEÇALHO LIMPO E RESPONSIVO */
         .header-clean {
             background: var(--nav-bg);
             border-bottom: 1px solid var(--border-color);
@@ -94,6 +94,21 @@
             transition: transform 0.3s ease;
         }
         .theme-toggle-btn:hover { transform: rotate(180deg); }
+
+        /* BOTÃO DE MENU PARA TELEMÓVEL */
+        .menu-toggle-mobile {
+            display: none;
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+        }
 
         /* HERO LAYOUT NOVO (PRINT) */
         .hero-layout-section {
@@ -160,7 +175,7 @@
         }
         .btn-secondary-action:hover { background: rgba(0,0,0,0.05); }
 
-        /* FEATURED CARDS SOBREPOSTOS */
+        /* FEATURED CARDS */
         .featured-cards-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -247,7 +262,7 @@
             font-weight: bold;
         }
 
-        /* SECÇÕES E ESTRUTURA GENERALIZADA */
+        /* SECÇÕES E ESTRUTURA */
         .content-section { display: none; }
         .content-section.active-section { display: block; animation: fadeInScale 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         @keyframes fadeInScale { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -335,9 +350,25 @@
         .footer-col h4 { color: #38bdf8; margin-bottom: 15px; font-size: 16px; }
         .footer-col p { font-size: 14px; color: #cbd5e1; margin-bottom: 8px; line-height: 1.5; }
 
+        /* MEDIA QUERIES PARA TELEMÓVEL */
         @media (max-width: 900px) {
             .hero-grid, .featured-cards-grid { grid-template-columns: 1fr; }
-            .nav-links-clean { display: none; }
+            .menu-toggle-mobile { display: flex; }
+            .nav-links-clean {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--nav-bg);
+                flex-direction: column;
+                padding: 20px;
+                border-bottom: 1px solid var(--border-color);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+            .nav-links-clean.mobile-active {
+                display: flex;
+            }
         }
     </style>
 </head>
@@ -359,7 +390,7 @@
                 <span>APSAN <span style="color: var(--primary-color);">LDA</span></span>
             </a>
 
-            <ul class="nav-links-clean">
+            <ul class="nav-links-clean" id="navLinks">
                 <li><a href="#home" class="nav-tab active" onclick="switchTab('home', event)">Início</a></li>
                 <li><a href="#about" class="nav-tab" onclick="switchTab('about', event)">Quem Somos</a></li>
                 <li><a href="#services" class="nav-tab" onclick="switchTab('services', event)">Serviços</a></li>
@@ -371,9 +402,14 @@
                 <li><a href="#contact" class="btn-contact-header" onclick="switchTab('contact', event)">Contacte-nos</a></li>
             </ul>
 
-            <button class="theme-toggle-btn" onclick="toggleTheme()" title="Alternar Modo Escuro/Claro">
-                <i class="fas fa-moon" id="themeIcon"></i>
-            </button>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <button class="theme-toggle-btn" onclick="toggleTheme()" title="Alternar Modo Escuro/Claro">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+                <button class="menu-toggle-mobile" onclick="toggleMobileMenu()" title="Abrir Menu">
+                    <i class="fas fa-ellipsis-v" id="menuIcon"></i>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -741,19 +777,54 @@
         <p style="text-align: center; margin-top: 20px; font-size: 13px; color: #94a3b8;">&copy; 2026 APSAN, LDA. Todos os direitos reservados.</p>
     </footer>
 
-    <!-- SCRIPTS INTEGRADOS -->
+    <!-- SCRIPTS INTEGRADOS COM HISTÓRICO RESPONSIVO -->
     <script>
-        function switchTab(sectionId, event) {
+        // FUNÇÃO DE MUDANÇA DE ABA COM HISTÓRICO DO NAVEGADOR
+        function switchTab(sectionId, event, pushToHistory = true) {
             if (event) event.preventDefault();
+
+            // Ocultar todas as secções e ativar a selecionada
             document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active-section'));
             const target = document.getElementById(sectionId);
             if(target) target.classList.add('active-section');
 
+            // Atualizar links de navegação ativos
             document.querySelectorAll('.nav-links-clean a').forEach(link => link.classList.remove('active'));
             const activeLink = document.querySelector(`.nav-links-clean a[href="#${sectionId}"]`);
             if(activeLink) activeLink.classList.add('active');
 
+            // Fechar menu de telemóvel se estiver aberto
+            document.getElementById('navLinks').classList.remove('mobile-active');
+
+            // Registar navegação no histórico do navegador (botão voltar do telemóvel)
+            if (pushToHistory && window.location.hash !== `#${sectionId}`) {
+                history.pushState({ sectionId: sectionId }, '', `#${sectionId}`);
+            }
+
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ESCUTAR O BOTÃO VOLTAR DO TELEMÓVEL
+        window.addEventListener('popstate', function(event) {
+            const hashSection = window.location.hash.replace('#', '');
+            if (hashSection) {
+                switchTab(hashSection, null, false);
+            } else {
+                switchTab('home', null, false);
+            }
+        });
+
+        // ABRIR/FECHAR MENU MOBILE
+        function toggleMobileMenu() {
+            const nav = document.getElementById('navLinks');
+            const icon = document.getElementById('menuIcon');
+            nav.classList.toggle('mobile-active');
+            
+            if(nav.classList.contains('mobile-active')) {
+                icon.className = 'fas fa-times';
+            } else {
+                icon.className = 'fas fa-ellipsis-v';
+            }
         }
 
         function toggleTheme() {
@@ -931,7 +1002,14 @@
             document.getElementById('clientAuthCard').style.display = 'block';
         }
 
-        window.addEventListener('DOMContentLoaded', loadCMSPosts);
+        window.addEventListener('DOMContentLoaded', () => {
+            loadCMSPosts();
+            // Verificar hash inicial ao carregar a página
+            const initialHash = window.location.hash.replace('#', '');
+            if (initialHash) {
+                switchTab(initialHash, null, false);
+            }
+        });
     </script>
 </body>
 </html>
