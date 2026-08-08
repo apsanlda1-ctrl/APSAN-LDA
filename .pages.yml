@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: apsanlda1-ctrl
+  repo: apsanlda1-ctrl/APSAN-LDA
   branch: main
 
 collections:
