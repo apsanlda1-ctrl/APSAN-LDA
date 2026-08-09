@@ -1465,7 +1465,7 @@
 
         function toggleAssistant() { document.getElementById('assistantWindow').classList.toggle('active'); }
 
-        // CÉREBRO INTELIGENTE DA ASSISTENTE AZNY GABRIEL COM BASE NAS INFORMAÇÕES REAIS DO SITE
+        // CÉREBRO INTELIGENTE DA ASSISTENTE AZNY GABRIEL COM RESPOSTAS TEXTUAIS FLUIDAS (SEM NUMERAÇÕES OU PONTOS CARDINAIS)
         function sendQuickQuery(text) {
             const body = document.getElementById('assistantBody');
             body.innerHTML += `<div class="assistant-message user">${text}</div>`;
@@ -1492,28 +1492,28 @@
             const q = query.toLowerCase();
 
             if (q.includes('nif') || q.includes('registo') || q.includes('fiscal') || q.includes('dados')) {
-                return "O NIF oficial da APSAN, LDA é **5002085011**. A empresa está devidamente registada, ativa e regularizada em Angola, cumprindo todas as obrigações fiscais perante a AGT.";
+                return "O NIF oficial da APSAN, LDA é 5002085011. A empresa está devidamente registada, ativa e regularizada em Angola, cumprindo rigorosamente todas as obrigações fiscais perante a AGT.";
             }
             else if (q.includes('sede') || q.includes('onde') || q.includes('localização') || q.includes('morada') || q.includes('ondjiva') || q.includes('namacunde')) {
-                return "A nossa **Sede Principal** fica localizada em **Namacunde / Santa Clara**, Província do Cunene, em Angola. Contamos também com um escritório de representação comercial em **Ondjiva**.";
+                return "A nossa Sede Principal fica situada em Namacunde, na zona de Santa Clara, Província do Cunene. Dispomos também de um escritório de representação comercial na cidade de Ondjiva.";
             }
             else if (q.includes('contacto') || q.includes('telefone') || q.includes('whatsapp') || q.includes('email') || q.includes('falar')) {
-                return "Pode contactar-nos diretamente pelas seguintes linhas:<br>• **WhatsApp / Telemóvel:** +244 944 403 093<br>• **Outros números:** +244 946 195 402 / +244 934 437 739<br>• **E-mail:** info@apsanlda.com";
+                return "Pode contactar a nossa equipa através do WhatsApp oficial pelo número +244 944 403 093, pelas linhas telefónicas +244 946 195 402 e +244 934 437 739, ou enviando um e-mail para info@apsanlda.com.";
             }
             else if (q.includes('serviço') || q.includes('o que fazem') || q.includes('limpeza') || q.includes('catering') || q.includes('software') || q.includes('internet')) {
-                return "Prestamos um conjunto completo de **Serviços Principais**: 1. Limpeza Institucional, 2. Material de Escritório, 3. Catering e Eventos Corporativos, 4. Internet & Cabling Estruturado, 5. Criação de Software & Gestão, 6. Transportes & Aluguer de Carros, e 7. Importação & Exportação.";
+                return "A APSAN, LDA oferece um portefólio abrangente de soluções que engloba limpeza institucional e higienização, fornecimento de material de escritório, catering e organização de eventos corporativos, infraestruturas de internet e cabling estruturado, criação de softwares de gestão personalizados, serviços de transporte e aluguer de viaturas, além de operações completas de importação e exportação transfronteiriça.";
             }
             else if (q.includes('extra') || q.includes('namíbia') || q.includes('trad') || q.includes('hospital') || q.includes('redes sociais')) {
-                return "Os nossos **Serviços Extras** incluem:<br>• **Acompanhamento Hospitalar Humanizado**<br>• **Tradução Oficial Juramentada**<br>• **Compras na Namíbia** (com cotação, transporte e despacho)<br>• **Gestão de Redes Sociais & Marketing Digital**";
+                return "Além das nossas soluções principais, disponibilizamos serviços extras de apoio humanizado em acompanhamento hospitalar, traduções oficiais juramentadas com validade legal, facilitação de compras e fretes diretos na Namíbia, e gestão profissional de redes sociais e marketing digital para marcas e empresas.";
             }
             else if (q.includes('pagamento') || q.includes('pagar')) {
-                return "Aceitamos transferências bancárias em Kwanzas (Kz), depósitos diretos, pagamentos via Express e acordos de faturação a 30 dias para contratos corporativos aprovados.";
+                return "Aceitamos pagamentos através de transferências bancárias em Kwanzas, depósitos diretos, pagamentos via Express e facilidades de faturação a trinta dias para parceiros corporativos devidamente aprovados.";
             }
             else if (q.includes('denúncia') || q.includes('abuso') || q.includes('ética')) {
-                return "Dispomos de um **Canal de Denúncias** dedicado e confidencial no site para reportar condutas antiéticas ou irregularidades operacionais com total segurança.";
+                return "Disponibilizamos um canal de denúncias totalmente confidencial e seguro diretamente no nosso site, permitindo relatar qualquer conduta antiética ou irregularidade operacional.";
             }
             else {
-                return "Compreendi a sua questão! Para além destas informações, a APSAN, LDA assegura atendimento personalizado e resposta a orçamentos em até 24h úteis. Pode enviar-nos uma mensagem pelo formulário de contacto ou contactar via WhatsApp em **+244 944 403 093**.";
+                return "Compreendi a sua questão! Para além destas informações, a APSAN, LDA garante atendimento personalizado e respostas a orçamentos em até vinte e quatro horas úteis. Pode enviar-nos uma mensagem detalhada através do nosso formulário ou contactar-nos diretamente via WhatsApp pelo número +244 944 403 093.";
             }
         }
 
