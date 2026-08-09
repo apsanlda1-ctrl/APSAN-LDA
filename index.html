@@ -255,16 +255,16 @@
         .slider-dots {
             position: absolute;
             bottom: 12px; right: 20px;
-            display: flex; gap: 8px;
+            display: flex; gap: 6px; flex-wrap: wrap; max-width: 200px; justify-content: flex-end;
             z-index: 10;
         }
         .slider-dot {
-            width: 10px; height: 10px; border-radius: 50%;
+            width: 8px; height: 8px; border-radius: 50%;
             background: rgba(255, 255, 255, 0.5);
             cursor: pointer;
             transition: background 0.3s, transform 0.3s;
         }
-        .slider-dot.active { background: #38bdf8; transform: scale(1.2); }
+        .slider-dot.active { background: #38bdf8; transform: scale(1.3); }
 
         .hero-content h1 {
             font-size: 2.8rem;
@@ -599,32 +599,55 @@
             <div class="hero-grid">
                 
                 <div class="hero-slider-container" id="heroSlider">
+                    <!-- 1. Limpeza Institucional -->
                     <div class="hero-slide active">
-                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1000&q=80" alt="Logística Transfronteiriça Angola e Namíbia">
-                        <div class="hero-slide-caption">
-                            <i class="fas fa-truck-loading" style="color: #38bdf8;"></i> Logística & Compras Angola-Namíbia
-                        </div>
+                        <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1000&q=80" alt="Limpeza Institucional">
+                        <div class="hero-slide-caption"><i class="fas fa-broom" style="color: #38bdf8;"></i> 1. Limpeza Institucional & Higienização</div>
                     </div>
-
+                    <!-- 2. Material de Escritório -->
                     <div class="hero-slide">
-                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80" alt="Instalações Corporativas & Limpeza">
-                        <div class="hero-slide-caption">
-                            <i class="fas fa-broom" style="color: #38bdf8;"></i> Limpeza Institucional & Catering
-                        </div>
+                        <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1000&q=80" alt="Material de Escritório">
+                        <div class="hero-slide-caption"><i class="fas fa-boxes" style="color: #38bdf8;"></i> 2. Material de Escritório & Consumíveis</div>
                     </div>
-                    
+                    <!-- 3. Catering e Eventos Corporativos -->
                     <div class="hero-slide">
-                        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1000&q=80" alt="Sistemas, Redes e Desenvolvedores">
-                        <div class="hero-slide-caption">
-                            <i class="fas fa-laptop-code" style="color: #38bdf8;"></i> Sistemas de Gestão & Infraestrutura de Redes
-                        </div>
+                        <img src="https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=1000&q=80" alt="Catering e Eventos">
+                        <div class="hero-slide-caption"><i class="fas fa-utensils" style="color: #38bdf8;"></i> 3. Catering & Eventos Corporativos</div>
                     </div>
-
+                    <!-- 4. Internet e Cabling -->
                     <div class="hero-slide">
-                        <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1000&q=80" alt="Aluguer de Carro">
-                        <div class="hero-slide-caption">
-                            <i class="fas fa-car" style="color: #38bdf8;"></i> Frota Transfronteiriça & Aluguer de Carros
-                        </div>
+                        <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1000&q=80" alt="Internet e Cabling">
+                        <div class="hero-slide-caption"><i class="fas fa-network-wired" style="color: #38bdf8;"></i> 4. Internet & Cabling Estruturado</div>
+                    </div>
+                    <!-- 5. Criação de Software e Gestão -->
+                    <div class="hero-slide">
+                        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1000&q=80" alt="Criação de Software">
+                        <div class="hero-slide-caption"><i class="fas fa-laptop-code" style="color: #38bdf8;"></i> 5. Criação de Software & Gestão</div>
+                    </div>
+                    <!-- 6. Transportes e Aluguer de Carros -->
+                    <div class="hero-slide">
+                        <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1000&q=80" alt="Transportes e Aluguer de Carros">
+                        <div class="hero-slide-caption"><i class="fas fa-car" style="color: #38bdf8;"></i> 6. Transportes & Aluguer de Carros</div>
+                    </div>
+                    <!-- 7. Importação & Exportação -->
+                    <div class="hero-slide">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1000&q=80" alt="Importação & Exportação">
+                        <div class="hero-slide-caption"><i class="fas fa-globe" style="color: #38bdf8;"></i> 7. Importação & Exportação Transfronteiriça</div>
+                    </div>
+                    <!-- 8. Acompanhamento Hospitalar -->
+                    <div class="hero-slide">
+                        <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=1000&q=80" alt="Acompanhamento Hospitalar">
+                        <div class="hero-slide-caption"><i class="fas fa-hospital-user" style="color: #38bdf8;"></i> 8. Acompanhamento Hospitalar Humanizado</div>
+                    </div>
+                    <!-- 9. Tradução Oficial Juramentada -->
+                    <div class="hero-slide">
+                        <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1000&q=80" alt="Tradução Oficial Juramentada">
+                        <div class="hero-slide-caption"><i class="fas fa-language" style="color: #38bdf8;"></i> 9. Tradução Oficial Juramentada</div>
+                    </div>
+                    <!-- 10. Compras na Namíbia & Gestão de Redes Sociais -->
+                    <div class="hero-slide">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=80" alt="Marketing e Compras na Namíbia">
+                        <div class="hero-slide-caption"><i class="fas fa-shopping-cart" style="color: #38bdf8;"></i> 10. Compras na Namíbia & Redes Sociais</div>
                     </div>
 
                     <div class="slider-dots">
@@ -632,6 +655,12 @@
                         <span class="slider-dot" onclick="goToSlide(1)"></span>
                         <span class="slider-dot" onclick="goToSlide(2)"></span>
                         <span class="slider-dot" onclick="goToSlide(3)"></span>
+                        <span class="slider-dot" onclick="goToSlide(4)"></span>
+                        <span class="slider-dot" onclick="goToSlide(5)"></span>
+                        <span class="slider-dot" onclick="goToSlide(6)"></span>
+                        <span class="slider-dot" onclick="goToSlide(7)"></span>
+                        <span class="slider-dot" onclick="goToSlide(8)"></span>
+                        <span class="slider-dot" onclick="goToSlide(9)"></span>
                     </div>
                 </div>
 
