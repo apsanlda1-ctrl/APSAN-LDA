@@ -111,16 +111,13 @@
         .mobile-overlay {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.5);
             z-index: 1000;
         }
         .mobile-overlay.active { display: block; }
 
-        /* BANNER GLOBAL COM MOVIMENTO CONSTANTE (LOGOTIPO / TOPO) */
+        /* BANNER GLOBAL COM CÍRCULOS EM MOVIMENTO FORTE E DESTAQUE */
         .global-animated-banner {
             position: relative;
             width: 100%;
@@ -129,58 +126,61 @@
             margin: 15px auto;
             border-radius: 12px;
             overflow: hidden;
-            background: linear-gradient(135deg, #004488, #001133);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            background: linear-gradient(135deg, #003366, #001122);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(56, 189, 248, 0.3);
         }
 
         .banner-world-bg {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(circle, rgba(56, 189, 248, 0.15) 1px, transparent 1px);
-            background-size: 20px 20px;
-            opacity: 0.6;
+            background-image: radial-gradient(circle, rgba(56, 189, 248, 0.25) 1.5px, transparent 1.5px);
+            background-size: 22px 22px;
+            opacity: 0.7;
         }
 
         .banner-grid-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.03) 10px, rgba(255,255,255,0.03) 20px);
+            background: repeating-linear-gradient(45deg, transparent, transparent 12px, rgba(56, 189, 248, 0.05) 12px, rgba(56, 189, 248, 0.05) 24px);
         }
 
+        /* ANÉIS / ESFERAS GLOBAIS COM MOVIMENTO CONSTANTE FORTE */
         .rotating-ring {
             position: absolute;
-            border: 2px solid rgba(56, 189, 248, 0.35);
+            border: 3px solid rgba(56, 189, 248, 0.75);
             border-radius: 50%;
             pointer-events: none;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4), inset 0 0 15px rgba(56, 189, 248, 0.4);
         }
 
         .ring-1 {
-            width: 220px; height: 220px;
-            top: -50px; right: 40px;
-            animation: pulseRotate 8s infinite linear;
+            width: 240px; height: 240px;
+            top: -60px; right: 30px;
+            animation: pulseRotateStrong 6s infinite linear;
         }
 
         .ring-2 {
-            width: 150px; height: 150px;
-            bottom: -30px; left: 60px;
-            animation: pulseRotate 6s infinite reverse linear;
+            width: 180px; height: 180px;
+            bottom: -50px; left: 40px;
+            border-color: rgba(0, 220, 255, 0.85);
+            animation: pulseRotateStrong 5s infinite reverse linear;
         }
 
         .ring-3 {
-            width: 280px; height: 280px;
-            top: -80px; left: 35%;
-            border-color: rgba(255, 255, 255, 0.15);
-            animation: pulseRotate 12s infinite linear;
+            width: 320px; height: 320px;
+            top: -90px; left: 28%;
+            border-color: rgba(255, 255, 255, 0.35);
+            animation: pulseRotateStrong 10s infinite linear;
         }
 
-        @keyframes pulseRotate {
-            0% { transform: scale(0.95) rotate(0deg); opacity: 0.3; }
-            50% { transform: scale(1.08) rotate(180deg); opacity: 0.7; }
-            100% { transform: scale(0.95) rotate(360deg); opacity: 0.3; }
+        @keyframes pulseRotateStrong {
+            0% { transform: scale(0.9) rotate(0deg); opacity: 0.5; }
+            50% { transform: scale(1.12) rotate(180deg); opacity: 1; }
+            100% { transform: scale(0.9) rotate(360deg); opacity: 0.5; }
         }
 
         .banner-content-box {
@@ -192,18 +192,19 @@
         }
 
         .banner-content-box h2 {
-            font-size: 1.6rem;
+            font-size: 1.55rem;
             font-weight: 800;
             letter-spacing: 0.5px;
-            margin-bottom: 4px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+            margin-bottom: 5px;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.6);
         }
 
         .banner-content-box p {
-            font-size: 0.9rem;
+            font-size: 0.92rem;
             color: #38bdf8;
-            font-weight: 600;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+            font-weight: 700;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+            letter-spacing: 0.3px;
         }
 
         .hero-layout-section {
@@ -228,28 +229,16 @@
         }
         .hero-slide {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             opacity: 0;
             transition: opacity 1s ease-in-out;
             pointer-events: none;
         }
-        .hero-slide.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-        .hero-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .hero-slide.active { opacity: 1; pointer-events: auto; }
+        .hero-slide img { width: 100%; height: 100%; object-fit: cover; }
         .hero-slide-caption {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            bottom: 0; left: 0; right: 0;
             padding: 15px 20px;
             background: linear-gradient(transparent, rgba(15, 23, 42, 0.85));
             color: #ffffff;
@@ -262,24 +251,17 @@
         
         .slider-dots {
             position: absolute;
-            bottom: 12px;
-            right: 20px;
-            display: flex;
-            gap: 8px;
+            bottom: 12px; right: 20px;
+            display: flex; gap: 8px;
             z-index: 10;
         }
         .slider-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
+            width: 10px; height: 10px; border-radius: 50%;
             background: rgba(255, 255, 255, 0.5);
             cursor: pointer;
             transition: background 0.3s, transform 0.3s;
         }
-        .slider-dot.active {
-            background: #38bdf8;
-            transform: scale(1.2);
-        }
+        .slider-dot.active { background: #38bdf8; transform: scale(1.2); }
 
         .hero-content h1 {
             font-size: 2.8rem;
@@ -294,36 +276,20 @@
             line-height: 1.6;
             margin-bottom: 30px;
         }
-        .hero-action-btns {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
+        .hero-action-btns { display: flex; gap: 15px; flex-wrap: wrap; }
         .btn-main-action {
-            background: #38bdf8;
-            color: #0f172a;
-            padding: 12px 28px;
-            border-radius: 8px;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
+            background: #38bdf8; color: #0f172a;
+            padding: 12px 28px; border-radius: 8px; font-weight: 700;
+            border: none; cursor: pointer;
             box-shadow: 0 4px 14px rgba(56, 189, 248, 0.4);
             transition: transform 0.2s, background 0.2s;
         }
-        .btn-main-action:hover {
-            transform: translateY(-2px);
-            background: #0284c7;
-            color: #fff;
-        }
+        .btn-main-action:hover { transform: translateY(-2px); background: #0284c7; color: #fff; }
         .btn-secondary-action {
-            background: transparent;
-            color: var(--text-color);
+            background: transparent; color: var(--text-color);
             border: 2px solid var(--border-color);
-            padding: 12px 28px;
-            border-radius: 8px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background 0.2s;
+            padding: 12px 28px; border-radius: 8px; font-weight: 700;
+            cursor: pointer; transition: background 0.2s;
         }
         .btn-secondary-action:hover { background: rgba(0,0,0,0.05); }
 
@@ -336,160 +302,69 @@
         .feature-box {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            padding: 25px;
-            border-radius: 12px;
+            padding: 25px; border-radius: 12px;
             box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
             transition: transform 0.3s, box-shadow 0.3s;
         }
-        .feature-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
-        }
+        .feature-box:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
         .feature-icon-box {
-            width: 48px;
-            height: 48px;
-            background: rgba(2, 132, 199, 0.1);
-            color: var(--primary-color);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            margin-bottom: 15px;
+            width: 48px; height: 48px;
+            background: rgba(2, 132, 199, 0.1); color: var(--primary-color);
+            border-radius: 10px; display: flex; align-items: center; justify-content: center;
+            font-size: 20px; margin-bottom: 15px;
         }
         .feature-box h3 { font-size: 1.2rem; margin-bottom: 10px; color: var(--text-color); }
         .feature-box p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 15px; }
         .feature-link {
-            text-decoration: none;
-            color: var(--primary-color);
-            font-weight: 700;
-            font-size: 0.9rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
+            text-decoration: none; color: var(--primary-color);
+            font-weight: 700; font-size: 0.9rem;
+            display: inline-flex; align-items: center; gap: 5px;
         }
 
-        /* WORKFLOW / PROCESSO IDÊNTICO AO PRINT */
-        .workflow-section {
-            margin: 60px auto;
-            max-width: 1200px;
-            padding: 0 20px;
-        }
-        .workflow-title-box {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        .workflow-title-box h2 {
-            font-size: 2.2rem;
-            color: var(--text-color);
-            font-weight: 800;
-        }
-        .workflow-title-box p {
-            color: var(--text-muted);
-            font-size: 1rem;
-            margin-top: 8px;
-        }
+        /* WORKFLOW / PROCESSO */
+        .workflow-section { margin: 60px auto; max-width: 1200px; padding: 0 20px; }
+        .workflow-title-box { text-align: center; margin-bottom: 40px; }
+        .workflow-title-box h2 { font-size: 2.2rem; color: var(--text-color); font-weight: 800; }
+        .workflow-title-box p { color: var(--text-muted); font-size: 1rem; margin-top: 8px; }
 
-        .workflow-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-
+        .workflow-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
         .replica-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 0 0 20px 0;
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 16px; padding: 0 0 20px 0;
             box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-            position: relative;
-            display: flex;
-            flex-direction: column;
+            position: relative; display: flex; flex-direction: column;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .replica-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 25px 40px rgba(0,0,0,0.15);
-        }
-
+        .replica-card:hover { transform: translateY(-6px); box-shadow: 0 25px 40px rgba(0,0,0,0.15); }
         .replica-top-btn {
-            margin: -1px -1px 0 -1px;
-            padding: 16px;
-            text-align: center;
-            color: #ffffff;
-            font-weight: 800;
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-            border-top-left-radius: 16px;
-            border-top-right-radius: 16px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin: -1px -1px 0 -1px; padding: 16px; text-align: center;
+            color: #ffffff; font-weight: 800; font-size: 1.1rem; letter-spacing: 1px;
+            border-top-left-radius: 16px; border-top-right-radius: 16px;
         }
-
-        .replica-body {
-            padding: 25px 25px 15px 25px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
+        .replica-body { padding: 25px 25px 15px 25px; display: flex; flex-direction: column; gap: 16px; }
         .replica-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            padding-bottom: 12px;
+            display: flex; align-items: center; justify-content: space-between;
+            font-size: 0.9rem; color: var(--text-muted); padding-bottom: 12px;
             border-bottom: 1px solid var(--border-color);
         }
-        .replica-item:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-        .replica-item span {
-            flex: 1;
-            padding-right: 10px;
-            line-height: 1.4;
-        }
-
+        .replica-item:last-child { border-bottom: none; padding-bottom: 0; }
+        .replica-item span { flex: 1; padding-right: 10px; line-height: 1.4; }
         .replica-3d-banner {
-            margin: 15px 20px 0 20px;
-            padding: 15px 20px;
-            border-radius: 8px;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-weight: 700;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            margin: 15px 20px 0 20px; padding: 15px 20px; border-radius: 8px;
+            color: #ffffff; display: flex; align-items: center; justify-content: space-between;
+            font-weight: 700; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
             transform: perspective(700px) rotateX(4deg);
-            transform-style: preserve-3d;
         }
-        .replica-3d-banner .banner-text {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            opacity: 0.95;
-        }
-        .replica-3d-banner .banner-number {
-            font-size: 2rem;
-            font-weight: 900;
-            line-height: 1;
-        }
+        .replica-3d-banner .banner-text { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.95; }
+        .replica-3d-banner .banner-number { font-size: 2rem; font-weight: 900; line-height: 1; }
 
         .stats-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 30px auto;
-            max-width: 1200px;
-            padding: 0 20px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px; margin: 30px auto; max-width: 1200px; padding: 0 20px;
         }
         .stat-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
+            background-color: var(--card-bg); border: 1px solid var(--border-color);
+            padding: 20px; border-radius: 12px; text-align: center;
             box-shadow: 0 8px 20px rgba(0,0,0,0.04);
         }
         .stat-card h3 { font-size: 24px; color: var(--primary-color); margin-bottom: 5px; }
@@ -497,26 +372,16 @@
 
         .route-visual-box {
             background: linear-gradient(135deg, #003366, #0f172a);
-            color: #fff;
-            padding: 40px 20px;
-            border-radius: 15px;
-            margin: 30px 0;
-            text-align: center;
+            color: #fff; padding: 40px 20px; border-radius: 15px;
+            margin: 30px 0; text-align: center;
         }
         .route-flex {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 20px;
+            display: flex; justify-content: center; align-items: center;
+            gap: 20px; flex-wrap: wrap; margin-top: 20px;
         }
         .route-node {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 15px 25px;
-            border-radius: 10px;
-            font-weight: bold;
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+            padding: 15px 25px; border-radius: 10px; font-weight: bold;
         }
 
         .content-section { display: none; }
@@ -524,15 +389,12 @@
         @keyframes fadeInScale { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .service-card, .portal-card, .testimonial-card, .faq-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 25px;
-            border-radius: 12px;
+            background-color: var(--card-bg); border: 1px solid var(--border-color);
+            padding: 25px; border-radius: 12px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .service-card:hover, .portal-card:hover, .testimonial-card:hover, .faq-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+            transform: translateY(-4px); box-shadow: 0 12px 25px rgba(0,0,0,0.08);
         }
 
         .faq-grid { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
@@ -551,17 +413,13 @@
         }
         .service-modal-close { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-color); }
         
-        .modal-form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
+        .modal-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         @media (max-width: 650px) {
             .modal-form-grid { grid-template-columns: 1fr; }
             .workflow-grid { grid-template-columns: 1fr; }
-            .global-animated-banner { height: 120px; }
-            .banner-content-box h2 { font-size: 1.2rem; }
-            .banner-content-box p { font-size: 0.75rem; }
+            .global-animated-banner { height: 130px; }
+            .banner-content-box h2 { font-size: 1.15rem; }
+            .banner-content-box p { font-size: 0.78rem; }
         }
 
         .modal-form-group { margin-bottom: 15px; }
@@ -570,12 +428,7 @@
         .modal-form-group input, .modal-form-group select, .modal-form-group textarea {
             width: 100%; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 14px; background-color: var(--bg-color); color: var(--text-color); outline: none;
         }
-        .modal-form-group input[type="file"] {
-            padding: 8px;
-            background: var(--bg-color);
-            border: 1px dashed var(--primary-color);
-            cursor: pointer;
-        }
+        .modal-form-group input[type="file"] { padding: 8px; background: var(--bg-color); border: 1px dashed var(--primary-color); cursor: pointer; }
 
         .assistant-widget { position: fixed; bottom: 25px; right: 25px; z-index: 100001; }
         .assistant-btn {
@@ -605,112 +458,27 @@
         .client-info { display: flex; align-items: center; gap: 12px; margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 12px; }
         .client-avatar { width: 36px; height: 36px; border-radius: 50%; background-color: var(--primary-color); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; }
 
-        .footer-wavy-container {
-            position: relative;
-            margin-top: 80px;
-            background-color: #0b1329;
-            color: #f1f5f9;
-        }
-
-        .footer-wavy-svg {
-            position: absolute;
-            top: -65px;
-            left: 0;
-            width: 100%;
-            height: 70px;
-            overflow: hidden;
-            line-height: 0;
-            z-index: 1;
-        }
-
+        .footer-wavy-container { position: relative; margin-top: 80px; background-color: #0b1329; color: #f1f5f9; }
+        .footer-wavy-svg { position: absolute; top: -65px; left: 0; width: 100%; height: 70px; overflow: hidden; line-height: 0; z-index: 1; }
         .footer-clean-grid {
-            position: relative;
-            z-index: 2;
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-            padding: 40px 20px 30px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative; z-index: 2; max-width: 1200px; margin: 0 auto;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px;
+            padding: 40px 20px 30px 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-
-        .footer-brand-info h3 {
-            font-size: 1.5rem;
-            color: #ffffff;
-            font-weight: 800;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .footer-brand-info p {
-            font-size: 0.9rem;
-            color: #94a3b8;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-        .footer-column-title {
-            color: #38bdf8;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 8px;
-        }
-        .footer-column-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 35px;
-            height: 2px;
-            background: #ff7700;
-            border-radius: 2px;
-        }
-        .footer-contact-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 14px;
-            font-size: 0.9rem;
-            color: #cbd5e1;
-        }
-        .footer-contact-item i {
-            color: #38bdf8;
-            margin-top: 3px;
-            font-size: 1rem;
-            width: 18px;
-        }
-        .footer-social-icons {
-            display: flex;
-            gap: 12px;
-            margin-top: 15px;
-        }
+        .footer-brand-info h3 { font-size: 1.5rem; color: #ffffff; font-weight: 800; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .footer-brand-info p { font-size: 0.9rem; color: #94a3b8; line-height: 1.6; margin-bottom: 20px; }
+        .footer-column-title { color: #38bdf8; font-size: 1.1rem; margin-bottom: 20px; position: relative; padding-bottom: 8px; }
+        .footer-column-title::after { content: ''; position: absolute; bottom: 0; left: 0; width: 35px; height: 2px; background: #ff7700; border-radius: 2px; }
+        .footer-contact-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; font-size: 0.9rem; color: #cbd5e1; }
+        .footer-contact-item i { color: #38bdf8; margin-top: 3px; font-size: 1rem; width: 18px; }
+        .footer-social-icons { display: flex; gap: 12px; margin-top: 15px; }
         .footer-social-btn {
-            width: 36px;
-            height: 36px;
-            background: rgba(255, 255, 255, 0.08);
-            color: #fff;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
+            width: 36px; height: 36px; background: rgba(255, 255, 255, 0.08); color: #fff; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center; text-decoration: none;
             transition: background 0.2s, transform 0.2s;
         }
-        .footer-social-btn:hover {
-            background: #0284c7;
-            transform: translateY(-3px);
-        }
-        .footer-copyright-bottom {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #94a3b8;
-            font-weight: 600;
-        }
+        .footer-social-btn:hover { background: #0284c7; transform: translateY(-3px); }
+        .footer-copyright-bottom { max-width: 1200px; margin: 0 auto; padding: 20px; text-align: center; font-size: 0.9rem; color: #94a3b8; font-weight: 600; }
 
         @media (max-width: 900px) {
             .hero-grid, .featured-cards-grid, .workflow-grid { grid-template-columns: 1fr; }
@@ -760,7 +528,7 @@
         </div>
     </header>
 
-    <!-- BANNER GLOBAL ANIMADO LOGO ABAIXO DA NAVEGAÇÃO -->
+    <!-- BANNER GLOBAL COM CÍRCULOS GLOBAIS EM MOVIMENTO FORTE E TEXTO SOLICITADO -->
     <div class="global-animated-banner">
         <div class="banner-world-bg"></div>
         <div class="banner-grid-overlay"></div>
@@ -770,8 +538,8 @@
         <div class="rotating-ring ring-3"></div>
 
         <div class="banner-content-box">
-            <h2>APSAN, LDA - Conectando Fronteiras</h2>
-            <p>Soluções Integradas em Logística, Tecnologia e Comércio Angola-Namíbia</p>
+            <h2>APSAN, LDA - Soluções Integradas</h2>
+            <p>Tecnologias &bull; Logística &bull; Limpeza &bull; Catering</p>
         </div>
     </div>
 
@@ -851,7 +619,7 @@
             </div>
         </div>
 
-        <!-- SECÇÃO DE PROCESSO EM 3 PASSOS (ESTILO 3D DO PRINT ANTERIOR) -->
+        <!-- SECÇÃO DE PROCESSO EM 3 PASSOS -->
         <div class="workflow-section">
             <div class="workflow-title-box">
                 <h2>Como Trabalhamos</h2>
@@ -951,7 +719,7 @@
                 <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);">
                     <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" style="width:100%; max-height:350px; object-fit:cover;" alt="Operações APSAN">
                     <div style="padding: 25px;">
-                        <span style="font-size: 12px; color: var(--primary-color); font-weight: bold;">Publicação em Destaque • 9 de Agosto de 2026</span>
+                        <span style="font-size: 12px; color: var(--primary-color); font-weight: bold;">Publicação em Destaque &bull; 9 de Agosto de 2026</span>
                         <h3 style="color: var(--text-color); margin: 10px 0; font-size: 1.4rem;">Consolidação e Expansão Logística no Cunene</h3>
                         <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
                             Continuamos a consolidar a nossa ponte logística e tecnológica entre Angola e Namíbia, garantindo serviços rápidos, seguros e com elevado padrão de qualidade institucional.
@@ -991,7 +759,7 @@
         </div>
     </section>
 
-    <!-- Demais secções (about, services, extras, parcerias, portal, client-area, faq, contact) mantêm-se intactas -->
+    <!-- Demais secções mantêm-se idênticas -->
     <section id="about" class="content-section" style="padding: 40px 20px; max-width: 1200px; margin: 0 auto;">
         <h2>Quem Somos</h2>
         <p style="margin-top: 15px; line-height: 1.6; color: var(--text-muted);">A <strong>APSAN, LDA</strong> destaca-se pela prestação de serviços diversificados com elevado padrão de qualidade, respondendo com rigor às necessidades institucionais, logísticas, tecnológicas e comerciais entre Angola e Namíbia.</p>
@@ -1398,19 +1166,9 @@
             dots[currentSlideIndex].classList.add('active');
         }
 
-        function nextSlide() {
-            showSlide(currentSlideIndex + 1);
-        }
-
-        function goToSlide(index) {
-            showSlide(index);
-            resetInterval();
-        }
-
-        function resetInterval() {
-            clearInterval(slideInterval);
-            slideInterval = setInterval(nextSlide, 4000);
-        }
+        function nextSlide() { showSlide(currentSlideIndex + 1); }
+        function goToSlide(index) { showSlide(index); resetInterval(); }
+        function resetInterval() { clearInterval(slideInterval); slideInterval = setInterval(nextSlide, 4000); }
 
         const sliderContainer = document.getElementById('heroSlider');
         if (sliderContainer) {
@@ -1420,7 +1178,6 @@
 
         function switchTab(sectionId, event, pushToHistory = true) {
             if (event) event.preventDefault();
-
             document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active-section'));
             const target = document.getElementById(sectionId);
             if(target) target.classList.add('active-section');
@@ -1430,43 +1187,31 @@
             if(activeLink) activeLink.classList.add('active');
 
             closeMobileMenu();
-
             if (pushToHistory && window.location.hash !== `#${sectionId}`) {
                 history.pushState({ sectionId: sectionId }, '', `#${sectionId}`);
             }
-
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         window.addEventListener('popstate', function() {
             const hashSection = window.location.hash.replace('#', '');
-            if (hashSection) {
-                switchTab(hashSection, null, false);
-            } else {
-                switchTab('home', null, false);
-            }
+            if (hashSection) { switchTab(hashSection, null, false); } 
+            else { switchTab('home', null, false); }
         });
 
         function toggleMobileMenu() {
             const nav = document.getElementById('navLinks');
             const overlay = document.getElementById('mobileOverlay');
             const icon = document.getElementById('menuIcon');
-            
             nav.classList.toggle('mobile-active');
             overlay.classList.toggle('active');
-
-            if(nav.classList.contains('mobile-active')) {
-                icon.className = 'fas fa-times';
-            } else {
-                icon.className = 'fas fa-ellipsis-v';
-            }
+            icon.className = nav.classList.contains('mobile-active') ? 'fas fa-times' : 'fas fa-ellipsis-v';
         }
 
         function closeMobileMenu() {
             const nav = document.getElementById('navLinks');
             const overlay = document.getElementById('mobileOverlay');
             const icon = document.getElementById('menuIcon');
-            
             if (nav) nav.classList.remove('mobile-active');
             if (overlay) overlay.classList.remove('active');
             if (icon) icon.className = 'fas fa-ellipsis-v';
@@ -1496,38 +1241,21 @@
                     <h2 style="color: var(--primary-color); font-size: 1.5rem;"><i class="fas fa-file-contract"></i> ${name}</h2>
                     <p style="font-size: 14px; color: var(--text-muted); margin-top: 5px;">${desc}</p>
                 </div>
-
                 <div style="background: rgba(2, 132, 199, 0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
                     <strong style="font-size: 13px; color: var(--primary-color); text-transform: uppercase;">Destaques do Serviço:</strong>
                     <ul style="list-style:none; margin-top: 8px; font-size:13px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px;">${fList}</ul>
                 </div>
-
                 <form action="https://formspree.io/f/mwlevyaz" method="POST" enctype="multipart/form-data">
                     <input type="text" name="_gotcha" style="display:none">
                     <input type="hidden" name="_subject" value="Novo Pedido de Serviço: ${name} - APSAN LDA">
                     <input type="hidden" name="servico_solicitado" value="${name}">
-                    
                     <h3 style="font-size: 15px; margin-bottom: 15px; color: var(--text-color); border-left: 3px solid var(--primary-color); padding-left: 8px;">Formulário de Solicitação de Serviço</h3>
-
                     <div class="modal-form-grid">
-                        <div class="modal-form-group">
-                            <label><i class="fas fa-user"></i> Nome Completo / Empresa *</label>
-                            <input type="text" name="nome_cliente" placeholder="Ex: Manuel Silva ou Empresa X" required>
-                        </div>
-                        <div class="modal-form-group">
-                            <label><i class="fas fa-id-card"></i> NIF / BI (Opcional)</label>
-                            <input type="text" name="nif_cliente" placeholder="NIF para emissão de factura">
-                        </div>
-                        <div class="modal-form-group">
-                            <label><i class="fas fa-envelope"></i> E-mail de Contacto *</label>
-                            <input type="email" name="email_cliente" placeholder="exemplo@email.com" required>
-                        </div>
-                        <div class="modal-form-group">
-                            <label><i class="fas fa-phone"></i> Telemóvel / WhatsApp *</label>
-                            <input type="tel" name="telefone_cliente" placeholder="+244 9XX XXX XXX" required>
-                        </div>
-                        <div class="modal-form-group">
-                            <label><i class="fas fa-map-marker-alt"></i> Local de Execução *</label>
+                        <div class="modal-form-group"><label><i class="fas fa-user"></i> Nome Completo / Empresa *</label><input type="text" name="nome_cliente" required></div>
+                        <div class="modal-form-group"><label><i class="fas fa-id-card"></i> NIF / BI (Opcional)</label><input type="text" name="nif_cliente"></div>
+                        <div class="modal-form-group"><label><i class="fas fa-envelope"></i> E-mail de Contacto *</label><input type="email" name="email_cliente" required></div>
+                        <div class="modal-form-group"><label><i class="fas fa-phone"></i> Telemóvel / WhatsApp *</label><input type="tel" name="telefone_cliente" required></div>
+                        <div class="modal-form-group"><label><i class="fas fa-map-marker-alt"></i> Local de Execução *</label>
                             <select name="local_execucao" required>
                                 <option value="Ondjiva">Ondjiva</option>
                                 <option value="Namacunde / Santa Clara">Namacunde / Santa Clara</option>
@@ -1536,12 +1264,8 @@
                                 <option value="Namíbia">Namíbia</option>
                             </select>
                         </div>
-                        <div class="modal-form-group">
-                            <label><i class="fas fa-calendar-alt"></i> Data Pretendida de Início</label>
-                            <input type="date" name="data_pretendida">
-                        </div>
-                        <div class="modal-form-group full-width">
-                            <label><i class="fas fa-flag"></i> Urgência do Pedido</label>
+                        <div class="modal-form-group"><label><i class="fas fa-calendar-alt"></i> Data Pretendida de Início</label><input type="date" name="data_pretendida"></div>
+                        <div class="modal-form-group full-width"><label><i class="fas fa-flag"></i> Urgência do Pedido</label>
                             <select name="nivel_urgencia">
                                 <option value="Normal">Normal (Até 3 dias)</option>
                                 <option value="Urgente">Urgente (Até 24h)</option>
@@ -1549,21 +1273,9 @@
                             </select>
                         </div>
                     </div>
-
-                    <div class="modal-form-group full-width">
-                        <label><i class="fas fa-paperclip"></i> Anexar Documentos / Caderno de Encargos / Imagens (PDF, PNG, JPG)</label>
-                        <input type="file" name="anexo_ficheiro" accept=".pdf,image/*">
-                        <span style="font-size: 11px; color: var(--text-muted);">Pode anexar listas de compras, fotos do local ou documentos de especificação.</span>
-                    </div>
-
-                    <div class="modal-form-group full-width">
-                        <label><i class="fas fa-align-left"></i> Especificações Detalhadas do Pedido *</label>
-                        <textarea name="detalhes_pedido" rows="4" placeholder="Descreva pormenorizadamente o que necessita (quantidades, dimensões, horários, necessidades específicas)..." required></textarea>
-                    </div>
-
-                    <button type="submit" style="width:100%; padding:12px; background-color:var(--primary-color); color:#fff; border:none; border-radius:6px; font-weight:bold; font-size:15px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;">
-                        <i class="fas fa-paper-plane"></i> Submeter Pedido de Serviço
-                    </button>
+                    <div class="modal-form-group full-width"><label><i class="fas fa-paperclip"></i> Anexar Documentos / Ficheiro</label><input type="file" name="anexo_ficheiro" accept=".pdf,image/*"></div>
+                    <div class="modal-form-group full-width"><label><i class="fas fa-align-left"></i> Especificações Detalhadas *</label><textarea name="detalhes_pedido" rows="4" required></textarea></div>
+                    <button type="submit" style="width:100%; padding:12px; background-color:var(--primary-color); color:#fff; border:none; border-radius:6px; font-weight:bold; font-size:15px; cursor:pointer;"><i class="fas fa-paper-plane"></i> Submeter Pedido de Serviço</button>
                 </form>
             `;
             modal.classList.add('active');
@@ -1581,7 +1293,7 @@
             const body = document.getElementById('assistantBody');
             body.innerHTML += `<div class="assistant-message user">${text}</div>`;
             setTimeout(() => {
-                body.innerHTML += `<div class="assistant-message">A APSAN, LDA presta serviços corporativos, logística transfronteiriça e apoio ao cliente. Contacte-nos pelo +244 944 403 093.</div>`;
+                body.innerHTML += `<div class="assistant-message">A APSAN, LDA presta serviços nas áreas de Tecnologias, Logística, Limpeza e Catering. Contacte-nos pelo +244 944 403 093.</div>`;
                 body.scrollTop = body.scrollHeight;
             }, 500);
         }
@@ -1608,9 +1320,7 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             const initialHash = window.location.hash.replace('#', '');
-            if (initialHash) {
-                switchTab(initialHash, null, false);
-            }
+            if (initialHash) { switchTab(initialHash, null, false); }
         });
     </script>
 </body>
