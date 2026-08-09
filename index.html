@@ -117,7 +117,7 @@
         }
         .mobile-overlay.active { display: block; }
 
-        /* BANNER GLOBAL COM CÍRCULOS EM MOVIMENTO FORTE E DESTAQUE */
+        /* BANNER GLOBAL UNIFICADO (PC E MOBILE) COM CÍRCULOS GLOBAIS FLUTUANTES */
         .global-animated-banner {
             position: relative;
             width: 100%;
@@ -148,7 +148,7 @@
             background: repeating-linear-gradient(45deg, transparent, transparent 12px, rgba(56, 189, 248, 0.05) 12px, rgba(56, 189, 248, 0.05) 24px);
         }
 
-        /* ANÉIS / ESFERAS GLOBAIS COM MOVIMENTO CONSTANTE FORTE */
+        /* ANÉIS / ESFERAS GLOBAIS COM MOVIMENTO CONSTANTE */
         .rotating-ring {
             position: absolute;
             border: 3px solid rgba(56, 189, 248, 0.75);
@@ -321,7 +321,7 @@
             display: inline-flex; align-items: center; gap: 5px;
         }
 
-        /* WORKFLOW / PROCESSO 3D EXATO */
+        /* WORKFLOW / PROCESSO 3D */
         .workflow-section { margin: 60px auto; max-width: 1200px; padding: 0 20px; }
         .workflow-title-box { text-align: center; margin-bottom: 40px; }
         .workflow-title-box h2 { font-size: 2.2rem; color: var(--text-color); font-weight: 800; }
@@ -576,7 +576,7 @@
         </div>
     </header>
 
-    <!-- BANNER GLOBAL COM CÍRCULOS GLOBAIS EM MOVIMENTO FORTE E TEXTO LIMPO -->
+    <!-- BANNER GLOBAL COM CÍRCULOS GLOBAIS FLUTUANTES -->
     <div class="global-animated-banner">
         <div class="banner-world-bg"></div>
         <div class="banner-grid-overlay"></div>
@@ -667,7 +667,7 @@
             </div>
         </div>
 
-        <!-- SECÇÃO DE PROCESSO EM 3 PASSOS COM BLOCOS 3D EXATOS DA REFERÊNCIA -->
+        <!-- SECÇÃO DE PROCESSO EM 3 PASSOS COM BLOCOS 3D -->
         <div class="workflow-section">
             <div class="workflow-title-box">
                 <h2>Como Trabalhamos</h2>
@@ -675,7 +675,6 @@
             </div>
 
             <div class="workflow-grid">
-                <!-- PASSO 01 -->
                 <div class="replica-card">
                     <div class="replica-top-btn" style="background: linear-gradient(135deg, #0d9488, #0f766e);">SOLICITAR SERVIÇO</div>
                     <div class="replica-body">
@@ -698,7 +697,6 @@
                     </div>
                 </div>
 
-                <!-- PASSO 02 -->
                 <div class="replica-card">
                     <div class="replica-top-btn" style="background: linear-gradient(135deg, #65a30d, #4d7c0f);">GESTÃO & LOGÍSTICA</div>
                     <div class="replica-body">
@@ -721,7 +719,6 @@
                     </div>
                 </div>
 
-                <!-- PASSO 03 -->
                 <div class="replica-card">
                     <div class="replica-top-btn" style="background: linear-gradient(135deg, #c026d3, #a21caf);">SUCESSO & CONCLUSÃO</div>
                     <div class="replica-body">
@@ -779,7 +776,7 @@
                 </div>
             </div>
 
-            <!-- SECÇÃO DE TESTEMUNHOS DINÂMICOS (PUBLICADOS IMEDIATAMENTE NO SITE) -->
+            <!-- SECÇÃO DE TESTEMUNHOS DINÂMICOS -->
             <div id="experiencias-section" style="margin: 40px 0; background: var(--card-bg); border: 1px solid var(--border-color); padding: 30px; border-radius: 12px;">
                 <div style="text-align: center; margin-bottom: 25px;">
                     <h2 style="color: var(--primary-color); font-size: 22px;"><i class="fas fa-comments"></i> Experiências dos Nossos Clientes</h2>
@@ -799,7 +796,6 @@
                 </div>
 
                 <div class="testimonials-grid" id="publicTestimonialsGrid">
-                    <!-- Testemunho inicial de exemplo -->
                     <div class="testimonial-card">
                         <div class="stars" style="color: #ffc107;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         <p style="font-size: 14px; font-style: italic; margin-top: 8px;">"A eficiência e o rigor na prestação de serviços da APSAN, LDA superaram as nossas expectativas."</p>
@@ -810,7 +806,6 @@
         </div>
     </section>
 
-    <!-- Demais secções mantêm-se idênticas -->
     <section id="about" class="content-section" style="padding: 40px 20px; max-width: 1200px; margin: 0 auto;">
         <h2>Quem Somos</h2>
         <p style="margin-top: 15px; line-height: 1.6; color: var(--text-muted);">A <strong>APSAN, LDA</strong> destaca-se pela prestação de serviços diversificados com elevado padrão de qualidade, respondendo com rigor às necessidades institucionais, logísticas, tecnológicas e comerciais entre Angola e Namíbia.</p>
@@ -1096,7 +1091,7 @@
         </button>
     </div>
 
-    <!-- MODAL DE SERVIÇOS COM SUBMISSÃO LIMPA -->
+    <!-- MODAL DE SERVIÇOS -->
     <div class="service-modal-overlay" id="serviceModal" onclick="closeServiceDetail(event)">
         <div class="service-modal-content">
             <button class="service-modal-close" onclick="closeServiceModal()">&times;</button>
@@ -1104,7 +1099,7 @@
         </div>
     </div>
 
-    <!-- MODAL DE DENÚNCIAS COM SUBMISSÃO LIMPA -->
+    <!-- MODAL DE DENÚNCIAS -->
     <div class="service-modal-overlay" id="denunciaModal" onclick="closeDenunciaModalOnClick(event)">
         <div class="service-modal-content" style="max-width: 600px;">
             <button class="service-modal-close" onclick="closeDenunciaModal()">&times;</button>
@@ -1126,7 +1121,7 @@
         </div>
     </div>
 
-    <!-- AVISO DE SUCESSO ELEGANTE (MODAL DE CONFIRMAÇÃO) -->
+    <!-- AVISO DE SUCESSO -->
     <div class="service-modal-overlay" id="successModal">
         <div class="service-modal-content" style="max-width: 400px; text-align: center; padding: 40px 30px;">
             <div style="font-size: 50px; color: #28a745; margin-bottom: 15px;"><i class="fas fa-check-circle"></i></div>
@@ -1291,7 +1286,6 @@
 
         function toggleFaq(card) { card.classList.toggle('active'); }
 
-        // --- SISTEMA DE TESTEMUNHOS DINÂMICOS (LOCAL & IMEDIATO) ---
         function toggleTestimonialForm() {
             const f = document.getElementById('testimonialFormContainer');
             f.style.display = f.style.display === 'none' ? 'block' : 'none';
@@ -1306,17 +1300,14 @@
             if (!nome || !mensagem) return;
 
             const iniciais = nome.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
-            
             const novoTestemunho = { nome, cargo, mensagem, iniciais };
             
-            // Salvar no localStorage
             let testemunhos = JSON.parse(localStorage.getItem('apsan_testemunhos') || '[]');
             testemunhos.unshift(novoTestemunho);
             localStorage.setItem('apsan_testemunhos', JSON.stringify(testemunhos));
 
             renderTestemunhoCard(novoTestemunho);
 
-            // Limpar formulário e fechar
             document.getElementById('expNome').value = '';
             document.getElementById('expCargo').value = '';
             document.getElementById('expMensagem').value = '';
@@ -1343,7 +1334,6 @@
             grid.prepend(card);
         }
 
-        // Carregar testemunhos salvos ao iniciar
         window.addEventListener('DOMContentLoaded', () => {
             const saved = JSON.parse(localStorage.getItem('apsan_testemunhos') || '[]');
             saved.forEach(t => renderTestemunhoCard(t));
@@ -1352,7 +1342,6 @@
             if (initialHash) { switchTab(initialHash, null, false); }
         });
 
-        // --- SUBMISSÃO DE FORMULÁRIOS SEM SAIR PARA O FORMSPREE (AJAX LIMPO) ---
         function submitCleanForm(e, formId, successMsg) {
             e.preventDefault();
             const form = document.getElementById(formId);
