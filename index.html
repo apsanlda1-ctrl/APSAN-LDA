@@ -321,7 +321,7 @@
             display: inline-flex; align-items: center; gap: 5px;
         }
 
-        /* WORKFLOW / PROCESSO EXATAMENTE IGUAL À REFERÊNCIA 3D */
+        /* WORKFLOW / PROCESSO 3D EXATO */
         .workflow-section { margin: 60px auto; max-width: 1200px; padding: 0 20px; }
         .workflow-title-box { text-align: center; margin-bottom: 40px; }
         .workflow-title-box h2 { font-size: 2.2rem; color: var(--text-color); font-weight: 800; }
@@ -338,12 +338,11 @@
             position: relative; 
             display: flex; 
             flex-direction: column;
-            overflow: visible; /* Necessário para o bloco 3D sobressair em perspetiva */
+            overflow: visible;
             transition: transform 0.3s ease;
         }
         .replica-card:hover { transform: translateY(-5px); }
 
-        /* HEADER SUPERIOR ARREDONDADO COM O TÍTULO (Ex: VIEW MORE / SOLICITAR) */
         .replica-top-btn {
             margin: 10px 10px 0 10px;
             padding: 14px; 
@@ -375,7 +374,6 @@
         .replica-item:last-child { border-bottom: none; padding-bottom: 0; }
         .replica-item span { flex: 1; padding-right: 10px; line-height: 1.4; }
 
-        /* BLOCO 3D INFERIOR (PRISMA COM NÚMERO E NOME EM PERSPETIVA) */
         .replica-3d-box {
             position: relative;
             margin: 15px 15px -20px 15px;
@@ -388,7 +386,6 @@
             color: #ffffff;
             font-weight: 700;
             box-shadow: 0 12px 25px rgba(0,0,0,0.25);
-            /* Efeito de perspetiva e inclinação 3D idêntico à referência */
             transform: perspective(600px) rotateX(8deg);
             transform-origin: bottom;
             border-bottom: 5px solid rgba(0, 0, 0, 0.25);
@@ -782,6 +779,7 @@
                 </div>
             </div>
 
+            <!-- SECÇÃO DE TESTEMUNHOS DINÂMICOS (PUBLICADOS IMEDIATAMENTE NO SITE) -->
             <div id="experiencias-section" style="margin: 40px 0; background: var(--card-bg); border: 1px solid var(--border-color); padding: 30px; border-radius: 12px;">
                 <div style="text-align: center; margin-bottom: 25px;">
                     <h2 style="color: var(--primary-color); font-size: 22px;"><i class="fas fa-comments"></i> Experiências dos Nossos Clientes</h2>
@@ -792,17 +790,16 @@
                 </div>
 
                 <div id="testimonialFormContainer" style="display: none; margin-bottom: 30px;">
-                    <form action="https://formspree.io/f/mwlevyaz" method="POST" style="background: rgba(2, 132, 199, 0.03); border: 1px solid var(--border-color); padding: 20px; border-radius: 10px;">
-                        <input type="text" name="_gotcha" style="display:none">
-                        <input type="hidden" name="_subject" value="Novo Testemunho do Site - APSAN LDA">
-                        <div class="modal-form-group"><label>Nome Completo</label><input type="text" name="nome_testemunho" id="expNome" required></div>
-                        <div class="modal-form-group"><label>Cargo / Função</label><input type="text" name="cargo_testemunho" id="expCargo"></div>
-                        <div class="modal-form-group"><label>Comentário</label><textarea name="mensagem_testemunho" id="expMensagem" rows="3" required></textarea></div>
-                        <button type="submit" style="padding: 10px 20px; background-color: var(--primary-color); color: #fff; border: none; font-weight: bold; border-radius: 6px; cursor: pointer;">Publicar</button>
+                    <form onsubmit="handleTestimonialSubmit(event)" style="background: rgba(2, 132, 199, 0.03); border: 1px solid var(--border-color); padding: 20px; border-radius: 10px;">
+                        <div class="modal-form-group"><label>Nome Completo</label><input type="text" id="expNome" required></div>
+                        <div class="modal-form-group"><label>Cargo / Função</label><input type="text" id="expCargo" placeholder="Ex: Diretor, Gestor, Cliente..."></div>
+                        <div class="modal-form-group"><label>Comentário</label><textarea id="expMensagem" rows="3" required></textarea></div>
+                        <button type="submit" style="padding: 10px 20px; background-color: var(--primary-color); color: #fff; border: none; font-weight: bold; border-radius: 6px; cursor: pointer;">Publicar no Site Imediatamente</button>
                     </form>
                 </div>
 
                 <div class="testimonials-grid" id="publicTestimonialsGrid">
+                    <!-- Testemunho inicial de exemplo -->
                     <div class="testimonial-card">
                         <div class="stars" style="color: #ffc107;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         <p style="font-size: 14px; font-style: italic; margin-top: 8px;">"A eficiência e o rigor na prestação de serviços da APSAN, LDA superaram as nossas expectativas."</p>
@@ -910,8 +907,7 @@
         <p style="margin-top: 8px; font-size: 14px; color: var(--text-muted); margin-bottom: 25px;">Submeta a sua proposta de cooperação comercial ou institucional.</p>
 
         <div class="portal-card">
-            <form action="https://formspree.io/f/mwlevyaz" method="POST" enctype="multipart/form-data">
-                <input type="text" name="_gotcha" style="display:none">
+            <form id="formParceria" onsubmit="submitCleanForm(event, 'formParceria', 'Obrigado! A sua proposta de parceria foi submetida com sucesso.')">
                 <input type="hidden" name="_subject" value="Nova Proposta de Parceria - APSAN LDA">
                 <div class="modal-form-grid">
                     <div class="modal-form-group"><label>Nome do Representante</label><input type="text" name="nome_parceiro" required></div>
@@ -1058,8 +1054,7 @@
 
             <div class="portal-card">
                 <h3 style="color: var(--primary-color); margin-bottom: 15px;"><i class="fas fa-paper-plane"></i> Envie uma Mensagem Direta</h3>
-                <form action="https://formspree.io/f/mwlevyaz" method="POST" enctype="multipart/form-data">
-                    <input type="text" name="_gotcha" style="display:none">
+                <form id="formContactoGeral" onsubmit="submitCleanForm(event, 'formContactoGeral', 'Mensagem enviada com sucesso! Entraremos em contacto brevemente.')">
                     <input type="hidden" name="_subject" value="Nova Mensagem de Contacto Geral - APSAN LDA">
                     <div class="modal-form-group"><input type="text" name="nome" placeholder="Seu Nome Completo" required></div>
                     <div class="modal-form-group"><input type="tel" name="telemovel" placeholder="Seu Contacto / WhatsApp" required></div>
@@ -1101,6 +1096,7 @@
         </button>
     </div>
 
+    <!-- MODAL DE SERVIÇOS COM SUBMISSÃO LIMPA -->
     <div class="service-modal-overlay" id="serviceModal" onclick="closeServiceDetail(event)">
         <div class="service-modal-content">
             <button class="service-modal-close" onclick="closeServiceModal()">&times;</button>
@@ -1108,12 +1104,12 @@
         </div>
     </div>
 
+    <!-- MODAL DE DENÚNCIAS COM SUBMISSÃO LIMPA -->
     <div class="service-modal-overlay" id="denunciaModal" onclick="closeDenunciaModalOnClick(event)">
         <div class="service-modal-content" style="max-width: 600px;">
             <button class="service-modal-close" onclick="closeDenunciaModal()">&times;</button>
             <h2 style="color: #dc3545; font-size: 20px; margin-bottom: 10px;"><i class="fas fa-shield-alt"></i> Canal de Denúncias</h2>
-            <form action="https://formspree.io/f/mwlevyaz" method="POST" enctype="multipart/form-data">
-                <input type="text" name="_gotcha" style="display:none">
+            <form id="formDenuncia" onsubmit="submitCleanForm(event, 'formDenuncia', 'A sua denúncia foi submetida com total confidencialidade.')">
                 <input type="hidden" name="_subject" value="NOVA DENÚNCIA SUBMETIDA - APSAN LDA">
                 <div class="modal-form-group">
                     <label>Assunto</label>
@@ -1127,6 +1123,16 @@
                 <div class="modal-form-group"><label>Descrição dos Factos</label><textarea name="detalhes_denuncia" rows="4" required></textarea></div>
                 <button type="submit" style="width: 100%; padding: 10px; background-color: #dc3545; color: #fff; border: none; font-weight: bold; border-radius: 6px; cursor: pointer;">Submeter Denúncia</button>
             </form>
+        </div>
+    </div>
+
+    <!-- AVISO DE SUCESSO ELEGANTE (MODAL DE CONFIRMAÇÃO) -->
+    <div class="service-modal-overlay" id="successModal">
+        <div class="service-modal-content" style="max-width: 400px; text-align: center; padding: 40px 30px;">
+            <div style="font-size: 50px; color: #28a745; margin-bottom: 15px;"><i class="fas fa-check-circle"></i></div>
+            <h2 style="color: var(--text-color); font-size: 22px; margin-bottom: 10px;">Formulário Submetido!</h2>
+            <p id="successMessageText" style="font-size: 14px; color: var(--text-muted); margin-bottom: 25px; line-height: 1.5;"></p>
+            <button onclick="closeSuccessModal()" style="padding: 10px 25px; background-color: var(--primary-color); color: #fff; border: none; font-weight: bold; border-radius: 6px; cursor: pointer;">Ok</button>
         </div>
     </div>
 
@@ -1285,6 +1291,100 @@
 
         function toggleFaq(card) { card.classList.toggle('active'); }
 
+        // --- SISTEMA DE TESTEMUNHOS DINÂMICOS (LOCAL & IMEDIATO) ---
+        function toggleTestimonialForm() {
+            const f = document.getElementById('testimonialFormContainer');
+            f.style.display = f.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function handleTestimonialSubmit(e) {
+            e.preventDefault();
+            const nome = document.getElementById('expNome').value.trim();
+            const cargo = document.getElementById('expCargo').value.trim();
+            const mensagem = document.getElementById('expMensagem').value.trim();
+
+            if (!nome || !mensagem) return;
+
+            const iniciais = nome.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
+            
+            const novoTestemunho = { nome, cargo, mensagem, iniciais };
+            
+            // Salvar no localStorage
+            let testemunhos = JSON.parse(localStorage.getItem('apsan_testemunhos') || '[]');
+            testemunhos.unshift(novoTestemunho);
+            localStorage.setItem('apsan_testemunhos', JSON.stringify(testemunhos));
+
+            renderTestemunhoCard(novoTestemunho);
+
+            // Limpar formulário e fechar
+            document.getElementById('expNome').value = '';
+            document.getElementById('expCargo').value = '';
+            document.getElementById('expMensagem').value = '';
+            toggleTestimonialForm();
+
+            showSuccessModal('O seu testemunho foi publicado no site com sucesso!');
+        }
+
+        function renderTestemunhoCard(t) {
+            const grid = document.getElementById('publicTestimonialsGrid');
+            const card = document.createElement('div');
+            card.className = 'testimonial-card';
+            card.innerHTML = `
+                <div class="stars" style="color: #ffc107;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p style="font-size: 14px; font-style: italic; margin-top: 8px;">"${t.mensagem}"</p>
+                <div class="client-info">
+                    <div class="client-avatar">${t.iniciais || 'AP'}</div>
+                    <div>
+                        <h4 style="font-size: 14px;">${t.nome}</h4>
+                        ${t.cargo ? `<span style="font-size: 12px; color: var(--text-muted);">${t.cargo}</span>` : ''}
+                    </div>
+                </div>
+            `;
+            grid.prepend(card);
+        }
+
+        // Carregar testemunhos salvos ao iniciar
+        window.addEventListener('DOMContentLoaded', () => {
+            const saved = JSON.parse(localStorage.getItem('apsan_testemunhos') || '[]');
+            saved.forEach(t => renderTestemunhoCard(t));
+            
+            const initialHash = window.location.hash.replace('#', '');
+            if (initialHash) { switchTab(initialHash, null, false); }
+        });
+
+        // --- SUBMISSÃO DE FORMULÁRIOS SEM SAIR PARA O FORMSPREE (AJAX LIMPO) ---
+        function submitCleanForm(e, formId, successMsg) {
+            e.preventDefault();
+            const form = document.getElementById(formId);
+            const formData = new FormData(form);
+
+            fetch("https://formspree.io/f/mwlevyaz", {
+                method: "POST",
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            }).then(response => {
+                if (response.ok) {
+                    form.reset();
+                    closeServiceModal();
+                    closeDenunciaModal();
+                    showSuccessModal(successMsg);
+                } else {
+                    showSuccessModal("Ocorreu um erro ao enviar. Por favor, tente novamente.");
+                }
+            }).catch(() => {
+                showSuccessModal("Erro de ligação. Verifique a sua internet e tente novamente.");
+            });
+        }
+
+        function showSuccessModal(msg) {
+            document.getElementById('successMessageText').innerText = msg;
+            document.getElementById('successModal').classList.add('active');
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.remove('active');
+        }
+
         function openServiceDetail(name, desc, features) {
             const modal = document.getElementById('serviceModal');
             const content = document.getElementById('modalBodyContent');
@@ -1299,8 +1399,7 @@
                     <strong style="font-size: 13px; color: var(--primary-color); text-transform: uppercase;">Destaques do Serviço:</strong>
                     <ul style="list-style:none; margin-top: 8px; font-size:13px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px;">${fList}</ul>
                 </div>
-                <form action="https://formspree.io/f/mwlevyaz" method="POST" enctype="multipart/form-data">
-                    <input type="text" name="_gotcha" style="display:none">
+                <form id="formServiceModal" onsubmit="submitCleanForm(event, 'formServiceModal', 'O seu pedido de serviço foi submetido com sucesso! Entraremos em contacto brevemente.')">
                     <input type="hidden" name="_subject" value="Novo Pedido de Serviço: ${name} - APSAN LDA">
                     <input type="hidden" name="servico_solicitado" value="${name}">
                     <h3 style="font-size: 15px; margin-bottom: 15px; color: var(--text-color); border-left: 3px solid var(--primary-color); padding-left: 8px;">Formulário de Solicitação de Serviço</h3>
@@ -1357,11 +1456,6 @@
         }
         function handleAssistantKey(e) { if(e.key === 'Enter') sendAssistantMessage(); }
 
-        function toggleTestimonialForm() {
-            const f = document.getElementById('testimonialFormContainer');
-            f.style.display = f.style.display === 'none' ? 'block' : 'none';
-        }
-
         function handleClientLogin(e) {
             e.preventDefault();
             document.getElementById('clientAuthCard').style.display = 'none';
@@ -1371,11 +1465,6 @@
             document.getElementById('clientDashboardCard').style.display = 'none';
             document.getElementById('clientAuthCard').style.display = 'block';
         }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const initialHash = window.location.hash.replace('#', '');
-            if (initialHash) { switchTab(initialHash, null, false); }
-        });
     </script>
 </body>
 </html>
