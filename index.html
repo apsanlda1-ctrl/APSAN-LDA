@@ -1104,16 +1104,17 @@
             </div>
             <div class="assistant-body" id="assistantBody">
                 <div class="assistant-message">
-                    Olá! Sou a Azny Gabriel, assistente virtual da APSAN, LDA. Como posso ajudar hoje?
+                    Olá! Sou a Azny Gabriel, assistente virtual da APSAN, LDA. Como posso ajudar hoje? Pergunte-me sobre os nossos serviços, NIF, contactos, compras na Namíbia ou dados da empresa!
                     <div class="chat-suggestions">
-                        <span class="chat-chip" onclick="sendQuickQuery('Serviços Extras')">Serviços Extras</span>
-                        <span class="chat-chip" onclick="sendQuickQuery('Compras na Namíbia')">Compras na Namíbia</span>
-                        <span class="chat-chip" onclick="sendQuickQuery('Contactos')">Falar com Operador</span>
+                        <span class="chat-chip" onclick="sendQuickQuery('Qual é o NIF e dados da empresa?')">NIF e Dados</span>
+                        <span class="chat-chip" onclick="sendQuickQuery('Quais são os serviços prestados?')">Serviços</span>
+                        <span class="chat-chip" onclick="sendQuickQuery('Como funcionam as compras na Namíbia?')">Compras Namíbia</span>
+                        <span class="chat-chip" onclick="sendQuickQuery('Quais são os contactos?')">Contactos</span>
                     </div>
                 </div>
             </div>
             <div class="assistant-footer">
-                <input type="text" id="assistantInput" placeholder="Mensagem..." onkeypress="handleAssistantKey(event)">
+                <input type="text" id="assistantInput" placeholder="Escreva a sua pergunta..." onkeypress="handleAssistantKey(event)">
                 <button onclick="sendAssistantMessage()"><i class="fas fa-paper-plane"></i></button>
             </div>
         </div>
@@ -1463,19 +1464,58 @@
         function closeDenunciaModalOnClick(e) { if(e.target.id === 'denunciaModal') closeDenunciaModal(); }
 
         function toggleAssistant() { document.getElementById('assistantWindow').classList.toggle('active'); }
+
+        // CÉREBRO INTELIGENTE DA ASSISTENTE AZNY GABRIEL COM BASE NAS INFORMAÇÕES REAIS DO SITE
         function sendQuickQuery(text) {
             const body = document.getElementById('assistantBody');
             body.innerHTML += `<div class="assistant-message user">${text}</div>`;
+            
             setTimeout(() => {
-                body.innerHTML += `<div class="assistant-message">A APSAN, LDA presta serviços nas áreas de Tecnologias, Logística, Limpeza e Catering. Contacte-nos pelo +244 944 403 093.</div>`;
+                const response = getAznyResponse(text);
+                body.innerHTML += `<div class="assistant-message">${response}</div>`;
                 body.scrollTop = body.scrollHeight;
-            }, 500);
+            }, 400);
         }
+
         function sendAssistantMessage() {
             const input = document.getElementById('assistantInput');
-            if(input.value.trim()) { sendQuickQuery(input.value); input.value = ''; }
+            const val = input.value.trim();
+            if(val) { 
+                sendQuickQuery(val); 
+                input.value = ''; 
+            }
         }
+
         function handleAssistantKey(e) { if(e.key === 'Enter') sendAssistantMessage(); }
+
+        function getAznyResponse(query) {
+            const q = query.toLowerCase();
+
+            if (q.includes('nif') || q.includes('registo') || q.includes('fiscal') || q.includes('dados')) {
+                return "O NIF oficial da APSAN, LDA é **5002085011**. A empresa está devidamente registada, ativa e regularizada em Angola, cumprindo todas as obrigações fiscais perante a AGT.";
+            }
+            else if (q.includes('sede') || q.includes('onde') || q.includes('localização') || q.includes('morada') || q.includes('ondjiva') || q.includes('namacunde')) {
+                return "A nossa **Sede Principal** fica localizada em **Namacunde / Santa Clara**, Província do Cunene, em Angola. Contamos também com um escritório de representação comercial em **Ondjiva**.";
+            }
+            else if (q.includes('contacto') || q.includes('telefone') || q.includes('whatsapp') || q.includes('email') || q.includes('falar')) {
+                return "Pode contactar-nos diretamente pelas seguintes linhas:<br>• **WhatsApp / Telemóvel:** +244 944 403 093<br>• **Outros números:** +244 946 195 402 / +244 934 437 739<br>• **E-mail:** info@apsanlda.com";
+            }
+            else if (q.includes('serviço') || q.includes('o que fazem') || q.includes('limpeza') || q.includes('catering') || q.includes('software') || q.includes('internet')) {
+                return "Prestamos um conjunto completo de **Serviços Principais**: 1. Limpeza Institucional, 2. Material de Escritório, 3. Catering e Eventos Corporativos, 4. Internet & Cabling Estruturado, 5. Criação de Software & Gestão, 6. Transportes & Aluguer de Carros, e 7. Importação & Exportação.";
+            }
+            else if (q.includes('extra') || q.includes('namíbia') || q.includes('trad') || q.includes('hospital') || q.includes('redes sociais')) {
+                return "Os nossos **Serviços Extras** incluem:<br>• **Acompanhamento Hospitalar Humanizado**<br>• **Tradução Oficial Juramentada**<br>• **Compras na Namíbia** (com cotação, transporte e despacho)<br>• **Gestão de Redes Sociais & Marketing Digital**";
+            }
+            else if (q.includes('pagamento') || q.includes('pagar')) {
+                return "Aceitamos transferências bancárias em Kwanzas (Kz), depósitos diretos, pagamentos via Express e acordos de faturação a 30 dias para contratos corporativos aprovados.";
+            }
+            else if (q.includes('denúncia') || q.includes('abuso') || q.includes('ética')) {
+                return "Dispomos de um **Canal de Denúncias** dedicado e confidencial no site para reportar condutas antiéticas ou irregularidades operacionais com total segurança.";
+            }
+            else {
+                return "Compreendi a sua questão! Para além destas informações, a APSAN, LDA assegura atendimento personalizado e resposta a orçamentos em até 24h úteis. Pode enviar-nos uma mensagem pelo formulário de contacto ou contactar via WhatsApp em **+244 944 403 093**.";
+            }
+        }
 
         function handleClientLogin(e) {
             e.preventDefault();
