@@ -321,42 +321,93 @@
             display: inline-flex; align-items: center; gap: 5px;
         }
 
-        /* WORKFLOW / PROCESSO */
+        /* WORKFLOW / PROCESSO EXATAMENTE IGUAL À REFERÊNCIA 3D */
         .workflow-section { margin: 60px auto; max-width: 1200px; padding: 0 20px; }
         .workflow-title-box { text-align: center; margin-bottom: 40px; }
         .workflow-title-box h2 { font-size: 2.2rem; color: var(--text-color); font-weight: 800; }
         .workflow-title-box p { color: var(--text-muted); font-size: 1rem; margin-top: 8px; }
 
         .workflow-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        
         .replica-card {
-            background: var(--card-bg); border: 1px solid var(--border-color);
-            border-radius: 16px; padding: 0 0 20px 0;
+            background: var(--card-bg); 
+            border: 1px solid var(--border-color);
+            border-radius: 16px; 
+            padding-bottom: 30px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-            position: relative; display: flex; flex-direction: column;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative; 
+            display: flex; 
+            flex-direction: column;
+            overflow: visible; /* Necessário para o bloco 3D sobressair em perspetiva */
+            transition: transform 0.3s ease;
         }
-        .replica-card:hover { transform: translateY(-6px); box-shadow: 0 25px 40px rgba(0,0,0,0.15); }
+        .replica-card:hover { transform: translateY(-5px); }
+
+        /* HEADER SUPERIOR ARREDONDADO COM O TÍTULO (Ex: VIEW MORE / SOLICITAR) */
         .replica-top-btn {
-            margin: -1px -1px 0 -1px; padding: 16px; text-align: center;
-            color: #ffffff; font-weight: 800; font-size: 1.1rem; letter-spacing: 1px;
-            border-top-left-radius: 16px; border-top-right-radius: 16px;
+            margin: 10px 10px 0 10px;
+            padding: 14px; 
+            text-align: center;
+            color: #ffffff; 
+            font-weight: 800; 
+            font-size: 1.05rem; 
+            letter-spacing: 1px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         }
-        .replica-body { padding: 25px 25px 15px 25px; display: flex; flex-direction: column; gap: 16px; }
+
+        .replica-body { 
+            padding: 20px 20px 10px 20px; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 16px; 
+        }
+
         .replica-item {
-            display: flex; align-items: center; justify-content: space-between;
-            font-size: 0.9rem; color: var(--text-muted); padding-bottom: 12px;
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between;
+            font-size: 0.88rem; 
+            color: var(--text-muted); 
+            padding-bottom: 12px;
             border-bottom: 1px solid var(--border-color);
         }
         .replica-item:last-child { border-bottom: none; padding-bottom: 0; }
         .replica-item span { flex: 1; padding-right: 10px; line-height: 1.4; }
-        .replica-3d-banner {
-            margin: 15px 20px 0 20px; padding: 15px 20px; border-radius: 8px;
-            color: #ffffff; display: flex; align-items: center; justify-content: space-between;
-            font-weight: 700; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            transform: perspective(700px) rotateX(4deg);
+
+        /* BLOCO 3D INFERIOR (PRISMA COM NÚMERO E NOME EM PERSPETIVA) */
+        .replica-3d-box {
+            position: relative;
+            margin: 15px 15px -20px 15px;
+            height: 75px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            color: #ffffff;
+            font-weight: 700;
+            box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+            /* Efeito de perspetiva e inclinação 3D idêntico à referência */
+            transform: perspective(600px) rotateX(8deg);
+            transform-origin: bottom;
+            border-bottom: 5px solid rgba(0, 0, 0, 0.25);
         }
-        .replica-3d-banner .banner-text { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.95; }
-        .replica-3d-banner .banner-number { font-size: 2rem; font-weight: 900; line-height: 1; }
+        
+        .replica-3d-box .box-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            opacity: 0.9;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+        }
+
+        .replica-3d-box .box-number {
+            font-size: 2.2rem;
+            font-weight: 900;
+            line-height: 1;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.4);
+        }
 
         .stats-container {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -619,7 +670,7 @@
             </div>
         </div>
 
-        <!-- SECÇÃO DE PROCESSO EM 3 PASSOS -->
+        <!-- SECÇÃO DE PROCESSO EM 3 PASSOS COM BLOCOS 3D EXATOS DA REFERÊNCIA -->
         <div class="workflow-section">
             <div class="workflow-title-box">
                 <h2>Como Trabalhamos</h2>
@@ -627,6 +678,7 @@
             </div>
 
             <div class="workflow-grid">
+                <!-- PASSO 01 -->
                 <div class="replica-card">
                     <div class="replica-top-btn" style="background: linear-gradient(135deg, #0d9488, #0f766e);">SOLICITAR SERVIÇO</div>
                     <div class="replica-body">
@@ -643,12 +695,13 @@
                             <i class="fas fa-check" style="color: #0d9488; font-weight: bold;"></i>
                         </div>
                     </div>
-                    <div class="replica-3d-banner" style="background: linear-gradient(135deg, #0d9488, #115e59);">
-                        <span class="banner-text">Diagnóstico</span>
-                        <span class="banner-number">01</span>
+                    <div class="replica-3d-box" style="background: linear-gradient(135deg, #0d9488, #115e59);">
+                        <span class="box-label">APSAN Soluções</span>
+                        <span class="box-number">01</span>
                     </div>
                 </div>
 
+                <!-- PASSO 02 -->
                 <div class="replica-card">
                     <div class="replica-top-btn" style="background: linear-gradient(135deg, #65a30d, #4d7c0f);">GESTÃO & LOGÍSTICA</div>
                     <div class="replica-body">
@@ -665,12 +718,13 @@
                             <i class="fas fa-check" style="color: #65a30d; font-weight: bold;"></i>
                         </div>
                     </div>
-                    <div class="replica-3d-banner" style="background: linear-gradient(135deg, #65a30d, #3f6212);">
-                        <span class="banner-text">Operação</span>
-                        <span class="banner-number">02</span>
+                    <div class="replica-3d-box" style="background: linear-gradient(135deg, #65a30d, #3f6212);">
+                        <span class="box-label">APSAN Soluções</span>
+                        <span class="box-number">02</span>
                     </div>
                 </div>
 
+                <!-- PASSO 03 -->
                 <div class="replica-card">
                     <div class="replica-top-btn" style="background: linear-gradient(135deg, #c026d3, #a21caf);">SUCESSO & CONCLUSÃO</div>
                     <div class="replica-body">
@@ -687,9 +741,9 @@
                             <i class="fas fa-check" style="color: #c026d3; font-weight: bold;"></i>
                         </div>
                     </div>
-                    <div class="replica-3d-banner" style="background: linear-gradient(135deg, #c026d3, #86198f);">
-                        <span class="banner-text">Entrega</span>
-                        <span class="banner-number">03</span>
+                    <div class="replica-3d-box" style="background: linear-gradient(135deg, #c026d3, #86198f);">
+                        <span class="box-label">APSAN Soluções</span>
+                        <span class="box-number">03</span>
                     </div>
                 </div>
             </div>
