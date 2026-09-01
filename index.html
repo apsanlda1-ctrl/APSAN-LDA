@@ -1214,9 +1214,6 @@
         async function loadCMSPosts() {
             const container = document.getElementById('dynamicPostsContainer');
             try {
-                // Tenta carregar a lista de posts do PagesCMS (normalmente gerada em assets/posts.json ou via API do GitHub Pages)
-                // Caso use Decap/PagesCMS com ficheiros Markdown, procuramos no diretório _posts/ ou num índice JSON.
-                // Abaixo implementamos um leitor robusto que busca o ficheiro índice ou faz parse se houver JSON de posts.
                 const response = await fetch('./_posts.json').catch(() => null);
                 
                 if (response && response.ok) {
@@ -1227,8 +1224,6 @@
                     }
                 }
 
-                // Fallback dinâmico integrado caso o ficheiro JSON ainda não exista no build estático, 
-                // renderizando o post atual criado no CMS (ex: Grandes momentos de elaboriais)
                 renderFallbackPost(container);
 
             } catch (err) {
