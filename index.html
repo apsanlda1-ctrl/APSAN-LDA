@@ -1210,10 +1210,18 @@
     </footer>
 
     <script>
-        // CARREGAMENTO AUTOMÁTICO DE POSTS DO PAGESCMS (VIA GITHUB REPO CONTENTS OU JSON INDEX)
+        // CARREGAMENTO AUTOMÁTICO DE POSTS (SUPORTE LOCALSTORAGE E PAGESCMS)
         async function loadCMSPosts() {
             const container = document.getElementById('dynamicPostsContainer');
             try {
+                // 1. Verifica se existem posts salvos/publicados no localStorage (útil para testes imediatos e sincronização do CMS)
+                const localPosts = JSON.parse(localStorage.getItem('apsan_cms_posts') || '[]');
+                if (localPosts.length > 0) {
+                    renderPosts(localPosts, container);
+                    return;
+                }
+
+                // 2. Tenta carregar o ficheiro índice JSON gerado pelo CMS
                 const response = await fetch('./_posts.json').catch(() => null);
                 
                 if (response && response.ok) {
@@ -1224,6 +1232,7 @@
                     }
                 }
 
+                // 3. Fallback padrão caso nenhum índice JSON seja encontrado
                 renderFallbackPost(container);
 
             } catch (err) {
@@ -1253,7 +1262,7 @@
                     <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); margin-bottom: 20px;">
                         ${post.cover_image ? `<img src="${post.cover_image}" style="width:100%; max-height:350px; object-fit:cover;" alt="${post.title}">` : ''}
                         <div style="padding: 25px;">
-                            <span style="font-size: 12px; color: var(--primary-color); font-weight: bold;">Publicação &bull; ${post.date || 'Agosto de 2026'}</span>
+                            <span style="font-size: 12px; color: var(--primary-color); font-weight: bold;">Publicação &bull; ${post.date || 'Recente'}</span>
                             <h3 style="color: var(--text-color); margin: 10px 0; font-size: 1.4rem;">${post.title}</h3>
                             <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
                                 ${post.excerpt || post.body || ''}
