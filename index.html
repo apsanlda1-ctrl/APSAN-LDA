@@ -2698,6 +2698,10 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
             let posts = [];
 
             // 1. Índices JSON, se existirem.
+            // IMPORTANTE: o índice pode estar desatualizado e conter apenas 1 post.
+            // Por isso NÃO interrompemos aqui. As fontes do GitHub são sempre
+            // consultadas e depois fazemos uma fusão sem duplicados.
+            const jsonPosts = [];
             const jsonSources = ['./_posts.json', './posts.json', './posts/index.json'];
             for (const source of jsonSources) {
                 try {
@@ -2705,25 +2709,42 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
                     if (!response.ok) continue;
                     const data = await response.json();
                     if (Array.isArray(data) && data.length) {
-                        posts = data.map(post => ({ ...post, repository: post.repository || APSAN_CMS_REPOSITORIES[0] }));
-                        break;
+                        jsonPosts.push(...data.map(post => ({ ...post, repository: post.repository || APSAN_CMS_REPOSITORIES[0] })));
                     }
                 } catch (e) {}
             }
 
-            // 2. Fonte principal: ficheiros _posts do repositório GitHub.
-            if (!posts.length) posts = await fetchGitHubPosts();
+            // 2. Fonte principal: TODOS os ficheiros _posts/posts do repositório GitHub.
+            // Não usamos o JSON sozinho, porque ele pode ter somente uma publicação.
+            let githubPosts = await fetchGitHubPosts();
 
-            // 3. Se a árvore recursiva do GitHub falhar (ex.: limite temporário da API),
-            // usa diretamente a API de conteúdo da pasta _posts.
-            if (!posts.length) posts = await fetchPostsFromContentsAPI();
+            // 3. Se a árvore recursiva do GitHub falhar, usa diretamente a API
+            // de conteúdo da pasta _posts.
+            if (!githubPosts.length) githubPosts = await fetchPostsFromContentsAPI();
 
             // 4. Fallback direto para os posts já publicados.
-            // Assim, uma falha temporária da API nunca apaga a secção de Publicações.
-            if (!posts.length) posts = await fetchKnownPostsFallback();
+            const knownPosts = githubPosts.length ? [] : await fetchKnownPostsFallback();
 
             // 5. Último recurso: páginas já publicadas no sitemap.
-            if (!posts.length) posts = await discoverPublishedPostsFromSitemap();
+            const sitemapPosts = (githubPosts.length || knownPosts.length) ? [] : await discoverPublishedPostsFromSitemap();
+
+            // 6. Junta todas as fontes disponíveis. O mesmo post só entra uma vez.
+            // A prioridade é: GitHub -> fallback conhecido -> JSON -> sitemap.
+            const merged = [];
+            const seen = new Set();
+            const postKey = post => String(
+                post.filePath || post.rawUrl || post.url ||
+                `${post.title || ''}|${post.date || post.published_at || ''}`
+            ).toLowerCase().trim();
+            for (const list of [githubPosts, knownPosts, jsonPosts, sitemapPosts]) {
+                for (const post of (list || [])) {
+                    const key = postKey(post);
+                    if (!key || seen.has(key)) continue;
+                    seen.add(key);
+                    merged.push(post);
+                }
+            }
+            posts = merged;
 
             posts.sort((a, b) => {
                 const da = new Date(a.date || a.published_at || 0).getTime();
