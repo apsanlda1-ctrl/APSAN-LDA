@@ -1589,6 +1589,88 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
  .cms-post-modal-nav button{width:42px;height:42px}
 }
 </style>
+
+<style id="mobile-menu-fix">
+/* MOBILE: menu nunca ocupa metade da página */
+@media (max-width: 900px) {
+  html, body {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+  .nav-links-clean {
+    position: fixed !important;
+    top: 78px !important;
+    right: 12px !important;
+    left: 12px !important;
+    width: auto !important;
+    max-width: none !important;
+    height: auto !important;
+    max-height: calc(100vh - 95px) !important;
+    overflow-y: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding: 18px !important;
+    border: 1px solid rgba(255,255,255,.14) !important;
+    border-radius: 22px !important;
+    background: rgba(3,52,102,.98) !important;
+    box-shadow: 0 24px 70px rgba(0,0,0,.30) !important;
+    transform: translateY(-12px) scale(.98) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transition: opacity .22s ease, transform .22s ease, visibility .22s ease !important;
+    z-index: 1002 !important;
+  }
+  .nav-links-clean.mobile-active {
+    transform: translateY(0) scale(1) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+  .nav-links-clean li {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+  .nav-links-clean a {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 12px 14px !important;
+    margin: 2px 0 !important;
+    border-radius: 12px !important;
+  }
+  .mobile-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    background: rgba(2,20,38,.28) !important;
+    backdrop-filter: blur(2px) !important;
+    z-index: 1000 !important;
+  }
+  .mobile-overlay:not(.active) {
+    display: none !important;
+  }
+  .header-clean, .nav-container-clean {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .nav-container-clean {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .nav-links-clean {
+    top: 72px !important;
+    left: 10px !important;
+    right: 10px !important;
+    border-radius: 20px !important;
+  }
+}
+</style>
+
 </head>
 <body data-theme="light">
 <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
