@@ -1590,87 +1590,128 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
 }
 </style>
 
-<style id="mobile-menu-fix">
-/* MOBILE: menu nunca ocupa metade da página */
-@media (max-width: 900px) {
-  html, body {
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow-x: hidden !important;
+<style id="apsan-mobile-final-fix">
+/* =========================================================
+   CORREÇÃO FINAL MOBILE — banner central, posts visíveis,
+   menu compacto em vez de painel lateral gigante
+   ========================================================= */
+@media (max-width: 760px){
+  html,body{width:100%;max-width:100%;overflow-x:hidden!important}
+  .global-animated-banner{
+    width:calc(100% - 24px)!important;
+    max-width:none!important;
+    margin:14px 12px 18px!important;
+    height:140px!important;
+    left:auto!important;
+    right:auto!important;
+    transform:none!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    text-align:center!important;
+    box-sizing:border-box!important;
   }
-  .nav-links-clean {
-    position: fixed !important;
-    top: 78px !important;
-    right: 12px !important;
-    left: 12px !important;
-    width: auto !important;
-    max-width: none !important;
-    height: auto !important;
-    max-height: calc(100vh - 95px) !important;
-    overflow-y: auto !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: stretch !important;
-    padding: 18px !important;
-    border: 1px solid rgba(255,255,255,.14) !important;
-    border-radius: 22px !important;
-    background: rgba(3,52,102,.98) !important;
-    box-shadow: 0 24px 70px rgba(0,0,0,.30) !important;
-    transform: translateY(-12px) scale(.98) !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-    transition: opacity .22s ease, transform .22s ease, visibility .22s ease !important;
-    z-index: 1002 !important;
+  .banner-content-box{
+    width:100%!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:center!important;
+    text-align:center!important;
+    padding:0 14px!important;
+    margin:0 auto!important;
   }
-  .nav-links-clean.mobile-active {
-    transform: translateY(0) scale(1) !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    pointer-events: auto !important;
+  .banner-content-box h2,.banner-content-box p{width:100%!important;text-align:center!important;margin-left:auto!important;margin-right:auto!important}
+  .banner-content-box h2{font-size:1.22rem!important}
+  .banner-content-box p{font-size:.78rem!important;line-height:1.45!important}
+
+  /* Posts ficam efetivamente dentro do fluxo da primeira página. */
+  #home-posts{
+    display:block!important;
+    visibility:visible!important;
+    opacity:1!important;
+    width:calc(100% - 20px)!important;
+    max-width:none!important;
+    margin:28px 10px 30px!important;
+    padding:36px 14px 44px!important;
+    box-sizing:border-box!important;
   }
-  .nav-links-clean li {
-    width: 100% !important;
-    margin: 0 !important;
+  #home-posts .dynamic-posts-container{display:block!important;visibility:visible!important;opacity:1!important}
+  #home-posts .cms-post-grid{
+    display:flex!important;
+    flex-direction:row!important;
+    flex-wrap:nowrap!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    width:100%!important;
+    max-width:100%!important;
+    gap:14px!important;
+    padding:8px 2px 18px!important;
+    touch-action:pan-x!important;
+    -webkit-overflow-scrolling:touch!important;
   }
-  .nav-links-clean a {
-    width: 100% !important;
-    box-sizing: border-box !important;
-    padding: 12px 14px !important;
-    margin: 2px 0 !important;
-    border-radius: 12px !important;
+  #home-posts .cms-post-card{
+    display:flex!important;
+    flex:0 0 86vw!important;
+    width:86vw!important;
+    max-width:340px!important;
+    min-width:280px!important;
   }
-  .mobile-overlay {
-    position: fixed !important;
-    inset: 0 !important;
-    background: rgba(2,20,38,.28) !important;
-    backdrop-filter: blur(2px) !important;
-    z-index: 1000 !important;
+
+  /* Menu dos três pontos: pequeno popover sobre a página. */
+  .mobile-overlay{display:none!important}
+  .mobile-overlay.active{display:block!important;position:fixed!important;inset:0!important;background:rgba(2,14,28,.12)!important;z-index:1000!important}
+  .nav-links-clean{
+    position:absolute!important;
+    top:calc(100% + 10px)!important;
+    right:12px!important;
+    left:auto!important;
+    width:240px!important;
+    max-width:calc(100vw - 24px)!important;
+    height:auto!important;
+    max-height:70vh!important;
+    overflow-y:auto!important;
+    background:#063766!important;
+    flex-direction:column!important;
+    padding:10px!important;
+    border:1px solid rgba(255,255,255,.16)!important;
+    border-radius:18px!important;
+    box-shadow:0 18px 45px rgba(0,0,0,.28)!important;
+    transform:translateY(-8px)!important;
+    opacity:0!important;
+    visibility:hidden!important;
+    pointer-events:none!important;
+    transition:opacity .2s ease,transform .2s ease,visibility .2s ease!important;
+    z-index:1002!important;
+    align-items:stretch!important;
   }
-  .mobile-overlay:not(.active) {
-    display: none !important;
+  .nav-links-clean.mobile-active{
+    right:12px!important;
+    transform:translateY(0)!important;
+    opacity:1!important;
+    visibility:visible!important;
+    pointer-events:auto!important;
   }
-  .header-clean, .nav-container-clean {
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
+  .nav-links-clean li{width:100%!important;margin:0!important}
+  .nav-links-clean a{
+    display:block!important;
+    width:100%!important;
+    box-sizing:border-box!important;
+    padding:12px 13px!important;
+    margin:2px 0!important;
+    border-radius:11px!important;
+    font-size:14px!important;
   }
-  .nav-container-clean {
-    padding-left: 14px !important;
-    padding-right: 14px !important;
-  }
+  .nav-links-clean .btn-contact-header{margin-top:5px!important;text-align:center!important}
+  .header-clean{position:relative!important;z-index:1003!important}
+  .nav-container-clean{position:relative!important}
+  .menu-toggle-mobile{position:relative!important;z-index:1004!important}
 }
 
-@media (max-width: 700px) {
-  .nav-links-clean {
-    top: 72px !important;
-    left: 10px !important;
-    right: 10px !important;
-    border-radius: 20px !important;
-  }
+@media (min-width:761px){
+  .nav-links-clean{position:static!important}
 }
 </style>
-
 </head>
 <body data-theme="light">
 <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
@@ -2289,10 +2330,10 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
         // criar _posts.json manualmente. Ao publicar no Pages CMS, basta atualizar
         // a página do site para a nova publicação aparecer.
         const APSAN_CMS_REPOSITORIES = [
+            { owner: 'apsanlda1-ctrl', repo: 'APSAN-LDA', branch: 'main' },
             { owner: 'APSAN-LDA', repo: 'apsan-lda', branch: 'main' },
             { owner: 'apsanlda1-ctrl', repo: 'apsan-lda', branch: 'main' },
-            { owner: 'APSAN-LDA', repo: 'APSAN-LDA', branch: 'main' },
-            { owner: 'apsanlda1-ctrl', repo: 'APSAN-LDA', branch: 'main' }
+            { owner: 'APSAN-LDA', repo: 'APSAN-LDA', branch: 'main' }
         ];
 
         function escapeHTML(value) {
@@ -2487,7 +2528,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
             const flushParagraph = () => {
                 if (!paragraph.length) return;
                 const p = paragraph.join(' ').trim();
-                if (p) blocks.push('<p>' + formatInlineMarkdown(p, rawBase) + '</p>');
+                if (p) blocks.push('<p>' + formatInlineMarkdown(p, rawBase, repository) + '</p>');
                 paragraph = [];
             };
             const closeList = () => {
@@ -2503,7 +2544,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
                 if (heading) {
                     flushParagraph(); closeList();
                     const level = heading[1].length;
-                    blocks.push(`<h${level}>${formatInlineMarkdown(heading[2], rawBase)}</h${level}>`);
+                    blocks.push(`<h${level}>${formatInlineMarkdown(heading[2], rawBase, repository)}</h${level}>`);
                     return;
                 }
                 const list = trimmed.match(/^([-*+] |\d+\. )(.+)$/);
@@ -2512,7 +2553,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
                     const ordered = /^\d+\. /.test(list[1]);
                     const wanted = ordered ? 'ol' : 'ul';
                     if (listType !== wanted) { closeList(); listType = wanted; blocks.push('<' + listType + '>'); }
-                    blocks.push('<li>' + formatInlineMarkdown(list[2], rawBase) + '</li>');
+                    blocks.push('<li>' + formatInlineMarkdown(list[2], rawBase, repository) + '</li>');
                     return;
                 }
                 paragraph.push(trimmed);
@@ -2521,7 +2562,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
             return blocks.join('');
         }
 
-        function formatInlineMarkdown(value, rawBase) {
+        function formatInlineMarkdown(value, rawBase, repository) {
             let s = escapeHTML(value);
             s = s.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (_, alt, src) => {
                 const imageUrl = resolvePostAsset(src, rawBase, repository);
@@ -2598,6 +2639,29 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
             } catch (e) { return []; }
         }
 
+        async function fetchPostsFromContentsAPI() {
+            const repo = { owner: 'apsanlda1-ctrl', repo: 'APSAN-LDA', branch: 'main' };
+            try {
+                const endpoint = `https://api.github.com/repos/${repo.owner}/${repo.repo}/contents/_posts?ref=${encodeURIComponent(repo.branch)}`;
+                const response = await fetch(endpoint, { cache: 'no-store', headers: { 'Accept': 'application/vnd.github+json' } });
+                if (!response.ok) return [];
+                const items = await response.json();
+                const files = Array.isArray(items) ? items.filter(item => item.type === 'file' && /\.(md|markdown|mdx)$/i.test(item.name)) : [];
+                const posts = await Promise.all(files.map(async file => {
+                    try {
+                        const rawUrl = file.download_url || `https://raw.githubusercontent.com/${repo.owner}/${repo.repo}/${repo.branch}/${file.path.split('/').map(encodeURIComponent).join('/')}`;
+                        const r = await fetch(rawUrl, { cache: 'no-store' });
+                        if (!r.ok) return null;
+                        const post = parsePostFile(await r.text(), rawUrl, file.path);
+                        post.repository = repo;
+                        post.rawBase = rawUrl.substring(0, rawUrl.lastIndexOf('/') + 1);
+                        return post;
+                    } catch (e) { return null; }
+                }));
+                return posts.filter(Boolean);
+            } catch (e) { return []; }
+        }
+
         async function loadCMSPosts() {
             const containers = document.querySelectorAll('.dynamic-posts-container');
             if (!containers.length) return;
@@ -2611,19 +2675,20 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
                     if (!response.ok) continue;
                     const data = await response.json();
                     if (Array.isArray(data) && data.length) {
-                        posts = data.map(post => ({
-                            ...post,
-                            repository: post.repository || APSAN_CMS_REPOSITORIES[0]
-                        }));
+                        posts = data.map(post => ({ ...post, repository: post.repository || APSAN_CMS_REPOSITORIES[0] }));
                         break;
                     }
                 } catch (e) {}
             }
 
-            // 2. Fonte principal: os ficheiros que o Pages CMS cria no GitHub.
+            // 2. Fonte principal: ficheiros _posts do repositório GitHub.
             if (!posts.length) posts = await fetchGitHubPosts();
 
-            // 3. Último recurso: páginas de posts já publicadas no sitemap.
+            // 3. Se a árvore recursiva do GitHub falhar (ex.: limite temporário da API),
+            // usa diretamente a API de conteúdo da pasta _posts.
+            if (!posts.length) posts = await fetchPostsFromContentsAPI();
+
+            // 4. Último recurso: páginas já publicadas no sitemap.
             if (!posts.length) posts = await discoverPublishedPostsFromSitemap();
 
             posts.sort((a, b) => {
@@ -2632,8 +2697,12 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
                 return db - da;
             });
 
-            if (posts.length) containers.forEach(container => renderPosts(posts, container));
-            else containers.forEach(container => renderFallbackPost(container));
+            if (posts.length) {
+                window.APSANRenderedPosts = posts;
+                containers.forEach(container => renderPosts(posts, container));
+            } else {
+                containers.forEach(container => renderFallbackPost(container));
+            }
         }
 
         function renderFallbackPost(container) {
