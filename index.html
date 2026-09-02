@@ -522,6 +522,7 @@
         }
 
         .content-section { display: none; }
+        .content-section#home .home-posts-inline { display: block !important; }
         .content-section.active-section { display: block; animation: fadeInScale 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         @keyframes fadeInScale { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -1449,6 +1450,9 @@ body:before{
  .content-section,#posts{margin:16px 10px!important;padding:42px 18px!important;border-radius:22px!important}.cms-post-grid{grid-template-columns:1fr!important}
  .cms-post-cover-wrap{height:220px!important}.route-visual-box{padding:25px!important}.route-flex{gap:10px!important}
 }
+
+#home-posts .cms-post-grid{touch-action:pan-y!important}
+#home-posts .cms-post-grid.is-dragging{scroll-snap-type:none!important;scroll-behavior:auto!important}
 </style>
 <style id="apsan-new-template-2pages">
 :root{--nt-navy:#06182f;--nt-navy2:#0a2d52;--nt-blue:#0878c9;--nt-cyan:#22c7e8;--nt-gold:#d7a93d;--nt-ink:#10243c;--nt-muted:#65758a;--nt-bg:#f4f7fb}
@@ -1510,7 +1514,82 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
 .hero-visual-new #heroSlider .hero-slide img{height:405px!important}
 @media(max-width:1050px){.hero-visual-new{display:block!important;min-height:0!important;margin-top:24px}.hero-visual-new .hero-slider-container,.hero-visual-new #heroSlider{width:100%!important;height:360px!important}.hero-visual-new #heroSlider .hero-slide img{height:360px!important}}
 @media(max-width:700px){.hero-visual-new{margin-top:10px}.hero-visual-new #heroSlider{height:300px!important}.hero-visual-new #heroSlider .hero-slide img{height:300px!important}}
-</style></head>
+</style>
+<style id="apsan-horizontal-publicacoes">
+/* =========================================================
+   PUBLICAÇÕES NA PRIMEIRA PÁGINA — CARROSSEL HORIZONTAL
+   ========================================================= */
+#home-posts{
+  position:relative!important;
+  max-width:1320px!important;
+  margin:42px auto 0!important;
+  padding:58px 34px 64px!important;
+  border-radius:32px!important;
+  background:linear-gradient(145deg,#ffffff 0%,#f4f9fc 58%,#edf7fb 100%)!important;
+  border:1px solid rgba(8,120,201,.11)!important;
+  box-shadow:0 28px 75px rgba(6,24,47,.08)!important;
+  overflow:hidden!important;
+}
+#home-posts:before{content:"";position:absolute;width:420px;height:420px;right:-190px;top:-180px;border-radius:50%;border:1px solid rgba(34,199,232,.16);box-shadow:0 0 0 38px rgba(34,199,232,.025),0 0 0 78px rgba(215,169,61,.02);pointer-events:none}
+#home-posts .posts-section-title{position:relative;z-index:2;margin:0!important;font-size:clamp(2rem,3.6vw,3.1rem)!important;display:flex;align-items:center;gap:12px}
+#home-posts .posts-section-subtitle{position:relative;z-index:2;margin-top:10px!important;margin-bottom:26px!important;max-width:760px!important}
+#home-posts .dynamic-posts-container{position:relative;z-index:2;margin-top:0!important}
+#home-posts .cms-post-grid{
+  display:flex!important;
+  flex-wrap:nowrap!important;
+  gap:22px!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  padding:8px 6px 22px!important;
+  margin:0!important;
+  scroll-snap-type:x mandatory!important;
+  scroll-behavior:smooth!important;
+  scrollbar-width:none!important;
+  -webkit-overflow-scrolling:touch!important;
+  cursor:grab!important;
+}
+#home-posts .cms-post-grid:active{cursor:grabbing!important}
+#home-posts .cms-post-grid::-webkit-scrollbar{display:none!important}
+#home-posts .cms-post-card{
+  flex:0 0 360px!important;
+  width:360px!important;
+  scroll-snap-align:start!important;
+  min-height:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+  overflow:hidden!important;
+  transform:none!important;
+}
+#home-posts .cms-post-card:hover{transform:translateY(-7px)!important}
+#home-posts .cms-post-card-content{min-height:245px!important;display:flex!important;flex-direction:column!important;padding:22px 22px 0!important}
+#home-posts .cms-post-card h3{display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important;min-height:49px!important}
+#home-posts .cms-post-excerpt{display:-webkit-box!important;-webkit-line-clamp:3!important;-webkit-box-orient:vertical!important;overflow:hidden!important;min-height:72px!important}
+#home-posts .cms-post-source{margin-top:auto!important}
+#home-posts .cms-post-cover-wrap{height:205px!important;flex:0 0 205px!important}
+#home-posts .cms-post-actions{margin-top:auto!important}
+.posts-carousel-bar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin:2px 6px 0}
+.posts-carousel-hint{display:flex;align-items:center;gap:9px;color:#6d8092;font-size:11px;font-weight:800;letter-spacing:.3px}
+.posts-carousel-hint i{color:#0878c9}
+.posts-carousel-controls{display:flex;gap:8px}
+.posts-carousel-btn{width:40px;height:40px;border-radius:12px;border:1px solid #dbe7ef;background:#fff;color:#0a3154;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 7px 18px rgba(6,24,47,.06);transition:.2s}
+.posts-carousel-btn:hover{background:#0878c9;color:#fff;border-color:#0878c9;transform:translateY(-2px)}
+/* Modal agora permite navegar horizontalmente entre publicações */
+.cms-post-modal-nav{position:absolute;left:0;right:0;top:50%;z-index:8;display:flex;justify-content:space-between;pointer-events:none;padding:0 12px;transform:translateY(-50%)}
+.cms-post-modal-nav button{pointer-events:auto;width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(3,20,38,.78);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 10px 28px rgba(0,0,0,.28);backdrop-filter:blur(10px);transition:.2s}
+.cms-post-modal-nav button:hover{background:#0878c9;transform:scale(1.06)}
+.cms-post-modal-counter{position:absolute;left:50%;bottom:14px;z-index:8;transform:translateX(-50%);padding:7px 12px;border-radius:999px;background:rgba(3,20,38,.72);color:#fff;font-size:11px;font-weight:800;letter-spacing:.5px;backdrop-filter:blur(8px)}
+@media(max-width:760px){
+ #home-posts{margin:28px 10px 0!important;padding:42px 16px 48px!important;border-radius:24px!important}
+ #home-posts .cms-post-grid{gap:15px!important;padding-left:2px!important;padding-right:2px!important}
+ #home-posts .cms-post-card{flex-basis:84vw!important;width:84vw!important}
+ #home-posts .cms-post-cover-wrap{height:205px!important;flex-basis:205px!important}
+ .posts-carousel-bar{align-items:flex-start}
+ .posts-carousel-hint{max-width:190px;line-height:1.45}
+ .cms-post-modal-nav{padding:0 7px}
+ .cms-post-modal-nav button{width:42px;height:42px}
+}
+</style>
+</head>
 <body data-theme="light">
 <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
 <header class="header-clean">
@@ -1524,7 +1603,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
 <li><a class="nav-tab" href="#about" onclick="switchTab('about', event)">Empresa &amp; Confiança</a></li>
 <li><a class="nav-tab" href="#services" onclick="switchTab('services', event)">Serviços</a></li>
 <li><a class="nav-tab" href="#extras" onclick="switchTab('extras', event)">Extras</a></li>
-<li><a class="nav-tab" href="#posts" onclick="switchTab('posts', event)">Publicações</a></li>
+<li><a class="nav-tab" href="#home-posts" onclick="scrollToHomePosts(event)">Publicações</a></li>
 <li><a class="nav-tab" href="#parcerias" onclick="switchTab('parcerias', event)">Parcerias</a></li>
 <li><a class="nav-tab" href="#portal" onclick="switchTab('portal', event)">Empresa</a></li>
 <li><a class="nav-tab" href="#client-area" onclick="switchTab('client-area', event)">Área do Cliente</a></li>
@@ -1649,21 +1728,22 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
 <a class="feature-link" href="#extras" onclick="switchTab('extras', event)">Ver extras <i class="fas fa-chevron-right"></i></a>
 </div>
 </div></div>
-<div class="home-bottom-cta">
-<div><span class="cta-eyebrow">UMA OPERAÇÃO. VÁRIAS SOLUÇÕES.</span><h2>Precisa de uma solução à medida?</h2><p>Fale connosco e explique o que precisa. A nossa equipa orienta o próximo passo.</p></div>
-<button class="btn-primary-new" onclick="switchTab('contact', event)">Falar com a APSAN <i class="fas fa-arrow-right"></i></button>
-</div>
-</div>
-</section>
-<section class="content-section" id="posts" style="padding: 50px 20px; max-width: 1200px; margin: 0 auto;">
+<section id="home-posts" class="home-posts-inline" aria-label="Publicações da APSAN">
 <h2 class="posts-section-title"><i class="fas fa-newspaper"></i> Publicações</h2>
-<p class="posts-section-subtitle">Notícias, atividades, novidades e publicações recentes da APSAN, LDA.</p>
+<p class="posts-section-subtitle">Acompanhe as notícias, atividades e novidades mais recentes da APSAN, LDA.</p>
 <div class="dynamic-posts-container" id="postsPageContainer">
 <div style="text-align:center; padding:25px; color:rgba(255,255,255,0.78);">
 <i class="fas fa-spinner fa-spin"></i> A carregar publicações...
             </div>
 </div>
 </section>
+<div class="home-bottom-cta">
+<div><span class="cta-eyebrow">UMA OPERAÇÃO. VÁRIAS SOLUÇÕES.</span><h2>Precisa de uma solução à medida?</h2><p>Fale connosco e explique o que precisa. A nossa equipa orienta o próximo passo.</p></div>
+<button class="btn-primary-new" onclick="switchTab('contact', event)">Falar com a APSAN <i class="fas fa-arrow-right"></i></button>
+</div>
+</div>
+</section>
+
 <section class="content-section" id="about" style="">
 <div class="company-page-head">
 <div class="hero-kicker"><span class="kicker-dot"></span> SEGUNDA PÁGINA · EMPRESA &amp; CONFIANÇA</div>
@@ -2512,6 +2592,11 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
                         <button type="button" class="cms-post-modal-close" aria-label="Fechar publicação" onclick="closePostModal()">
                             <i class="fas fa-times"></i>
                         </button>
+                        <div class="cms-post-modal-nav" aria-label="Navegar entre publicações">
+                            <button type="button" aria-label="Publicação anterior" onclick="navigatePostModal(-1)"><i class="fas fa-chevron-left"></i></button>
+                            <button type="button" aria-label="Próxima publicação" onclick="navigatePostModal(1)"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                        <div class="cms-post-modal-counter" id="cmsPostModalCounter"></div>
                         <div class="cms-post-modal-scroll" id="cmsPostModalScroll"></div>
                     </div>
                 </div>`);
@@ -2522,11 +2607,15 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
             });
         }
 
-        function openPostModal(index) {
-            const post = window.APSANRenderedPosts && window.APSANRenderedPosts[index];
-            if (!post) return;
-            ensurePostsModal();
+        let currentPostModalIndex = 0;
 
+        function renderPostModalContent(index) {
+            const posts = window.APSANRenderedPosts || [];
+            if (!posts.length) return;
+            if (index < 0) index = posts.length - 1;
+            if (index >= posts.length) index = 0;
+            currentPostModalIndex = index;
+            const post = posts[index];
             const rawBase = post.rawBase || (post.rawUrl ? post.rawUrl.substring(0, post.rawUrl.lastIndexOf('/') + 1) : window.location.href);
             const repository = post.repository || APSAN_CMS_REPOSITORIES[0];
             const image = getPostImage(post, rawBase);
@@ -2555,9 +2644,24 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
                     ${linkHTML}
                 </div>`;
 
+            const counter = document.getElementById('cmsPostModalCounter');
+            if (counter) counter.textContent = `${index + 1} / ${posts.length}`;
+        }
+
+        function openPostModal(index) {
+            const posts = window.APSANRenderedPosts || [];
+            if (!posts[index]) return;
+            ensurePostsModal();
+            renderPostModalContent(index);
             const modal = document.getElementById('cmsPostModal');
             modal.classList.add('is-open');
             document.body.style.overflow = 'hidden';
+        }
+
+        function navigatePostModal(direction) {
+            const posts = window.APSANRenderedPosts || [];
+            if (!posts.length) return;
+            renderPostModalContent(currentPostModalIndex + direction);
         }
 
         function closePostModal() {
@@ -2568,8 +2672,32 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
         }
 
         document.addEventListener('keydown', (event) => {
+            const modal = document.getElementById('cmsPostModal');
+            if (modal && modal.classList.contains('is-open')) {
+                if (event.key === 'ArrowLeft') navigatePostModal(-1);
+                if (event.key === 'ArrowRight') navigatePostModal(1);
+            }
             if (event.key === 'Escape') closePostModal();
         });
+
+        let postModalTouchStartX = 0;
+        let postModalTouchStartY = 0;
+        document.addEventListener('touchstart', (event) => {
+            const modal = document.getElementById('cmsPostModal');
+            if (!modal || !modal.classList.contains('is-open')) return;
+            const touch = event.changedTouches[0];
+            postModalTouchStartX = touch.clientX;
+            postModalTouchStartY = touch.clientY;
+        }, { passive: true });
+        document.addEventListener('touchend', (event) => {
+            const modal = document.getElementById('cmsPostModal');
+            if (!modal || !modal.classList.contains('is-open')) return;
+            const touch = event.changedTouches[0];
+            const dx = touch.clientX - postModalTouchStartX;
+            const dy = touch.clientY - postModalTouchStartY;
+            if (Math.abs(dx) > 65 && Math.abs(dx) > Math.abs(dy) * 1.25) navigatePostModal(dx < 0 ? 1 : -1);
+        }, { passive: true });
+
 
         function renderPosts(posts, container) {
             // Mantém a lista disponível para os modais sem duplicar dados no HTML.
@@ -2610,8 +2738,51 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
                             </button>
                         </div>
                     </article>`;
-            }).join('')}</div>`;
+            }).join('')}</div>
+                <div class="posts-carousel-bar">
+                    <div class="posts-carousel-hint"><i class="fas fa-hand-pointer"></i> Deslize da esquerda para a direita para ver mais publicações</div>
+                    <div class="posts-carousel-controls">
+                        <button type="button" class="posts-carousel-btn" aria-label="Publicações anteriores" onclick="scrollPostsCarousel(-1)"><i class="fas fa-chevron-left"></i></button>
+                        <button type="button" class="posts-carousel-btn" aria-label="Próximas publicações" onclick="scrollPostsCarousel(1)"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>`;
         }
+
+        function scrollPostsCarousel(direction) {
+            const rail = document.querySelector('#home-posts .cms-post-grid');
+            if (!rail) return;
+            const amount = Math.max(300, Math.round(rail.clientWidth * 0.78));
+            rail.scrollBy({ left: direction * amount, behavior: 'smooth' });
+        }
+
+        // Arrastar com o rato no computador + swipe nativo no telemóvel.
+        document.addEventListener('pointerdown', (event) => {
+            const rail = event.target.closest('#home-posts .cms-post-grid');
+            if (!rail || event.pointerType === 'touch') return;
+            rail.dataset.dragging = '1';
+            rail.classList.add('is-dragging');
+            rail._dragStartX = event.clientX;
+            rail._dragStartScroll = rail.scrollLeft;
+            rail.setPointerCapture?.(event.pointerId);
+        });
+        document.addEventListener('pointermove', (event) => {
+            const rail = event.target.closest('#home-posts .cms-post-grid');
+            if (!rail || rail.dataset.dragging !== '1') return;
+            const dx = event.clientX - rail._dragStartX;
+            rail.scrollLeft = rail._dragStartScroll - dx;
+        });
+        document.addEventListener('pointerup', (event) => {
+            const rail = event.target.closest('#home-posts .cms-post-grid');
+            if (!rail) return;
+            rail.dataset.dragging = '0';
+            rail.classList.remove('is-dragging');
+        });
+        document.addEventListener('pointercancel', (event) => {
+            const rail = event.target.closest('#home-posts .cms-post-grid');
+            if (!rail) return;
+            rail.dataset.dragging = '0';
+            rail.classList.remove('is-dragging');
+        });
 
         // Carrega ao abrir e verifica novamente periodicamente para captar novos posts.
         loadCMSPosts();
@@ -2644,6 +2815,22 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
         if (sliderContainer) {
             sliderContainer.addEventListener('mouseenter', () => clearInterval(slideInterval));
             sliderContainer.addEventListener('mouseleave', () => resetInterval());
+        }
+
+        function scrollToHomePosts(event) {
+            if (event) event.preventDefault();
+            const home = document.getElementById('home');
+            if (home && !home.classList.contains('active-section')) {
+                switchTab('home', null, false);
+            }
+            setTimeout(() => {
+                const target = document.getElementById('home-posts');
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 40);
+            document.querySelectorAll('.nav-links-clean a').forEach(link => link.classList.remove('active'));
+            const homeLink = document.querySelector('.nav-links-clean a[href="#home"]');
+            if (homeLink) homeLink.classList.add('active');
+            closeMobileMenu();
         }
 
         function switchTab(sectionId, event, pushToHistory = true) {
