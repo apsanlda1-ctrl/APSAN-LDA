@@ -737,6 +737,15 @@
         .cms-post-content { padding:28px; color:#111827 !important; }
         .cms-post-meta { display:flex; gap:18px; flex-wrap:wrap; font-size:12px; font-weight:700; color:#003366 !important; margin-bottom:10px; }
         .cms-post-meta span { color:#003366 !important; }
+        .cms-post-author { display:inline-flex; align-items:center; gap:5px; }
+        .cms-post-author-avatar {
+            width:32px;
+            height:32px;
+            border-radius:50%;
+            object-fit:cover;
+            border:2px solid #e5e7eb;
+            vertical-align:middle;
+        }
         .cms-post-card h3 { color:#111827 !important; margin:8px 0 12px; font-size:1.5rem; line-height:1.25; }
         .cms-post-excerpt { color:#374151 !important; font-size:15px; line-height:1.65; margin:0 0 14px; }
         .cms-post-body { color:#111827 !important; font-size:15px; line-height:1.75; }
@@ -1499,11 +1508,27 @@
             const titleFromFile = filePath.split('/').pop().replace(/\.(md|markdown|mdx)$/i, '')
                 .replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/[-_]+/g, ' ');
 
+            const authorObject = (front.author && typeof front.author === 'object')
+                ? front.author
+                : {};
+
             const author = typeof front.author === 'object'
                 ? (front.author.name || front.author.full_name || '')
                 : (front.author || '');
 
-            const image = front.cover_image || front.coverImage || front.image || front.thumbnail || '';
+            // O Pages CMS usa actualmente estes campos:
+            // coverImage -> imagem principal do post
+            // author.picture -> imagem associada ao autor
+            // ogImage.url -> imagem para partilha social
+            // Mantemos também nomes antigos para compatibilidade.
+            const authorPicture = authorObject.picture || authorObject.image || '';
+            const ogImageUrl = front.ogImage && typeof front.ogImage === 'object'
+                ? (front.ogImage.url || front.ogImage.image || '')
+                : (front.ogImage || '');
+
+            const image = front.coverImage || front.cover_image || front.image ||
+                front.thumbnail || ogImageUrl || authorPicture || '';
+
             const date = front.date || front.published_at || front.published || '';
             const excerpt = front.excerpt || front.description || front.summary || '';
 
@@ -1513,6 +1538,8 @@
                 excerpt,
                 body,
                 author,
+                authorPicture,
+                ogImageUrl,
                 date,
                 cover_image: image,
                 rawUrl,
@@ -1521,20 +1548,96 @@
             };
         }
 
-        function resolvePostAsset(value, rawBase) {
+        // Resolve imagens publicadas pelo Pages CMS.
+        // O .pages.yml deste repositório grava as imagens em public/assets
+        // e escreve no Markdown caminhos públicos como /assets/nome-da-imagem.png.
+        // Para evitar que o navegador procure uma imagem num caminho que não
+        // esteja exposto pelo servidor estático, usamos o ficheiro RAW do GitHub
+        // como primeira opção e deixamos um fallback para o domínio do site.
+        function resolvePostAsset(value, rawBase, repository) {
             if (!value) return '';
+
             let src = String(value).trim();
             if ((src.startsWith('"') && src.endsWith('"')) || (src.startsWith("'") && src.endsWith("'"))) {
                 src = src.slice(1, -1);
             }
-            if (/^https?:\/\//i.test(src) || src.startsWith('data:')) return src;
-            if (src.startsWith('/')) return src;
-            try { return new URL(src, rawBase).href; } catch (e) { return src; }
+
+            src = src.replace(/\\/g, '/');
+
+            if (/^https?:\/\//i.test(src) || src.startsWith('data:') || src.startsWith('blob:')) {
+                return src;
+            }
+
+            // Âncora absoluta do site.
+            let siteUrl = '';
+            try {
+                siteUrl = new URL(src, window.location.origin).href;
+            } catch (e) {}
+
+            // Converte o caminho público do Pages CMS para o caminho real
+            // dentro do repositório GitHub.
+            if (repository && repository.owner && repository.repo && repository.branch) {
+                try {
+                    let cleanPath = decodeURIComponent(src.split('?')[0].split('#')[0])
+                        .replace(/^\/+/, '');
+
+                    const candidates = [];
+
+                    if (cleanPath.startsWith('assets/')) {
+                        candidates.push('public/' + cleanPath);
+                    }
+
+                    if (cleanPath.startsWith('public/')) {
+                        candidates.push(cleanPath);
+                    } else {
+                        candidates.push(cleanPath);
+                        candidates.push('public/' + cleanPath);
+                    }
+
+                    for (const candidate of [...new Set(candidates)]) {
+                        const rawUrl = `https://raw.githubusercontent.com/${repository.owner}/${repository.repo}/${repository.branch}/${candidate.split('/').map(encodeURIComponent).join('/')}`;
+                        return rawUrl;
+                    }
+                } catch (e) {}
+            }
+
+            // Para caminhos relativos ao próprio ficheiro Markdown.
+            try {
+                return new URL(src, rawBase || window.location.href).href;
+            } catch (e) {
+                return siteUrl || src;
+            }
+        }
+
+        function getPostImage(post, rawBase) {
+            const repository = post.repository || APSAN_CMS_REPOSITORIES[0];
+            return resolvePostAsset(post.cover_image, rawBase, repository);
+        }
+
+        function getPostImageFallback(post, rawBase) {
+            const repository = post.repository || APSAN_CMS_REPOSITORIES[0];
+            const value = post.cover_image || post.ogImageUrl || post.authorPicture || '';
+            if (!value) return '';
+
+            let src = String(value).trim();
+            if ((src.startsWith('"') && src.endsWith('"')) || (src.startsWith("'") && src.endsWith("'"))) {
+                src = src.slice(1, -1);
+            }
+
+            try {
+                return new URL(src, window.location.origin).href;
+            } catch (e) {
+                try {
+                    return new URL(src, rawBase || window.location.href).href;
+                } catch (e2) {
+                    return resolvePostAsset(value, rawBase, repository);
+                }
+            }
         }
 
         // Conversor leve de Markdown para que o texto publicado no Pages CMS
         // apareça no site com títulos, parágrafos, listas, links e imagens.
-        function markdownToHTML(markdown, rawBase) {
+        function markdownToHTML(markdown, rawBase, repository) {
             let text = String(markdown || '').trim();
             if (!text) return '';
             const blocks = [];
@@ -1581,8 +1684,10 @@
 
         function formatInlineMarkdown(value, rawBase) {
             let s = escapeHTML(value);
-            s = s.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (_, alt, src) =>
-                `<img src="${escapeHTML(resolvePostAsset(src, rawBase))}" alt="${alt}" loading="lazy">`);
+            s = s.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (_, alt, src) => {
+                const imageUrl = resolvePostAsset(src, rawBase, repository);
+                return `<img src="${escapeHTML(imageUrl)}" alt="${escapeHTML(alt)}" loading="lazy" decoding="async" onerror="this.style.display='none'">`;
+            });
             s = s.replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
             s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
             s = s.replace(/__([^_]+)__/g, '<strong>$1</strong>');
@@ -1666,7 +1771,13 @@
                     const response = await fetch(source, { cache: 'no-store' });
                     if (!response.ok) continue;
                     const data = await response.json();
-                    if (Array.isArray(data) && data.length) { posts = data; break; }
+                    if (Array.isArray(data) && data.length) {
+                        posts = data.map(post => ({
+                            ...post,
+                            repository: post.repository || APSAN_CMS_REPOSITORIES[0]
+                        }));
+                        break;
+                    }
                 } catch (e) {}
             }
 
@@ -1697,17 +1808,37 @@
         function renderPosts(posts, container) {
             container.innerHTML = posts.map(post => {
                 const rawBase = post.rawBase || (post.rawUrl ? post.rawUrl.substring(0, post.rawUrl.lastIndexOf('/') + 1) : window.location.href);
-                const image = resolvePostAsset(post.cover_image, rawBase);
-                const bodyHTML = markdownToHTML(post.body || '', rawBase);
+                const image = getPostImage(post, rawBase);
+                const imageFallback = getPostImageFallback(post, rawBase);
+                const bodyHTML = markdownToHTML(post.body || '', rawBase, post.repository || APSAN_CMS_REPOSITORIES[0]);
                 const excerptHTML = post.excerpt ? `<p class="cms-post-excerpt">${escapeHTML(post.excerpt)}</p>` : '';
-                const authorHTML = post.author ? `<span><i class="fas fa-user"></i> ${escapeHTML(post.author)}</span>` : '';
+                const authorPicture = post.authorPicture
+                    ? resolvePostAsset(post.authorPicture, rawBase, post.repository || APSAN_CMS_REPOSITORIES[0])
+                    : '';
+                const authorHTML = post.author
+                    ? `<span class="cms-post-author"><i class="fas fa-user"></i> ${escapeHTML(post.author)}</span>`
+                    : '';
                 const dateHTML = post.date ? `<span><i class="far fa-calendar"></i> ${escapeHTML(post.date)}</span>` : '';
                 const linkHTML = post.url ? `<a href="${escapeHTML(post.url)}" target="_blank" rel="noopener noreferrer" class="cms-post-link">Ver publicação completa <i class="fas fa-arrow-right"></i></a>` : '';
+
+                const coverHTML = image
+                    ? `<img class="cms-post-cover" src="${escapeHTML(image)}"
+                            alt="${escapeHTML(post.title || 'Publicação APSAN, LDA')}"
+                            loading="lazy" decoding="async"
+                            onerror="this.onerror=null;${imageFallback ? `this.src='${escapeHTML(imageFallback)}';` : "this.style.display='none';"}">`
+                    : '';
+
+                const authorPictureHTML = (authorPicture && !post.cover_image)
+                    ? ''
+                    : (authorPicture
+                        ? `<img class="cms-post-author-avatar" src="${escapeHTML(authorPicture)}" alt="${escapeHTML(post.author || 'Autor')}" loading="lazy" decoding="async" onerror="this.style.display='none';">`
+                        : '');
+
                 return `
                     <article class="cms-post-card">
-                        ${image ? `<img class="cms-post-cover" src="${escapeHTML(image)}" alt="${escapeHTML(post.title || 'Publicação APSAN, LDA')}" loading="lazy">` : ''}
+                        ${coverHTML}
                         <div class="cms-post-content">
-                            <div class="cms-post-meta">${dateHTML}${authorHTML}</div>
+                            <div class="cms-post-meta">${dateHTML}${authorHTML}${authorPictureHTML}</div>
                             <h3>${escapeHTML(post.title || 'Publicação APSAN, LDA')}</h3>
                             ${excerptHTML}
                             ${bodyHTML ? `<div class="cms-post-body">${bodyHTML}</div>` : ''}
