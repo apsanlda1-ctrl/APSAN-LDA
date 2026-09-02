@@ -72,7 +72,7 @@
             --primary-hover: #0369a1;
             --accent-color: #0f172a;
             --border-color: rgba(255,255,255,0.22);
-            --nav-bg: #003366;
+            --nav-bg: rgba(255,255,255,0.96);
         }
 
         [data-theme="dark"] {
@@ -84,7 +84,7 @@
             --primary-hover: #0284c7;
             --accent-color: #38bdf8;
             --border-color: #334155;
-            --nav-bg: #003366;
+            --nav-bg: #0f172a;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
@@ -622,9 +622,9 @@
         .hero-content h1,
         .hero-content p { color: #ffffff; }
 
-        .nav-links-clean a { color: #ffffff; }
+        .nav-links-clean a { color: #1e293b; }
         .nav-links-clean a:hover,
-        .nav-links-clean a.active { color: #38bdf8; }
+        .nav-links-clean a.active { color: #075985; }
 
         .global-animated-banner { background: rgba(255,255,255,0.94); }
 
@@ -650,7 +650,12 @@
             margin-bottom: 25px;
         }
 
-    </style>
+    
+        /* Ajuste solicitado: título "Soluções Integradas" do banner em azul escuro */
+        .banner-content-box h2 {
+            color: #003366 !important;
+        }
+</style>
 </head>
 <body data-theme="light">
 
@@ -1683,3 +1688,4 @@
     </script>
 </body>
 </html>
+```[cite: 8]
