@@ -756,6 +756,45 @@
         .cms-post-body a,.cms-post-link { color:#003366 !important; font-weight:700; }
         .cms-post-body img { max-width:100%; height:auto; border-radius:10px; margin:10px 0; }
         .cms-post-body code { background:#f3f4f6; color:#111827; padding:2px 5px; border-radius:4px; }
+
+        /* Descrições longas dos posts: mostrar apenas um resumo e permitir expandir/recolher. */
+        .cms-post-body.cms-post-collapsed {
+            max-height: 190px;
+            overflow: hidden;
+            position: relative;
+        }
+        .cms-post-body.cms-post-collapsed::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 58px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0), #ffffff);
+            pointer-events: none;
+        }
+        .cms-post-body.cms-post-expanded {
+            max-height: none;
+            overflow: visible;
+        }
+        .cms-post-body.cms-post-expanded::after { display:none; }
+        .cms-post-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            margin-top: 6px;
+            padding: 8px 14px;
+            border: 0;
+            border-radius: 8px;
+            background: #003366;
+            color: #ffffff !important;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform .15s ease, opacity .15s ease;
+        }
+        .cms-post-more-btn:hover { opacity:.9; transform: translateY(-1px); }
+        .cms-post-more-btn i { color:#ffffff !important; }
         .cms-post-link { display:inline-block; margin-top:12px; text-decoration:none; }
         @media (max-width:600px) {
             .cms-post-content { padding:20px; }
@@ -1805,6 +1844,29 @@
                 </div>`;
         }
 
+        function setupPostExpanders(container) {
+            container.querySelectorAll('.cms-post-expandable').forEach(body => {
+                const button = body.parentElement.querySelector('.cms-post-more-btn');
+                if (!button) return;
+
+                // Só mostra "Ver mais" quando o conteúdo realmente ultrapassa o limite.
+                if (body.scrollHeight <= body.clientHeight + 4) {
+                    body.classList.remove('cms-post-collapsed');
+                    button.remove();
+                    return;
+                }
+
+                button.addEventListener('click', () => {
+                    const expanded = body.classList.toggle('cms-post-expanded');
+                    body.classList.toggle('cms-post-collapsed', !expanded);
+                    button.innerHTML = expanded
+                        ? 'Ver menos <i class="fas fa-chevron-up"></i>'
+                        : 'Ver mais <i class="fas fa-chevron-down"></i>';
+                    button.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+                });
+            });
+        }
+
         function renderPosts(posts, container) {
             container.innerHTML = posts.map(post => {
                 const rawBase = post.rawBase || (post.rawUrl ? post.rawUrl.substring(0, post.rawUrl.lastIndexOf('/') + 1) : window.location.href);
@@ -1841,11 +1903,16 @@
                             <div class="cms-post-meta">${dateHTML}${authorHTML}${authorPictureHTML}</div>
                             <h3>${escapeHTML(post.title || 'Publicação APSAN, LDA')}</h3>
                             ${excerptHTML}
-                            ${bodyHTML ? `<div class="cms-post-body">${bodyHTML}</div>` : ''}
+                            ${bodyHTML ? `
+                                <div class="cms-post-body cms-post-expandable cms-post-collapsed">${bodyHTML}</div>
+                                <button type="button" class="cms-post-more-btn" aria-expanded="false">
+                                    Ver mais <i class="fas fa-chevron-down"></i>
+                                </button>` : ''}
                             ${linkHTML}
                         </div>
                     </article>`;
             }).join('');
+            setupPostExpanders(container);
         }
 
         // Carrega ao abrir e verifica novamente periodicamente para captar novos posts.
