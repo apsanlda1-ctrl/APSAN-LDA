@@ -2662,6 +2662,36 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
             } catch (e) { return []; }
         }
 
+        // Fallback ultra-resistente: os posts que já existem no repositório são
+        // lidos diretamente dos ficheiros RAW. Isto evita que uma limitação
+        // temporária da API do GitHub faça a área de Publicações ficar vazia.
+        // A descoberta via API continua a ser usada primeiro, portanto novos
+        // posts continuam a aparecer automaticamente quando a API responde.
+        async function fetchKnownPostsFallback() {
+            const repo = { owner: 'apsanlda1-ctrl', repo: 'APSAN-LDA', branch: 'main' };
+            const knownFiles = [
+                '2026-09-02-comitiva.md',
+                '2026-09-01-website.md',
+                '2026-08-09-grandes-momentos-de-elaboriais.md'
+            ];
+
+            const posts = await Promise.all(knownFiles.map(async fileName => {
+                try {
+                    const rawUrl = `https://raw.githubusercontent.com/${repo.owner}/${repo.repo}/${repo.branch}/_posts/${encodeURIComponent(fileName)}`;
+                    const response = await fetch(rawUrl, { cache: 'no-store' });
+                    if (!response.ok) return null;
+                    const post = parsePostFile(await response.text(), rawUrl, `_posts/${fileName}`);
+                    post.repository = repo;
+                    post.rawBase = rawUrl.substring(0, rawUrl.lastIndexOf('/') + 1);
+                    return post;
+                } catch (e) {
+                    return null;
+                }
+            }));
+
+            return posts.filter(Boolean);
+        }
+
         async function loadCMSPosts() {
             const containers = document.querySelectorAll('.dynamic-posts-container');
             if (!containers.length) return;
@@ -2688,7 +2718,11 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
             // usa diretamente a API de conteúdo da pasta _posts.
             if (!posts.length) posts = await fetchPostsFromContentsAPI();
 
-            // 4. Último recurso: páginas já publicadas no sitemap.
+            // 4. Fallback direto para os posts já publicados.
+            // Assim, uma falha temporária da API nunca apaga a secção de Publicações.
+            if (!posts.length) posts = await fetchKnownPostsFallback();
+
+            // 5. Último recurso: páginas já publicadas no sitemap.
             if (!posts.length) posts = await discoverPublishedPostsFromSitemap();
 
             posts.sort((a, b) => {
