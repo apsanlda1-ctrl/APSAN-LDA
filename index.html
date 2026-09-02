@@ -9,10 +9,10 @@
     <meta name="theme-color" content="#ffffff">
 
     <!-- FAVICON: o Google usa este ícone nas pesquisas quando a página e o ícone são rastreados -->
-    <link rel="icon" type="image/jpeg" sizes="512x512" href="/logo.jpeg">
-    <link rel="icon" type="image/jpeg" sizes="192x192" href="/logo.jpeg">
-    <link rel="apple-touch-icon" sizes="512x512" href="/logo.jpeg">
-    <link rel="shortcut icon" href="/logo.jpeg">
+    <link rel="icon" type="image/jpeg" sizes="512x512" href="logo.jpeg">
+    <link rel="icon" type="image/jpeg" sizes="192x192" href="logo.jpeg">
+    <link rel="apple-touch-icon" sizes="512x512" href="logo.jpeg">
+    <link rel="shortcut icon" href="logo.jpeg">
 
     <!-- URL principal da página -->
     <link rel="canonical" href="https://apsanlda.com/">
@@ -64,7 +64,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-color: #f8fafc;
+            --bg-color: #d4af37;
             --card-bg: #ffffff;
             --text-color: #0f172a;
             --text-muted: #475569;
@@ -114,7 +114,14 @@
             font-size: 1.3rem;
             color: var(--text-color);
         }
-        .brand-logo img { height: 44px; border-radius: 6px; object-fit: contain; }
+        .brand-logo img {
+            width: 52px;
+            height: 52px;
+            display: block;
+            border-radius: 6px;
+            object-fit: contain;
+            background: #ffffff;
+        }
         
         .nav-links-clean {
             display: flex;
@@ -606,7 +613,13 @@
     <header class="header-clean">
         <div class="nav-container-clean">
             <a href="#home" onclick="switchTab('home', event)" class="brand-logo">
-                <img src="/logo.jpeg" alt="APSAN, LDA Logo">
+                <img src="logo.jpeg"
+                     alt="APSAN, LDA Logo"
+                     width="52"
+                     height="52"
+                     loading="eager"
+                     decoding="async"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.marginLeft='0';">
                 <span>APSAN <span style="color: var(--primary-color);">LDA</span></span>
             </a>
 
