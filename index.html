@@ -1603,7 +1603,9 @@
                     if (!response.ok) continue;
                     const treeData = await response.json();
                     const files = (treeData.tree || []).filter(item =>
-                        item.type === 'blob' && /^posts\/.+\.(md|markdown|mdx)$/i.test(item.path)
+                        item.type === 'blob' &&
+                        (/^posts\/.+\.(md|markdown|mdx)$/i.test(item.path) ||
+                         /^_posts\/.+\.(md|markdown|mdx)$/i.test(item.path))
                     );
                     if (!files.length) continue;
 
