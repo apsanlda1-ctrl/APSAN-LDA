@@ -568,13 +568,33 @@
         }
         .modal-form-group input[type="file"] { padding: 8px; background: var(--bg-color); border: 1px dashed var(--primary-color); cursor: pointer; }
 
-        .assistant-widget { position: fixed; bottom: 25px; right: 25px; z-index: 100001; }
+        .assistant-widget { position: fixed; bottom: 25px; right: 25px; z-index: 100001; display: none; align-items: flex-end; gap: 10px; }
+        .assistant-widget.home-only-visible { display: flex; }
+        .assistant-greeting-bubble {
+            position: relative; max-width: 180px; padding: 11px 16px; border-radius: 18px 18px 5px 18px;
+            background: #fff; color: #003366; border: 2px solid #0b8ed1;
+            box-shadow: 0 8px 24px rgba(0,0,0,.18); font-size: 13px; font-weight: 800;
+            line-height: 1.25; text-align: center; animation: assistantGreetingFloat 2.8s ease-in-out infinite;
+        }
+        .assistant-greeting-bubble::after {
+            content: ''; position: absolute; right: -8px; bottom: 12px; width: 14px; height: 14px;
+            background: #fff; border-top: 2px solid #0b8ed1; border-right: 2px solid #0b8ed1;
+            transform: rotate(45deg);
+        }
+        .assistant-greeting-bubble strong { display: block; font-size: 14px; margin-bottom: 2px; }
+        @keyframes assistantGreetingFloat {
+            0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); }
+        }
         .assistant-btn {
-            background-color: var(--primary-color); color: #fff; border: 3px solid #28a745; width: 60px; height: 60px;
+            background-color: var(--primary-color); color: #fff; border: 3px solid #28a745; width: 74px; height: 74px;
             border-radius: 50%; box-shadow: 0 6px 20px rgba(0,0,0,0.3); cursor: pointer;
             display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;
+            animation: assistantAvatarPulse 2.6s ease-in-out infinite;
         }
         .assistant-btn img { width: 100%; height: 100%; object-fit: cover; }
+        @keyframes assistantAvatarPulse {
+            0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-3px) scale(1.025); }
+        }
         .online-dot { width: 14px; height: 14px; background-color: #28a745; border: 2px solid #fff; border-radius: 50%; position: absolute; bottom: 2px; right: 2px; }
         .assistant-window {
             position: absolute; bottom: 75px; right: 0; width: 350px; background-color: var(--card-bg);
@@ -591,6 +611,12 @@
         .assistant-footer { padding: 10px; border-top: 1px solid var(--border-color); display: flex; gap: 5px; }
         .assistant-footer input { flex: 1; padding: 8px 12px; border: 1px solid var(--border-color); border-radius: 20px; outline: none; background-color: var(--bg-color); color: var(--text-color); font-size: 12px; }
         .assistant-footer button { background-color: var(--primary-color); color: #fff; border: none; padding: 8px 12px; border-radius: 20px; cursor: pointer; }
+        @media (max-width: 600px) {
+            .assistant-widget { bottom: 14px; right: 14px; gap: 7px; }
+            .assistant-greeting-bubble { max-width: 145px; padding: 9px 12px; font-size: 11px; }
+            .assistant-greeting-bubble strong { font-size: 12px; }
+            .assistant-btn { width: 64px; height: 64px; }
+        }
 
         .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
         .client-info { display: flex; align-items: center; gap: 12px; margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 12px; }
@@ -2529,7 +2555,8 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
 </div>
 </div>
 </section>
-<div class="assistant-widget">
+<div class="assistant-widget home-only-visible" id="assistantWidget" aria-label="Assistente virtual da APSAN, disponível na página principal">
+<div class="assistant-greeting-bubble" aria-hidden="true"><strong>Olá! 👋</strong>Vamos conversar?</div>
 <div class="assistant-window" id="assistantWindow">
 <div class="assistant-header">
 <div style="display: flex; align-items: center; gap: 8px;">
@@ -3384,6 +3411,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
             document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active-section'));
             const target = document.getElementById(sectionId);
             if(target) target.classList.add('active-section');
+            setAssistantVisibility(sectionId);
 
             document.querySelectorAll('.nav-links-clean a').forEach(link => link.classList.remove('active'));
             const activeLink = document.querySelector(`.nav-links-clean a[href="#${sectionId}"]`);
@@ -3490,6 +3518,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
             
             const initialHash = window.location.hash.replace('#', '');
             if (initialHash) { switchTab(initialHash, null, false); }
+            else { setAssistantVisibility('home'); }
         });
 
         function submitCleanForm(e, formId, successMsg) {
@@ -3584,7 +3613,21 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
         function closeDenunciaModal() { document.getElementById('denunciaModal').classList.remove('active'); }
         function closeDenunciaModalOnClick(e) { if(e.target.id === 'denunciaModal') closeDenunciaModal(); }
 
-        function toggleAssistant() { document.getElementById('assistantWindow').classList.toggle('active'); }
+        function setAssistantVisibility(sectionId) {
+            const widget = document.getElementById('assistantWidget');
+            const windowEl = document.getElementById('assistantWindow');
+            if (!widget) return;
+            const isHome = sectionId === 'home';
+            widget.classList.toggle('home-only-visible', isHome);
+            if (!isHome && windowEl) windowEl.classList.remove('active');
+        }
+
+        function toggleAssistant() {
+            const widget = document.getElementById('assistantWidget');
+            const windowEl = document.getElementById('assistantWindow');
+            if (!widget || !windowEl || !widget.classList.contains('home-only-visible')) return;
+            windowEl.classList.toggle('active');
+        }
 
         function sendQuickQuery(text) {
             const body = document.getElementById('assistantBody');
