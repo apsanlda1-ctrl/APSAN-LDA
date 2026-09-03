@@ -1298,6 +1298,85 @@ body{
 @media (prefers-reduced-motion: reduce){
   *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
 }
+
+/* ===== BARRA INFORMATIVA MÓVEL APSAN — ADIÇÃO ===== */
+.apsan-info-ticker{
+    width:100%;
+    height:46px;
+    background:linear-gradient(90deg,#021326,#003366,#021326);
+    border-top:1px solid rgba(255,255,255,.10);
+    border-bottom:1px solid rgba(40,183,232,.28);
+    overflow:hidden;
+    position:relative;
+    z-index:20;
+    display:flex;
+    align-items:center;
+    box-shadow:0 5px 18px rgba(0,0,0,.16);
+}
+.apsan-info-ticker::before,
+.apsan-info-ticker::after{
+    content:'';
+    position:absolute;
+    top:0;
+    width:90px;
+    height:100%;
+    z-index:3;
+    pointer-events:none;
+}
+.apsan-info-ticker::before{
+    left:0;
+    background:linear-gradient(90deg,#021326,transparent);
+}
+.apsan-info-ticker::after{
+    right:0;
+    background:linear-gradient(270deg,#021326,transparent);
+}
+.apsan-info-ticker-track{
+    display:flex;
+    width:max-content;
+    flex-shrink:0;
+    animation:apsanTickerMove 48s linear infinite;
+    will-change:transform;
+}
+.apsan-info-ticker-group{
+    display:flex;
+    align-items:center;
+    flex-shrink:0;
+}
+.apsan-info-ticker-item{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    padding:0 28px;
+    color:#fff;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.15px;
+    white-space:nowrap;
+}
+.apsan-info-ticker-item i{
+    color:#28b7e8;
+    font-size:12px;
+}
+.apsan-info-ticker-item strong{
+    color:#72d8f8;
+}
+.apsan-info-ticker-separator{
+    color:#f5b942;
+    font-size:15px;
+}
+.apsan-info-ticker:hover .apsan-info-ticker-track{
+    animation-play-state:paused;
+}
+@keyframes apsanTickerMove{
+    from{transform:translateX(0)}
+    to{transform:translateX(-50%)}
+}
+@media (max-width:650px){
+    .apsan-info-ticker{height:42px}
+    .apsan-info-ticker-item{font-size:11px;padding:0 18px;gap:7px}
+}
+
 </style>
 <style>
 /* =========================================================
@@ -1743,6 +1822,82 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
 </div>
 </div>
 </header>
+
+<div class="apsan-info-ticker" aria-label="Informações importantes da APSAN, LDA">
+    <div class="apsan-info-ticker-track">
+        <div class="apsan-info-ticker-group">
+            <span class="apsan-info-ticker-item"><i class="fas fa-building"></i><strong>APSAN, LDA</strong> — Soluções Integradas</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fas fa-location-dot"></i>Angola ↔ Namíbia</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fas fa-broom"></i>Limpeza Institucional &amp; Higienização</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fas fa-utensils"></i>Catering &amp; Eventos Corporativos</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fas fa-laptop-code"></i>Software de Gestão &amp; Tecnologia</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fas fa-network-wired"></i>Internet, Redes &amp; Cablagem Estruturada</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fas fa-truck-fast"></i>Logística, Transporte &amp; Aluguer de Viaturas</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fas fa-arrow-right-arrow-left"></i>Importação &amp; Exportação Transfronteiriça</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fas fa-cart-shopping"></i>Compras e Fretes na Namíbia</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fas fa-language"></i>Traduções Oficiais Juramentadas</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fas fa-hospital"></i>Acompanhamento Hospitalar</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fas fa-bullhorn"></i>Redes Sociais &amp; Marketing Digital</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fas fa-file-invoice-dollar"></i>Orçamentos em até 24 horas úteis</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fas fa-envelope"></i>info@apsanlda.com</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fab fa-whatsapp"></i>+244 944 403 093</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fas fa-phone"></i>+244 946 195 402 · +244 934 437 739</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fas fa-map-marker-alt"></i>Sede: Namacunde / Santa Clara, Cunene</span>
+        </div>
+        <div class="apsan-info-ticker-group" aria-hidden="true">
+            <span class="apsan-info-ticker-item"><i class="fas fa-building"></i><strong>APSAN, LDA</strong> — Soluções Integradas</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fas fa-location-dot"></i>Angola ↔ Namíbia</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fas fa-broom"></i>Limpeza Institucional &amp; Higienização</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fas fa-utensils"></i>Catering &amp; Eventos Corporativos</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fas fa-laptop-code"></i>Software de Gestão &amp; Tecnologia</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fas fa-network-wired"></i>Internet, Redes &amp; Cablagem Estruturada</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fas fa-truck-fast"></i>Logística, Transporte &amp; Aluguer de Viaturas</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fas fa-arrow-right-arrow-left"></i>Importação &amp; Exportação Transfronteiriça</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fas fa-cart-shopping"></i>Compras e Fretes na Namíbia</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fas fa-language"></i>Traduções Oficiais Juramentadas</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fas fa-hospital"></i>Acompanhamento Hospitalar</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fas fa-bullhorn"></i>Redes Sociais &amp; Marketing Digital</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fas fa-file-invoice-dollar"></i>Orçamentos em até 24 horas úteis</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fas fa-envelope"></i>info@apsanlda.com</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fab fa-whatsapp"></i>+244 944 403 093</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fas fa-phone"></i>+244 946 195 402 · +244 934 437 739</span>
+            <span class="apsan-info-ticker-separator">•</span>
+            <span class="apsan-info-ticker-item"><i class="fas fa-map-marker-alt"></i>Sede: Namacunde / Santa Clara, Cunene</span>
+        </div>
+    </div>
+</div>
+
 <div class="global-animated-banner">
 <div class="banner-world-bg"></div>
 <div class="banner-grid-overlay"></div>
