@@ -568,56 +568,6 @@
         }
         .modal-form-group input[type="file"] { padding: 8px; background: var(--bg-color); border: 1px dashed var(--primary-color); cursor: pointer; }
 
-        .assistant-widget { position: fixed; bottom: 25px; right: 25px; z-index: 100001; display: none; align-items: flex-end; gap: 10px; }
-        .assistant-widget.home-only-visible { display: flex; }
-        .assistant-greeting-bubble {
-            position: relative; max-width: 180px; padding: 11px 16px; border-radius: 18px 18px 5px 18px;
-            background: #fff; color: #003366; border: 2px solid #0b8ed1;
-            box-shadow: 0 8px 24px rgba(0,0,0,.18); font-size: 13px; font-weight: 800;
-            line-height: 1.25; text-align: center; animation: assistantGreetingFloat 2.8s ease-in-out infinite;
-        }
-        .assistant-greeting-bubble::after {
-            content: ''; position: absolute; right: -8px; bottom: 12px; width: 14px; height: 14px;
-            background: #fff; border-top: 2px solid #0b8ed1; border-right: 2px solid #0b8ed1;
-            transform: rotate(45deg);
-        }
-        .assistant-greeting-bubble strong { display: block; font-size: 14px; margin-bottom: 2px; }
-        @keyframes assistantGreetingFloat {
-            0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); }
-        }
-        .assistant-btn {
-            background-color: var(--primary-color); color: #fff; border: 3px solid #28a745; width: 74px; height: 74px;
-            border-radius: 50%; box-shadow: 0 6px 20px rgba(0,0,0,0.3); cursor: pointer;
-            display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;
-            animation: assistantAvatarPulse 2.6s ease-in-out infinite;
-        }
-        .assistant-btn img { width: 100%; height: 100%; object-fit: cover; }
-        @keyframes assistantAvatarPulse {
-            0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-3px) scale(1.025); }
-        }
-        .online-dot { width: 14px; height: 14px; background-color: #28a745; border: 2px solid #fff; border-radius: 50%; position: absolute; bottom: 2px; right: 2px; }
-        .assistant-window {
-            position: absolute; bottom: 75px; right: 0; width: 350px; background-color: var(--card-bg);
-            border: 1px solid var(--border-color); border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.25);
-            display: none; flex-direction: column; overflow: hidden;
-        }
-        .assistant-window.active { display: flex; }
-        .assistant-header { background-color: #003366; color: #fff; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
-        .assistant-body { padding: 15px; max-height: 300px; overflow-y: auto; font-size: 13px; color: var(--text-color); display: flex; flex-direction: column; gap: 10px; }
-        .assistant-message { background: rgba(2, 132, 199, 0.08); padding: 10px; border-radius: 8px; line-height: 1.4; }
-        .assistant-message.user { background: var(--primary-color); color: #fff; text-align: right; margin-left: 20px; }
-        .chat-suggestions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 5px; }
-        .chat-chip { background-color: var(--bg-color); border: 1px solid var(--primary-color); color: var(--primary-color); padding: 4px 8px; border-radius: 12px; font-size: 11px; cursor: pointer; font-weight: bold; }
-        .assistant-footer { padding: 10px; border-top: 1px solid var(--border-color); display: flex; gap: 5px; }
-        .assistant-footer input { flex: 1; padding: 8px 12px; border: 1px solid var(--border-color); border-radius: 20px; outline: none; background-color: var(--bg-color); color: var(--text-color); font-size: 12px; }
-        .assistant-footer button { background-color: var(--primary-color); color: #fff; border: none; padding: 8px 12px; border-radius: 20px; cursor: pointer; }
-        @media (max-width: 600px) {
-            .assistant-widget { bottom: 14px; right: 14px; gap: 7px; }
-            .assistant-greeting-bubble { max-width: 145px; padding: 9px 12px; font-size: 11px; }
-            .assistant-greeting-bubble strong { font-size: 12px; }
-            .assistant-btn { width: 64px; height: 64px; }
-        }
-
         .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
         .client-info { display: flex; align-items: center; gap: 12px; margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 12px; }
         .client-avatar { width: 36px; height: 36px; border-radius: 50%; background-color: var(--primary-color); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; }
@@ -2555,37 +2505,6 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
 </div>
 </div>
 </section>
-<div class="assistant-widget home-only-visible" id="assistantWidget" aria-label="Assistente virtual da APSAN, disponível na página principal">
-<div class="assistant-greeting-bubble" aria-hidden="true"><strong>Olá! 👋</strong>Vamos conversar?</div>
-<div class="assistant-window" id="assistantWindow">
-<div class="assistant-header">
-<div style="display: flex; align-items: center; gap: 8px;">
-<img alt="Azny Gabriel" src="avatar.png" style="width:28px; height:28px; border-radius:50%;"/>
-<span>Azny Gabriel - APSAN</span>
-</div>
-<button onclick="toggleAssistant()" style="background:none; border:none; color:#fff; font-size:18px; cursor:pointer;">×</button>
-</div>
-<div class="assistant-body" id="assistantBody">
-<div class="assistant-message">
-                    Olá! Sou a Azny Gabriel, assistente virtual da APSAN, LDA. Como posso ajudar hoje? Pergunte-me sobre os nossos serviços, NIF, contactos, compras na Namíbia ou dados da empresa!
-                    <div class="chat-suggestions">
-<span class="chat-chip" onclick="sendQuickQuery('Qual é o NIF e dados da empresa?')">NIF e Dados</span>
-<span class="chat-chip" onclick="sendQuickQuery('Quais são os serviços prestados?')">Serviços</span>
-<span class="chat-chip" onclick="sendQuickQuery('Como funcionam as compras na Namíbia?')">Compras Namíbia</span>
-<span class="chat-chip" onclick="sendQuickQuery('Quais são os contactos?')">Contactos</span>
-</div>
-</div>
-</div>
-<div class="assistant-footer">
-<input id="assistantInput" onkeypress="handleAssistantKey(event)" placeholder="Escreva a sua pergunta..." type="text"/>
-<button onclick="sendAssistantMessage()"><i class="fas fa-paper-plane"></i></button>
-</div>
-</div>
-<button class="assistant-btn" onclick="toggleAssistant()" title="Chat Azny Gabriel">
-<img alt="Azny Gabriel" src="avatar.png"/>
-<span class="online-dot"></span>
-</button>
-</div>
 <div class="service-modal-overlay" id="serviceModal" onclick="closeServiceDetail(event)">
 <div class="service-modal-content">
 <button class="service-modal-close" onclick="closeServiceModal()">×</button>
@@ -3411,7 +3330,6 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
             document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active-section'));
             const target = document.getElementById(sectionId);
             if(target) target.classList.add('active-section');
-            setAssistantVisibility(sectionId);
 
             document.querySelectorAll('.nav-links-clean a').forEach(link => link.classList.remove('active'));
             const activeLink = document.querySelector(`.nav-links-clean a[href="#${sectionId}"]`);
@@ -3518,7 +3436,6 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
             
             const initialHash = window.location.hash.replace('#', '');
             if (initialHash) { switchTab(initialHash, null, false); }
-            else { setAssistantVisibility('home'); }
         });
 
         function submitCleanForm(e, formId, successMsg) {
@@ -3613,206 +3530,6 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
         function closeDenunciaModal() { document.getElementById('denunciaModal').classList.remove('active'); }
         function closeDenunciaModalOnClick(e) { if(e.target.id === 'denunciaModal') closeDenunciaModal(); }
 
-        function setAssistantVisibility(sectionId) {
-            const widget = document.getElementById('assistantWidget');
-            const windowEl = document.getElementById('assistantWindow');
-            if (!widget) return;
-            const isHome = sectionId === 'home';
-            widget.classList.toggle('home-only-visible', isHome);
-            if (!isHome && windowEl) windowEl.classList.remove('active');
-        }
-
-        function toggleAssistant() {
-            const widget = document.getElementById('assistantWidget');
-            const windowEl = document.getElementById('assistantWindow');
-            if (!widget || !windowEl || !widget.classList.contains('home-only-visible')) return;
-            windowEl.classList.toggle('active');
-        }
-
-        // ===== AZNY GABRIEL — CONVERSA NATURAL E CONTEXTUAL =====
-        let aznyClientName = '';
-        let aznyConversationStarted = false;
-
-        function escapeAssistantHTML(value) {
-            return String(value).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
-        }
-
-        function getTimeGreeting() {
-            const hour = new Date().getHours();
-            if (hour >= 5 && hour < 12) return 'Bom dia';
-            if (hour >= 12 && hour < 18) return 'Boa tarde';
-            return 'Boa noite';
-        }
-
-        function isGreeting(q) {
-            return /^(olá|ola|oi|olá azny|ola azny|bom dia|boa tarde|boa noite|boa madrugada|hello|hi)\b/i.test(q.trim());
-        }
-
-        function extractName(q) {
-            const patterns = [
-                /(?:meu nome é|me chamo|sou o|sou a|sou)\s+([A-Za-zÀ-ÿ][A-Za-zÀ-ÿ' -]{1,40})/i,
-                /(?:aqui é|aqui e|fala|quem fala é|quem fala e)\s+([A-Za-zÀ-ÿ][A-Za-zÀ-ÿ' -]{1,40})/i
-            ];
-            for (const p of patterns) {
-                const m = q.match(p);
-                if (m) return m[1].trim().replace(/[.,!?]+$/,'');
-            }
-            return '';
-        }
-
-        function sendQuickQuery(text) {
-            const body = document.getElementById('assistantBody');
-            if (!body) return;
-            const clean = String(text).trim();
-            if (!clean) return;
-
-            const possibleName = extractName(clean);
-            if (possibleName && possibleName.split(/\s+/).length <= 4 && !/(empresa|serviço|servicos|namíbia|angola)/i.test(possibleName)) {
-                aznyClientName = possibleName;
-            }
-            aznyConversationStarted = true;
-
-            body.innerHTML += `<div class="assistant-message user">${escapeAssistantHTML(clean)}</div>`;
-            setTimeout(() => {
-                const response = getAznyResponse(clean);
-                body.innerHTML += `<div class="assistant-message">${response}</div>`;
-                body.scrollTop = body.scrollHeight;
-            }, 350);
-        }
-
-        function sendAssistantMessage() {
-            const input = document.getElementById('assistantInput');
-            const val = input ? input.value.trim() : '';
-            if (val) {
-                sendQuickQuery(val);
-                input.value = '';
-            }
-        }
-
-        function handleAssistantKey(e) { if(e.key === 'Enter') sendAssistantMessage(); }
-
-        function getAznyResponse(query) {
-            const q = query.toLowerCase().trim();
-            const name = aznyClientName ? escapeAssistantHTML(aznyClientName) : '';
-            const addressed = name ? `, ${name}` : '';
-
-            // Saudações: responde à saudação antes de tentar qualquer outro assunto.
-            if (/^bom dia\b/i.test(q)) {
-                return `Bom dia${addressed}! É um prazer recebê-lo(a). Eu sou a Azny Gabriel, assistente virtual da APSAN, LDA. Como está? Em que posso ser útil?`;
-            }
-            if (/^boa tarde\b/i.test(q)) {
-                return `Boa tarde${addressed}! É um prazer recebê-lo(a). Eu sou a Azny Gabriel, assistente virtual da APSAN, LDA. Como está? Em que posso ser útil?`;
-            }
-            if (/^boa noite\b/i.test(q)) {
-                return `Boa noite${addressed}! É um prazer recebê-lo(a). Eu sou a Azny Gabriel, assistente virtual da APSAN, LDA. Como está? Em que posso ser útil?`;
-            }
-            if (/^(olá|ola|oi|hello|hi)\b/i.test(q)) {
-                return `Olá${addressed}! Eu sou a Azny Gabriel, assistente virtual da APSAN, LDA. Seja muito bem-vindo(a)! Com quem tenho o prazer de falar?`;
-            }
-            if (/muito obrigado|muito obrigada|obrigad[oa]\b/i.test(q)) {
-                return name ? `É um prazer, ${name}! Sempre que precisar, estarei aqui para ajudar. Pode perguntar-me sobre qualquer assunto relacionado com a APSAN, LDA.` : `É um prazer! Sempre que precisar, estarei aqui para ajudar. Pode perguntar-me sobre qualquer assunto relacionado com a APSAN, LDA.`;
-            }
-            if (/^(quem és|quem es|qual é o teu nome|qual e o teu nome|como te chamas)/i.test(q)) {
-                return `Eu sou a Azny Gabriel, assistente virtual da APSAN, LDA. Estou aqui para conversar consigo e esclarecer dúvidas sobre a empresa, os nossos serviços, operações, contactos e formas de atendimento.`;
-            }
-            if (/(como estás|como estas|tudo bem|como vai)/i.test(q)) {
-                return `Estou muito bem, obrigada${addressed}! 😊 Estou aqui para ajudá-lo(a). Pode perguntar-me sobre qualquer assunto relacionado com a APSAN, LDA. Em que posso ser útil?`;
-            }
-
-            // Nome do interlocutor: nunca usa "falas com o senhor...".
-            if (possibleNameFromConversation(query)) {
-                const n = escapeAssistantHTML(aznyClientName);
-                return `Muito prazer, ${n}! Eu sou a Azny Gabriel, assistente virtual da APSAN, LDA. Em que posso ser útil? Pode perguntar-me sobre qualquer assunto relacionado com a nossa empresa.`;
-            }
-
-            // Namíbia — resposta específica e contextual.
-            if (/(prestam|presta|atuam|trabalham|serviço|servicos|serviço|operações|operacoes).*(namíbia|namibia)|(namíbia|namibia).*(prestam|serviço|servicos|atuam|trabalham)/i.test(q)) {
-                return `Sim, a APSAN, LDA presta serviços na Namíbia. 🇳🇦 Podemos apoiar, entre outros, em acompanhamento hospitalar para quem vai realizar consultas, compras na Namíbia e apoio logístico. No serviço de compras, podemos consultar o preço do produto, atualizar o valor para si e, caso decida avançar, preparar a nossa equipa para efetuar a compra. Depois, a encomenda pode ser despachada através de agências de viagem, como a Macom ou a Wambus Press. Se me disser qual serviço pretende na Namíbia, explico-lhe como funciona passo a passo.`;
-            }
-
-            // Consultas médicas na Namíbia — hospital público.
-            if (/(público|publico|hospital público|hospital publico)/i.test(q) && /(consulta|hospital|médic|medic|namíbia|namibia)/i.test(q)) {
-                return `No hospital público, de forma geral, o processo começa pela chegada à unidade e pelo pagamento do cartão, indicado em cerca de 150 rand (aproximadamente 9 a 10 mil kwanzas, dependendo do câmbio). Depois é necessário aguardar na fila até ser chamado para o consultório. O médico faz a avaliação e, conforme o caso, pode solicitar exames. Existem exames que podem ser pagos e outros que podem ser gratuitos. Depois, em função dos resultados, o médico orienta a medicação adequada para a situação apresentada. A APSAN pode prestar acompanhamento a quem se desloca para realizar consultas.`;
-            }
-
-            // Consultas médicas na Namíbia — clínica privada.
-            if (/(privad|clínica privada|clinica privada|clínica particular|clinica particular)/i.test(q) && /(consulta|hospital|médic|medic|namíbia|namibia)/i.test(q)) {
-                return `Nas clínicas privadas, a consulta funciona mediante marcação. Em primeiro lugar, o paciente deve partilhar o histórico médico feito em Angola, para que o mesmo seja traduzido para inglês e posteriormente apresentado, em forma de marcação da consulta, ao médico, permitindo que o médico se familiarize previamente com a situação da patologia. Ao marcar a consulta, é feito um pagamento de 350 randes, o que corresponde a 22 mil kwanzas. Depois de feito este pagamento, no dia da consulta o paciente desloca-se à clínica e é atendido pelo médico. Em função da conversa durante a consulta, o médico poderá, se necessário, solicitar exames específicos. Os resultados dos exames podem demorar um dia ou dois dias no privado. No público, alguns resultados de exames podem demorar uma, duas ou até três semanas, no mais tardar, para sair. No privado, normalmente, em um ou dois dias, ou três dias no máximo, o resultado sai. Em função dos resultados, o médico irá prescrever as medicações que deverão ser compradas. Os preços das medicações variam de acordo com cada medicamento. Com a aquisição da medicação, inicia-se o tratamento para o combate à patologia. É desta forma que funciona o processo de consulta nas clínicas privadas.`;
-            }
-
-            // Consultas médicas na Namíbia — orientação geral.
-            if (/(consulta|consultas|hospital|médic|medic|clínica|clinica).*(namíbia|namibia)|(namíbia|namibia).*(consulta|hospital|médic|medic|clínica|clinica)/i.test(q)) {
-                return `Claro. Sobre consultas médicas na Namíbia, posso explicar-lhe o processo. Prefere saber como funciona num hospital público ou numa clínica privada?`;
-            }
-
-            // Orçamentos e preços.
-            if (/(quanto custa|quanto é|quanto e|preço|preco|valor|orçamento|orcamento|cotação|cotacao|custa)/i.test(q)) {
-                return `Para lhe dar um orçamento correto, não quero inventar um valor. Vou direcioná-lo(a) para a equipa da APSAN, LDA responsável pelos orçamentos, para que possa receber todos os detalhes e o valor adequado ao serviço que pretende. Para serviços normais, a empresa informa que os orçamentos podem ser emitidos em até 24 horas úteis.`;
-            }
-
-            // Compras na Namíbia.
-            if (/(compras|comprar|produto|mercadoria).*(namíbia|namibia)|(namíbia|namibia).*(compras|comprar|produto|mercadoria)/i.test(q)) {
-                return `Sim. A APSAN pode apoiar nas compras na Namíbia: consultamos o preço do produto, atualizamos o valor para si e, se decidir comprar, a nossa equipa pode realizar a compra. Depois tratamos do despacho da encomenda através de agências de viagem, podendo ser utilizada a Macom ou a Wambus Press. Se quiser, diga-me que produto pretende comprar e posso explicar o processo.`;
-            }
-
-            // Serviços principais — detalhe conforme o serviço perguntado.
-            if (/limpeza|higienização|higienizacao/i.test(q)) {
-                return `No serviço de Limpeza Institucional & Higienização, a APSAN trabalha com soluções de limpeza e higienização para ambientes institucionais e corporativos, procurando garantir organização, asseio e boas condições de utilização. Se me disser o tipo de espaço e a necessidade, posso encaminhar o pedido para um orçamento adequado.`;
-            }
-            if (/catering|evento|eventos|alimentação|alimentacao/i.test(q)) {
-                return `A APSAN disponibiliza Catering & Eventos Corporativos, apoiando a organização e o serviço de alimentação para eventos. Podemos analisar o tipo de evento, quantidade de pessoas, data e necessidades específicas para encaminhar a solicitação à equipa responsável.`;
-            }
-            if (/software|sistema de gestão|sistema de gestao|programa|tecnologia/i.test(q)) {
-                return `Na área de tecnologia, a APSAN trabalha com criação de Software de Gestão personalizado e soluções tecnológicas. A ideia é analisar a necessidade da empresa ou instituição e estruturar uma solução adequada ao processo que pretende controlar ou melhorar.`;
-            }
-            if (/internet|rede|redes|cabling|cablagem/i.test(q)) {
-                return `A APSAN presta serviços de Internet, Redes & Cablagem Estruturada, incluindo apoio na implementação de infraestruturas de rede e conectividade. Para indicar a solução correta, é importante conhecer o espaço, a quantidade de utilizadores/equipamentos e a necessidade de conectividade.`;
-            }
-            if (/logística|logistica|transporte|viatura|viaturas|aluguer/i.test(q)) {
-                return `Na área de Logística e Transporte, a APSAN disponibiliza transporte seguro de passageiros e bens, aluguer de viaturas e apoio logístico. Também atua em operações transfronteiriças entre Angola e Namíbia. Se me disser o que pretende transportar ou a deslocação necessária, posso orientar o próximo passo.`;
-            }
-            if (/importação|importacao|exportação|exportacao|alfândega|alfandega|fronteira/i.test(q)) {
-                return `A APSAN apoia operações de Importação & Exportação Transfronteiriça, incluindo trâmites legais e comerciais, despachos aduaneiros, logística transfronteiriça e consultoria de comércio. Posso explicar melhor conforme o tipo de mercadoria e o percurso entre Angola e Namíbia.`;
-            }
-            if (/tradução|traducao|juramentada|documento|documentos/i.test(q)) {
-                return `A APSAN disponibiliza Tradução Oficial Juramentada, destinada a documentos que necessitam de tradução com validade legal, incluindo certificados, contratos, autenticações e traduções simultâneas. Se me disser qual documento precisa de traduzir, posso orientar o pedido.`;
-            }
-            if (/hospital|acompanhamento hospitalar/i.test(q)) {
-                return `O serviço de Acompanhamento Hospitalar foi pensado para apoiar pessoas que se deslocam para consultas e atendimentos médicos, incluindo apoio durante o processo de deslocação e acompanhamento. Se pretende realizar uma consulta na Namíbia, diga-me se é hospital público ou clínica privada para eu explicar a orientação correspondente.`;
-            }
-            if (/redes sociais|marketing digital|marketing/i.test(q)) {
-                return `A APSAN também presta serviços de Gestão de Redes Sociais & Marketing Digital, com criação de conteúdos, anúncios e marketing e acompanhamento através de relatórios. Podemos adaptar o trabalho às necessidades da marca ou empresa.`;
-            }
-
-            if (/nif|registo|fiscal|dados da empresa/i.test(q)) {
-                return `O NIF da APSAN, LDA é 5002085011. A empresa apresenta-se no site como registada e ativa em Angola, com atuação em soluções integradas, serviços corporativos, tecnologia e logística entre Angola e Namíbia.`;
-            }
-            if (/sede|localização|localizacao|morada|onde fica|ondjiva|namacunde/i.test(q)) {
-                return `A sede principal da APSAN, LDA fica em Namacunde / Santa Clara, Província do Cunene. A empresa também apresenta representação comercial em Ondjiva e operações ligadas à Namíbia.`;
-            }
-            if (/contacto|contato|telefone|whatsapp|email|e-mail/i.test(q)) {
-                return `Pode contactar a APSAN, LDA através do +244 944 403 093, +244 946 195 402 ou +244 934 437 739. O e-mail indicado pela empresa é info@apsanlda.com.`;
-            }
-            if (/pagamento|pagar|transferência|transferencia|express/i.test(q)) {
-                return `A empresa informa que aceita pagamentos por transferência bancária em Kwanzas, depósitos diretos, pagamentos via Express e facilidades de faturação a 30 dias para parceiros corporativos aprovados.`;
-            }
-            if (/denúncia|denuncia|abuso|ética|etica/i.test(q)) {
-                return `A APSAN disponibiliza um canal de denúncias confidencial e seguro para comunicar condutas antiéticas ou irregularidades operacionais.`;
-            }
-            if (/obrigad/i.test(q)) {
-                return name ? `É um prazer, ${name}! Conte comigo sempre que precisar de informações sobre a APSAN, LDA.` : `É um prazer! Conte comigo sempre que precisar de informações sobre a APSAN, LDA.`;
-            }
-
-            return `Entendi a sua pergunta${addressed}. Pode perguntar-me sobre qualquer assunto relacionado com a APSAN, LDA — serviços, tecnologia, limpeza, catering, logística, transporte, importação e exportação, operações na Namíbia, compras, acompanhamento hospitalar, traduções, marketing, contactos, pagamentos ou orçamentos. Vou responder de acordo com o assunto que me apresentar. Se a questão exigir um valor ou decisão comercial específica, encaminho para a equipa da empresa responsável.`;
-        }
-
-        function possibleNameFromConversation(query) {
-            const n = extractName(query);
-            if (!n) return false;
-            const words = n.split(/\s+/).filter(Boolean);
-            return words.length <= 4 && words.length >= 1 && !/(empresa|serviço|servicos|namíbia|namibia|angola|apsan|orçamento|orcamento)/i.test(n);
-        }
-
         function handleClientLogin(e) {
             e.preventDefault();
             document.getElementById('clientAuthCard').style.display = 'none';
@@ -3823,5 +3540,312 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
             document.getElementById('clientAuthCard').style.display = 'block';
         }
     </script>
+
+<!-- APSAN AI UNIVERSAL V2 -->
+<style id="apsan-ai-universal-v2">
+#apsanUniversalAIv2{position:fixed;right:22px;bottom:22px;z-index:2147483000;font-family:Inter,Segoe UI,Arial,sans-serif}
+#apsanAIv2Open{display:flex;align-items:center;gap:10px;border:0;border-radius:999px;padding:14px 20px;background:linear-gradient(135deg,#003366,#0878b8);color:#fff;font-weight:800;font-size:15px;box-shadow:0 14px 35px rgba(0,30,70,.32);cursor:pointer;transition:.2s}
+#apsanAIv2Open:hover{transform:translateY(-2px);box-shadow:0 18px 42px rgba(0,30,70,.4)}
+#apsanAIv2Open .ai-dot{width:11px;height:11px;border-radius:50%;background:#43d7ff;box-shadow:0 0 0 5px rgba(67,215,255,.15);animation:apsanAIPulse 2s infinite}
+@keyframes apsanAIPulse{50%{box-shadow:0 0 0 9px rgba(67,215,255,.04)}}
+#apsanAIv2Panel{position:fixed;right:22px;bottom:88px;width:min(720px,calc(100vw - 30px));height:min(78vh,760px);min-height:500px;background:#fff;border:1px solid #d9e2ec;border-radius:22px;box-shadow:0 28px 90px rgba(3,25,50,.30);overflow:hidden;display:flex;flex-direction:column;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(18px) scale(.98);transition:opacity .2s,transform .2s,visibility .2s}
+#apsanUniversalAIv2.open #apsanAIv2Panel{opacity:1;visibility:visible;pointer-events:auto;transform:none}
+#apsanAIv2Head{flex:0 0 auto;background:linear-gradient(135deg,#003366,#0a5a88);color:#fff;padding:17px 18px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+#apsanAIv2Head .title{font-size:17px;font-weight:900}.apsan-ai-status{font-size:11px;opacity:.85;margin-top:3px}
+#apsanAIv2Close{border:0;background:rgba(255,255,255,.12);color:#fff;width:38px;height:38px;border-radius:50%;font-size:24px;cursor:pointer}
+#apsanAIv2Messages{flex:1;min-height:0;overflow-y:auto;padding:22px;background:#eef3f8;scroll-behavior:smooth}
+.apsan-v2-msg{max-width:88%;margin:0 0 15px;padding:13px 15px;border-radius:16px;font-size:14px;line-height:1.65;white-space:pre-wrap;word-break:break-word;box-shadow:0 4px 12px rgba(20,40,60,.05)}
+.apsan-v2-bot{background:#fff;color:#182536;border:1px solid #e1e8ef;margin-right:auto}.apsan-v2-user{background:#0878b8;color:#fff;margin-left:auto;border-bottom-right-radius:5px}
+.apsan-v2-meta{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;opacity:.6;margin-bottom:5px}
+#apsanAIv2Quick{flex:0 0 auto;padding:10px 12px;background:#fff;border-top:1px solid #e2e8f0;display:flex;gap:8px;overflow-x:auto}
+#apsanAIv2Quick button{white-space:nowrap;border:1px solid #d5e0e9;background:#f8fafc;color:#12304b;border-radius:999px;padding:8px 12px;font-size:12px;font-weight:700;cursor:pointer}
+#apsanAIv2Quick button:hover{background:#e8f5fb;border-color:#0878b8}
+#apsanAIv2Form{flex:0 0 auto;display:flex;gap:9px;padding:12px;background:#fff;border-top:1px solid #dfe6ee}
+#apsanAIv2Input{flex:1;min-width:0;border:1px solid #cbd7e3;border-radius:14px;padding:13px 14px;font-size:14px;color:#111827;background:#fff;outline:none}
+#apsanAIv2Input:focus{border-color:#0878b8;box-shadow:0 0 0 3px rgba(8,120,184,.1)}
+#apsanAIv2Send{border:0;border-radius:14px;padding:0 18px;background:#003366;color:#fff;font-weight:800;cursor:pointer}
+#apsanAIv2Send:disabled{opacity:.55;cursor:wait}
+@media(max-width:650px){#apsanUniversalAIv2{right:10px;bottom:10px}#apsanAIv2Open{padding:13px 16px}#apsanAIv2Panel{right:8px;bottom:70px;width:calc(100vw - 16px);height:calc(100dvh - 88px);min-height:0;border-radius:18px}#apsanAIv2Messages{padding:14px}.apsan-v2-msg{max-width:94%;font-size:14px}}
+</style>
+<div id="apsanUniversalAIv2">
+  <div id="apsanAIv2Panel" role="dialog" aria-modal="false" aria-label="APSAN AI">
+    <div id="apsanAIv2Head"><div><div class="title">✦ APSAN AI</div><div class="apsan-ai-status">Ligado ao conteúdo desta página e preparado para consultar o conteúdo publicado no site.</div></div><button id="apsanAIv2Close" aria-label="Fechar chat">×</button></div>
+    <div id="apsanAIv2Messages" aria-live="polite"></div>
+    <div id="apsanAIv2Quick">
+      <button data-q="Explique tudo sobre a APSAN, LDA.">Sobre a APSAN</button>
+      <button data-q="Quais são todos os serviços da APSAN? Detalhe cada um.">Todos os serviços</button>
+      <button data-q="Quais são os contactos, NIF e localização da APSAN?">Contactos</button>
+      <button data-q="Explique os serviços entre Angola e Namíbia.">Angola ↔ Namíbia</button>
+      <button data-q="Quais são as publicações e novidades disponíveis no site?">Publicações</button>
+    </div>
+    <form id="apsanAIv2Form"><input id="apsanAIv2Input" autocomplete="off" placeholder="Pergunte qualquer coisa sobre a APSAN ou faça uma pergunta geral..."><button id="apsanAIv2Send" type="submit">Enviar</button></form>
+  </div>
+  <button id="apsanAIv2Open" aria-expanded="false" aria-controls="apsanAIv2Panel"><span class="ai-dot"></span><span>APSAN AI</span></button>
+</div>
+<script>
+(function(){
+  'use strict';
+  var APSAN_CORE={
+    company:'APSAN, LDA',
+    website:'https://apsanlda.com/',
+    nif:'5002085011',
+    email:'info@apsanlda.com',
+    phones:['+244 944 403 093 (WhatsApp)','+244 946 195 402','+244 934 437 739'],
+    locations:'Sede: Namacunde / Santa Clara, Cunene - Angola. Escritório: Ondjiva, Cunene - Angola.',
+    hours:{
+      weekdays:'Segunda a sexta-feira: das 08h00 às 18h00.',
+      saturday:'Sábado: das 08h00 às 16h30.',
+      sunday:'Domingo: somente mediante marcação prévia ou em situações de emergência.'
+    },
+    description:'Soluções integradas, serviços corporativos, tecnologia e logística entre Angola e Namíbia.',
+    services:{
+      technology:'A APSAN, LDA presta serviços tecnológicos, incluindo criação e desenvolvimento de websites, desenvolvimento de software e sistemas de gestão, infraestrutura de redes e cablagem estruturada. A resposta deve distinguir claramente cada necessidade: website para presença digital, software de gestão para processos internos e redes/cablagem para conectividade e infraestrutura.',
+      importExport:'Importação e exportação, incluindo apoio a operações comerciais entre Angola e Namíbia.',
+      namibiaPurchases:'Compras na Namíbia, com apoio na procura e aquisição de produtos e bens.',
+      passengerGoods:'Transporte seguro de passageiros e bens.',
+      corporate:'Serviços corporativos e apoio empresarial.',
+      cleaning:'Serviços de limpeza e manutenção.',
+      catering:'Catering e apoio a eventos.',
+      logistics:'Transportes e apoio logístico.',
+      hospital:'Acompanhamento hospitalar na Namíbia. O serviço pode envolver apoio ao cliente durante o atendimento e a permanência hospitalar, incluindo orientação no percurso de atendimento e apoio de comunicação/tradução quando necessário. No hospital público, o processo informado pela APSAN é: 1) partilhar previamente o histórico médico para uma breve tradução e familiarização do médico com a patologia; 2) no dia da consulta, pagar 150 randes pelo cartão do hospital, valor aproximado de 9.000 a 10.000 Kz conforme o câmbio do dia; 3) aguardar a fila para entrada no consultório; 4) consultar com o médico; 5) conforme a avaliação médica, realizar os exames indicados. Alguns exames no hospital público são gratuitos, enquanto exames mais aprofundados são pagos e têm preços variáveis, pelo que a APSAN não deve apresentar um preço definitivo para esses custos; 6) os resultados podem sair no mesmo dia ou levar cerca de 2 dias, 1 semana, 2 semanas, 3 semanas ou até 1 mês, conforme o exame. Em exames mais aprofundados, os materiais podem ser encaminhados para laboratórios na África do Sul, incluindo Windhoek, para processamento; 7) com o resultado disponível, o médico orienta a medicação adequada. Nas clínicas privadas: 1) partilhar previamente o histórico médico para familiarização do médico com a patologia; 2) pagar a consulta, normalmente a partir de 350 randes, equivalente a cerca de 22.000 Kz, podendo variar conforme o especialista; 3) aguardar a vez para consulta; 4) o médico avalia o caso e pode solicitar exames; 5) no privado, alguns resultados podem sair no mesmo dia e outros em até 3 dias; 6) com os resultados, o médico orienta a medicação adequada. Os valores em Kwanzas são aproximados e dependem do câmbio do dia.',
+      translation:'Traduções e apoio administrativo.',
+      marketing:'Marketing e comunicação.'
+    },
+    payments:'Transferência bancária em Kwanzas, depósitos diretos, pagamentos via Express e facilidades de faturação a 30 dias para parceiros corporativos aprovados.'
+  };
+
+  var root=document.getElementById('apsanUniversalAIv2'), panel=document.getElementById('apsanAIv2Panel'), open=document.getElementById('apsanAIv2Open'), close=document.getElementById('apsanAIv2Close'), msgs=document.getElementById('apsanAIv2Messages'), form=document.getElementById('apsanAIv2Form'), input=document.getElementById('apsanAIv2Input'), sendBtn=document.getElementById('apsanAIv2Send');
+  var siteContext='', sitePages=[], loadingSite=false;
+
+  function norm(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+  function add(text,user){
+    var box=document.createElement('div'); box.className='apsan-v2-msg '+(user?'apsan-v2-user':'apsan-v2-bot');
+    var meta=document.createElement('div'); meta.className='apsan-v2-meta'; meta.textContent=user?'Você':'APSAN AI';
+    box.appendChild(meta);
+    var body=document.createElement('div'); body.className='apsan-v2-message-body'; body.textContent=text;
+    box.appendChild(body); msgs.appendChild(box); msgs.scrollTop=msgs.scrollHeight; return body;
+  }
+
+  function coreText(){
+    return [
+      'EMPRESA: '+APSAN_CORE.company,
+      'DESCRIÇÃO: '+APSAN_CORE.description,
+      'NIF: '+APSAN_CORE.nif,
+      'CONTACTOS: '+APSAN_CORE.phones.join(' | '),
+      'EMAIL: '+APSAN_CORE.email,
+      'SITE: '+APSAN_CORE.website,
+      'LOCALIZAÇÃO: '+APSAN_CORE.locations,
+      'HORÁRIO: '+APSAN_CORE.hours.weekdays+' '+APSAN_CORE.hours.saturday+' '+APSAN_CORE.hours.sunday,
+      'SERVIÇOS:',
+      'Tecnologia: '+APSAN_CORE.services.technology,
+      'Importação e exportação: '+APSAN_CORE.services.importExport,
+      'Compras na Namíbia: '+APSAN_CORE.services.namibiaPurchases,
+      'Transporte seguro de passageiros e bens: '+APSAN_CORE.services.passengerGoods,
+      'Serviços corporativos e apoio empresarial: '+APSAN_CORE.services.corporate,
+      'Limpeza e manutenção: '+APSAN_CORE.services.cleaning,
+      'Catering e apoio a eventos: '+APSAN_CORE.services.catering,
+      'Transportes e apoio logístico: '+APSAN_CORE.services.logistics,
+      'Acompanhamento hospitalar na Namíbia: '+APSAN_CORE.services.hospital,
+      'Traduções e apoio administrativo: '+APSAN_CORE.services.translation,
+      'Marketing e comunicação: '+APSAN_CORE.services.marketing,
+      'PAGAMENTOS: '+APSAN_CORE.payments
+    ].join('\n');
+  }
+
+  function buildSiteContext(){
+    var body=document.body?document.body.innerText:'';
+    var posts='';
+    try{
+      posts=(window.APSANRenderedPosts||[]).map(function(p){
+        return [p.title,p.category,p.date,p.excerpt,p.content].filter(Boolean).join('\n');
+      }).join('\n---\n');
+    }catch(e){}
+    siteContext=(coreText()+'\n\nCONTEÚDO ATUAL DA PÁGINA:\n'+body+'\n\nPUBLICAÇÕES CARREGADAS PELO SITE:\n'+posts).slice(0,110000);
+  }
+
+  function answerService(label,description){
+    return 'Sim. A APSAN, LDA presta o serviço de '+label+'.\n\n'+description+
+      '\n\nSe desejar, posso também explicar como este serviço pode ser aplicado ao seu caso e indicar os contactos da APSAN para solicitar atendimento.';
+  }
+
+  function hospitalDetailedReply(x){
+    var privateClinic=/(privad|clinica|clínica)/.test(x);
+    var publicHospital=/(public|publico|público|hospital publico|hospital público)/.test(x);
+    var intro='O acompanhamento hospitalar da APSAN, LDA na Namíbia pode seguir duas vias: hospital público ou clínica privada. O processo informado é o seguinte:';
+    if(privateClinic && !publicHospital) return intro+'\n\nCLÍNICA PRIVADA\n1. Primeiro, partilha-se o histórico médico para uma breve familiarização do médico com a patologia.\n2. Paga-se a consulta, normalmente a partir de 350 randes, cerca de 22.000 Kz, podendo variar conforme o especialista e o câmbio do dia.\n3. Aguarda-se a vez para entrar na consulta.\n4. O médico avalia o paciente e, conforme o caso, solicita os exames necessários.\n5. No privado, alguns resultados podem sair no mesmo dia e outros em até 3 dias.\n6. Com os resultados, o médico orienta a medicação adequada.\n\nOs valores e prazos são aproximados e podem variar conforme o especialista, exame e câmbio.';
+    if(publicHospital && !privateClinic) return intro+'\n\nHOSPITAL PÚBLICO\n1. Primeiro, partilha-se o histórico médico para uma breve tradução e para permitir ao médico uma prévia familiarização com a patologia.\n2. No dia da consulta, paga-se 150 randes pelo cartão do hospital, aproximadamente 9.000 a 10.000 Kz, dependendo do câmbio do dia.\n3. Depois, aguarda-se a fila para entrada no consultório.\n4. Na consulta, o médico avalia o paciente e, conforme a sua percepção clínica, solicita um ou mais exames.\n5. Alguns exames no hospital público são gratuitos; outros, mais aprofundados, são pagos. Os preços variam, por isso a APSAN não deve indicar um preço definitivo para esses exames.\n6. Os resultados podem sair no mesmo dia, em 2 dias, 1 semana, 2 semanas, 3 semanas ou até 1 mês, dependendo da profundidade do exame. Em exames mais aprofundados, os materiais podem ser encaminhados para laboratórios na África do Sul, incluindo Windhoek, para processamento.\n7. Quando o resultado fica disponível, o médico faz a avaliação e orienta a medicação adequada.\n\nOs valores em Kwanzas são aproximados e dependem do câmbio do dia.';
+    return intro+'\n\nHOSPITAL PÚBLICO\n• Histórico médico: partilha prévia para breve tradução e familiarização do médico.\n• Cartão do hospital: 150 randes (aprox. 9.000–10.000 Kz, conforme o câmbio).\n• Consulta: aguardar a fila e depois ser avaliado pelo médico.\n• Exames: alguns gratuitos; outros pagos e variáveis.\n• Resultados: podem sair no mesmo dia, em 2 dias, 1, 2 ou 3 semanas, ou até 1 mês; exames mais aprofundados podem ser processados em laboratórios na África do Sul, incluindo Windhoek.\n• Depois do resultado: o médico orienta a medicação adequada.\n\nCLÍNICA PRIVADA\n• Histórico médico: partilha prévia para familiarização do médico.\n• Consulta: normalmente a partir de 350 randes (aprox. 22.000 Kz), podendo variar conforme o especialista e o câmbio.\n• Consulta e exames: aguarda-se a vez, o médico avalia e solicita os exames necessários.\n• Resultados: alguns no mesmo dia e outros em até 3 dias.\n• Depois do resultado: o médico orienta a medicação adequada.\n\nSe me disser se pretende hospital público ou clínica privada, posso explicar apenas esse percurso passo a passo.';
+  }
+
+  function localReply(q){
+    var x=norm(q);
+
+    if(/^(ola|oi|bom dia|boa tarde|boa noite|hello|hi)(\b|[!,.?]|$)/.test(x))
+      return 'Olá! É um prazer falar consigo. Sou o APSAN AI, assistente da APSAN, LDA. Posso consultar e organizar as informações disponíveis no site para responder às suas perguntas de forma clara e específica. Como posso ajudar?';
+
+    if(/(horario|horarios|aberto|fecha|fecham|funciona|fim de semana|final de semana|sabado|domingo|segunda|sexta)/.test(x))
+      return 'Sim. O horário de atendimento da APSAN, LDA é:\n\n• Segunda a sexta-feira: das 08h00 às 18h00.\n• Sábado: das 08h00 às 16h30.\n• Domingo: somente mediante marcação prévia ou em situações de emergência.\n\nPara atendimento ao domingo, recomendamos fazer a marcação antecipadamente, salvo situações de emergência.';
+
+    if(x.includes('nif')) return 'O NIF da APSAN, LDA é '+APSAN_CORE.nif+'.';
+    if(x.includes('email')||x.includes('e-mail')) return 'O e-mail da APSAN, LDA é '+APSAN_CORE.email+'.';
+    if(x.includes('contact')||x.includes('telefone')||x.includes('numero')||x.includes('whatsapp'))
+      return 'Pode contactar a APSAN, LDA através de:\n\n• '+APSAN_CORE.phones.join('\n• ')+'\n• E-mail: '+APSAN_CORE.email+'\n• Site: '+APSAN_CORE.website;
+    if(x.includes('onde')||x.includes('localiza')||x.includes('morada')||x.includes('endereco'))
+      return 'A APSAN, LDA tem a sua sede em Namacunde / Santa Clara, Cunene - Angola, e escritório em Ondjiva, Cunene - Angola.';
+
+    if(/(acompanhamento hospitalar|acompanhar no hospital|hospitalar|hospital|consulta.*namibia|medico.*namibia|clinica.*namibia)/.test(x))
+      return hospitalDetailedReply(x);
+
+    if(/(criacao|criar|desenvolvimento|website|site|pagina.*web|pagina web|webdesign)/.test(x) && /(site|website|web|pagina|internet)/.test(x))
+      return answerService('criação e desenvolvimento de websites', 'A APSAN, LDA pode atender necessidades de presença digital através da criação e desenvolvimento de websites. Este serviço enquadra-se na área de tecnologia. Se a sua necessidade for um website institucional, página de apresentação de serviços ou outra solução web, a APSAN pode avaliar o projeto e orientar sobre a solução adequada. Preços, prazos e funcionalidades específicas devem ser definidos conforme o projeto e não devem ser inventados pelo assistente.');
+
+    if(/(software|programa de gestao|sistema de gestao|tecnologia|informatica)/.test(x))
+      return answerService('desenvolvimento de software e soluções tecnológicas', 'Na área tecnológica, a APSAN, LDA trabalha com desenvolvimento de software de gestão e soluções tecnológicas. Se a pergunta for sobre software de gestão, o foco é criar uma solução para organizar e apoiar processos de gestão. Se a necessidade for um website, a APSAN AI deve tratar a criação de website como serviço próprio, em vez de responder apenas de forma genérica sobre software.');
+
+    if(/(rede|redes|cablagem|infraestrutura.*rede|internet.*empresa)/.test(x))
+      return answerService('infraestrutura de redes e cablagem estruturada', 'Este serviço está relacionado com a infraestrutura de conectividade de uma empresa, incluindo redes e cablagem estruturada. Para indicar uma solução concreta, o assistente deve primeiro considerar o que o cliente pretende instalar, organizar ou melhorar e não inventar equipamentos, quantidades ou preços.');
+
+    if(/(importacao|exportacao|importar|exportar)/.test(x))
+      return answerService('importação e exportação',APSAN_CORE.services.importExport);
+
+    if(/(compras na namibia|comprar na namibia|compras.*namibia)/.test(x))
+      return answerService('compras na Namíbia',APSAN_CORE.services.namibiaPurchases);
+
+    if(/(transporte.*passageiro|transporte.*bens|passageiros|bens)/.test(x))
+      return answerService('transporte seguro de passageiros e bens',APSAN_CORE.services.passengerGoods);
+
+    if(/(servico.*corporativ|apoio empresarial|empresa)/.test(x))
+      return answerService('serviços corporativos e apoio empresarial',APSAN_CORE.services.corporate);
+
+    if(/(limpeza|manutencao)/.test(x))
+      return answerService('limpeza e manutenção',APSAN_CORE.services.cleaning);
+
+    if(/(catering|evento|eventos)/.test(x))
+      return answerService('catering e apoio a eventos',APSAN_CORE.services.catering);
+
+    if(/(transporte|logistica|transportes)/.test(x))
+      return answerService('transportes e apoio logístico',APSAN_CORE.services.logistics);
+
+    if(/(traducao|traducoes|administrativ)/.test(x))
+      return answerService('traduções e apoio administrativo',APSAN_CORE.services.translation);
+
+    if(/(marketing|comunicacao|publicidade)/.test(x))
+      return answerService('marketing e comunicação',APSAN_CORE.services.marketing);
+
+    if(/(pagamento|pagar|fatura|faturacao)/.test(x))
+      return 'As formas de pagamento indicadas pela APSAN, LDA são:\n\n'+APSAN_CORE.payments;
+
+    if(/(quais.*servic|todos.*servic|servicos.*prestam|o que.*fazem)/.test(x))
+      return 'A APSAN, LDA atua em várias áreas, incluindo tecnologia, logística, operações entre Angola e Namíbia, serviços corporativos, limpeza e manutenção, catering e eventos, transportes, acompanhamento hospitalar na Namíbia, traduções, apoio administrativo e marketing/comunicação.\n\nSe me disser qual serviço pretende, eu explico apenas esse serviço, com os respetivos detalhes, em vez de apresentar uma lista genérica.';
+
+    if(/(quem.*apsan|sobre.*apsan|o que.*apsan|empresa.*apsan)/.test(x))
+      return APSAN_CORE.company+' é uma empresa orientada para soluções integradas, serviços corporativos, tecnologia e logística entre Angola e Namíbia.\n\n'+APSAN_CORE.locations+'\n\nPosso explicar qualquer área da empresa de forma individual.';
+
+    return null;
+  }
+
+  function scoreContext(question){
+    var q=norm(question).split(/\s+/).filter(function(w){return w.length>3;});
+    var chunks=siteContext.split(/\n(?=---|[A-ZÁÉÍÓÚÃÕÇ ]{5,}:)/);
+    return chunks.map(function(c){
+      var n=norm(c), score=q.reduce(function(a,w){return a+(n.includes(w)?1:0);},0);
+      return {c:c,score:score};
+    }).filter(function(o){return o.score>0;}).sort(function(a,b){return b.score-a.score;}).slice(0,12).map(function(o){return o.c;}).join('\n---\n');
+  }
+
+  async function refreshSite(){
+    if(loadingSite) return siteContext;
+    loadingSite=true;
+    buildSiteContext();
+    try{
+      var r=await fetch('/sitemap.xml',{cache:'no-store'});
+      if(r.ok){
+        var xml=await r.text();
+        var urls=[...xml.matchAll(/<loc>(.*?)<\/loc>/gi)].map(function(m){return m[1].trim();}).filter(Boolean);
+        sitePages=urls.slice(0,12);
+        for(var i=0;i<sitePages.length;i++){
+          try{
+            var pr=await fetch(sitePages[i],{cache:'no-store'});
+            if(pr.ok){
+              var html=await pr.text();
+              var doc=new DOMParser().parseFromString(html,'text/html');
+              var txt=doc&&doc.body?doc.body.innerText:'';
+              if(txt) siteContext+='\n\nPÁGINA DO SITE: '+sitePages[i]+'\n'+txt.slice(0,12000);
+            }
+          }catch(e){}
+        }
+      }
+    }catch(e){}
+    siteContext=siteContext.slice(0,140000);
+    loadingSite=false;
+    return siteContext;
+  }
+
+  async function askAI(q){
+    var local=localReply(q);
+    if(local) return local;
+
+    await refreshSite();
+    var relevant=scoreContext(q);
+
+    try{
+      var r=await fetch('/api/chat',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body:JSON.stringify({
+          message:q,
+          company:APSAN_CORE,
+          site_context:siteContext,
+          relevant_site_context:relevant,
+          instructions:
+            'És o APSAN AI, assistente oficial da APSAN, LDA. Responde em português. '+
+            'PRIORIDADE ABSOLUTA: quando a pergunta tiver relação com a APSAN, usa primeiro o conteúdo real do site, das páginas consultadas e das publicações. '+
+            'Responde exatamente à pergunta feita. Se perguntarem por UM serviço, responde sobre esse serviço específico e não uses uma resposta genérica nem mudes para outro serviço. Se perguntarem especificamente por criação de website, responde sobre criação de website. '+
+            'Explica o que o serviço inclui, como funciona e quais limites/condições estão efetivamente indicados nas fontes. '+
+            'Se perguntarem pelo horário, usa os horários fornecidos no contexto. '+
+            'Nunca inventes preços, horários, contactos, condições, disponibilidade ou serviços. '+
+            'Se uma informação específica não estiver disponível nas fontes, diz claramente isso e oferece o contacto da empresa. '+
+            'Para perguntas gerais não relacionadas com a APSAN, responde normalmente como uma IA geral, desde que o servidor esteja ligado a um modelo de IA. '+
+            'Mantém respostas profissionais, naturais, construtivas e bem organizadas, sem respostas genéricas.'
+        })
+      });
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      var j=await r.json();
+      return j.reply||j.answer||j.message||'Não foi possível obter uma resposta neste momento.';
+    }catch(e){
+      return 'Consigo responder diretamente às informações da APSAN que já estão disponíveis no site. Para perguntas gerais que não estejam cobertas pelo conteúdo do site, é necessária a ligação do endpoint /api/chat a um modelo de IA no servidor.';
+    }
+  }
+
+  async function send(q){
+    q=String(q||'').trim(); if(!q)return;
+    add(q,true); input.value=''; sendBtn.disabled=true;
+    var loading=add('Vou verificar a informação da APSAN e preparar uma resposta específica para a sua pergunta…',false);
+    try{loading.textContent=await askAI(q);}
+    catch(e){loading.textContent='Ocorreu um erro ao processar a pergunta.';}
+    sendBtn.disabled=false; input.focus(); msgs.scrollTop=msgs.scrollHeight;
+  }
+
+  function show(){
+    root.classList.add('open'); open.setAttribute('aria-expanded','true');
+    if(!msgs.children.length){
+      buildSiteContext();
+      add('Olá! Sou o APSAN AI da APSAN, LDA.\n\nPode perguntar sobre qualquer serviço, horário, contactos, localização, operações entre Angola e Namíbia, publicações ou qualquer outra informação relacionada com a empresa. Quando necessário, consulto o conteúdo disponível no próprio site antes de responder.',false);
+    }
+    setTimeout(function(){input.focus();},150);
+  }
+
+  open.addEventListener('click',function(){
+    root.classList.contains('open')?(root.classList.remove('open'),open.setAttribute('aria-expanded','false')):show();
+  });
+  close.addEventListener('click',function(){root.classList.remove('open');open.setAttribute('aria-expanded','false');});
+  form.addEventListener('submit',function(e){e.preventDefault();send(input.value);});
+  document.querySelectorAll('#apsanAIv2Quick button').forEach(function(b){b.addEventListener('click',function(){send(b.getAttribute('data-q'));});});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&root.classList.contains('open')){root.classList.remove('open');open.setAttribute('aria-expanded','false');}});
+  buildSiteContext();
+})();
+
+</script>
+
 </body>
 </html>
