@@ -3511,7 +3511,6 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            buildApsanKnowledge();
             loadCMSPosts();
 
             const saved = JSON.parse(localStorage.getItem('apsan_testemunhos') || '[]');
@@ -3630,248 +3629,185 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
             windowEl.classList.toggle('active');
         }
 
-        // ================= ASSISTENTE VIRTUAL AZNY GABRIEL =================
-        // Atendimento conversacional contextual da APSAN, LDA.
-        // A assistente responde primeiro à intenção da pergunta e só depois
-        // conduz a conversa. O nome do cliente nunca substitui a resposta à pergunta.
-        const aznyConversation = {
-            greeted: false,
-            askedName: false,
-            clientName: '',
-            lastTopic: '',
-            awaitingMedicalType: false
-        };
+        // ===== AZNY GABRIEL — CONVERSA NATURAL E CONTEXTUAL =====
+        let aznyClientName = '';
+        let aznyConversationStarted = false;
 
-        let apsanSiteKnowledge = [];
-
-        function buildApsanKnowledge() {
-            const clone = document.body.cloneNode(true);
-            clone.querySelectorAll('#assistantWidget,script,style,noscript').forEach(el => el.remove());
-            const text = (clone.innerText || clone.textContent || '').replace(/\s+/g, ' ').trim();
-            const sentences = text.split(/(?<=[.!?;:])\s+|\s{2,}/).map(x => x.trim()).filter(x => x.length >= 30);
-            apsanSiteKnowledge = [];
-            for (let i = 0; i < sentences.length; i++) {
-                const chunk = sentences.slice(Math.max(0, i - 1), Math.min(sentences.length, i + 2)).join(' ');
-                if (chunk.length >= 40 && !apsanSiteKnowledge.includes(chunk)) apsanSiteKnowledge.push(chunk);
-            }
+        function escapeAssistantHTML(value) {
+            return String(value).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
         }
 
-        function normalizeAzny(text) {
-            return String(text || '').toLowerCase()
-                .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-                .replace(/[^a-z0-9\s@+.-]/g, ' ')
-                .replace(/\s+/g, ' ').trim();
-        }
-
-        function currentAznyGreeting() {
-            const h = new Date().getHours();
-            if (h >= 5 && h < 12) return 'Bom dia';
-            if (h >= 12 && h < 18) return 'Boa tarde';
+        function getTimeGreeting() {
+            const hour = new Date().getHours();
+            if (hour >= 5 && hour < 12) return 'Bom dia';
+            if (hour >= 12 && hour < 18) return 'Boa tarde';
             return 'Boa noite';
         }
 
-        function greetingReply(q) {
-            if (/\b(bom dia|bomdias)\b/.test(q)) return 'Bom dia! Seja muito bem-vindo(a) à APSAN, LDA. Eu sou a Azny Gabriel, assistente virtual da APSAN. Com quem tenho o prazer de falar?';
-            if (/\b(boa tarde|boatarde)\b/.test(q)) return 'Boa tarde! Seja muito bem-vindo(a) à APSAN, LDA. Eu sou a Azny Gabriel, assistente virtual da APSAN. Com quem tenho o prazer de falar?';
-            if (/\b(boa noite|boanoite)\b/.test(q)) return 'Boa noite! Seja muito bem-vindo(a) à APSAN, LDA. Eu sou a Azny Gabriel, assistente virtual da APSAN. Com quem tenho o prazer de falar?';
-            if (/^(ola|oi|hello|hi|saudacoes)([.!?,\s]|$)/.test(q)) return 'Olá! Seja muito bem-vindo(a) à APSAN, LDA. Eu sou a Azny Gabriel, assistente virtual da APSAN. Com quem tenho o prazer de falar?';
-            return null;
-        }
-
         function isGreeting(q) {
-            return /^(ola|oi|hello|hi|bom dia|boa tarde|boa noite|bomdias|boatarde|boanoite)([.!?,\s]|$)/i.test(q);
+            return /^(olá|ola|oi|olá azny|ola azny|bom dia|boa tarde|boa noite|boa madrugada|hello|hi)\b/i.test(q.trim());
         }
 
-        function extractName(text) {
-            const clean = String(text || '').trim().replace(/^(me chamo|chamo-me|o meu nome e|o meu nome é|meu nome e|meu nome é|sou|eu sou|aqui e|aqui é)\s+/i, '').trim();
-            if (!clean || clean.length > 70) return '';
-            const n = clean.replace(/[.!?,;:]+$/g, '').trim();
-            if (/^(eu|voce|você|uma pessoa|cliente|interessado|interessada)$/i.test(n)) return '';
-            if (n.split(/\s+/).length <= 6 && /^[A-Za-zÀ-ÿ' -]+$/.test(n)) return n;
-            return '';
-        }
-
-        function hasAny(q, terms) { return terms.some(t => q.includes(t)); }
-
-        function answerMedicalNamibia(q) {
-            const publicTerms = ['hospital publico','hospital público','publico','público','hospital do estado','public'];
-            const privateTerms = ['clinica privada','clínica privada','clinicas privadas','clínicas privadas','privado','privada','particular','private'];
-            if (hasAny(q, publicTerms)) {
-                return 'Claro. Se estiver a falar de atendimento num hospital público na Namíbia, o processo informado pela APSAN é: chegar ao hospital, pagar o cartão, no valor de 150 rand (aproximadamente 9 a 10 mil kwanzas), e aguardar na fila. Depois, o paciente entra no consultório e é atendido pelo médico. Conforme a consulta, o doutor orienta se serão necessários exames. Alguns exames são pagos e outros podem ser gratuitos. Em função dos resultados, o médico recomenda a medicação adequada para a patologia em causa. Se quiser, também posso explicar como funciona o atendimento em clínicas privadas.';
-            }
-            if (hasAny(q, privateTerms)) {
-                return 'Claro. Para clínicas privadas na Namíbia, posso orientar sobre o serviço de acompanhamento hospitalar e ajudar a encaminhar o atendimento. Como os procedimentos, preços e condições podem variar de uma clínica para outra, para obter valores e detalhes atualizados a APSAN pode fazer o encaminhamento e acompanhamento necessário. Se me disser a cidade ou a clínica que pretende, posso orientar melhor dentro das informações disponíveis da empresa.';
-            }
-            return 'Claro. Sobre consultas médicas na Namíbia, gostaria de saber se pretende informação sobre **hospital público** ou **clínica privada**? Diga-me qual dos dois e explico o processo.';
-        }
-
-        function topicFromQuery(q) {
-            const topics = [
-                ['orcamento', ['orcamento','orçamento','quanto custa','quanto e','quanto é','preco','preço','valor','cotacao','cotação','proposta comercial']],
-                ['consulta_medica', ['consulta medica','consulta médica','medico','médico','hospital','clinica','clínica','exame','paciente','saude','saúde','acompanhamento hospitalar']],
-                ['compras_namibia', ['compras na namibia','compras na namíbia','comprar na namibia','comprar na namíbia','produto na namibia','produto na namíbia','preco na namibia','preço na namíbia']],
-                ['namibia', ['namibia','namíbia','servico na namibia','serviço na namíbia','servicos na namibia','serviços na namíbia','atuam na namibia','atuam na namíbia']],
-                ['servicos', ['servicos','serviços','o que fazem','solucoes','soluções','oferecem','disponibilizam']],
-                ['limpeza', ['limpeza','higienizacao','higienização','asseio']],
-                ['catering', ['catering','eventos','alimentacao','alimentação','buffet']],
-                ['tecnologia', ['tecnologia','software','gestao','gestão','internet','redes','cablagem','cabling','sistema']],
-                ['logistica', ['logistica','logística','transporte','viaturas','aluguer','frete','despacho']],
-                ['extras', ['traducao','tradução','juramentad','marketing digital','redes sociais','acompanhamento hospitalar']],
-                ['contactos', ['contacto','contato','telefone','whatsapp','email','e-mail','falar com','numero','número']],
-                ['localizacao', ['sede','morada','endereco','endereço','onde ficam','onde estao','onde estão','ondjiva','namacunde','santa clara','cunene']],
-                ['nif', ['nif','fiscal','registo','registro','dados da empresa','numero fiscal','número fiscal']],
-                ['pagamentos', ['pagamento','pagar','transferencia','transferência','express','faturacao','faturação','30 dias','trinta dias']],
-                ['denuncia', ['denuncia','denúncia','abuso','etica','ética','irregularidade','reclamar']],
-                ['parcerias', ['parceria','parcerias','parceiro','parceiros','corporativo','instituicao','instituição']],
-                ['depoimentos', ['testemunho','testemunhos','depoimento','avaliacao','avaliação']]
+        function extractName(q) {
+            const patterns = [
+                /(?:meu nome é|me chamo|sou o|sou a|sou)\s+([A-Za-zÀ-ÿ][A-Za-zÀ-ÿ' -]{1,40})/i,
+                /(?:aqui é|aqui e|fala|quem fala é|quem fala e)\s+([A-Za-zÀ-ÿ][A-Za-zÀ-ÿ' -]{1,40})/i
             ];
-            for (const [topic, terms] of topics) if (hasAny(q, terms)) return topic;
-            return '';
-        }
-
-        function fixedCompanyAnswer(topic, q) {
-            const answers = {
-                servicos: 'A APSAN, LDA disponibiliza soluções integradas em limpeza institucional e higienização, material de escritório, catering e eventos corporativos, tecnologia, internet, redes e cablagem estruturada, software de gestão personalizado, logística, transporte e aluguer de viaturas, importação e exportação transfronteiriça, além de serviços extras como acompanhamento hospitalar, traduções oficiais juramentadas, compras e fretes na Namíbia e gestão de redes sociais e marketing digital.',
-                limpeza: 'Na área de limpeza, a APSAN, LDA presta serviços de limpeza institucional e higienização, com foco em ambientes limpos, organizados e adequados às necessidades de cada cliente.',
-                catering: 'A APSAN, LDA presta serviços de catering e apoio a eventos corporativos, adaptando o serviço às necessidades e dimensão de cada evento.',
-                tecnologia: 'Na área de tecnologia, a APSAN, LDA trabalha com internet, redes, cablagem estruturada e desenvolvimento de software de gestão personalizado para as necessidades do cliente.',
-                logistica: 'Na área de logística, a APSAN, LDA disponibiliza transporte, aluguer de viaturas e soluções de logística transfronteiriça entre Angola e Namíbia, incluindo apoio a compras, fretes e despacho.',
-                extras: 'Nos serviços extras, a APSAN, LDA disponibiliza acompanhamento hospitalar para clientes que vão realizar consultas, traduções oficiais juramentadas, compras e fretes na Namíbia e apoio profissional em redes sociais e marketing digital.',
-                contactos: 'Pode contactar a APSAN, LDA pelo +244 944 403 093, +244 946 195 402 ou +244 934 437 739, ou pelo e-mail info@apsanlda.com.',
-                localizacao: 'A sede da APSAN, LDA está em Namacunde / Santa Clara, Cunene, Angola. O site também apresenta informação de representação comercial em Ondjiva.',
-                nif: 'O NIF indicado no site para a APSAN, LDA é 5002085011.',
-                pagamentos: 'A APSAN, LDA indica opções de pagamento por transferência bancária em Kwanzas, depósitos diretos, Express e facilidades de faturação a 30 dias para parceiros corporativos devidamente aprovados.',
-                denuncia: 'A APSAN, LDA disponibiliza um canal de denúncias confidencial e seguro para comunicar condutas antiéticas ou irregularidades operacionais.',
-                parcerias: 'Sim. A APSAN, LDA trabalha com parceiros e clientes corporativos, procurando construir relações de confiança, compromisso e soluções integradas. Se quiser apresentar uma proposta de parceria, pode usar o formulário de Parcerias.',
-                depoimentos: 'O site possui uma área de testemunhos onde clientes podem partilhar a sua experiência com a APSAN, LDA.'
-            };
-
-            if (topic === 'orcamento') {
-                return 'Para saber o preço ou receber um orçamento, a Azny não deve inventar valores. Posso recolher e encaminhar o seu pedido, mas o orçamento é preparado pela equipa da APSAN, LDA. A empresa informa que os pedidos de orçamento podem receber resposta em até 24 horas úteis. Se quiser, diga-me qual serviço pretende, onde será realizado e os detalhes necessários, e eu direciono o pedido para a equipa responsável pelos valores.';
-            }
-            if (topic === 'namibia') {
-                return 'Sim, a APSAN, LDA presta serviços na Namíbia, trabalhando entre Angola e Namíbia. Entre os serviços estão acompanhamento hospitalar para quem vai realizar consultas, compras de produtos na Namíbia, consulta e atualização de preços, realização da compra pela equipa quando o cliente pretende avançar, e despacho da encomenda através de agências de viagem, podendo ser pela Macom ou pela Wambus Press. A empresa também atua com logística, fretes e operações de importação e exportação transfronteiriça.';
-            }
-            if (topic === 'compras_namibia') {
-                return 'Sim. Para compras na Namíbia, a APSAN pode consultar o preço do produto e atualizar o valor para o cliente. Se o cliente quiser avançar, a equipa pode preparar a compra, adquirir o produto e depois tratar do despacho da encomenda através de agências de viagem, podendo ser pela Macom ou pela Wambus Press. Diga-me o produto que procura e, para orçamento/valor final, encaminharei o pedido à equipa da empresa.';
-            }
-            if (topic === 'consulta_medica') return answerMedicalNamibia(q);
-            return answers[topic] || '';
-        }
-
-        function searchSiteKnowledge(query) {
-            const words = normalizeAzny(query).split(' ').filter(w => w.length >= 3);
-            if (!words.length || !apsanSiteKnowledge.length) return '';
-            const scored = apsanSiteKnowledge.map(chunk => {
-                const c = normalizeAzny(chunk);
-                let score = 0;
-                words.forEach(w => { if (c.includes(w)) score += w.length >= 6 ? 3 : 1; });
-                return { chunk, score };
-            }).filter(x => x.score > 0).sort((a,b) => b.score - a.score);
-            return scored.slice(0, 2).map(x => x.chunk).join(' ');
-        }
-
-        function conversationalFollowUp(q) {
-            if (/\b(nao|não) entendi|explica melhor|podes explicar|pode explicar|mais detalhes|detalhes\b/.test(q)) {
-                return 'Claro. Posso explicar passo a passo. Diga-me apenas qual serviço ou assunto da APSAN pretende compreender melhor.';
-            }
-            if (/\b(como estas|como estás|tudo bem|tudo bom|como vai|como esta|como está)\b/.test(q)) {
-                return `${currentAznyGreeting()}! Estou muito bem, obrigada por perguntar. Eu sou a Azny Gabriel, assistente virtual da APSAN, LDA. ${aznyConversation.clientName ? 'É um prazer continuar a falar consigo, ' + aznyConversation.clientName + '.' : 'Com quem tenho o prazer de falar?'}`;
-            }
-            if (/\b(obrigad|obrigado|obrigada|valeu|agradeco|agradeço)\b/.test(q)) {
-                return `É um prazer ajudar${aznyConversation.clientName ? ', ' + aznyConversation.clientName : ''}! Muito obrigada pela confiança. Pode continuar a perguntar sobre qualquer assunto relacionado com a APSAN, LDA.`;
-            }
-            if (/\b(quem es|quem és|quem e voce|quem é você|seu nome|teu nome|apresenta-te|apresente-se)\b/.test(q)) {
-                return 'Olá! Eu sou a Azny Gabriel, assistente virtual da APSAN, LDA. Estou aqui para conversar consigo e orientar sobre qualquer assunto relacionado com a empresa: serviços, Angola e Namíbia, compras, acompanhamento hospitalar, tecnologia, limpeza, catering, logística, transporte, parcerias, contactos, pagamentos e pedidos de orçamento.';
+            for (const p of patterns) {
+                const m = q.match(p);
+                if (m) return m[1].trim().replace(/[.,!?]+$/,'');
             }
             return '';
-        }
-
-        function getAznyResponse(query) {
-            const q = normalizeAzny(query);
-            if (!q) return 'Estou aqui consigo. Diga-me o que gostaria de saber sobre a APSAN, LDA.';
-
-            // Saudações são tratadas como saudações. Uma pergunta específica que começa
-            // por "olá" continua a ser respondida pelo assunto perguntado.
-            const topic = topicFromQuery(q);
-            const asksSpecific = !!topic || /\b(quanto|como|onde|qual|quais|vocês|voces|prestam|fazem|tem|têm|podem|posso|preciso|quero|gostaria|existe|funciona|funcionam)\b/.test(q);
-
-            if (isGreeting(q) && !asksSpecific) {
-                const naturalGreeting = greetingReply(q);
-                aznyConversation.greeted = true;
-                aznyConversation.askedName = true;
-                return naturalGreeting;
-            }
-
-            // Se a assistente acabou de perguntar o nome, aceita uma apresentação
-            // simples. Se o cliente fez uma pergunta ao mesmo tempo, prioriza a pergunta.
-            if (aznyConversation.askedName && !aznyConversation.clientName && !topic) {
-                const possibleName = extractName(query);
-                if (possibleName) {
-                    aznyConversation.clientName = possibleName;
-                    aznyConversation.askedName = false;
-                    return `Muito prazer, senhor(a) ${possibleName}! Em que posso ser útil? Pode perguntar-me sobre qualquer assunto relacionado com a APSAN, LDA.`;
-                }
-            }
-
-            if (topic === 'consulta_medica') {
-                aznyConversation.lastTopic = topic;
-                aznyConversation.awaitingMedicalType = !hasAny(q, ['publico','público','public','privado','privada','particular','private']);
-                return fixedCompanyAnswer(topic, q);
-            }
-
-            if (topic) {
-                aznyConversation.lastTopic = topic;
-                const answer = fixedCompanyAnswer(topic, q);
-                if (answer) return answer;
-            }
-
-            const follow = conversationalFollowUp(q);
-            if (follow) return follow;
-
-            // Continuação do tema de consultas médicas.
-            if (aznyConversation.lastTopic === 'consulta_medica' && (hasAny(q, ['publico','público','public','privado','privada','particular','private']))) {
-                return answerMedicalNamibia(q);
-            }
-
-            // Pesquisa contextual no texto real do site para perguntas fora das intenções
-            // pré-programadas, sem inventar informações.
-            const siteAnswer = searchSiteKnowledge(query);
-            if (siteAnswer) {
-                aznyConversation.lastTopic = 'site';
-                return `Claro. Sobre isso, encontrei esta informação da APSAN, LDA: ${siteAnswer} Se quiser, pode continuar a pergunta e eu explico melhor.`;
-            }
-
-            return `Entendi a sua pergunta${aznyConversation.clientName ? ', ' + aznyConversation.clientName : ''}. Eu sou a Azny Gabriel, assistente virtual da APSAN, LDA. Posso conversar consigo sobre qualquer assunto relacionado com a empresa. Se me disser exatamente o que pretende saber ou fazer, vou responder de acordo com as informações disponíveis da APSAN. Para valores e orçamentos, não invento preços: encaminho o pedido para a equipa responsável.`;
         }
 
         function sendQuickQuery(text) {
             const body = document.getElementById('assistantBody');
             if (!body) return;
-            body.innerHTML += `<div class="assistant-message user">${escapeAssistantHtml(text)}</div>`;
+            const clean = String(text).trim();
+            if (!clean) return;
+
+            const possibleName = extractName(clean);
+            if (possibleName && possibleName.split(/\s+/).length <= 4 && !/(empresa|serviço|servicos|namíbia|angola)/i.test(possibleName)) {
+                aznyClientName = possibleName;
+            }
+            aznyConversationStarted = true;
+
+            body.innerHTML += `<div class="assistant-message user">${escapeAssistantHTML(clean)}</div>`;
             setTimeout(() => {
-                const response = getAznyResponse(text);
+                const response = getAznyResponse(clean);
                 body.innerHTML += `<div class="assistant-message">${response}</div>`;
                 body.scrollTop = body.scrollHeight;
             }, 350);
         }
 
-        function escapeAssistantHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
         function sendAssistantMessage() {
             const input = document.getElementById('assistantInput');
-            const val = input.value.trim();
-            if(val) {
+            const val = input ? input.value.trim() : '';
+            if (val) {
                 sendQuickQuery(val);
                 input.value = '';
             }
         }
 
         function handleAssistantKey(e) { if(e.key === 'Enter') sendAssistantMessage(); }
+
+        function getAznyResponse(query) {
+            const q = query.toLowerCase().trim();
+            const name = aznyClientName ? escapeAssistantHTML(aznyClientName) : '';
+            const addressed = name ? `, ${name}` : '';
+
+            // Saudações: responde à saudação antes de tentar qualquer outro assunto.
+            if (/^bom dia\b/i.test(q)) {
+                return `Bom dia${addressed}! É um prazer recebê-lo(a). Eu sou a Azny Gabriel, assistente virtual da APSAN, LDA. Como está? Em que posso ser útil?`;
+            }
+            if (/^boa tarde\b/i.test(q)) {
+                return `Boa tarde${addressed}! É um prazer recebê-lo(a). Eu sou a Azny Gabriel, assistente virtual da APSAN, LDA. Como está? Em que posso ser útil?`;
+            }
+            if (/^boa noite\b/i.test(q)) {
+                return `Boa noite${addressed}! É um prazer recebê-lo(a). Eu sou a Azny Gabriel, assistente virtual da APSAN, LDA. Como está? Em que posso ser útil?`;
+            }
+            if (/^(olá|ola|oi|hello|hi)\b/i.test(q)) {
+                return `Olá${addressed}! Eu sou a Azny Gabriel, assistente virtual da APSAN, LDA. Seja muito bem-vindo(a)! Com quem tenho o prazer de falar?`;
+            }
+            if (/muito obrigado|muito obrigada|obrigad[oa]\b/i.test(q)) {
+                return name ? `É um prazer, ${name}! Sempre que precisar, estarei aqui para ajudar. Pode perguntar-me sobre qualquer assunto relacionado com a APSAN, LDA.` : `É um prazer! Sempre que precisar, estarei aqui para ajudar. Pode perguntar-me sobre qualquer assunto relacionado com a APSAN, LDA.`;
+            }
+            if (/^(quem és|quem es|qual é o teu nome|qual e o teu nome|como te chamas)/i.test(q)) {
+                return `Eu sou a Azny Gabriel, assistente virtual da APSAN, LDA. Estou aqui para conversar consigo e esclarecer dúvidas sobre a empresa, os nossos serviços, operações, contactos e formas de atendimento.`;
+            }
+            if (/(como estás|como estas|tudo bem|como vai)/i.test(q)) {
+                return `Estou muito bem, obrigada${addressed}! 😊 Estou aqui para ajudá-lo(a). Pode perguntar-me sobre qualquer assunto relacionado com a APSAN, LDA. Em que posso ser útil?`;
+            }
+
+            // Nome do interlocutor: nunca usa "falas com o senhor...".
+            if (possibleNameFromConversation(query)) {
+                const n = escapeAssistantHTML(aznyClientName);
+                return `Muito prazer, ${n}! Eu sou a Azny Gabriel, assistente virtual da APSAN, LDA. Em que posso ser útil? Pode perguntar-me sobre qualquer assunto relacionado com a nossa empresa.`;
+            }
+
+            // Namíbia — resposta específica e contextual.
+            if (/(prestam|presta|atuam|trabalham|serviço|servicos|serviço|operações|operacoes).*(namíbia|namibia)|(namíbia|namibia).*(prestam|serviço|servicos|atuam|trabalham)/i.test(q)) {
+                return `Sim, a APSAN, LDA presta serviços na Namíbia. 🇳🇦 Podemos apoiar, entre outros, em acompanhamento hospitalar para quem vai realizar consultas, compras na Namíbia e apoio logístico. No serviço de compras, podemos consultar o preço do produto, atualizar o valor para si e, caso decida avançar, preparar a nossa equipa para efetuar a compra. Depois, a encomenda pode ser despachada através de agências de viagem, como a Macom ou a Wambus Press. Se me disser qual serviço pretende na Namíbia, explico-lhe como funciona passo a passo.`;
+            }
+
+            // Consultas médicas na Namíbia.
+            if (/(consulta|consultas|hospital|médic|medic|clínica|clinica).*(namíbia|namibia)|(namíbia|namibia).*(consulta|hospital|médic|medic|clínica|clinica)/i.test(q)) {
+                return `Claro. Sobre consultas médicas na Namíbia, posso explicar-lhe o processo. Prefere saber como funciona num hospital público ou numa clínica privada?`;
+            }
+            if (/(público|publico|hospital público|hospital publico)/i.test(q) && /(consulta|hospital|médic|medic|namíbia|namibia)/i.test(q)) {
+                return `No hospital público, de forma geral, o processo começa pela chegada à unidade e pelo pagamento do cartão, indicado em cerca de 150 rand (aproximadamente 9 a 10 mil kwanzas, dependendo do câmbio). Depois é necessário aguardar na fila até ser chamado para o consultório. O médico faz a avaliação e, conforme o caso, pode solicitar exames. Existem exames que podem ser pagos e outros que podem ser gratuitos. Depois, em função dos resultados, o médico orienta a medicação adequada para a situação apresentada. A APSAN pode prestar acompanhamento a quem se desloca para realizar consultas.`;
+            }
+            if (/(privad|clínica privada|clinica privada)/i.test(q) && /(consulta|hospital|médic|medic|namíbia|namibia)/i.test(q)) {
+                return `Nas clínicas privadas, o procedimento e os valores podem variar conforme a clínica, o médico e o tipo de atendimento. A APSAN pode ajudar no acompanhamento e na organização da deslocação para a consulta. Se me disser a cidade, a clínica ou o tipo de consulta que pretende, posso orientar dentro das informações disponíveis da empresa.`;
+            }
+
+            // Orçamentos e preços.
+            if (/(quanto custa|quanto é|quanto e|preço|preco|valor|orçamento|orcamento|cotação|cotacao|custa)/i.test(q)) {
+                return `Para lhe dar um orçamento correto, não quero inventar um valor. Vou direcioná-lo(a) para a equipa da APSAN, LDA responsável pelos orçamentos, para que possa receber todos os detalhes e o valor adequado ao serviço que pretende. Para serviços normais, a empresa informa que os orçamentos podem ser emitidos em até 24 horas úteis.`;
+            }
+
+            // Compras na Namíbia.
+            if (/(compras|comprar|produto|mercadoria).*(namíbia|namibia)|(namíbia|namibia).*(compras|comprar|produto|mercadoria)/i.test(q)) {
+                return `Sim. A APSAN pode apoiar nas compras na Namíbia: consultamos o preço do produto, atualizamos o valor para si e, se decidir comprar, a nossa equipa pode realizar a compra. Depois tratamos do despacho da encomenda através de agências de viagem, podendo ser utilizada a Macom ou a Wambus Press. Se quiser, diga-me que produto pretende comprar e posso explicar o processo.`;
+            }
+
+            // Serviços principais — detalhe conforme o serviço perguntado.
+            if (/limpeza|higienização|higienizacao/i.test(q)) {
+                return `No serviço de Limpeza Institucional & Higienização, a APSAN trabalha com soluções de limpeza e higienização para ambientes institucionais e corporativos, procurando garantir organização, asseio e boas condições de utilização. Se me disser o tipo de espaço e a necessidade, posso encaminhar o pedido para um orçamento adequado.`;
+            }
+            if (/catering|evento|eventos|alimentação|alimentacao/i.test(q)) {
+                return `A APSAN disponibiliza Catering & Eventos Corporativos, apoiando a organização e o serviço de alimentação para eventos. Podemos analisar o tipo de evento, quantidade de pessoas, data e necessidades específicas para encaminhar a solicitação à equipa responsável.`;
+            }
+            if (/software|sistema de gestão|sistema de gestao|programa|tecnologia/i.test(q)) {
+                return `Na área de tecnologia, a APSAN trabalha com criação de Software de Gestão personalizado e soluções tecnológicas. A ideia é analisar a necessidade da empresa ou instituição e estruturar uma solução adequada ao processo que pretende controlar ou melhorar.`;
+            }
+            if (/internet|rede|redes|cabling|cablagem/i.test(q)) {
+                return `A APSAN presta serviços de Internet, Redes & Cablagem Estruturada, incluindo apoio na implementação de infraestruturas de rede e conectividade. Para indicar a solução correta, é importante conhecer o espaço, a quantidade de utilizadores/equipamentos e a necessidade de conectividade.`;
+            }
+            if (/logística|logistica|transporte|viatura|viaturas|aluguer/i.test(q)) {
+                return `Na área de Logística e Transporte, a APSAN disponibiliza transporte seguro de passageiros e bens, aluguer de viaturas e apoio logístico. Também atua em operações transfronteiriças entre Angola e Namíbia. Se me disser o que pretende transportar ou a deslocação necessária, posso orientar o próximo passo.`;
+            }
+            if (/importação|importacao|exportação|exportacao|alfândega|alfandega|fronteira/i.test(q)) {
+                return `A APSAN apoia operações de Importação & Exportação Transfronteiriça, incluindo trâmites legais e comerciais, despachos aduaneiros, logística transfronteiriça e consultoria de comércio. Posso explicar melhor conforme o tipo de mercadoria e o percurso entre Angola e Namíbia.`;
+            }
+            if (/tradução|traducao|juramentada|documento|documentos/i.test(q)) {
+                return `A APSAN disponibiliza Tradução Oficial Juramentada, destinada a documentos que necessitam de tradução com validade legal, incluindo certificados, contratos, autenticações e traduções simultâneas. Se me disser qual documento precisa de traduzir, posso orientar o pedido.`;
+            }
+            if (/hospital|acompanhamento hospitalar/i.test(q)) {
+                return `O serviço de Acompanhamento Hospitalar foi pensado para apoiar pessoas que se deslocam para consultas e atendimentos médicos, incluindo apoio durante o processo de deslocação e acompanhamento. Se pretende realizar uma consulta na Namíbia, diga-me se é hospital público ou clínica privada para eu explicar a orientação correspondente.`;
+            }
+            if (/redes sociais|marketing digital|marketing/i.test(q)) {
+                return `A APSAN também presta serviços de Gestão de Redes Sociais & Marketing Digital, com criação de conteúdos, anúncios e marketing e acompanhamento através de relatórios. Podemos adaptar o trabalho às necessidades da marca ou empresa.`;
+            }
+
+            if (/nif|registo|fiscal|dados da empresa/i.test(q)) {
+                return `O NIF da APSAN, LDA é 5002085011. A empresa apresenta-se no site como registada e ativa em Angola, com atuação em soluções integradas, serviços corporativos, tecnologia e logística entre Angola e Namíbia.`;
+            }
+            if (/sede|localização|localizacao|morada|onde fica|ondjiva|namacunde/i.test(q)) {
+                return `A sede principal da APSAN, LDA fica em Namacunde / Santa Clara, Província do Cunene. A empresa também apresenta representação comercial em Ondjiva e operações ligadas à Namíbia.`;
+            }
+            if (/contacto|contato|telefone|whatsapp|email|e-mail/i.test(q)) {
+                return `Pode contactar a APSAN, LDA através do +244 944 403 093, +244 946 195 402 ou +244 934 437 739. O e-mail indicado pela empresa é info@apsanlda.com.`;
+            }
+            if (/pagamento|pagar|transferência|transferencia|express/i.test(q)) {
+                return `A empresa informa que aceita pagamentos por transferência bancária em Kwanzas, depósitos diretos, pagamentos via Express e facilidades de faturação a 30 dias para parceiros corporativos aprovados.`;
+            }
+            if (/denúncia|denuncia|abuso|ética|etica/i.test(q)) {
+                return `A APSAN disponibiliza um canal de denúncias confidencial e seguro para comunicar condutas antiéticas ou irregularidades operacionais.`;
+            }
+            if (/obrigad/i.test(q)) {
+                return name ? `É um prazer, ${name}! Conte comigo sempre que precisar de informações sobre a APSAN, LDA.` : `É um prazer! Conte comigo sempre que precisar de informações sobre a APSAN, LDA.`;
+            }
+
+            return `Entendi a sua pergunta${addressed}. Pode perguntar-me sobre qualquer assunto relacionado com a APSAN, LDA — serviços, tecnologia, limpeza, catering, logística, transporte, importação e exportação, operações na Namíbia, compras, acompanhamento hospitalar, traduções, marketing, contactos, pagamentos ou orçamentos. Vou responder de acordo com o assunto que me apresentar. Se a questão exigir um valor ou decisão comercial específica, encaminho para a equipa da empresa responsável.`;
+        }
+
+        function possibleNameFromConversation(query) {
+            const n = extractName(query);
+            if (!n) return false;
+            const words = n.split(/\s+/).filter(Boolean);
+            return words.length <= 4 && words.length >= 1 && !/(empresa|serviço|servicos|namíbia|namibia|angola|apsan|orçamento|orcamento)/i.test(n);
+        }
 
         function handleClientLogin(e) {
             e.preventDefault();
