@@ -3730,15 +3730,19 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
                 return `Sim, a APSAN, LDA presta serviços na Namíbia. 🇳🇦 Podemos apoiar, entre outros, em acompanhamento hospitalar para quem vai realizar consultas, compras na Namíbia e apoio logístico. No serviço de compras, podemos consultar o preço do produto, atualizar o valor para si e, caso decida avançar, preparar a nossa equipa para efetuar a compra. Depois, a encomenda pode ser despachada através de agências de viagem, como a Macom ou a Wambus Press. Se me disser qual serviço pretende na Namíbia, explico-lhe como funciona passo a passo.`;
             }
 
-            // Consultas médicas na Namíbia.
-            if (/(consulta|consultas|hospital|médic|medic|clínica|clinica).*(namíbia|namibia)|(namíbia|namibia).*(consulta|hospital|médic|medic|clínica|clinica)/i.test(q)) {
-                return `Claro. Sobre consultas médicas na Namíbia, posso explicar-lhe o processo. Prefere saber como funciona num hospital público ou numa clínica privada?`;
-            }
+            // Consultas médicas na Namíbia — hospital público.
             if (/(público|publico|hospital público|hospital publico)/i.test(q) && /(consulta|hospital|médic|medic|namíbia|namibia)/i.test(q)) {
                 return `No hospital público, de forma geral, o processo começa pela chegada à unidade e pelo pagamento do cartão, indicado em cerca de 150 rand (aproximadamente 9 a 10 mil kwanzas, dependendo do câmbio). Depois é necessário aguardar na fila até ser chamado para o consultório. O médico faz a avaliação e, conforme o caso, pode solicitar exames. Existem exames que podem ser pagos e outros que podem ser gratuitos. Depois, em função dos resultados, o médico orienta a medicação adequada para a situação apresentada. A APSAN pode prestar acompanhamento a quem se desloca para realizar consultas.`;
             }
-            if (/(privad|clínica privada|clinica privada)/i.test(q) && /(consulta|hospital|médic|medic|namíbia|namibia)/i.test(q)) {
-                return `Nas clínicas privadas, o procedimento e os valores podem variar conforme a clínica, o médico e o tipo de atendimento. A APSAN pode ajudar no acompanhamento e na organização da deslocação para a consulta. Se me disser a cidade, a clínica ou o tipo de consulta que pretende, posso orientar dentro das informações disponíveis da empresa.`;
+
+            // Consultas médicas na Namíbia — clínica privada.
+            if (/(privad|clínica privada|clinica privada|clínica particular|clinica particular)/i.test(q) && /(consulta|hospital|médic|medic|namíbia|namibia)/i.test(q)) {
+                return `Nas clínicas privadas, a consulta funciona mediante marcação. Em primeiro lugar, o paciente deve partilhar o histórico médico feito em Angola, para que o mesmo seja traduzido para inglês e posteriormente apresentado, em forma de marcação da consulta, ao médico, permitindo que o médico se familiarize previamente com a situação da patologia. Ao marcar a consulta, é feito um pagamento de 350 randes, o que corresponde a 22 mil kwanzas. Depois de feito este pagamento, no dia da consulta o paciente desloca-se à clínica e é atendido pelo médico. Em função da conversa durante a consulta, o médico poderá, se necessário, solicitar exames específicos. Os resultados dos exames podem demorar um dia ou dois dias no privado. No público, alguns resultados de exames podem demorar uma, duas ou até três semanas, no mais tardar, para sair. No privado, normalmente, em um ou dois dias, ou três dias no máximo, o resultado sai. Em função dos resultados, o médico irá prescrever as medicações que deverão ser compradas. Os preços das medicações variam de acordo com cada medicamento. Com a aquisição da medicação, inicia-se o tratamento para o combate à patologia. É desta forma que funciona o processo de consulta nas clínicas privadas.`;
+            }
+
+            // Consultas médicas na Namíbia — orientação geral.
+            if (/(consulta|consultas|hospital|médic|medic|clínica|clinica).*(namíbia|namibia)|(namíbia|namibia).*(consulta|hospital|médic|medic|clínica|clinica)/i.test(q)) {
+                return `Claro. Sobre consultas médicas na Namíbia, posso explicar-lhe o processo. Prefere saber como funciona num hospital público ou numa clínica privada?`;
             }
 
             // Orçamentos e preços.
