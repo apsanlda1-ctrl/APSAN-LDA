@@ -2,6 +2,7 @@
 title: "Desenvolvimento de uma comunidade educativa e infoprodutos "
 date: 2026-09-08T00:35:00.000Z
 author:
+  name: "Gabinete de telecomunicações e imagens "
   picture: /assets/file_0000000057f8820e9011c20d9a807030.png
 ---
 A APSAN, LDA encontra-se atualmente a trabalhar no desenvolvimento de um projeto inovador voltado para a criação de uma plataforma de comunidade angolana educativa e de comercialização de infoprodutos em Angola.
