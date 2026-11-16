@@ -3487,7 +3487,7 @@ body{background-color:#f3f7fb!important;color:#10243e}
     </div>
     <form id="apsanAIv2Form"><input id="apsanAIv2Input" autocomplete="off" placeholder="Pergunte qualquer coisa sobre a APSAN ou faça uma pergunta geral..."><button id="apsanAIv2Send" type="submit">Enviar</button></form>
   </div>
-  <button id="apsanAIv2Open" aria-expanded="false" aria-controls="apsanAIv2Panel"><span class="ai-dot"></span><span>APSAN AI</span></button>
+  <button id="apsanAIv2Open" aria-label="Abrir assistente APSAN AI" title="Falar com APSAN AI" aria-expanded="false" aria-controls="apsanAIv2Panel"><img src="logo.jpeg?v=20261116" alt=""><span class="apsan-avatar-status" aria-hidden="true"></span></button>
 </div>
 <script>
 (function(){
@@ -4274,6 +4274,83 @@ function toggleApsanNews(event){
  news.classList.add('is-open');
  news.scrollIntoView({behavior:'smooth',block:'start'});
 }
+</script>
+
+
+<style id="apsan-ai-floating-avatar">
+#apsanUniversalAIv2{right:22px!important;bottom:22px!important;z-index:2147483000!important;pointer-events:none!important}
+#apsanAIv2Open{pointer-events:auto!important;position:fixed!important;right:22px!important;bottom:22px!important;width:68px!important;height:68px!important;min-width:68px!important;padding:5px!important;display:grid!important;place-items:center!important;gap:0!important;border:3px solid #fff!important;border-radius:50%!important;background:linear-gradient(145deg,#0878b8,#003366)!important;box-shadow:0 9px 26px rgba(0,25,55,.34)!important;transition:right .28s ease,left .28s ease,top .28s ease,bottom .28s ease,transform .2s ease!important;cursor:grab!important;touch-action:none!important}
+#apsanAIv2Open img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;border-radius:50%!important;background:#fff!important;padding:3px!important;pointer-events:none!important}
+#apsanAIv2Open .apsan-avatar-status{position:absolute!important;right:1px!important;bottom:1px!important;width:15px!important;height:15px!important;border:3px solid #fff!important;border-radius:50%!important;background:#27d17f!important;box-shadow:0 1px 5px rgba(0,0,0,.2)!important}
+#apsanAIv2Open:hover{transform:scale(1.06)!important}
+#apsanAIv2Open:active{cursor:grabbing!important}
+#apsanUniversalAIv2.open #apsanAIv2Open{opacity:0!important;visibility:hidden!important;pointer-events:none!important;transform:scale(.7)!important}
+#apsanUniversalAIv2.menu-open #apsanAIv2Open{right:auto!important;left:18px!important;bottom:22px!important}
+#apsanAIv2Panel{pointer-events:auto!important}
+@media(max-width:650px){
+ #apsanUniversalAIv2{right:0!important;bottom:0!important}
+ #apsanAIv2Open{right:15px!important;bottom:18px!important;width:60px!important;height:60px!important;min-width:60px!important}
+ #apsanUniversalAIv2.menu-open #apsanAIv2Open{right:auto!important;left:14px!important;bottom:18px!important}
+ #apsanAIv2Panel{right:8px!important;bottom:78px!important;width:calc(100vw - 16px)!important;height:calc(100dvh - 96px)!important}
+}
+</style>
+<script id="apsan-ai-avatar-behaviour">
+(function(){
+ var root=document.getElementById('apsanUniversalAIv2');
+ var trigger=document.getElementById('apsanAIv2Open');
+ var nav=document.getElementById('navLinks');
+ if(!root||!trigger)return;
+ function syncMenuPosition(){
+   var menuOpen=!!(nav&&nav.classList.contains('mobile-active'));
+   root.classList.toggle('menu-open',menuOpen);
+ }
+ if(nav&&window.MutationObserver){
+   new MutationObserver(syncMenuPosition).observe(nav,{attributes:true,attributeFilter:['class']});
+ }
+ document.addEventListener('click',function(e){
+   if(e.target&&e.target.closest&&e.target.closest('.apsan-main-nav a'))setTimeout(syncMenuPosition,30);
+ },true);
+ syncMenuPosition();
+
+ var startX=0,startY=0,lastX=0,lastY=0,dragging=false,moved=false;
+ trigger.addEventListener('pointerdown',function(e){
+   if(e.button!==undefined&&e.button!==0)return;
+   dragging=true;moved=false;startX=e.clientX;startY=e.clientY;lastX=e.clientX;lastY=e.clientY;
+ });
+ window.addEventListener('pointermove',function(e){
+   if(!dragging)return;
+   var dx=e.clientX-lastX,dy=e.clientY-lastY;
+   if(Math.abs(e.clientX-startX)>7||Math.abs(e.clientY-startY)>7)moved=true;
+   if(moved){
+     var rect=trigger.getBoundingClientRect();
+     var x=Math.min(window.innerWidth-rect.width-8,Math.max(8,rect.left+dx));
+     var y=Math.min(window.innerHeight-rect.height-8,Math.max(8,rect.top+dy));
+     trigger.style.setProperty('right','auto','important');
+     trigger.style.setProperty('left',x+'px','important');
+     trigger.style.setProperty('bottom','auto','important');
+     trigger.style.setProperty('top',y+'px','important');
+   }
+   lastX=e.clientX;lastY=e.clientY;
+ });
+ window.addEventListener('pointerup',function(){
+   if(!dragging)return;
+   dragging=false;
+   if(moved){
+     trigger.dataset.dragged='1';
+     setTimeout(function(){delete trigger.dataset.dragged;},250);
+   }
+ });
+ trigger.addEventListener('click',function(e){
+   if(trigger.dataset.dragged==='1'){e.preventDefault();e.stopImmediatePropagation();}
+ },true);
+ window.addEventListener('resize',function(){
+   var rect=trigger.getBoundingClientRect();
+   if(rect.right>window.innerWidth-8||rect.bottom>window.innerHeight-8){
+     trigger.style.left=Math.max(8,window.innerWidth-rect.width-15)+'px';
+     trigger.style.top=Math.max(8,window.innerHeight-rect.height-18)+'px';
+   }
+ });
+})();
 </script>
 
 </body>
