@@ -1988,7 +1988,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
     <div class="apsan-brand-promise">Soluções Integradas<br>de Serviços entre<br><strong>Angola e Namíbia</strong></div>
     <div class="apsan-header-actions">
       <button class="apsan-round-action" type="button" aria-label="Explorar serviços" onclick="switchTab('services', event)"><i class="fas fa-search"></i></button>
-      <button class="apsan-round-action apsan-notification-action" type="button" aria-label="Ver novidades" onclick="scrollToHomePosts(event)"><i class="far fa-bell"></i><span></span></button>
+      <button class="apsan-round-action apsan-notification-action" type="button" aria-label="Ver novidades" onclick="toggleApsanNews(event)"><i class="far fa-bell"></i><span></span></button>
       <a class="apsan-client-button" href="#client-area" onclick="switchTab('client-area', event)"><i class="fas fa-user"></i> Área do Cliente</a>
       <button class="menu-toggle-mobile apsan-mobile-menu" onclick="toggleMobileMenu()" title="Abrir Menu"><i class="fas fa-ellipsis-v" id="menuIcon"></i></button>
     </div>
@@ -4249,5 +4249,34 @@ body{background:#f5f8fb!important;color:#082b55!important;font-family:Arial,Helv
  .apsan-footer-contact-hours>.apsan-footer-column{padding:0 8px!important}
 }
 </style>
+
+<style id="apsan-reference-navigation-fix">
+.apsan-main-nav .nav-links-clean.mobile-active{display:flex!important}
+.apsan-news-preserve.is-open{display:block!important;max-width:1360px!important;margin:28px auto!important;padding:24px!important;background:#fff!important;border-radius:22px!important;box-shadow:0 12px 30px rgba(5,35,75,.1)!important}
+@media(max-width:700px){
+ .apsan-main-nav{overflow:hidden!important}
+ .apsan-main-nav .nav-links-clean{
+  display:flex!important;position:relative!important;left:auto!important;right:auto!important;top:auto!important;
+  flex-direction:row!important;justify-content:flex-start!important;align-items:center!important;
+  gap:2px!important;padding:0 8px!important;overflow-x:auto!important;overflow-y:hidden!important;
+  white-space:nowrap!important;scrollbar-width:none!important;box-shadow:none!important
+ }
+ .apsan-main-nav .nav-links-clean::-webkit-scrollbar{display:none!important}
+ .apsan-main-nav .nav-links-clean li{display:flex!important;flex:0 0 auto!important}
+ .apsan-main-nav .nav-links-clean a{width:auto!important;padding:12px 11px!important;font-size:11px!important;gap:6px!important}
+ .apsan-main-nav .nav-links-clean a i{font-size:12px!important}
+ .apsan-mobile-menu{display:none!important}
+}
+</style>
+<script>
+function toggleApsanNews(event){
+ if(event) event.preventDefault();
+ const news=document.querySelector('.apsan-news-preserve');
+ if(!news) return;
+ news.classList.add('is-open');
+ news.scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+
 </body>
 </html>
