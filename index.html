@@ -4357,5 +4357,22 @@ function toggleApsanNews(event){
 })();
 </script>
 
+
+<style id="apsan-ticker-motion-restore">
+.apsan-info-ticker{display:flex!important;align-items:center!important;overflow:hidden!important;white-space:nowrap!important}
+.apsan-info-ticker-track{display:flex!important;flex:0 0 auto!important;width:max-content!important;min-width:max-content!important;max-width:none!important;animation:apsanTickerMove 30s linear infinite!important;animation-play-state:running!important;will-change:transform!important}
+.apsan-info-ticker-group{display:flex!important;align-items:center!important;flex:0 0 auto!important;white-space:nowrap!important}
+.apsan-info-ticker-item{display:inline-flex!important;align-items:center!important;white-space:nowrap!important}
+.apsan-info-ticker:hover .apsan-info-ticker-track{animation-play-state:paused!important}
+@keyframes apsanTickerMove{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(-50%,0,0)}}
+@media(max-width:700px){
+ .apsan-info-ticker-track{animation-duration:25s!important}
+ .apsan-info-ticker-item{font-size:11px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .apsan-info-ticker-track{animation:apsanTickerMove 45s linear infinite!important}
+}
+</style>
+
 </body>
 </html>
