@@ -1975,35 +1975,8 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
 </style></head>
 <body data-theme="light">
 <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
-<header class="header-clean">
-<div class="nav-container-clean">
-<a class="brand-logo" href="#home" onclick="switchTab('home', event)">
-<img alt="APSAN, LDA Logo" decoding="async" height="64" loading="eager" src="logo.jpeg?v=20261116" style="width:96px;height:96px;object-fit:contain;background:#fff;border-radius:18px;padding:5px;" width="52"/>
-<span>APSAN <span style="color: var(--primary-color);">LDA</span></span>
-</a>
-<ul class="nav-links-clean" id="navLinks">
-<li><a class="nav-tab active" href="#home" onclick="switchTab('home', event)">Início</a></li>
-<li><a class="nav-tab" href="#about" onclick="switchTab('about', event)">Empresa &amp; Confiança</a></li>
-<li><a class="nav-tab" href="#services" onclick="switchTab('services', event)">Serviços</a></li>
-<li><a class="nav-tab" href="#extras" onclick="switchTab('extras', event)">Extras</a></li>
-<li><a class="nav-tab" href="#home-posts" onclick="scrollToHomePosts(event)">Publicações</a></li>
-<li><a class="nav-tab" href="#parcerias" onclick="switchTab('parcerias', event)">Parcerias</a></li>
-<li><a class="nav-tab" href="#portal" onclick="switchTab('portal', event)">Empresa</a></li>
-<li><a class="nav-tab" href="#client-area" onclick="switchTab('client-area', event)">Área do Cliente</a></li>
-<li><a class="nav-tab" href="#faq" onclick="switchTab('faq', event)">FAQ</a></li>
-<li><a class="btn-contact-header" href="#contact" onclick="switchTab('contact', event)">Contacte-nos</a></li>
-</ul>
-<div style="display: flex; align-items: center; gap: 10px;">
-<button class="theme-toggle-btn" onclick="toggleTheme()" title="Alternar Modo Escuro/Claro">
-<i class="fas fa-moon" id="themeIcon"></i>
-</button>
-<button class="menu-toggle-mobile" onclick="toggleMobileMenu()" title="Abrir Menu">
-<i class="fas fa-ellipsis-v" id="menuIcon"></i>
-</button>
-</div>
-</div>
-</header>
 <div aria-label="Informações importantes da APSAN, LDA" class="apsan-info-ticker">
+<strong class="apsan-ticker-label"><i class="fas fa-bullhorn"></i> Aviso Importante</strong>
 <div class="apsan-info-ticker-track">
 <div class="apsan-info-ticker-group">
 <span class="apsan-info-ticker-item">APSAN, LDA — Soluções Integradas</span><span class="apsan-info-ticker-separator">•</span>
@@ -2041,6 +2014,35 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
 </div>
 </div>
 </div>
+<header class="header-clean">
+<div class="nav-container-clean">
+<a class="brand-logo" href="#home" onclick="switchTab('home', event)">
+<img alt="APSAN, LDA Logo" decoding="async" height="64" loading="eager" src="logo.jpeg?v=20261116" style="width:96px;height:96px;object-fit:contain;background:#fff;border-radius:18px;padding:5px;" width="52"/>
+<span>APSAN <span style="color: var(--primary-color);">LDA</span></span>
+</a>
+<div class="brand-tagline">Soluções Tecnológicas<br>e Serviços Integrados<br>entre <strong>Angola</strong> e <b>Namíbia</b></div>
+<ul class="nav-links-clean" id="navLinks">
+<li><a class="nav-tab active" href="#home" onclick="switchTab('home', event)">Início</a></li>
+<li><a class="nav-tab" href="#about" onclick="switchTab('about', event)">Empresa &amp; Confiança</a></li>
+<li><a class="nav-tab" href="#services" onclick="switchTab('services', event)">Serviços</a></li>
+<li><a class="nav-tab" href="#extras" onclick="switchTab('extras', event)">Extras</a></li>
+<li><a class="nav-tab" href="#home-posts" onclick="scrollToHomePosts(event)">Publicações</a></li>
+<li><a class="nav-tab" href="#parcerias" onclick="switchTab('parcerias', event)">Parcerias</a></li>
+<li><a class="nav-tab" href="#portal" onclick="switchTab('portal', event)">Empresa</a></li>
+<li><a class="nav-tab" href="#client-area" onclick="switchTab('client-area', event)">Área do Cliente</a></li>
+<li><a class="nav-tab" href="#faq" onclick="switchTab('faq', event)">FAQ</a></li>
+<li><a class="btn-contact-header" href="#contact" onclick="switchTab('contact', event)">Contacte-nos</a></li>
+</ul>
+<div style="display: flex; align-items: center; gap: 10px;">
+<button class="theme-toggle-btn" onclick="toggleTheme()" title="Alternar Modo Escuro/Claro">
+<i class="fas fa-moon" id="themeIcon"></i>
+</button>
+<button class="menu-toggle-mobile" onclick="toggleMobileMenu()" title="Abrir Menu">
+<i class="fas fa-ellipsis-v" id="menuIcon"></i>
+</button>
+</div>
+</div>
+</header>
 <div class="global-animated-banner">
 <div class="banner-world-bg"></div>
 <div class="banner-grid-overlay"></div>
@@ -2058,11 +2060,12 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
 <div class="home-hero-new">
 <div class="hero-copy-new">
 <div class="hero-kicker"><span class="kicker-dot"></span> APSAN, LDA · SOLUÇÕES INTEGRADAS</div>
-<h1>O parceiro certo para <span>fazer acontecer.</span></h1>
-<p class="hero-lead">Serviços corporativos, tecnologia, logística e soluções transfronteiriças pensadas para empresas, instituições e particulares.</p>
+<h1>Soluções Integradas<br>entre <span>Angola e Namíbia</span></h1>
+<p class="hero-lead">Conectamos pessoas, empresas e instituições com serviços confiáveis, rápidos e seguros em tecnologia, logística, saúde, tradução e apoio empresarial.</p>
+<div class="hero-service-line">Tecnologia <i>•</i> Logística <i>•</i> Saúde <i>•</i> Tradução <i>•</i> Consultoria <i>•</i> Catering</div>
 <div class="hero-actions-new">
-<button class="btn-primary-new" onclick="switchTab('services', event)">Explorar soluções <i class="fas fa-arrow-right"></i></button>
-<button class="btn-ghost-new" onclick="switchTab('about', event)">Conhecer a APSAN <i class="fas fa-compass"></i></button>
+<button class="btn-primary-new" onclick="switchTab('services', event)">Conheça os nossos serviços <i class="fas fa-arrow-right"></i></button>
+<button class="btn-ghost-new" onclick="switchTab('contact', event)"><i class="fab fa-whatsapp"></i> Fale connosco</button>
 </div>
 <div class="hero-trust-row">
 <div><i class="fas fa-location-dot"></i><span>Angola ↔ Namíbia</span></div>
@@ -2147,7 +2150,49 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
 <p>Importação, exportação, compras na Namíbia e transporte seguro de passageiros e bens.</p>
 <a class="feature-link" href="#extras" onclick="switchTab('extras', event)">Ver extras <i class="fas fa-chevron-right"></i></a>
 </div>
+<div class="feature-box">
+<div class="feature-icon-box"><i class="fas fa-heartbeat"></i></div>
+<h3>Acompanhamento Hospitalar</h3>
+<p>Apoio e orientação a pacientes que procuram atendimento médico na Namíbia.</p>
+<a class="feature-link" href="#services" onclick="switchTab('services', event)">Saber mais <i class="fas fa-chevron-right"></i></a>
+</div>
+<div class="feature-box">
+<div class="feature-icon-box"><i class="fas fa-language"></i></div>
+<h3>Traduções Juramentadas</h3>
+<p>Traduções oficiais e apoio de comunicação entre Angola e Namíbia.</p>
+<a class="feature-link" href="#services" onclick="switchTab('services', event)">Saber mais <i class="fas fa-chevron-right"></i></a>
+</div>
+<div class="feature-box">
+<div class="feature-icon-box"><i class="fas fa-briefcase"></i></div>
+<h3>Consultoria &amp; Auditoria</h3>
+<p>Apoio empresarial, organização de processos e soluções administrativas.</p>
+<a class="feature-link" href="#services" onclick="switchTab('services', event)">Saber mais <i class="fas fa-chevron-right"></i></a>
+</div>
 </div></div>
+<section class="home-about-showcase" aria-label="Sobre a APSAN">
+<div class="home-about-photo">
+<img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&amp;fit=crop&amp;w=1100&amp;q=85" alt="Edifício empresarial moderno">
+<div class="home-about-logo"><img src="logo.jpeg?v=20261116" alt="Logótipo APSAN, LDA"></div>
+</div>
+<div class="home-about-copy">
+<span class="home-about-eyebrow">QUEM SOMOS</span>
+<h2>Sobre a <span>APSAN, LDA</span></h2>
+<div class="home-about-rule"></div>
+<p>Somos uma agência de prestação de serviços que atua entre Angola e Namíbia, oferecendo soluções tecnológicas, logísticas, administrativas e de apoio ao cidadão, com profissionalismo, segurança e eficiência.</p>
+<div class="home-about-values">
+<div><i class="fas fa-shield-alt"></i><strong>Confiança</strong></div>
+<div><i class="fas fa-award"></i><strong>Qualidade</strong></div>
+<div><i class="fas fa-clock"></i><strong>Agilidade</strong></div>
+</div>
+<button class="btn-primary-new" onclick="switchTab('about', event)">Conheça a nossa empresa <i class="fas fa-arrow-right"></i></button>
+</div>
+</section>
+<div class="home-proof-strip">
+<div><i class="fas fa-users"></i><strong>+3 Anos</strong><span>de experiência</span></div>
+<div><i class="fas fa-handshake"></i><strong>Angola &amp; Namíbia</strong><span>atuação transfronteiriça</span></div>
+<div><i class="fas fa-cubes"></i><strong>Serviços Integrados</strong><span>soluções num só parceiro</span></div>
+<div><i class="fas fa-headset"></i><strong>Suporte</strong><span>atendimento especializado</span></div>
+</div>
 <section aria-label="Publicações da APSAN" class="home-posts-inline" id="home-posts">
 <h2 class="posts-section-title"><i class="fas fa-newspaper"></i> Publicações</h2>
 <p class="posts-section-subtitle">Acompanhe as notícias, atividades e novidades mais recentes da APSAN, LDA.</p>
@@ -3865,5 +3910,155 @@ body{background-color:#f3f7fb!important;color:#10243e}
 
 </script>
 
+
+<style id="apsan-home-redesign-2026">
+:root{--apsan-navy:#06264d;--apsan-deep:#031a36;--apsan-blue:#0876c9;--apsan-red:#cf1728;--apsan-ice:#eff6fc}
+body{background:#eff5fb!important;color:#10243e!important}
+.apsan-info-ticker{height:44px!important;background:linear-gradient(90deg,#041a35,#07518a,#041a35)!important;border:0!important;border-bottom:2px solid var(--apsan-red)!important;box-shadow:none!important}
+.apsan-ticker-label{height:100%;display:flex;align-items:center;gap:9px;flex:0 0 auto;padding:0 24px;background:linear-gradient(110deg,#e0182b,#b70e20);color:#fff;font-size:13px;font-weight:900;letter-spacing:.2px;position:relative;z-index:2}
+.apsan-ticker-label:after{content:"";position:absolute;right:-16px;top:0;border-top:22px solid #b70e20;border-bottom:22px solid #b70e20;border-right:16px solid transparent}
+.apsan-info-ticker-track{flex:1;min-width:0}
+.header-clean{position:relative!important;top:auto!important;background:#fff!important;border:0!important;box-shadow:0 5px 20px rgba(4,28,56,.08)!important;z-index:1000}
+.nav-container-clean{max-width:1400px!important;min-height:112px!important;padding:12px 28px 0!important;display:flex!important;flex-wrap:wrap!important;gap:12px!important}
+.brand-logo{order:1!important;color:#08264b!important;gap:14px!important;font-size:1.65rem!important;white-space:nowrap}
+.brand-logo img{width:96px!important;height:96px!important;border-radius:18px!important;padding:4px!important;border:1px solid #e5edf5!important;box-shadow:0 5px 16px rgba(5,34,65,.08)}
+.brand-logo>span{color:#092b55!important}
+.brand-logo>span span{color:#0876c9!important}
+.brand-tagline{order:2;display:block;border-left:2px solid #d7e3ee;padding:4px 0 4px 24px;color:#102b50;font-size:clamp(14px,1.8vw,22px);line-height:1.24;font-weight:650;margin-left:16px}
+.brand-tagline strong{color:#0876c9}.brand-tagline b{color:#c91e2b}
+.nav-container-clean>div:last-child{order:3;margin-left:auto}
+.theme-toggle-btn{width:46px!important;height:46px!important;border:1px solid #d5e1ed!important;color:#08264b!important;background:#f8fbfe!important}
+.menu-toggle-mobile{width:46px!important;height:46px!important;border:1px solid #cbd9e8!important;border-radius:12px!important;background:#fff!important;color:#08264b!important}
+.nav-links-clean{order:4!important;flex:0 0 calc(100% + 56px)!important;width:calc(100% + 56px)!important;margin:0 -28px!important;padding:0 22px!important;min-height:62px;background:linear-gradient(100deg,#041a35,#073d72)!important;display:flex!important;align-items:center!important;justify-content:space-around!important;gap:8px!important}
+.nav-links-clean a{color:#fff!important;font-size:13px!important;font-weight:800!important;padding:12px 10px!important;border-radius:10px!important;white-space:nowrap}
+.nav-links-clean a:hover,.nav-links-clean a.active{color:#fff!important;background:#c9182b!important}
+.nav-links-clean .btn-contact-header{background:#cf1728!important;color:#fff!important;border-radius:999px!important;padding:11px 18px!important}
+.menu-toggle-mobile{display:none!important}
+.global-animated-banner{display:none!important}
+#home.content-section{padding:0!important}
+.home-command-center{max-width:none!important;margin:0 auto 52px!important;padding:0!important;overflow:visible!important;background:#eff5fb!important}
+.home-command-center:before,.home-watermark{display:none!important}
+.home-hero-new{position:relative!important;isolation:isolate;max-width:none!important;min-height:560px!important;grid-template-columns:minmax(0,1.02fr) minmax(360px,.98fr)!important;gap:40px!important;padding:62px max(5vw,calc((100vw - 1280px)/2)) 70px!important;background:radial-gradient(circle at 72% 35%,rgba(10,117,190,.45),transparent 34%),linear-gradient(118deg,#031a36 0%,#06366a 58%,#0876b5 100%)!important;color:#fff!important;overflow:hidden}
+.home-hero-new:before{content:"";position:absolute;z-index:-1;width:600px;height:600px;right:12%;top:-240px;border:1px solid rgba(69,202,241,.25);border-radius:50%;box-shadow:0 0 0 36px rgba(69,202,241,.035),0 0 0 76px rgba(69,202,241,.025)}
+.home-hero-new:after{content:"";position:absolute;z-index:-1;right:-5%;bottom:-95px;width:70%;height:135px;background:linear-gradient(100deg,transparent,#c9182b 45%,#e52938 68%,transparent);transform:skewY(-8deg);opacity:.95}
+.hero-copy-new{max-width:700px!important;padding:12px 0!important}
+.hero-kicker{color:#75d7f5!important;font-size:12px!important;letter-spacing:1.7px!important}
+.kicker-dot{background:#46d5f2!important;box-shadow:0 0 0 6px rgba(70,213,242,.16)!important}
+.hero-copy-new h1{font-size:clamp(2.7rem,5.4vw,5.1rem)!important;line-height:.99!important;letter-spacing:-2.5px!important;color:#fff!important;max-width:760px!important}
+.hero-copy-new h1 span{color:#f12b3c!important;display:inline!important}
+.hero-lead{font-size:17px!important;line-height:1.7!important;color:rgba(255,255,255,.88)!important;max-width:620px!important;margin:24px 0 16px!important}
+.hero-service-line{color:#d6efff;font-size:15px;font-weight:750;line-height:1.8;margin:0 0 25px;letter-spacing:.2px}
+.hero-service-line i{font-style:normal;color:#52d3f1;padding:0 7px}
+.hero-actions-new{gap:12px!important}
+.btn-primary-new{background:linear-gradient(110deg,#e51a2c,#b90e23)!important;color:#fff!important;border:1px solid rgba(255,255,255,.25)!important;border-radius:999px!important;padding:15px 23px!important;box-shadow:0 12px 26px rgba(180,10,30,.25)!important}
+.btn-primary-new:hover{transform:translateY(-3px);filter:brightness(1.08)}
+.btn-ghost-new{background:rgba(255,255,255,.08)!important;color:#fff!important;border:1px solid rgba(255,255,255,.65)!important;border-radius:999px!important;padding:14px 22px!important}
+.hero-trust-row{border-top:1px solid rgba(255,255,255,.18)!important;padding-top:19px!important;margin-top:27px!important}
+.hero-trust-row div{color:#d7e9f8!important;font-size:12px!important}
+.hero-trust-row i{color:#56d2f1!important}
+.hero-visual-new{display:flex!important;min-height:420px!important;position:relative!important;align-items:center!important;justify-content:center!important}
+.hero-orbit{border-color:rgba(68,206,240,.28)!important}
+.hero-slider-frame{width:92%!important;height:88%!important;right:0!important;border-radius:30px!important;background:linear-gradient(145deg,#0a4b7d,#03162e)!important;transform:rotate(2deg)!important;box-shadow:0 28px 65px rgba(0,0,0,.28)!important}
+.hero-slider-container{position:relative!important;z-index:3!important;width:100%!important;height:410px!important;border-radius:28px!important;overflow:hidden!important;border:5px solid rgba(255,255,255,.88)!important;box-shadow:0 25px 60px rgba(0,0,0,.28)!important}
+.hero-slide img{width:100%!important;height:410px!important;object-fit:cover!important}
+.hero-slide-caption{background:linear-gradient(transparent,rgba(2,17,32,.92))!important;color:#fff!important;font-weight:800!important;padding:20px!important}
+.slider-dots{z-index:5!important}
+.slider-dot.active{background:#e21b2d!important}
+.home-features-mount{padding:0 24px!important;margin:-34px auto 42px!important;position:relative!important;z-index:5!important;max-width:1360px!important}
+.home-features-mount .featured-cards-grid{grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:0!important;margin:0!important;padding:16px 8px!important;background:#fff!important;border:1px solid #dbe6f0!important;border-radius:28px!important;box-shadow:0 18px 42px rgba(5,35,68,.13)!important}
+.home-features-mount .feature-box{min-width:0!important;padding:17px 12px!important;text-align:center!important;background:transparent!important;border:0!important;border-right:1px solid #d9e5f0!important;border-radius:0!important;box-shadow:none!important;cursor:pointer}
+.home-features-mount .feature-box:last-child{border-right:0!important}
+.home-features-mount .feature-box:hover{transform:translateY(-4px)!important;box-shadow:none!important}
+.home-features-mount .feature-icon-box{width:52px!important;height:52px!important;margin:0 auto 12px!important;border-radius:15px!important;background:#eaf4fc!important;color:#075aa5!important;font-size:23px!important}
+.home-features-mount .feature-box h3{font-size:13px!important;line-height:1.35!important;color:#09264a!important;margin:0 0 7px!important}
+.home-features-mount .feature-box p{font-size:11px!important;line-height:1.45!important;color:#617286!important;margin:0 0 8px!important}
+.home-features-mount .feature-link{font-size:11px!important;color:#0876c9!important}
+.home-about-showcase{max-width:1320px;margin:54px auto 34px;padding:0 28px;display:grid;grid-template-columns:1fr 1.08fr;gap:52px;align-items:center}
+.home-about-photo{position:relative;min-height:360px;border-radius:28px;overflow:visible}
+.home-about-photo:before{content:"";position:absolute;inset:-9px 18px 12px -9px;border:7px solid #cf1728;border-right-color:#0876c9;border-radius:34px;z-index:0}
+.home-about-photo>img{position:relative;width:100%;height:360px;object-fit:cover;border-radius:26px;display:block;z-index:1;box-shadow:0 22px 50px rgba(3,30,60,.18)}
+.home-about-logo{position:absolute;z-index:2;left:22px;bottom:20px;width:116px;height:116px;background:#fff;border:1px solid #e1e8ef;border-radius:18px;padding:8px;box-shadow:0 12px 30px rgba(0,0,0,.18)}
+.home-about-logo img{width:100%;height:100%;object-fit:contain}
+.home-about-copy{padding:24px 8px}
+.home-about-eyebrow{color:#0876c9;font-size:11px;font-weight:900;letter-spacing:1.8px}
+.home-about-copy h2{font-size:clamp(2rem,4vw,3.4rem);line-height:1.05;color:#08264d;margin:12px 0 0;font-weight:900;letter-spacing:-1.7px}
+.home-about-copy h2 span{color:#0876c9}
+.home-about-rule{height:5px;width:88px;background:#cf1728;border-radius:9px;margin:19px 0}
+.home-about-copy>p{font-size:16px;line-height:1.75;color:#5b6c7f;max-width:640px;margin-bottom:26px}
+.home-about-values{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:25px 0 30px}
+.home-about-values div{display:flex;flex-direction:column;align-items:center;gap:8px;border-right:1px solid #cbd9e8;color:#082b55;font-size:13px}
+.home-about-values div:last-child{border:0}
+.home-about-values i{font-size:26px;color:#075aa5}
+.home-proof-strip{max-width:1320px;margin:42px auto 62px;padding:22px 24px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;background:linear-gradient(110deg,#031a36,#073e75);color:#fff;border-radius:28px;box-shadow:0 20px 45px rgba(3,30,60,.18)}
+.home-proof-strip div{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;border-right:1px solid rgba(255,255,255,.3);padding:4px 10px}
+.home-proof-strip div:last-child{border:0}
+.home-proof-strip i{font-size:25px;color:#fff;margin-bottom:3px}
+.home-proof-strip strong{font-size:15px}.home-proof-strip span{font-size:12px;color:#d2e4f4}
+.home-posts-inline{max-width:1280px!important;margin:0 auto!important;padding:40px 26px!important}
+.home-bottom-cta{background:linear-gradient(110deg,#031a36,#0a4b7d)!important;border:1px solid rgba(255,255,255,.15)!important}
+.home-bottom-cta .cta-eyebrow{color:#70d9f4!important}
+@media(max-width:1050px){
+ .nav-container-clean{padding:10px 18px 0!important;min-height:100px!important}
+ .brand-logo img{width:82px!important;height:82px!important}
+ .brand-tagline{font-size:15px;padding-left:15px;margin-left:5px}
+ .nav-links-clean{flex:0 0 calc(100% + 36px)!important;width:calc(100% + 36px)!important;margin:0 -18px!important}
+ .nav-links-clean a{font-size:11px!important;padding:10px 6px!important}
+ .home-hero-new{grid-template-columns:1fr minmax(280px,.8fr)!important;gap:24px!important;padding:48px 34px 64px!important;min-height:500px!important}
+ .hero-copy-new h1{font-size:clamp(2.6rem,5vw,4rem)!important}
+ .hero-visual-new{display:flex!important;min-height:330px!important}
+ .hero-slider-container,.hero-slide img{height:330px!important}
+ .home-features-mount .featured-cards-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+ .home-features-mount .feature-box:nth-child(3){border-right:0!important}
+ .home-features-mount .feature-box:nth-child(n+4){border-top:1px solid #d9e5f0!important}
+}
+@media(max-width:700px){
+ .apsan-info-ticker{height:40px!important}
+ .apsan-ticker-label{font-size:10px;padding:0 13px}
+ .apsan-ticker-label:after{right:-12px;border-top-width:20px;border-bottom-width:20px;border-right-width:12px}
+ .apsan-info-ticker-item{font-size:11px!important;padding:0 12px!important}
+ .nav-container-clean{min-height:88px!important;padding:8px 14px 10px!important;gap:7px!important}
+ .brand-logo{gap:9px!important;font-size:1.15rem!important}
+ .brand-logo img{width:72px!important;height:72px!important;border-radius:14px!important}
+ .brand-tagline{display:none!important}
+ .theme-toggle-btn{width:40px!important;height:40px!important}
+ .menu-toggle-mobile{display:flex!important;width:42px!important;height:42px!important}
+ .nav-links-clean{display:none!important;position:absolute!important;top:100%!important;left:0!important;right:0!important;width:100%!important;margin:0!important;padding:12px!important;min-height:0!important;flex-direction:column!important;align-items:stretch!important;gap:4px!important;box-shadow:0 20px 35px rgba(0,0,0,.24)!important;z-index:1001!important}
+ .nav-links-clean.active{display:flex!important}
+ .nav-links-clean li{width:100%!important}
+ .nav-links-clean a{display:block!important;padding:12px 14px!important;font-size:14px!important}
+ .home-hero-new{grid-template-columns:1fr!important;padding:42px 22px 58px!important;gap:28px!important;min-height:0!important}
+ .hero-copy-new h1{font-size:clamp(2.45rem,11vw,3.65rem)!important;letter-spacing:-1.8px!important;line-height:1.02!important}
+ .hero-lead{font-size:15px!important;margin:18px 0 12px!important}
+ .hero-service-line{font-size:12px;line-height:1.8;margin-bottom:20px}
+ .hero-trust-row{gap:12px!important;margin-top:22px!important}
+ .hero-trust-row div{font-size:10px!important}
+ .hero-visual-new{min-height:0!important;display:flex!important}
+ .hero-slider-container,.hero-slide img{height:265px!important}
+ .hero-slider-frame{height:90%!important;width:93%!important}
+ .home-features-mount{padding:0 12px!important;margin:-24px auto 28px!important}
+ .home-features-mount .featured-cards-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;padding:8px!important;border-radius:20px!important}
+ .home-features-mount .feature-box{padding:14px 8px!important;border-right:1px solid #d9e5f0!important}
+ .home-features-mount .feature-box:nth-child(even){border-right:0!important}
+ .home-features-mount .feature-box:nth-child(3){border-right:1px solid #d9e5f0!important}
+ .home-features-mount .feature-box:nth-child(n+3){border-top:1px solid #d9e5f0!important}
+ .home-features-mount .feature-box h3{font-size:12px!important}
+ .home-features-mount .feature-box p{font-size:10px!important}
+ .home-about-showcase{grid-template-columns:1fr;gap:24px;margin:36px auto 20px;padding:0 18px}
+ .home-about-photo,.home-about-photo>img{min-height:0;height:245px}
+ .home-about-logo{width:86px;height:86px;left:14px;bottom:14px}
+ .home-about-copy{padding:5px 2px}
+ .home-about-copy h2{font-size:2.2rem}
+ .home-about-copy>p{font-size:14px}
+ .home-proof-strip{grid-template-columns:repeat(2,1fr);margin:28px 12px 42px;padding:17px 8px;border-radius:20px}
+ .home-proof-strip div{padding:12px 5px}
+ .home-proof-strip div:nth-child(2){border-right:0}
+ .home-proof-strip div:nth-child(n+3){border-top:1px solid rgba(255,255,255,.25)}
+ .home-proof-strip strong{font-size:12px}
+ .home-proof-strip span{font-size:10px}
+ .home-posts-inline{padding:28px 14px!important}
+ .home-bottom-cta{margin:18px 14px 0!important;padding:22px!important;flex-direction:column!important;align-items:flex-start!important}
+}
+@media(prefers-reduced-motion:reduce){.apsan-info-ticker-track{animation:none!important}}
+</style>
 </body>
 </html>
