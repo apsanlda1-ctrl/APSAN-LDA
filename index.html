@@ -2601,9 +2601,9 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
       <section class="apsan-footer-column apsan-footer-follow">
         <h4>Horário de atendimento</h4>
         <div class="apsan-footer-hours">
-          <span><strong>Segunda a Sexta:</strong> 08h00 – 18h00</span>
-          <span><strong>Sábado:</strong> 08h00 – 15h30</span>
-          <span><strong>Domingo:</strong> Apenas emergências</span>
+          <div class="apsan-footer-hour-row"><strong>Segunda a Sexta-feira</strong><span>08h00 – 18h00</span></div>
+          <div class="apsan-footer-hour-row"><strong>Sábado</strong><span>08h00 – 15h30</span></div>
+          <div class="apsan-footer-hour-row"><strong>Domingo</strong><span>Apenas emergências</span></div>
         </div>
       </section>
     </div>
@@ -4115,6 +4115,24 @@ body{background:#eff5fb!important;color:#10243e!important}
 @media(max-width:360px){
  .apsan-footer .apsan-footer-contact-hours{gap:10px!important;padding-left:8px!important;padding-right:8px!important}
  .apsan-footer .apsan-footer-contact-hours>.apsan-footer-column{padding-left:8px}
+}
+</style>
+
+
+<style id="apsan-footer-hours-stacked">
+.apsan-footer .apsan-footer-hours{
+ display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:16px!important
+}
+.apsan-footer .apsan-footer-hour-row{
+ display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:4px!important;
+ color:#b7c8d8!important;font-size:14px!important;line-height:1.5!important
+}
+.apsan-footer .apsan-footer-hour-row strong{
+ display:block!important;color:#fff!important;font-size:14px!important;font-weight:700!important;margin:0!important
+}
+.apsan-footer .apsan-footer-hour-row span{display:block!important;color:#b7c8d8!important}
+@media(max-width:650px){
+ .apsan-footer .apsan-footer-hour-row,.apsan-footer .apsan-footer-hour-row strong{font-size:11px!important}
 }
 </style>
 
