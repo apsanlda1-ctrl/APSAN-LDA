@@ -2013,7 +2013,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
         <p>Acompanhamento hospitalar, tradução, logística e tecnologia com segurança, profissionalismo e eficiência.</p>
         <div class="apsan-hero-buttons">
           <button class="apsan-btn-gold" onclick="switchTab('services', event)">Conheça os nossos serviços <i class="fas fa-arrow-right"></i></button>
-          <button class="apsan-btn-outline" onclick="switchTab('contact', event)"><i class="fab fa-whatsapp"></i> Fale connosco</button>
+          <button class="apsan-btn-outline apsan-whatsapp-icon-only" type="button" aria-label="Fale connosco pelo WhatsApp" title="Fale connosco pelo WhatsApp" onclick="switchTab('contact', event)"><i class="fab fa-whatsapp" aria-hidden="true"></i></button>
         </div>
       </div>
       <div class="apsan-hospital-stack">
@@ -4371,6 +4371,23 @@ function toggleApsanNews(event){
 }
 @media(prefers-reduced-motion:reduce){
  .apsan-info-ticker-track{animation:apsanTickerMove 45s linear infinite!important}
+}
+</style>
+
+
+<style id="apsan-whatsapp-icon-button">
+.apsan-hero-buttons .apsan-whatsapp-icon-only{
+ width:54px!important;height:54px!important;min-height:54px!important;min-width:54px!important;
+ padding:0!important;border-radius:50%!important;display:inline-flex!important;
+ align-items:center!important;justify-content:center!important;flex:0 0 54px!important;
+ color:#fff!important;border:2px solid #fff!important;background:rgba(255,255,255,.08)!important;
+ font-size:27px!important;line-height:1!important;box-shadow:0 5px 16px rgba(0,0,0,.14)!important
+}
+.apsan-hero-buttons .apsan-whatsapp-icon-only i{font-size:28px!important;margin:0!important}
+.apsan-hero-buttons .apsan-whatsapp-icon-only:hover{background:#25d366!important;border-color:#25d366!important;color:#fff!important;transform:translateY(-2px)!important}
+@media(max-width:700px){
+ .apsan-hero-buttons .apsan-whatsapp-icon-only{width:46px!important;height:46px!important;min-height:46px!important;min-width:46px!important;flex-basis:46px!important;font-size:24px!important}
+ .apsan-hero-buttons .apsan-whatsapp-icon-only i{font-size:25px!important}
 }
 </style>
 
