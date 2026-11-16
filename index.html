@@ -2590,25 +2590,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
 <footer class="apsan-footer">
   <div class="apsan-footer-wave" aria-hidden="true"><svg viewBox="0 0 1440 110" preserveAspectRatio="none"><path d="M0,55 C260,5 430,100 720,52 C1010,5 1190,15 1440,42 L1440,110 L0,110Z" fill="#0b2a49"/><path d="M0,72 C320,22 510,105 820,64 C1100,28 1260,35 1440,58 L1440,110 L0,110Z" fill="#071b31"/></svg></div>
   <div class="apsan-footer-main">
-    <div class="apsan-footer-grid">
-      <section class="apsan-footer-brand">
-        <a class="apsan-footer-logo" href="#home" aria-label="APSAN, LDA - Início"><img src="logo.png" alt="Logótipo APSAN, LDA"><span><strong>APSAN, LDA</strong><small>Soluções Integradas</small></span></a>
-        <p>Prestação de serviços corporativos, soluções tecnológicas e suporte logístico de excelência entre Angola e Namíbia.</p>
-        <div class="apsan-footer-social">
-          <a href="https://wa.me/244944403093" aria-label="WhatsApp" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-          <a href="#" aria-label="Facebook" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" aria-label="LinkedIn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="#" aria-label="Instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
-        </div>
-      </section>
-      <nav class="apsan-footer-column" aria-label="Ligações rápidas">
-        <h4>Ligações rápidas</h4>
-        <a href="#home">Página inicial</a><a href="#services">Sobre a APSAN</a><a href="#services">Nossos serviços</a><a href="#contact">Solicitar serviço</a>
-      </nav>
-      <section class="apsan-footer-column">
-        <h4>Nossos serviços</h4>
-        <a href="#services">Logística transfronteiriça</a><a href="#services">Traduções juramentadas</a><a href="#services">Consultoria &amp; auditoria</a><a href="#services">Importação &amp; exportação</a><a href="#services">Soluções tecnológicas</a>
-      </section>
+    <div class="apsan-footer-grid apsan-footer-contact-hours">
       <section class="apsan-footer-column apsan-footer-contacts">
         <h4>Contactos</h4>
         <p><i class="fas fa-phone-alt"></i><span><a href="tel:+244944403093">+244 944 403 093</a><br><a href="tel:+244946195402">+244 946 195 402</a><br><a href="tel:+244934437739">+244 934 437 739</a></span></p>
@@ -2617,15 +2599,16 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
         <p><i class="fas fa-file-invoice"></i><span><strong>NIF:</strong> 5002085011</span></p>
       </section>
       <section class="apsan-footer-column apsan-footer-follow">
-        <h4>Acompanhe-nos</h4>
-        <p>Fique a par das nossas novidades, soluções e serviços.</p>
-        <a class="apsan-footer-whatsapp" href="https://wa.me/244944403093"><i class="fab fa-whatsapp"></i> Fale connosco</a>
-        <div class="apsan-footer-hours"><strong>Atendimento</strong><span>Segunda a Sexta: 08h–18h</span><span>Sábado: 08h–15h30</span></div>
+        <h4>Horário de atendimento</h4>
+        <div class="apsan-footer-hours">
+          <span><strong>Segunda a Sexta:</strong> 08h00 – 18h00</span>
+          <span><strong>Sábado:</strong> 08h00 – 15h30</span>
+          <span><strong>Domingo:</strong> Apenas emergências</span>
+        </div>
       </section>
     </div>
     <div class="apsan-footer-bottom">
       <span>© 2026 APSAN, LDA. Todos os direitos reservados.</span>
-      <div><a href="#contact">Apoio online</a><a href="#contact">Contactos</a></div>
     </div>
   </div>
 </footer>
@@ -4098,6 +4081,40 @@ body{background:#eff5fb!important;color:#10243e!important}
 @media(max-width:360px){
  .apsan-footer .apsan-footer-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:20px 10px!important}
  .apsan-footer .apsan-footer-column{padding-left:8px}
+}
+</style>
+
+
+<style id="apsan-footer-only-contacts-hours">
+.apsan-footer .apsan-footer-contact-hours{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  max-width:900px!important;
+  gap:70px!important;
+  justify-content:center!important;
+  padding:48px 28px 38px!important;
+}
+.apsan-footer .apsan-footer-contact-hours>.apsan-footer-column{
+  border-left:1px solid rgba(255,255,255,.12);
+  padding-left:28px;
+}
+.apsan-footer .apsan-footer-contact-hours h4{font-size:17px!important}
+.apsan-footer .apsan-footer-hours{gap:14px!important;font-size:14px!important}
+.apsan-footer .apsan-footer-hours span{display:block;color:#b7c8d8}
+.apsan-footer .apsan-footer-hours strong{display:inline;color:#fff;margin-right:5px}
+.apsan-footer .apsan-footer-bottom{justify-content:center!important;text-align:center}
+@media(max-width:650px){
+ .apsan-footer .apsan-footer-contact-hours{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:16px!important;padding:34px 14px 28px!important
+ }
+ .apsan-footer .apsan-footer-contact-hours>.apsan-footer-column{padding-left:12px}
+ .apsan-footer .apsan-footer-contact-hours h4{font-size:13px!important}
+ .apsan-footer .apsan-footer-contacts p{font-size:11px!important;gap:7px!important}
+ .apsan-footer .apsan-footer-hours{font-size:11px!important;gap:10px!important}
+}
+@media(max-width:360px){
+ .apsan-footer .apsan-footer-contact-hours{gap:10px!important;padding-left:8px!important;padding-right:8px!important}
+ .apsan-footer .apsan-footer-contact-hours>.apsan-footer-column{padding-left:8px}
 }
 </style>
 
