@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vídeos | APSAN, LDA</title><meta name="description" content="Assista aos vídeos oficiais da APSAN, LDA.">
+<link rel="icon" href="https://apsanlda.com/logo.jpeg"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f7fb;color:#10243e;font-family:'Segoe UI',Arial,sans-serif}
+header{background:#082d59;color:#fff;padding:14px 18px;box-shadow:0 4px 16px #061b3530}
+.head{max-width:1160px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.brand{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none;font-weight:800;font-size:18px}.brand img{width:48px;height:48px;object-fit:contain;background:#fff;border-radius:8px}
+.back{color:#fff;text-decoration:none;border:1px solid #ffffff70;border-radius:10px;padding:10px 14px;font-weight:700}
+.hero{background:linear-gradient(125deg,#082d59,#075da5);color:#fff;padding:42px 18px}.hero>div{max-width:1160px;margin:auto}
+.eyebrow{font-size:11px;letter-spacing:2px;font-weight:900;color:#f5c84c}h1{font-size:clamp(30px,5vw,46px);margin:8px 0}.hero p{color:#dcecff;margin:0;line-height:1.6}
+main{max-width:1200px;margin:30px auto 55px;padding:0 16px;min-height:45vh}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:20px}
+.card{background:#fff;border:1px solid #dce5ef;border-radius:17px;overflow:hidden;box-shadow:0 8px 22px #092b5010}
+.frame{aspect-ratio:16/9;background:#071b31}.frame iframe{width:100%;height:100%;border:0;display:block}
+.copy{padding:16px}.copy h2{font-size:18px;margin:0;color:#092d5c}.copy p{color:#65758a;line-height:1.55;margin:8px 0 0}
+.empty,.error{padding:28px;text-align:center;background:#fff;border:1px dashed #cbd8e7;border-radius:16px;color:#64748b;line-height:1.6}
+footer{text-align:center;padding:24px 15px;color:#718096;border-top:1px solid #dce5ef;background:#fff}
+@media(max-width:560px){.head{align-items:center}.brand{font-size:15px}.brand img{width:42px;height:42px}.back{padding:9px 11px;font-size:13px}.hero{padding:32px 17px}.grid{grid-template-columns:1fr}}
+</style></head>
+<body>
+<header><div class="head"><a class="brand" href="index.html"><img src="https://apsanlda.com/logo.jpeg" alt="APSAN"><span>APSAN, LDA</span></a><a class="back" href="index.html"><i class="fas fa-arrow-left"></i> Página principal</a></div></header>
+<section class="hero"><div><div class="eyebrow">CANAL OFICIAL APSAN</div><h1>Vídeos da APSAN</h1><p>Assista às apresentações, novidades e conteúdos audiovisuais publicados pela nossa equipa.</p></div></section>
+<main><div id="videoGrid" class="grid"><div class="empty">A carregar vídeos publicados…</div></div></main>
+<footer>© APSAN, LDA — Agência de Prestação de Serviços entre Angola e Namíbia.</footer>
+<script>
+(function(){
+const API="https://api.github.com/repos/mateus-max/Website-Management/contents/content/videos?ref=main";
+const RAW="https://raw.githubusercontent.com/mateus-max/Website-Management/main/content/videos/";
+const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function parse(raw){const m=raw.match(/^---\\s*\\r?\\n([\\s\\S]*?)\\r?\\n---\\s*\\r?\\n?([\\s\\S]*)$/),d={};if(!m)return d;m[1].split(/\\r?\\n/).forEach(line=>{const x=line.match(/^([A-Za-z0-9_-]+):\\s*(.*)$/);if(x){let v=x[2].trim();try{v=JSON.parse(v)}catch(_){}d[x[1]]=v}});d.body=m[2]||"";return d}
+function youtubeId(url){try{const u=new URL(url);if(u.hostname.includes("youtu.be"))return u.pathname.slice(1).split("/")[0];if(u.hostname.includes("youtube.com"))return u.searchParams.get("v")||(u.pathname.match(/\\/(?:embed|shorts)\\/([^/]+)/)||[])[1]}catch(_){}return""}
+async function init(){const host=document.getElementById("videoGrid");try{const r=await fetch(API+"&v="+Date.now(),{cache:"no-store",headers:{Accept:"application/vnd.github+json"}});if(!r.ok)throw Error("Não foi possível consultar os vídeos.");const files=await r.json();const rows=(await Promise.all(files.filter(f=>f.type==="file"&&/\\.md$/i.test(f.name)).map(async f=>{const x=await fetch(RAW+encodeURIComponent(f.name)+"?v="+Date.now(),{cache:"no-store"});if(!x.ok)return null;return parse(await x.text())}))).filter(v=>v&&["true","yes","1"].includes(String(v.published||"").toLowerCase())&&youtubeId(v.url));rows.sort((a,b)=>String(b.date||"").localeCompare(String(a.date||"")));host.innerHTML=rows.length?rows.map(v=>'<article class="card"><div class="frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/'+encodeURIComponent(youtubeId(v.url))+'" title="'+esc(v.title||"Vídeo APSAN")+'" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="copy"><h2>'+esc(v.title||"Vídeo APSAN")+'</h2><p>'+esc(v.description||"")+'</p></div></article>').join(""):'<div class="empty">Ainda não existem vídeos publicados. Assim que a equipa publicar vídeos no Web Management, eles aparecerão automaticamente nesta página.</div>'}catch(e){console.error(e);host.innerHTML='<div class="error">Não foi possível carregar os vídeos neste momento. Tente novamente mais tarde.</div>'}}
+init();
+})();
+</script></body></html>
