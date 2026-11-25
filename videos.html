@@ -5,128 +5,57 @@
 <title>Vídeos | APSAN, LDA</title><meta name="description" content="Assista aos vídeos oficiais da APSAN, LDA.">
 <link rel="icon" href="https://apsanlda.com/logo.jpeg"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#f4f7fb;color:#10243e;font-family:'Segoe UI',Arial,sans-serif}
-header{background:#fff;color:#082d59;padding:13px 20px;border-bottom:1px solid #e3eaf2;box-shadow:0 5px 18px #082d5909}
-.head{max-width:1160px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:15px}
-.brand{display:flex;align-items:center;gap:12px;color:#082d59;text-decoration:none;font-weight:900;font-size:22px;letter-spacing:.2px}
-.brand img{width:58px;height:58px;object-fit:contain;background:transparent;border-radius:0}
-.back{color:#fff;background:#082d59;text-decoration:none;border:0;border-radius:10px;padding:10px 15px;font-weight:700;font-size:13px}
-.hero{background:transparent;color:#0b2d55;padding:30px 18px 22px;border:0;box-shadow:none}
-.hero>div{max-width:1160px;margin:auto;text-align:center}
-.eyebrow{display:flex;align-items:center;justify-content:center;gap:13px;font-size:clamp(19px,3.4vw,29px);letter-spacing:.3px;font-weight:900;color:#082d59}
-.hero h1{line-height:1.25;margin:0}
-.hero h1:before{content:"";display:inline-block;width:32px;height:32px;margin-right:10px;vertical-align:-5px;border:4px solid #0878d1;border-radius:9px;background:linear-gradient(white,white);clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}
-.hero h1:after{content:"";display:block;width:110px;height:5px;border-radius:9px;background:#0878d1;margin:14px auto 0}
-.hero p{display:none}
-main{max-width:1160px;margin:8px auto 48px;padding:0 22px;min-height:45vh}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:22px;align-items:start}
-.card{background:#fff;border:1px solid #dce5ef;border-radius:22px;overflow:hidden;box-shadow:0 10px 28px #092b5015}
-.frame{aspect-ratio:16/9;background:#071b31;position:relative}
-.frame iframe{width:100%;height:100%;border:0;display:block}
-.copy{padding:18px 20px 21px}
-.copy h2{font-size:21px;margin:0;color:#092d5c;font-weight:850}
-.copy p{color:#65758a;line-height:1.55;margin:8px 0 0;font-size:16px}
-.empty,.error{padding:28px;text-align:center;background:#fff;border:1px dashed #cbd8e7;border-radius:16px;color:#64748b;line-height:1.6}
-footer{text-align:center;padding:24px 15px;color:#718096;border-top:1px solid #dce5ef;background:#fff;line-height:1.5}
-@media(max-width:560px){
- header{padding:10px 15px}
- .head{align-items:center}
- .brand{font-size:18px;gap:8px}
- .brand img{width:48px;height:48px}
- .back{padding:9px 11px;font-size:12px}
- .hero{padding:25px 14px 19px}
- .eyebrow{font-size:19px;gap:8px}
- .hero h1:before{width:27px;height:27px;border-width:3px;margin-right:7px}
- .hero h1:after{margin-top:11px;width:90px;height:4px}
- main{margin:6px auto 35px;padding:0 16px}
- .grid{grid-template-columns:1fr;gap:17px}
- .card{border-radius:20px}
- .copy{padding:16px 18px 19px}
- .copy h2{font-size:20px}
- .copy p{font-size:15px}
-}
+:root{--navy:#062b60;--blue:#0878df;--ink:#10284c;--muted:#687b96;--line:#dce7f4}*{box-sizing:border-box}
+body{margin:0;background:#f5f9ff;color:var(--ink);font-family:'Segoe UI',Arial,sans-serif}
+header{background:linear-gradient(115deg,#05275a,#06417f);color:#fff;padding:13px 20px;box-shadow:0 5px 20px #082b5520}
+.head{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.brand{display:flex;align-items:center;gap:13px;color:#fff;text-decoration:none;font-weight:900;font-size:22px}.brand img{width:58px;height:58px;object-fit:contain;background:#fff;border-radius:12px}
+.back{color:#fff;text-decoration:none;border:1px solid #ffffff9c;border-radius:24px;padding:11px 17px;font-weight:750;font-size:13px}
+.brand small{display:block;font-size:10px;letter-spacing:1px;margin-top:3px;color:#d9eaff}
+main{max-width:1200px;margin:0 auto;padding:0 22px 48px}.hero{padding:31px 6px 22px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.hero h1{margin:0;color:#082b5c;font-size:clamp(23px,4vw,36px);font-weight:950;letter-spacing:-.7px}.hero h1 span{color:var(--blue)}.hero p{margin:8px 0 0;color:#617795;font-size:15px}.hero-icon{font-size:72px;color:#b8d8ff;opacity:.8;padding-right:12px}
+.searchbar{display:flex;gap:10px;background:#fff;border:1px solid #d4e2f2;border-radius:16px;padding:7px;box-shadow:0 5px 18px #0a3b7010}
+.search-icon{display:grid;place-items:center;color:#0759a8;padding:0 8px;font-size:20px}.searchbar input{flex:1;min-width:0;border:0;outline:0;padding:10px 4px;font-size:16px;color:var(--ink);background:transparent}
+.searchbar button,.watch{border:0;border-radius:12px;background:linear-gradient(135deg,#0786f5,#0757bd);color:#fff;padding:12px 24px;font-weight:800;font-size:14px;box-shadow:0 5px 12px #0878df30}
+.categories{display:flex;gap:12px;overflow-x:auto;padding:20px 0 23px;scrollbar-width:none}.categories::-webkit-scrollbar{display:none}
+.cat{flex:1 0 auto;min-width:115px;border:0;border-radius:18px;background:#e8f0fa;color:#17395f;padding:13px 17px;font-weight:750;font-size:14px;white-space:nowrap}
+.cat i{color:#075fc0;margin-right:8px}.cat.active{background:linear-gradient(135deg,#0786f5,#0757bd);color:#fff;box-shadow:0 6px 14px #0878df35}.cat.active i{color:#fff}
+.featured{display:grid;grid-template-columns:1.55fr 1fr;gap:24px;align-items:center;background:#fff;border:1px solid #e2ebf5;border-radius:23px;padding:14px;box-shadow:0 9px 28px #0b37630d}
+.frame{aspect-ratio:16/9;background:#061d3b;position:relative}.featured .frame{border-radius:16px;overflow:hidden}.frame iframe{width:100%;height:100%;border:0;display:block}
+.feature-info{padding:12px 14px 12px 0}.eyebrow{font-size:11px;letter-spacing:1.5px;font-weight:900;color:#0878df}
+.feature-info h2{font-size:clamp(23px,3vw,30px);line-height:1.15;margin:9px 0;color:#092c5d}.feature-info p{font-size:16px;line-height:1.55;color:#5f7189;margin:0 0 16px}
+.meta{display:flex;gap:16px;flex-wrap:wrap;color:#617795;font-size:13px;margin:12px 0 18px}.meta i{color:#0878df;margin-right:5px}.watch{display:inline-flex;align-items:center;gap:9px;text-decoration:none}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid var(--line);margin-top:28px;padding:22px 0 15px}
+.section-head h2{margin:0;font-size:25px;color:#092b5a}.section-head h2 i{color:#0878df;margin-right:9px}.seeall{color:#075fbe;font-weight:800;text-decoration:none;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.card{background:#fff;border:1px solid #e0e9f3;border-radius:17px;overflow:hidden;box-shadow:0 7px 20px #0a31570b;min-width:0}
+.card .frame{overflow:hidden}.copy{padding:14px 16px 17px}.copy h3{font-size:17px;line-height:1.3;margin:0;color:#102e59}.copy p{font-size:14px;line-height:1.5;color:#718096;margin:7px 0 0}.card-meta{font-size:12px;color:#718096;margin-top:11px}
+.empty,.error{grid-column:1/-1;padding:28px;text-align:center;background:#fff;border:1px dashed #cbd8e7;border-radius:16px;color:#64748b;line-height:1.6}
+footer{margin-top:8px;background:linear-gradient(110deg,#05275a,#06417f);color:#fff;padding:32px 20px;border-top:5px solid #0878df}
+.foot-inner{max-width:1160px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:22px}.foot-brand{display:flex;align-items:center;gap:12px;font-weight:900;font-size:22px}.foot-brand img{width:55px;height:55px;object-fit:contain;background:#fff;border-radius:10px}.foot-copy{border-left:2px solid #ffffff70;padding-left:24px;color:#e2efff;line-height:1.5}
+@media(max-width:760px){header{padding:10px 14px}.brand{font-size:18px}.brand img{width:48px;height:48px}.back{padding:9px 12px;font-size:12px}main{padding:0 15px 35px}.hero{padding:24px 2px 17px}.hero-icon{font-size:48px}.hero p{font-size:13px}.searchbar{border-radius:13px}.searchbar button{padding:10px 14px}.categories{gap:8px;padding:15px 0 18px}.cat{min-width:105px;padding:12px 13px;font-size:13px}.featured{grid-template-columns:1fr;gap:0;padding:10px;border-radius:19px}.featured .frame{border-radius:13px}.feature-info{padding:15px 7px 8px}.feature-info h2{font-size:23px}.feature-info p{font-size:15px;margin-bottom:10px}.meta{margin:9px 0 14px}.section-head{margin-top:22px;padding-top:18px}.section-head h2{font-size:21px}.grid{grid-template-columns:1fr 1fr;gap:12px}.copy{padding:11px 12px 13px}.copy h3{font-size:14px}.copy p{font-size:12px}.card-meta{font-size:11px}footer{padding:25px 18px}.foot-inner{align-items:flex-start;flex-direction:column}.foot-brand{font-size:19px}.foot-copy{border-left:0;border-top:1px solid #ffffff70;padding:13px 0 0;font-size:14px}}
+@media(max-width:390px){.grid{grid-template-columns:1fr}.hero-icon{display:none}.back{font-size:11px}.brand{font-size:16px}}
 </style></head>
 <body>
 <header><div class="head"><a class="brand" href="index.html"><img src="https://apsanlda.com/logo.jpeg" alt="APSAN"><span>APSAN, LDA</span></a><a class="back" href="index.html"><i class="fas fa-arrow-left"></i> Página principal</a></div></header>
-<section class="hero"><div><h1 class="eyebrow">CANAL DE NOTÍCIAS DA APSAN</h1></div></section>
-<main><div id="videoGrid" class="grid"><div class="empty">A carregar vídeos publicados…</div></div></main>
-<footer>© APSAN, LDA — Agência de Prestação de Serviços entre Angola e Namíbia.</footer>
+<main>
+<section class="hero"><div><h1><i class="fas fa-circle-play" style="color:#0878df;margin-right:9px"></i> CANAL DE NOTÍCIAS <span>DA APSAN</span></h1><p>Assista aos nossos vídeos, atualizações e informações importantes.</p></div><i class="fas fa-clapperboard hero-icon"></i></section>
+<form class="searchbar" id="searchForm"><span class="search-icon"><i class="fas fa-search"></i></span><input id="videoSearch" type="search" placeholder="Pesquisar vídeo..." aria-label="Pesquisar vídeos"><button type="submit">Pesquisar</button></form>
+<nav class="categories" id="categories" aria-label="Categorias de vídeos"><button class="cat active" data-category="Todos"><i class="fas fa-grip"></i>Todos</button><button class="cat" data-category="Serviços"><i class="fas fa-briefcase"></i>Serviços</button><button class="cat" data-category="Notícias"><i class="fas fa-bullhorn"></i>Notícias</button><button class="cat" data-category="Formação"><i class="fas fa-graduation-cap"></i>Formação</button><button class="cat" data-category="Tutoriais"><i class="fas fa-circle-play"></i>Tutoriais</button></nav>
+<section id="featuredHost"><div class="empty">A carregar vídeos publicados…</div></section>
+<section class="section-head"><h2><i class="fas fa-circle-play"></i> Mais vídeos recentes</h2><a href="#recentGrid" class="seeall">Ver todos <i class="fas fa-arrow-right"></i></a></section>
+<section id="recentGrid" class="grid"><div class="empty">A carregar vídeos…</div></section></main>
+<footer><div class="foot-inner"><div class="foot-brand"><img src="https://apsanlda.com/logo.jpeg" alt="APSAN"><span>APSAN, LDA<br><small style="font-size:10px;letter-spacing:1px">A PRESTADORA DE SERVIÇOS</small></span></div><div class="foot-copy"><i class="fas fa-globe" style="font-size:23px;margin-right:9px"></i> Agência de Prestação de Serviços<br>entre Angola e Namíbia.</div></div></footer>
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBe28uhKKzOycocioX0YyyUZ0jmODDAnCM",
-  authDomain: "apsan-web-manegment.firebaseapp.com",
-  databaseURL: "https://apsan-web-manegment-default-rtdb.firebaseio.com",
-  projectId: "apsan-web-manegment",
-  storageBucket: "apsan-web-manegment.firebasestorage.app",
-  messagingSenderId: "1026894206568",
-  appId: "1:1026894206568:web:a8896e7caf7f14d6118ddd",
-  measurementId: "G-RCCH3ME0MR"
-};
-
-const host = document.getElementById("videoGrid");
-const esc = value => String(value ?? "").replace(/[&<>"']/g, ch => ({
-  "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
-}[ch]));
-
-function youtubeId(value) {
-  try {
-    const url = new URL(value);
-    const hostname = url.hostname.toLowerCase().replace(/^www[.]|^m[.]/, "");
-    if (hostname === "youtu.be") return url.pathname.split("/").filter(Boolean)[0] || "";
-    if (hostname === "youtube.com" || hostname === "youtube-nocookie.com") {
-      const parts = url.pathname.split("/").filter(Boolean);
-      return url.searchParams.get("v") || (["embed","shorts","live"].includes(parts[0]) ? (parts[1] || "") : "");
-    }
-  } catch (_) {}
-  return "";
-}
-
-function renderVideos(value) {
-  const rows = Object.values(value || {}).filter(video =>
-    video && video.published === true && youtubeId(video.url)
-  );
-  rows.sort((a,b) => (Number(b.updatedAt || b.createdAt || 0)) - (Number(a.updatedAt || a.createdAt || 0)));
-
-  if (!rows.length) {
-    host.innerHTML = '<div class="empty">Ainda não existem vídeos publicados. Assim que a equipa publicar vídeos no Web Management, eles aparecerão automaticamente nesta página.</div>';
-    return;
-  }
-
-  host.innerHTML = rows.map(video => {
-    const id = youtubeId(video.url);
-    return '<article class="card"><div class="frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/' +
-      encodeURIComponent(id) + '" title="' + esc(video.title || "Vídeo APSAN") +
-      '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="copy"><h2>' +
-      esc(video.title || "Vídeo APSAN") + '</h2><p>' + esc(video.description || "") +
-      '</p></div></article>';
-  }).join("");
-}
-
-try {
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
-  let received = false;
-  const fallback = setTimeout(() => {
-    if (!received) host.innerHTML = '<div class="error">O servidor demorou a responder. Verifique a ligação à internet e atualize a página. Se o problema continuar, confirme a permissão de leitura pública de <b>apsanVideos</b> no Firebase Realtime Database.</div>';
-  }, 12000);
-
-  onValue(ref(db, "apsanVideos"), snapshot => {
-    received = true;
-    clearTimeout(fallback);
-    renderVideos(snapshot.val());
-  }, error => {
-    received = true;
-    clearTimeout(fallback);
-    console.error("APSAN videos Firebase:", error);
-    host.innerHTML = '<div class="error">Não foi possível carregar os vídeos: ' + esc(error.message || "erro de ligação") +
-      '. Confirme se a regra de leitura de <b>apsanVideos</b> está pública no Firebase.</div>';
-  });
-} catch (error) {
-  console.error("APSAN videos page:", error);
-  host.innerHTML = '<div class="error">Ocorreu um erro ao iniciar a página de vídeos. Atualize o navegador e tente novamente.</div>';
-}
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import {getDatabase,ref,onValue} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
+const cfg={apiKey:"AIzaSyBe28uhKKzOycocioX0YyyUZ0jmODDAnCM",authDomain:"apsan-web-manegment.firebaseapp.com",databaseURL:"https://apsan-web-manegment-default-rtdb.firebaseio.com",projectId:"apsan-web-manegment",storageBucket:"apsan-web-manegment.firebasestorage.app",messagingSenderId:"1026894206568",appId:"1:1026894206568:web:a8896e7caf7f14d6118ddd",measurementId:"G-RCCH3ME0MR"};
+const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function youtubeId(value){try{const u=new URL(value),h=u.hostname.toLowerCase().replace(/^www[.]|^m[.]/,"");if(h==="youtu.be")return u.pathname.split("/").filter(Boolean)[0]||"";if(h==="youtube.com"||h==="youtube-nocookie.com"){const p=u.pathname.split("/").filter(Boolean);return u.searchParams.get("v")||(["embed","shorts","live"].includes(p[0])?(p[1]||""):"")}}catch(e){}return""}
+const featured=document.getElementById("featuredHost"),recent=document.getElementById("recentGrid"),search=document.getElementById("videoSearch");let videos=[],category="Todos";
+function dateLabel(v){const n=Number(v||0);return n?new Intl.DateTimeFormat("pt-PT",{day:"2-digit",month:"short",year:"numeric"}).format(new Date(n)):""}
+function card(v){const id=youtubeId(v.url),date=dateLabel(v.createdAt||v.updatedAt);return '<article class="card"><div class="frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/'+encodeURIComponent(id)+'" title="'+esc(v.title||"Vídeo APSAN")+'" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="copy"><h3>'+esc(v.title||"Vídeo APSAN")+'</h3><p>'+esc(v.description||"")+'</p><div class="card-meta">'+(date?'<i class="far fa-calendar"></i> '+date:"")+'</div></div></article>'}
+function render(){const q=search.value.trim().toLowerCase();const list=videos.filter(v=>(category==="Todos"||String(v.category||"Serviços").toLowerCase()===category.toLowerCase())&&(!q||(String(v.title||"")+" "+String(v.description||"")).toLowerCase().includes(q)));if(!list.length){featured.innerHTML="";recent.innerHTML='<div class="empty">Não foram encontrados vídeos nesta categoria ou pesquisa.</div>';return}const top=list[0],id=youtubeId(top.url),date=dateLabel(top.createdAt||top.updatedAt);featured.innerHTML='<article class="featured"><div class="frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/'+encodeURIComponent(id)+'" title="'+esc(top.title||"Vídeo em destaque")+'" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="feature-info"><div class="eyebrow">VÍDEO EM DESTAQUE</div><h2>'+esc(top.title||"Vídeo APSAN")+'</h2><p>'+esc(top.description||"Conheça os serviços, novidades e informações da APSAN.")+'</p><div class="meta">'+(date?'<span><i class="far fa-calendar"></i>'+date+'</span>':"")+'<span><i class="fas fa-play-circle"></i>'+esc(top.category||"Canal APSAN")+'</span></div><a class="watch" href="https://www.youtube.com/watch?v='+encodeURIComponent(id)+'" target="_blank" rel="noopener"><i class="fas fa-play"></i> Assistir agora</a></div></article>';const rest=list.slice(1);recent.innerHTML=rest.length?rest.map(card).join(""):'<div class="empty">Este é o único vídeo disponível nesta seleção. Outros vídeos aparecerão aqui quando forem publicados.</div>'}
+document.getElementById("searchForm").addEventListener("submit",e=>{e.preventDefault();render()});search.addEventListener("input",render);
+document.getElementById("categories").addEventListener("click",e=>{const b=e.target.closest("[data-category]");if(!b)return;category=b.dataset.category;document.querySelectorAll(".cat").forEach(x=>x.classList.toggle("active",x===b));render()});
+try{const db=getDatabase(initializeApp(cfg));let received=false;const timer=setTimeout(()=>{if(!received){featured.innerHTML='<div class="error">O servidor demorou a responder. Verifique a ligação e a permissão de leitura de apsanVideos.</div>';recent.innerHTML=""}},12000);onValue(ref(db,"apsanVideos"),snap=>{received=true;clearTimeout(timer);videos=Object.values(snap.val()||{}).filter(v=>v&&v.published===true&&youtubeId(v.url));videos.sort((a,b)=>Number(b.updatedAt||b.createdAt||0)-Number(a.updatedAt||a.createdAt||0));render()},err=>{received=true;clearTimeout(timer);featured.innerHTML='<div class="error">Não foi possível carregar os vídeos: '+esc(err.message)+'</div>';recent.innerHTML=""})}catch(e){featured.innerHTML='<div class="error">Erro ao iniciar o canal: '+esc(e.message)+'</div>'}
 </script></body></html>
