@@ -29,13 +29,78 @@ footer{text-align:center;padding:24px 15px;color:#718096;border-top:1px solid #d
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
 import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
-const firebaseConfig={apiKey:"AIzaSyBe28uhKKzOycocioX0YyyUZ0jmODDAnCM",authDomain:"apsan-web-manegment.firebaseapp.com",databaseURL:"https://apsan-web-manegment-default-rtdb.firebaseio.com",projectId:"apsan-web-manegment",storageBucket:"apsan-web-manegment.firebasestorage.app",messagingSenderId:"1026894206568",appId:"1:1026894206568:web:a8896e7caf7f14d6118ddd",measurementId:"G-RCCH3ME0MR"};
-const app=initializeApp(firebaseConfig),db=getDatabase(app),host=document.getElementById("videoGrid");
-const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-function youtubeId(value){try{const u=new URL(value),h=u.hostname.replace(/^www\\./,"");if(h==="youtu.be")return u.pathname.split("/").filter(Boolean)[0]||"";if(["youtube.com","m.youtube.com","youtube-nocookie.com"].includes(h))return u.searchParams.get("v")||(u.pathname.match(/^\\/(?:embed|shorts|live)\\/([^/?]+)/)||[])[1]||""}catch(e){}return""}
-onValue(ref(db,"apsanVideos"),snap=>{
- const rows=Object.values(snap.val()||{}).filter(v=>v&&v.published===true&&youtubeId(v.url));
- rows.sort((a,b)=>(b.updatedAt||b.createdAt||0)-(a.updatedAt||a.createdAt||0));
- host.innerHTML=rows.length?rows.map(v=>{const id=youtubeId(v.url);return '<article class="card"><div class="frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/'+encodeURIComponent(id)+'" title="'+esc(v.title||"Vídeo APSAN")+'" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="copy"><h2>'+esc(v.title||"Vídeo APSAN")+'</h2><p>'+esc(v.description||"")+'</p></div></article>'}).join(""):'<div class="empty">Ainda não existem vídeos publicados. Assim que a equipa publicar vídeos no Web Management, eles aparecerão automaticamente nesta página.</div>';
-},error=>{console.error(error);host.innerHTML='<div class="error">Não foi possível carregar os vídeos. Verifique a ligação e as permissões de leitura.</div>'});
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBe28uhKKzOycocioX0YyyUZ0jmODDAnCM",
+  authDomain: "apsan-web-manegment.firebaseapp.com",
+  databaseURL: "https://apsan-web-manegment-default-rtdb.firebaseio.com",
+  projectId: "apsan-web-manegment",
+  storageBucket: "apsan-web-manegment.firebasestorage.app",
+  messagingSenderId: "1026894206568",
+  appId: "1:1026894206568:web:a8896e7caf7f14d6118ddd",
+  measurementId: "G-RCCH3ME0MR"
+};
+
+const host = document.getElementById("videoGrid");
+const esc = value => String(value ?? "").replace(/[&<>"']/g, ch => ({
+  "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+}[ch]));
+
+function youtubeId(value) {
+  try {
+    const url = new URL(value);
+    const hostname = url.hostname.toLowerCase().replace(/^www[.]|^m[.]/, "");
+    if (hostname === "youtu.be") return url.pathname.split("/").filter(Boolean)[0] || "";
+    if (hostname === "youtube.com" || hostname === "youtube-nocookie.com") {
+      const parts = url.pathname.split("/").filter(Boolean);
+      return url.searchParams.get("v") || (["embed","shorts","live"].includes(parts[0]) ? (parts[1] || "") : "");
+    }
+  } catch (_) {}
+  return "";
+}
+
+function renderVideos(value) {
+  const rows = Object.values(value || {}).filter(video =>
+    video && video.published === true && youtubeId(video.url)
+  );
+  rows.sort((a,b) => (Number(b.updatedAt || b.createdAt || 0)) - (Number(a.updatedAt || a.createdAt || 0)));
+
+  if (!rows.length) {
+    host.innerHTML = '<div class="empty">Ainda não existem vídeos publicados. Assim que a equipa publicar vídeos no Web Management, eles aparecerão automaticamente nesta página.</div>';
+    return;
+  }
+
+  host.innerHTML = rows.map(video => {
+    const id = youtubeId(video.url);
+    return '<article class="card"><div class="frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/' +
+      encodeURIComponent(id) + '" title="' + esc(video.title || "Vídeo APSAN") +
+      '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="copy"><h2>' +
+      esc(video.title || "Vídeo APSAN") + '</h2><p>' + esc(video.description || "") +
+      '</p></div></article>';
+  }).join("");
+}
+
+try {
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  let received = false;
+  const fallback = setTimeout(() => {
+    if (!received) host.innerHTML = '<div class="error">O servidor demorou a responder. Verifique a ligação à internet e atualize a página. Se o problema continuar, confirme a permissão de leitura pública de <b>apsanVideos</b> no Firebase Realtime Database.</div>';
+  }, 12000);
+
+  onValue(ref(db, "apsanVideos"), snapshot => {
+    received = true;
+    clearTimeout(fallback);
+    renderVideos(snapshot.val());
+  }, error => {
+    received = true;
+    clearTimeout(fallback);
+    console.error("APSAN videos Firebase:", error);
+    host.innerHTML = '<div class="error">Não foi possível carregar os vídeos: ' + esc(error.message || "erro de ligação") +
+      '. Confirme se a regra de leitura de <b>apsanVideos</b> está pública no Firebase.</div>';
+  });
+} catch (error) {
+  console.error("APSAN videos page:", error);
+  host.innerHTML = '<div class="error">Ocorreu um erro ao iniciar a página de vídeos. Atualize o navegador e tente novamente.</div>';
+}
 </script></body></html>
