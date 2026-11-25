@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#082c60">
+<title>Publicações | APSAN, LDA</title>
+<meta name="description" content="Notícias, novidades, actividades e publicações oficiais da APSAN, LDA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f6fa;color:#142b47;font-family:Inter,Arial,sans-serif}
+.top{background:linear-gradient(120deg,#061a36,#0b3b73);color:white;padding:26px max(20px,calc((100% - 1160px)/2)) 32px}
+.topline{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{font-weight:900;letter-spacing:.5px;font-size:19px}.back{color:#fff;text-decoration:none;border:1px solid #ffffff66;border-radius:30px;padding:11px 17px;font-size:13px;font-weight:800}
+h1{font-size:clamp(30px,5vw,48px);margin:30px 0 8px;letter-spacing:-1.5px}.lead{margin:0;color:#d6e5f6;line-height:1.6}
+main{max-width:1160px;margin:32px auto 70px;padding:0 20px}
+.tools{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+.count{font-weight:800;color:#183e6c}.search{width:min(100%,360px);padding:13px 15px;border:1px solid #d7e1ed;border-radius:12px;background:white;font:inherit;outline:none}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.card{background:white;border:1px solid #e0e8f1;border-radius:18px;overflow:hidden;box-shadow:0 8px 25px #0a2b5010;display:flex;flex-direction:column;min-width:0}
+.cover{height:205px;background:#e5edf6}.cover img{width:100%;height:100%;object-fit:cover;display:block}
+.copy{padding:18px;display:flex;flex-direction:column;flex:1}.meta{font-size:12px;color:#6d7f95;margin-bottom:10px}.tag{display:inline-block;background:#fff3d1;color:#79540a;padding:5px 9px;border-radius:20px;font-size:10px;font-weight:900;text-transform:uppercase;margin-bottom:10px;align-self:flex-start}
+h2{font-size:19px;line-height:1.35;color:#092e61;margin:0 0 10px}.excerpt{font-size:13px;line-height:1.65;color:#5e7086;margin:0 0 18px}
+.open{margin-top:auto;align-self:flex-start;background:#0868bd;color:white;border:0;border-radius:10px;padding:11px 16px;font-weight:800;cursor:pointer}
+.empty{background:white;border:1px dashed #cbd8e7;border-radius:16px;padding:32px;text-align:center;color:#667991}
+footer{text-align:center;color:#718198;font-size:12px;padding:24px}
+.modal{position:fixed;inset:0;background:#06172cdb;z-index:99;display:grid;place-items:center;padding:15px}
+.dialog{width:min(780px,100%);max-height:92vh;overflow:auto;background:white;border-radius:18px;padding:24px}
+.close{float:right;border:0;border-radius:50%;width:38px;height:38px;background:#edf2f8;font-size:23px;cursor:pointer}
+.dialog h2{font-size:26px;margin:12px 48px 12px 0}.dialog img{width:100%;max-height:370px;object-fit:contain;background:#edf2f8;border-radius:12px;margin:8px 0 16px}
+.body{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.8;color:#354b64;font-size:15px}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.cover{height:155px}.copy{padding:13px}h2{font-size:16px}.top{padding:22px 18px 27px}}
+@media(max-width:520px){.grid{grid-template-columns:1fr}.cover{height:210px}.card{max-width:100%}.tools{align-items:stretch}.search{width:100%}}
+</style>
+</head>
+<body>
+<header class="top">
+ <div class="topline"><div class="brand">APSAN, LDA</div><a class="back" href="index.html">← Voltar à página principal</a></div>
+ <h1>Publicações da empresa</h1>
+ <p class="lead">Acompanhe as notícias, novidades, actividades e comunicados oficiais da APSAN, LDA.</p>
+</header>
+<main>
+ <div class="tools"><div class="count" id="count">A carregar publicações…</div><input class="search" id="search" type="search" placeholder="Pesquisar publicações…"></div>
+ <div class="grid" id="grid"></div>
+</main>
+<footer>© APSAN, LDA — Agência de Prestação de Serviços entre Angola e Namíbia.</footer>
+<script>
+(function(){
+"use strict";
+const API="https://api.github.com/repos/mateus-max/Website-Management/contents/";
+const RAW="https://raw.githubusercontent.com/mateus-max/Website-Management/main/";
+const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function parse(t){const m=t.match(/^---\s*\r?\n([\s\S]*?)\r?\n---\s*\r?\n?([\s\S]*)$/),d={};if(!m)return {body:t};m[1].split(/\r?\n/).forEach(line=>{const x=line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);if(!x)return;let v=x[2].trim();try{v=JSON.parse(v)}catch(_){}d[x[1]]=v});d.body=m[2]||"";return d}
+function coverUrl(v){if(!v)return "";if(v.startsWith("http://")||v.startsWith("https://")||v.startsWith("//")||v.startsWith("data:"))return v;return RAW+"public/"+v.replace(/^\/+/, "")}
+function plain(s){return String(s||"").replace(/!\[([^\]]*)\]\([^)]+\)/g,"$1").replace(/\[([^\]]+)\]\(([^)]+)\)/g,"$1").replace(/[#*_>`]/g,"").replace(/\s+/g," ").trim()}
+let posts=[];
+function render(){const q=document.getElementById("search").value.trim().toLowerCase();const rows=posts.filter(p=>[p.title,p.category,p.excerpt,p.body].join(" ").toLowerCase().includes(q));document.getElementById("count").textContent=rows.length+" publicação(ões)";document.getElementById("grid").innerHTML=rows.length?rows.map((p,i)=>{const img=coverUrl(p.coverImage||p.image),desc=p.excerpt||plain(p.body).slice(0,170);return '<article class="card"><div class="cover">'+(img?'<img src="'+esc(img)+'" alt="'+esc(p.title)+'" loading="lazy">':"")+'</div><div class="copy"><span class="tag">'+esc(p.category||"APSAN")+'</span><div class="meta">'+esc(p.date||"APSAN, LDA")+'</div><h2>'+esc(p.title||"Publicação")+'</h2><p class="excerpt">'+esc(desc)+'</p><button class="open" data-open="'+i+'">Ler publicação →</button></div></article>'}).join(""):'<div class="empty">Não foram encontradas publicações.</div>';document.querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>show(rows[Number(b.dataset.open)]))}
+function show(p){const m=document.createElement("div");m.className="modal";const img=coverUrl(p.coverImage||p.image);m.innerHTML='<article class="dialog"><button class="close" aria-label="Fechar">×</button><div class="meta">'+esc(p.category||"APSAN")+' · '+esc(p.date||"")+'</div><h2>'+esc(p.title||"Publicação APSAN")+'</h2>'+(img?'<img src="'+esc(img)+'" alt="'+esc(p.title||"")+'">':"")+'<div class="body">'+esc(p.body||p.excerpt||"")+'</div></article>';document.body.appendChild(m);document.body.style.overflow="hidden";const close=()=>{m.remove();document.body.style.overflow=""};m.querySelector(".close").onclick=close;m.onclick=e=>{if(e.target===m)close()}}
+async function init(){try{const r=await fetch(API+"content/posts?ref=main&v="+Date.now(),{cache:"no-store"});if(!r.ok)throw Error("Não foi possível carregar as publicações.");const files=await r.json();const list=await Promise.all(files.filter(f=>f.type==="file"&&/\.md$/i.test(f.name)).map(async f=>{const x=await fetch(RAW+"content/posts/"+encodeURIComponent(f.name)+"?v="+Date.now(),{cache:"no-store"});if(!x.ok)return null;return parse(await x.text())}));posts=list.filter(p=>p&&String(p.published).toLowerCase()==="true").sort((a,b)=>String(b.date||"").localeCompare(String(a.date||"")));render()}catch(e){document.getElementById("count").textContent="Publicações";document.getElementById("grid").innerHTML='<div class="empty">Não foi possível carregar as publicações neste momento. Tente novamente mais tarde.</div>';console.error(e)}}
+document.getElementById("search").addEventListener("input",render);init();
+})();
+</script>
+</body>
+</html>
