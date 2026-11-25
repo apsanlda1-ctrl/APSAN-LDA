@@ -1,66 +1,93 @@
 <!doctype html>
 <html lang="pt">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#082c60">
 <title>Publicações | APSAN, LDA</title>
-<meta name="description" content="Notícias, novidades, actividades e publicações oficiais da APSAN, LDA.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="description" content="Notícias, novidades, serviços e actividades da APSAN, LDA.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box}body{margin:0;background:#f3f6fa;color:#142b47;font-family:Inter,Arial,sans-serif}
-.top{background:linear-gradient(120deg,#061a36,#0b3b73);color:white;padding:26px max(20px,calc((100% - 1160px)/2)) 32px}
-.topline{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.brand{font-weight:900;letter-spacing:.5px;font-size:19px}.back{color:#fff;text-decoration:none;border:1px solid #ffffff66;border-radius:30px;padding:11px 17px;font-size:13px;font-weight:800}
-h1{font-size:clamp(30px,5vw,48px);margin:30px 0 8px;letter-spacing:-1.5px}.lead{margin:0;color:#d6e5f6;line-height:1.6}
-main{max-width:1160px;margin:32px auto 70px;padding:0 20px}
-.tools{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:22px;flex-wrap:wrap}
-.count{font-weight:800;color:#183e6c}.search{width:min(100%,360px);padding:13px 15px;border:1px solid #d7e1ed;border-radius:12px;background:white;font:inherit;outline:none}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.card{background:white;border:1px solid #e0e8f1;border-radius:18px;overflow:hidden;box-shadow:0 8px 25px #0a2b5010;display:flex;flex-direction:column;min-width:0}
-.cover{height:205px;background:#e5edf6}.cover img{width:100%;height:100%;object-fit:cover;display:block}
-.copy{padding:18px;display:flex;flex-direction:column;flex:1}.meta{font-size:12px;color:#6d7f95;margin-bottom:10px}.tag{display:inline-block;background:#fff3d1;color:#79540a;padding:5px 9px;border-radius:20px;font-size:10px;font-weight:900;text-transform:uppercase;margin-bottom:10px;align-self:flex-start}
-h2{font-size:19px;line-height:1.35;color:#092e61;margin:0 0 10px}.excerpt{font-size:13px;line-height:1.65;color:#5e7086;margin:0 0 18px}
-.open{margin-top:auto;align-self:flex-start;background:#0868bd;color:white;border:0;border-radius:10px;padding:11px 16px;font-weight:800;cursor:pointer}
-.empty{background:white;border:1px dashed #cbd8e7;border-radius:16px;padding:32px;text-align:center;color:#667991}
-footer{text-align:center;color:#718198;font-size:12px;padding:24px}
-.modal{position:fixed;inset:0;background:#06172cdb;z-index:99;display:grid;place-items:center;padding:15px}
-.dialog{width:min(780px,100%);max-height:92vh;overflow:auto;background:white;border-radius:18px;padding:24px}
-.close{float:right;border:0;border-radius:50%;width:38px;height:38px;background:#edf2f8;font-size:23px;cursor:pointer}
-.dialog h2{font-size:26px;margin:12px 48px 12px 0}.dialog img{width:100%;max-height:370px;object-fit:contain;background:#edf2f8;border-radius:12px;margin:8px 0 16px}
-.body{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.8;color:#354b64;font-size:15px}
-@media(max-width:800px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.cover{height:155px}.copy{padding:13px}h2{font-size:16px}.top{padding:22px 18px 27px}}
-@media(max-width:520px){.grid{grid-template-columns:1fr}.cover{height:210px}.card{max-width:100%}.tools{align-items:stretch}.search{width:100%}}
+:root{--navy:#082d60;--deep:#061b3b;--blue:#0870c7;--gold:#ffc21b;--ink:#142f55;--muted:#68798e;--line:#e1e8f0;--bg:#f6f8fb}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,Arial,sans-serif}
+.site-head{height:auto;min-height:112px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:15px max(22px,calc((100% - 1240px)/2));gap:24px}
+.brand{display:flex;align-items:center;gap:22px;min-width:0}.brand img{width:205px;max-height:90px;object-fit:contain}.brand-line{height:72px;width:4px;background:var(--navy)}.brand-copy{font-size:21px;line-height:1.22;font-weight:850;color:var(--navy)}.brand-copy strong{color:#d92735}
+.head-actions{display:flex;gap:12px}.round{width:54px;height:54px;border:1px solid #e1e8f0;border-radius:50%;background:#fff;color:var(--navy);font-size:24px;box-shadow:0 5px 15px #0a2b5010}
+.hero{position:relative;overflow:hidden;background:linear-gradient(115deg,#061d40,#0b4384);color:white;min-height:300px;display:flex;align-items:center}
+.hero:before{content:"";position:absolute;width:540px;height:540px;border:2px solid #ffffff12;border-radius:50%;right:10%;top:-190px}
+.hero:after{content:"";position:absolute;width:400px;height:400px;border:22px solid var(--gold);border-left-color:transparent;border-bottom-color:transparent;border-radius:50%;right:-70px;top:-85px;transform:rotate(40deg);opacity:.95}
+.hero-inner{width:min(1240px,100%);margin:auto;padding:46px 24px;position:relative;z-index:1}
+.eyebrow{font-weight:850;letter-spacing:.08em;text-transform:uppercase;color:#ffcf43;font-size:13px}
+.hero h1{font-size:clamp(34px,5vw,58px);line-height:1.06;letter-spacing:-1.8px;margin:12px 0 14px;max-width:780px}.hero h1 span{color:var(--gold)}
+.hero p{font-size:clamp(15px,2vw,20px);color:#e2edfa;margin:0;max-width:700px;line-height:1.55}
+.hero-count{display:inline-flex;align-items:center;gap:13px;border:1px solid #ffffff9c;border-radius:40px;padding:13px 22px;margin-top:25px;font-weight:800;background:#ffffff10}
+main{max-width:1240px;margin:0 auto;padding:30px 22px 54px}
+.filters{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(240px,.9fr);gap:16px;margin-bottom:28px}
+.input-wrap{height:58px;background:#fff;border:1px solid var(--line);border-radius:16px;display:flex;align-items:center;gap:13px;padding:0 18px;box-shadow:0 4px 12px #102c4c08}
+.input-wrap span{font-size:22px}.input-wrap input,.input-wrap select{width:100%;height:100%;border:0;outline:0;background:transparent;color:var(--ink);font:inherit;font-size:16px}
+.grid{display:grid;grid-template-columns:1fr;gap:20px}
+.card{display:grid;grid-template-columns:minmax(280px, .82fr) minmax(0,1fr);gap:30px;align-items:stretch;background:#fff;border:1px solid var(--line);border-radius:24px;padding:18px;box-shadow:0 10px 28px #0a2b5010;overflow:hidden}
+.cover{min-height:290px;border-radius:18px;overflow:hidden;background:#e8eff7}
+.cover img{display:block;width:100%;height:100%;min-height:290px;max-height:390px;object-fit:cover}
+.copy{padding:8px 10px 8px 0;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
+.tag{display:inline-flex;background:#ffedb7;color:#72500b;border-radius:30px;padding:9px 16px;font-size:12px;font-weight:900;text-transform:uppercase}
+.date{margin:14px 0 12px;color:#64758b;font-size:15px;display:flex;align-items:center;gap:9px}
+.copy h2{font-size:clamp(22px,3vw,34px);line-height:1.2;color:var(--navy);margin:0 0 14px;letter-spacing:-.5px}
+.excerpt{font-size:16px;line-height:1.65;color:#536983;margin:0 0 22px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.open{display:inline-flex;align-items:center;gap:12px;border:0;border-radius:13px;padding:15px 22px;background:linear-gradient(110deg,#0878d1,#0756a4);color:white;font-size:15px;font-weight:850;cursor:pointer;box-shadow:0 7px 15px #0878d133}
+.open:hover{filter:brightness(1.07);transform:translateY(-1px)}
+.empty{background:#fff;border:1px dashed #cbd8e7;border-radius:18px;padding:36px;text-align:center;color:var(--muted)}
+.pagination{display:flex;justify-content:center;align-items:center;gap:12px;margin:34px 0}
+.pagination button{border:1px solid var(--line);background:#fff;color:#53657a;border-radius:14px;padding:13px 20px;font-weight:750}.pagination .current{background:#0866b7;color:#fff;border-color:#0866b7;min-width:52px}
+.follow{display:flex;align-items:center;justify-content:space-between;gap:18px;background:linear-gradient(105deg,#062b5b,#0a4384);color:#fff;border-radius:22px;padding:20px 26px;margin:42px 0 0}
+.follow-text{font-size:19px;font-weight:850;display:flex;align-items:center;gap:17px}.follow-text .bell{font-size:28px;border-right:2px solid #fff;padding-right:18px}
+.whatsapp{background:var(--gold);color:#152b49;text-decoration:none;font-weight:900;border-radius:14px;padding:15px 20px;white-space:nowrap}
+footer{background:linear-gradient(110deg,#061d40,#0b3970);color:#fff;padding:30px 22px 22px}
+.foot-inner{max-width:1240px;margin:auto;display:grid;grid-template-columns:220px 1fr 1fr;align-items:center;gap:28px}
+.foot-inner img{width:175px;max-height:85px;object-fit:contain;background:#fff;border-radius:8px;padding:5px}
+.foot-copy{border-left:3px solid #fff;padding-left:28px;line-height:1.55}.foot-social{border-left:3px solid #fff;padding-left:28px}.socials{display:flex;gap:12px;margin-top:12px}.socials a{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#0878d1;color:white;text-decoration:none;font-weight:900}.copyright{max-width:1240px;margin:22px auto 0;border-top:1px solid #ffffff50;padding-top:18px;text-align:center;color:#e1eafa}
+.modal{position:fixed;inset:0;z-index:9999;background:#06172cdb;display:grid;place-items:center;padding:14px}
+.dialog{width:min(820px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:20px;padding:24px;color:#253c57}
+.close{float:right;border:0;border-radius:50%;width:40px;height:40px;background:#edf2f8;font-size:24px;cursor:pointer}
+.dialog h2{font-size:clamp(24px,4vw,34px);color:var(--navy);line-height:1.2;margin:14px 48px 14px 0}
+.dialog img{width:100%;max-height:420px;object-fit:contain;background:#edf2f8;border-radius:14px;margin:10px 0 18px}
+.body{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.8;color:#354b64;font-size:16px}
+@media(min-width:1050px){.grid{grid-template-columns:1fr 1fr}.card{grid-template-columns:1fr;gap:0;padding:14px}.cover{min-height:220px;max-height:250px}.cover img{min-height:220px;max-height:250px}.copy{padding:18px 8px 8px}.copy h2{font-size:22px}.excerpt{font-size:14px}}
+@media(max-width:720px){.site-head{min-height:82px;padding:10px 14px;gap:10px}.brand{gap:11px}.brand img{width:112px;max-height:65px}.brand-line{height:52px;width:3px}.brand-copy{font-size:13px}.round{width:43px;height:43px;font-size:19px}.hero{min-height:260px}.hero-inner{padding:36px 20px}.hero h1{max-width:500px}.hero:after{right:-250px;opacity:.4}.filters{grid-template-columns:1fr;gap:10px}.input-wrap{height:54px}.card{grid-template-columns:1fr;gap:0;padding:12px;border-radius:19px}.cover{min-height:0;height:auto;aspect-ratio:16/9}.cover img{min-height:0;height:100%;max-height:none}.copy{padding:15px 5px 5px}.copy h2{font-size:22px}.excerpt{font-size:14px;margin-bottom:17px}.open{padding:13px 18px}.follow{align-items:flex-start;flex-direction:column;padding:19px}.follow-text{font-size:16px}.whatsapp{width:100%;text-align:center}.foot-inner{grid-template-columns:1fr;gap:18px}.foot-inner img{width:145px}.foot-copy,.foot-social{border-left:0;border-top:1px solid #ffffff60;padding:15px 0 0}.copyright{font-size:12px}}
 </style>
 </head>
 <body>
-<header class="top">
- <div class="topline"><div class="brand">APSAN, LDA</div><a class="back" href="index.html">← Voltar à página principal</a></div>
- <h1>Publicações da empresa</h1>
- <p class="lead">Acompanhe as notícias, novidades, actividades e comunicados oficiais da APSAN, LDA.</p>
+<header class="site-head">
+ <div class="brand"><img src="https://raw.githubusercontent.com/apsanlda1-ctrl/APSAN-LDA/main/public/assets/logo.png" alt="APSAN, LDA"><span class="brand-line"></span><div class="brand-copy">Soluções Integradas<br>de Serviços entre<br><strong>Angola e Namíbia</strong></div></div>
+ <div class="head-actions"><button class="round" aria-label="Pesquisar" onclick="document.getElementById('search').focus()">⌕</button><button class="round" aria-label="Menu" onclick="location.href='index.html'">☰</button></div>
 </header>
+<section class="hero"><div class="hero-inner"><div class="eyebrow">APSAN, LDA · Informação oficial</div><h1>Publicações da <span>APSAN</span></h1><p>Notícias, novidades, serviços e actividades da nossa empresa.</p><div class="hero-count">▤ <span id="heroCount">A carregar publicações…</span></div></div></section>
 <main>
- <div class="tools"><div class="count" id="count">A carregar publicações…</div><input class="search" id="search" type="search" placeholder="Pesquisar publicações…"></div>
- <div class="grid" id="grid"></div>
+ <div class="filters">
+  <label class="input-wrap"><span>⌕</span><input id="search" type="search" placeholder="Pesquisar publicações…" aria-label="Pesquisar publicações"></label>
+  <label class="input-wrap"><span>▽</span><select id="category" aria-label="Filtrar categoria"><option value="">Todas as categorias</option></select></label>
+ </div>
+ <div id="grid" class="grid"><div class="empty">A carregar publicações…</div></div>
+ <div class="pagination" id="pagination" hidden><button id="prev">« Anterior</button><button class="current" id="pageNum">1</button><button id="next">Seguinte »</button></div>
+ <section class="follow"><div class="follow-text"><span class="bell">♧</span>Receba as nossas publicações<br>em primeira mão!</div><a class="whatsapp" href="https://wa.me/244944403093?text=Ol%C3%A1%2C%20gostaria%20de%20acompanhar%20as%20publica%C3%A7%C3%B5es%20da%20APSAN." target="_blank" rel="noopener">◉ &nbsp; Siga-nos no WhatsApp</a></section>
 </main>
-<footer>© APSAN, LDA — Agência de Prestação de Serviços entre Angola e Namíbia.</footer>
+<footer><div class="foot-inner"><img src="https://raw.githubusercontent.com/apsanlda1-ctrl/APSAN-LDA/main/public/assets/logo.png" alt="APSAN, LDA"><div class="foot-copy"><strong>APSAN, LDA</strong><br>A Prestadora de Serviços<br>entre Angola e Namíbia</div><div class="foot-social"><strong>Siga-nos:</strong><div class="socials"><a href="https://wa.me/244944403093" aria-label="WhatsApp">W</a><a href="https://www.facebook.com/" aria-label="Facebook">f</a><a href="https://www.youtube.com/" aria-label="YouTube">▶</a></div></div></div><div class="copyright">© 2026 APSAN, LDA. Todos os direitos reservados.</div></footer>
 <script>
 (function(){
 "use strict";
 const API="https://api.github.com/repos/mateus-max/Website-Management/contents/";
 const RAW="https://raw.githubusercontent.com/mateus-max/Website-Management/main/";
 const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-function parse(t){const m=t.match(/^---\s*\r?\n([\s\S]*?)\r?\n---\s*\r?\n?([\s\S]*)$/),d={};if(!m)return {body:t};m[1].split(/\r?\n/).forEach(line=>{const x=line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);if(!x)return;let v=x[2].trim();try{v=JSON.parse(v)}catch(_){}d[x[1]]=v});d.body=m[2]||"";return d}
-function coverUrl(v){if(!v)return "";if(v.startsWith("http://")||v.startsWith("https://")||v.startsWith("//")||v.startsWith("data:"))return v;return RAW+"public/"+v.replace(/^\/+/, "")}
+function parse(t){const m=t.match(/^---\s*\r?\n([\s\S]*?)\r?\n---\s*\r?\n?([\s\S]*)$/),d={};if(!m)return{body:t};m[1].split(/\r?\n/).forEach(line=>{const x=line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);if(!x)return;let v=x[2].trim();try{v=JSON.parse(v)}catch(_){}d[x[1]]=v});d.body=m[2]||"";return d}
+function imageUrl(v){if(!v)return"";if(v.startsWith("http://")||v.startsWith("https://")||v.startsWith("//")||v.startsWith("data:"))return v;return RAW+"public/"+v.replace(/^\/+/, "")}
 function plain(s){return String(s||"").replace(/!\[([^\]]*)\]\([^)]+\)/g,"$1").replace(/\[([^\]]+)\]\(([^)]+)\)/g,"$1").replace(/[#*_>`]/g,"").replace(/\s+/g," ").trim()}
-let posts=[];
-function render(){const q=document.getElementById("search").value.trim().toLowerCase();const rows=posts.filter(p=>[p.title,p.category,p.excerpt,p.body].join(" ").toLowerCase().includes(q));document.getElementById("count").textContent=rows.length+" publicação(ões)";document.getElementById("grid").innerHTML=rows.length?rows.map((p,i)=>{const img=coverUrl(p.coverImage||p.image),desc=p.excerpt||plain(p.body).slice(0,170);return '<article class="card"><div class="cover">'+(img?'<img src="'+esc(img)+'" alt="'+esc(p.title)+'" loading="lazy">':"")+'</div><div class="copy"><span class="tag">'+esc(p.category||"APSAN")+'</span><div class="meta">'+esc(p.date||"APSAN, LDA")+'</div><h2>'+esc(p.title||"Publicação")+'</h2><p class="excerpt">'+esc(desc)+'</p><button class="open" data-open="'+i+'">Ler publicação →</button></div></article>'}).join(""):'<div class="empty">Não foram encontradas publicações.</div>';document.querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>show(rows[Number(b.dataset.open)]))}
-function show(p){const m=document.createElement("div");m.className="modal";const img=coverUrl(p.coverImage||p.image);m.innerHTML='<article class="dialog"><button class="close" aria-label="Fechar">×</button><div class="meta">'+esc(p.category||"APSAN")+' · '+esc(p.date||"")+'</div><h2>'+esc(p.title||"Publicação APSAN")+'</h2>'+(img?'<img src="'+esc(img)+'" alt="'+esc(p.title||"")+'">':"")+'<div class="body">'+esc(p.body||p.excerpt||"")+'</div></article>';document.body.appendChild(m);document.body.style.overflow="hidden";const close=()=>{m.remove();document.body.style.overflow=""};m.querySelector(".close").onclick=close;m.onclick=e=>{if(e.target===m)close()}}
-async function init(){try{const r=await fetch(API+"content/posts?ref=main&v="+Date.now(),{cache:"no-store"});if(!r.ok)throw Error("Não foi possível carregar as publicações.");const files=await r.json();const list=await Promise.all(files.filter(f=>f.type==="file"&&/\.md$/i.test(f.name)).map(async f=>{const x=await fetch(RAW+"content/posts/"+encodeURIComponent(f.name)+"?v="+Date.now(),{cache:"no-store"});if(!x.ok)return null;return parse(await x.text())}));posts=list.filter(p=>p&&String(p.published).toLowerCase()==="true").sort((a,b)=>String(b.date||"").localeCompare(String(a.date||"")));render()}catch(e){document.getElementById("count").textContent="Publicações";document.getElementById("grid").innerHTML='<div class="empty">Não foi possível carregar as publicações neste momento. Tente novamente mais tarde.</div>';console.error(e)}}
-document.getElementById("search").addEventListener("input",render);init();
+let posts=[],page=1;const perPage=6;
+function filtered(){const q=document.getElementById("search").value.toLowerCase().trim(),cat=document.getElementById("category").value;return posts.filter(p=>(!cat||p.category===cat)&&[p.title,p.category,p.excerpt,p.body].join(" ").toLowerCase().includes(q))}
+function openPost(p){const m=document.createElement("div");m.className="modal";const img=imageUrl(p.coverImage||p.image);m.innerHTML='<article class="dialog"><button class="close" aria-label="Fechar">×</button><div class="tag">'+esc(p.category||"APSAN")+'</div><div class="date">▣ '+esc(p.date||"")+'</div><h2>'+esc(p.title||"Publicação APSAN")+'</h2>'+(img?'<img src="'+esc(img)+'" alt="'+esc(p.title||"")+'">':"")+'<div class="body">'+esc(p.body||p.excerpt||"")+'</div></article>';document.body.appendChild(m);document.body.style.overflow="hidden";const close=()=>{m.remove();document.body.style.overflow=""};m.querySelector(".close").onclick=close;m.onclick=e=>{if(e.target===m)close()}}
+function render(){const rows=filtered(),pages=Math.max(1,Math.ceil(rows.length/perPage));page=Math.min(page,pages);const shown=rows.slice((page-1)*perPage,page*perPage);document.getElementById("heroCount").textContent=posts.length+" publicação(ões)";const grid=document.getElementById("grid");if(!shown.length){grid.innerHTML='<div class="empty">Não foram encontradas publicações com esses critérios.</div>'}else{grid.innerHTML=shown.map((p,i)=>{const img=imageUrl(p.coverImage||p.image),desc=p.excerpt||plain(p.body).slice(0,190);return '<article class="card"><div class="cover">'+(img?'<img src="'+esc(img)+'" alt="'+esc(p.title||"")+'" loading="lazy" onerror="this.style.display=\'none\'">':"")+'</div><div class="copy"><span class="tag">'+esc(p.category||"Publicação")+'</span><div class="date">▣ '+esc(p.date||"APSAN, LDA")+'</div><h2>'+esc(p.title||"Publicação APSAN")+'</h2><p class="excerpt">'+esc(desc)+'</p><button class="open" data-open="'+i+'">Ler publicação <span>→</span></button></div></article>'}).join("");grid.querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>openPost(shown[Number(b.dataset.open)]))}
+const pag=document.getElementById("pagination");pag.hidden=rows.length<=perPage;document.getElementById("pageNum").textContent=page;document.getElementById("prev").disabled=page===1;document.getElementById("next").disabled=page===pages}
+async function init(){try{const r=await fetch(API+"content/posts?ref=main&v="+Date.now(),{cache:"no-store"});if(!r.ok)throw Error("Falha ao consultar o repositório de publicações.");const files=await r.json();const data=await Promise.all(files.filter(f=>f.type==="file"&&/\.md$/i.test(f.name)).map(async f=>{const x=await fetch(RAW+"content/posts/"+encodeURIComponent(f.name)+"?v="+Date.now(),{cache:"no-store"});if(!x.ok)return null;return parse(await x.text())}));posts=data.filter(p=>p&&String(p.published).toLowerCase()==="true").sort((a,b)=>String(b.date||"").localeCompare(String(a.date||"")));const cats=[...new Set(posts.map(p=>p.category).filter(Boolean))];document.getElementById("category").innerHTML='<option value="">Todas as categorias</option>'+cats.map(c=>'<option value="'+esc(c)+'">'+esc(c)+'</option>').join("");render()}catch(e){document.getElementById("heroCount").textContent="Publicações";document.getElementById("grid").innerHTML='<div class="empty">Não foi possível carregar as publicações neste momento. Tente novamente mais tarde.</div>';console.error(e)}}
+document.getElementById("search").addEventListener("input",()=>{page=1;render()});document.getElementById("category").addEventListener("change",()=>{page=1;render()});document.getElementById("prev").onclick=()=>{page--;render()};document.getElementById("next").onclick=()=>{page++;render()};init();
 })();
 </script>
-</body>
-</html>
+</body></html>
