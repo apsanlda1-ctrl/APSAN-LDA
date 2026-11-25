@@ -1938,6 +1938,8 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
       <li><a class="nav-tab" href="#extras" onclick="switchTab('extras', event)"><i class="fas fa-concierge-bell"></i> Serviços Extras</a></li>
       <li><a class="nav-tab" href="#about" onclick="switchTab('about', event)"><i class="fas fa-building"></i> Empresa</a></li>
       <li><a class="nav-tab" href="publicacoes.html"><i class="far fa-newspaper"></i> Publicações</a></li>
+      <li><a class="nav-tab" href="#apsan-products-public" data-apsan-scroll="apsan-products-public"><i class="fas fa-store"></i> Produtos</a></li>
+      <li><a class="nav-tab" href="#apsan-managed-videos" data-apsan-scroll="apsan-managed-videos"><i class="fab fa-youtube"></i> Vídeos</a></li>
       <li><a class="nav-tab" href="#contact" onclick="switchTab('contact', event)"><i class="fas fa-phone"></i> Contacto</a></li>
     </ul>
   </nav>
@@ -1996,6 +1998,25 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
       <div><i class="fas fa-handshake"></i><strong>Experiência<br>entre Angola e Namíbia</strong></div>
     </section>
 
+    <section class="apsan-home-content-links" aria-label="Conteúdos publicados pela APSAN">
+      <div class="apsan-home-content-heading"><span>EXPLORE A APSAN</span><h2>Consulte os nossos conteúdos</h2><p>Aceda aos anúncios, novidades e vídeos publicados pela nossa equipa.</p></div>
+      <div class="apsan-home-content-grid">
+        <a class="apsan-home-content-card" href="publicacoes.html"><span class="apsan-home-content-icon"><i class="far fa-newspaper"></i></span><span class="apsan-home-content-text"><strong>Publicações</strong><small>Notícias, novidades e comunicados</small></span><b>Ver publicações <i class="fas fa-arrow-right"></i></b></a>
+        <a class="apsan-home-content-card" href="#apsan-products-public" data-apsan-scroll="apsan-products-public"><span class="apsan-home-content-icon"><i class="fas fa-store"></i></span><span class="apsan-home-content-text"><strong>Produtos e serviços</strong><small>Consulte os anúncios disponíveis</small></span><b>Ver produtos <i class="fas fa-arrow-right"></i></b></a>
+        <a class="apsan-home-content-card" href="#apsan-managed-videos" data-apsan-scroll="apsan-managed-videos"><span class="apsan-home-content-icon"><i class="fab fa-youtube"></i></span><span class="apsan-home-content-text"><strong>Vídeos</strong><small>Assista aos vídeos da APSAN</small></span><b>Ver vídeos <i class="fas fa-arrow-right"></i></b></a>
+      </div>
+    </section>
+    <style id="apsan-home-content-links-css">
+      .apsan-home-content-links{max-width:1200px;margin:34px auto 12px;padding:30px 18px 12px}
+      .apsan-home-content-heading{text-align:center;margin-bottom:22px}.apsan-home-content-heading>span{font-size:11px;font-weight:900;letter-spacing:2px;color:#bd8c00}.apsan-home-content-heading h2{font-size:clamp(24px,3vw,34px);color:#082d60;margin:7px 0}.apsan-home-content-heading p{color:#65758a;font-size:15px}
+      .apsan-home-content-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+      .apsan-home-content-card{min-height:172px;display:flex;flex-direction:column;align-items:flex-start;gap:13px;padding:21px;border:1px solid #dce5ef;border-radius:18px;background:linear-gradient(145deg,#fff,#f3f7fc);box-shadow:0 10px 25px rgba(7,38,77,.07);text-decoration:none!important;transition:transform .2s,box-shadow .2s}
+      .apsan-home-content-card:hover{transform:translateY(-4px);box-shadow:0 15px 30px rgba(7,38,77,.12)}
+      .apsan-home-content-icon{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:#e6effa;color:#0756a6;font-size:21px}
+      .apsan-home-content-text{display:grid;gap:5px}.apsan-home-content-text strong{font-size:18px;color:#0a2d59}.apsan-home-content-text small{font-size:13px;color:#697b90;line-height:1.4}
+      .apsan-home-content-card>b{margin-top:auto;color:#0869bd;font-size:13px}.apsan-home-content-card>b i{margin-left:5px}
+      @media(max-width:720px){.apsan-home-content-links{padding:25px 14px 8px;margin:18px auto}.apsan-home-content-grid{grid-template-columns:1fr;gap:11px}.apsan-home-content-card{min-height:0;display:grid;grid-template-columns:46px 1fr;align-items:center;padding:15px}.apsan-home-content-card>b{grid-column:2;margin-top:-4px}}
+    </style>
     
   </div>
 </section>
@@ -3419,7 +3440,17 @@ body{background:#f5f8fb!important;color:#082b55!important;font-family:Arial,Helv
 
 
 
-<script type="module" src="apsan-products.js?v=5"></script>
+<script type="module" src="apsan-products.js?v=6"></script>
 
+<script id="apsan-home-content-navigation">
+document.addEventListener("click",function(e){
+ const a=e.target.closest("[data-apsan-scroll]");if(!a)return;
+ e.preventDefault();const id=a.getAttribute("data-apsan-scroll");
+ const target=document.getElementById(id);
+ if(target){target.scrollIntoView({behavior:"smooth",block:"start"});return;}
+ const section=document.getElementById("apsan-managed-videos");
+ if(id==="apsan-managed-videos"&&section){section.scrollIntoView({behavior:"smooth",block:"start"});return;}
+});
+</script>
 </body>
 </html>
