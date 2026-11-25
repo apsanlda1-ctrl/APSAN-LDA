@@ -1938,10 +1938,8 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
       <li><a class="nav-tab" href="#extras" onclick="switchTab('extras', event)"><i class="fas fa-concierge-bell"></i> Serviços Extras</a></li>
       <li><a class="nav-tab" href="#about" onclick="switchTab('about', event)"><i class="fas fa-building"></i> Empresa</a></li>
       <li><a class="nav-tab" href="publicacoes.html"><i class="far fa-newspaper"></i> Publicações</a></li>
-      <li><a class="nav-tab" href="#apsan-products-public" data-apsan-jump="apsan-products-public"><i class="fas fa-store"></i> Produtos</a></li>
-      <li><a class="nav-tab" href="#apsan-managed-videos" data-apsan-jump="apsan-managed-videos"><i class="fab fa-youtube"></i> Vídeos</a></li>
-      <li><a class="nav-tab" href="#apsan-products-public" data-apsan-scroll="apsan-products-public"><i class="fas fa-store"></i> Produtos</a></li>
-      <li><a class="nav-tab" href="#apsan-managed-videos" data-apsan-scroll="apsan-managed-videos"><i class="fab fa-youtube"></i> Vídeos</a></li>
+      <li><a class="nav-tab" href="produtos.html"><i class="fas fa-store"></i> Produtos</a></li>
+      <li><a class="nav-tab" href="videos.html"><i class="fab fa-youtube"></i> Vídeos</a></li>
       <li><a class="nav-tab" href="#contact" onclick="switchTab('contact', event)"><i class="fas fa-phone"></i> Contacto</a></li>
     </ul>
   </nav>
@@ -2003,8 +2001,8 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
       <h2>Explore os conteúdos da APSAN</h2><p>Aceda às publicações, produtos e vídeos disponíveis.</p>
       <div class="apsan-home-content-grid">
         <a href="publicacoes.html"><i class="far fa-newspaper"></i><strong>Publicações</strong><span>Ver novidades publicadas</span><b>Ver publicações →</b></a>
-        <a href="#apsan-products-public" data-apsan-jump="apsan-products-public"><i class="fas fa-store"></i><strong>Produtos e serviços</strong><span>Consultar anúncios disponíveis</span><b>Ver produtos →</b></a>
-        <a href="#apsan-managed-videos" data-apsan-jump="apsan-managed-videos"><i class="fab fa-youtube"></i><strong>Vídeos</strong><span>Assistir aos vídeos da APSAN</span><b>Ver vídeos →</b></a>
+        <a href="produtos.html"><i class="fas fa-store"></i><strong>Produtos e serviços</strong><span>Consultar anúncios disponíveis</span><b>Ver produtos →</b></a>
+        <a href="videos.html"><i class="fab fa-youtube"></i><strong>Vídeos</strong><span>Assistir aos vídeos da APSAN</span><b>Ver vídeos →</b></a>
       </div>
     </section>
     <style>
@@ -2020,8 +2018,8 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
       <div class="apsan-home-content-heading"><span>EXPLORE A APSAN</span><h2>Consulte os nossos conteúdos</h2><p>Aceda aos anúncios, novidades e vídeos publicados pela nossa equipa.</p></div>
       <div class="apsan-home-content-grid">
         <a class="apsan-home-content-card" href="publicacoes.html"><span class="apsan-home-content-icon"><i class="far fa-newspaper"></i></span><span class="apsan-home-content-text"><strong>Publicações</strong><small>Notícias, novidades e comunicados</small></span><b>Ver publicações <i class="fas fa-arrow-right"></i></b></a>
-        <a class="apsan-home-content-card" href="#apsan-products-public" data-apsan-scroll="apsan-products-public"><span class="apsan-home-content-icon"><i class="fas fa-store"></i></span><span class="apsan-home-content-text"><strong>Produtos e serviços</strong><small>Consulte os anúncios disponíveis</small></span><b>Ver produtos <i class="fas fa-arrow-right"></i></b></a>
-        <a class="apsan-home-content-card" href="#apsan-managed-videos" data-apsan-scroll="apsan-managed-videos"><span class="apsan-home-content-icon"><i class="fab fa-youtube"></i></span><span class="apsan-home-content-text"><strong>Vídeos</strong><small>Assista aos vídeos da APSAN</small></span><b>Ver vídeos <i class="fas fa-arrow-right"></i></b></a>
+        <a class="apsan-home-content-card" href="produtos.html"><span class="apsan-home-content-icon"><i class="fas fa-store"></i></span><span class="apsan-home-content-text"><strong>Produtos e serviços</strong><small>Consulte os anúncios disponíveis</small></span><b>Ver produtos <i class="fas fa-arrow-right"></i></b></a>
+        <a class="apsan-home-content-card" href="videos.html"><span class="apsan-home-content-icon"><i class="fab fa-youtube"></i></span><span class="apsan-home-content-text"><strong>Vídeos</strong><small>Assista aos vídeos da APSAN</small></span><b>Ver vídeos <i class="fas fa-arrow-right"></i></b></a>
       </div>
     </section>
     <style id="apsan-home-content-links-css">
@@ -3458,17 +3456,7 @@ body{background:#f5f8fb!important;color:#082b55!important;font-family:Arial,Helv
 
 
 
-<script type="module" src="apsan-products.js?v=7"></script>
+<script type="module" src="apsan-products.js?v=8"></script>
 
-<script id="apsan-home-content-navigation">
-document.addEventListener("click",function(e){
- const a=e.target.closest("[data-apsan-scroll]");if(!a)return;
- e.preventDefault();const id=a.getAttribute("data-apsan-scroll");
- const target=document.getElementById(id);
- if(target){target.scrollIntoView({behavior:"smooth",block:"start"});return;}
- const section=document.getElementById("apsan-managed-videos");
- if(id==="apsan-managed-videos"&&section){section.scrollIntoView({behavior:"smooth",block:"start"});return;}
-});
-</script>
 </body>
 </html>
