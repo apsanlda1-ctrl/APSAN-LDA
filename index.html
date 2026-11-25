@@ -1904,7 +1904,13 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
 @media (prefers-reduced-motion:reduce){
   .apsan-form-greeting-media img{animation:none!important}
 }
-</style></head>
+</style><style id="apsan-publications-cta-css">
+.apsan-hero-buttons .apsan-publications-cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 22px;border-radius:999px;background:#0b3b73;color:#fff!important;border:2px solid #0b3b73;text-decoration:none!important;font-weight:800;font-size:14px;box-shadow:0 8px 22px rgba(6,40,82,.18);transition:transform .2s ease,background .2s ease}
+.apsan-hero-buttons .apsan-publications-cta:hover{background:#075da8;border-color:#075da8;transform:translateY(-2px)}
+.apsan-hero-buttons .apsan-publications-cta i{font-size:17px}
+@media(max-width:700px){.apsan-hero-buttons .apsan-publications-cta{min-height:46px;padding:0 16px;font-size:12px}}
+</style>
+</head>
 <body data-theme="light">
 <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
 <div aria-label="Informações importantes da APSAN, LDA" class="apsan-info-ticker">
@@ -1931,7 +1937,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
       <li><a class="nav-tab" href="#services" onclick="switchTab('services', event)"><i class="fas fa-layer-group"></i> Serviços <i class="fas fa-chevron-down apsan-nav-chevron"></i></a></li>
       <li><a class="nav-tab" href="#extras" onclick="switchTab('extras', event)"><i class="fas fa-concierge-bell"></i> Serviços Extras</a></li>
       <li><a class="nav-tab" href="#about" onclick="switchTab('about', event)"><i class="fas fa-building"></i> Empresa</a></li>
-      <li><a class="nav-tab" href="#home-posts" onclick="scrollToHomePosts(event)"><i class="far fa-newspaper"></i> Notícias</a></li>
+      <li><a class="nav-tab" href="publicacoes.html"><i class="far fa-newspaper"></i> Publicações</a></li>
       <li><a class="nav-tab" href="#contact" onclick="switchTab('contact', event)"><i class="fas fa-phone"></i> Contacto</a></li>
     </ul>
   </nav>
@@ -1945,6 +1951,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
         <p>Acompanhamento hospitalar, tradução, logística e tecnologia com segurança, profissionalismo e eficiência.</p>
         <div class="apsan-hero-buttons">
           <button class="apsan-btn-gold" onclick="switchTab('services', event)">Conheça os nossos serviços <i class="fas fa-arrow-right"></i></button>
+          <a class="apsan-publications-cta" href="publicacoes.html"><i class="far fa-newspaper"></i> Ver publicações</a>
           <a class="apsan-btn-outline apsan-whatsapp-icon-only" href="https://wa.me/244944403093" target="_blank" rel="noopener noreferrer" aria-label="Fale connosco pelo WhatsApp" title="Fale connosco pelo WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
         </div>
       </div>
@@ -3412,7 +3419,6 @@ body{background:#f5f8fb!important;color:#082b55!important;font-family:Arial,Helv
 
 
 
-<script src="apsan-editorial.js?v=2" defer></script>
 <script type="module" src="apsan-products.js?v=4"></script>
 
 </body>
