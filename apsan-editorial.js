@@ -11,7 +11,7 @@ function parse(text){
  m[1].split(/\r?\n/).forEach(line=>{const x=line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);if(!x)return;let v=x[2].trim();try{v=JSON.parse(v)}catch(_){}d[x[1]]=v});
  d.body=m[2]||"";return d;
 }
-function asset(v){if(!v)return "";if(/^(https?:)?\/\//i.test(v)||v.startsWith("data:"))return v;return RAW+"public/"+String(v).replace(/^\/+ /,"");}
+function asset(v){if(!v)return "";if(v.startsWith("http://")||v.startsWith("https://")||v.startsWith("//")||v.startsWith("data:"))return v;return RAW+"public/"+String(v).replace(/^\/+/, "");}
 function plain(s){return String(s||"").replace(/!\[([^\]]*)\]\([^)]+\)/g,"$1").replace(/\[([^\]]+)\]\(([^)]+)\)/g,"$1").replace(/[#*_>`]/g,"").replace(/\s+/g," ").trim()}
 function styles(){
  if(document.getElementById("apsanEditorialCss"))return;
