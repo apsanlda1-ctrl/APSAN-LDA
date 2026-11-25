@@ -96,9 +96,27 @@ function showVideos(data){videos=Object.entries(data||{}).map(([key,v])=>({...v,
 try{const cached=localStorage.getItem("apsanVideosPublicCache");if(cached){const parsed=JSON.parse(cached);if(parsed&&typeof parsed==="object")showVideos(parsed)}else{featured.innerHTML='<div class="empty">A preparar o canal…</div>';recent.innerHTML=""}}catch(e){console.warn("Cache local indisponível",e)}
 document.getElementById("searchForm").addEventListener("submit",e=>{e.preventDefault();render()});search.addEventListener("input",render);
 document.getElementById("categories").addEventListener("click",e=>{const b=e.target.closest("[data-category]");if(!b)return;category=b.dataset.category;document.querySelectorAll(".cat").forEach(x=>x.classList.toggle("active",x===b));render()});
-const videosEndpoint=cfg.databaseURL.replace(/\/$/,"")+"/apsanVideos.json";
-let loadingRequest=false;
-async function fetchPublishedVideos(){if(loadingRequest)return;loadingRequest=true;const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),10000);try{const response=await fetch(videosEndpoint,{method:"GET",cache:"no-store",signal:controller.signal});if(!response.ok)throw new Error("Firebase respondeu HTTP "+response.status);const data=await response.json();const safeData=data&&typeof data==="object"?data:{};try{localStorage.setItem("apsanVideosPublicCache",JSON.stringify(safeData));localStorage.setItem("apsanVideosCacheTime",String(Date.now()))}catch(e){console.warn("Cache local indisponível",e)}showVideos(safeData)}catch(err){console.error("Falha ao obter vídeos APSAN:",err);if(!videos.length){featured.innerHTML='<div class="error">Não foi possível obter os vídeos agora. Verifique a ligação à internet e se a leitura de apsanVideos está pública no Firebase.</div>';recent.innerHTML=""}}finally{clearTimeout(timeout);loadingRequest=false}}
-fetchPublishedVideos();
-setInterval(fetchPublishedVideos,20000);
+// Carregamento restaurado com o mesmo método Firebase onValue da versão que apresentava os vídeos.
+let videosReceived=false;
+const videosFallback=setTimeout(()=>{
+  if(!videosReceived && !videos.length){
+    featured.innerHTML='<div class="error">O Firebase ainda não respondeu. Confirme a leitura pública de apsanVideos e a ligação à internet.</div>';
+    recent.innerHTML="";
+  }
+},12000);
+onValue(ref(db,"apsanVideos"),snapshot=>{
+  videosReceived=true;
+  clearTimeout(videosFallback);
+  const data=snapshot.val()||{};
+  try{localStorage.setItem("apsanVideosPublicCache",JSON.stringify(data));}catch(e){console.warn("Cache local indisponível",e);}
+  showVideos(data);
+},error=>{
+  videosReceived=true;
+  clearTimeout(videosFallback);
+  console.error("APSAN videos Firebase:",error);
+  if(!videos.length){
+    featured.innerHTML='<div class="error">Não foi possível carregar os vídeos: '+esc(error.message||"erro de ligação")+'. Confirme a regra de leitura pública de apsanVideos.</div>';
+    recent.innerHTML="";
+  }
+});
 </script></body></html>
