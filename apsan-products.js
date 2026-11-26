@@ -395,7 +395,7 @@ function render(){addStyles();const el=host();if(el.dataset.homeCarousel==="true
 function bindExpandable(root){root.querySelectorAll("[data-expand-text]").forEach(btn=>{btn.onclick=()=>{const box=btn.closest(".aps-expandable-text"),span=box&&box.querySelector(".aps-expand-content");if(!box||!span)return;const expanded=box.dataset.expanded==="true",full=btn.dataset.expandText,limit=Number(btn.dataset.limit)||260;span.textContent=expanded?(full.slice(0,limit).trimEnd()+"…"):full;box.dataset.expanded=expanded?"false":"true";btn.setAttribute("aria-expanded",expanded?"false":"true");btn.innerHTML=expanded?'Ver mais <i class="fas fa-chevron-down"></i>':'Ver menos <i class="fas fa-chevron-up"></i>'}})}
 function favoriteIds(){try{return JSON.parse(localStorage.getItem("apsanFavoriteProducts")||"[]")}catch{return []}}
 function apsanProductShareUrl(id){
- const url=new URL("/produtos.html",window.location.origin);
+ const url=new URL("/",window.location.origin);
  url.searchParams.set("produto",String(id));
  return url.href;
 }
