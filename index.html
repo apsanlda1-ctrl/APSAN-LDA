@@ -1924,7 +1924,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
       <button class="apsan-round-action" type="button" aria-label="Explorar serviços" onclick="switchTab('services', event)"><i class="fas fa-search"></i></button>
       <button class="apsan-round-action apsan-notification-action" type="button" aria-label="Ver novidades" onclick="toggleApsanNews(event)"><i class="far fa-bell"></i><span></span></button>
       <a class="apsan-client-button" href="#client-area" onclick="switchTab('client-area', event)"><i class="fas fa-user"></i> Área do Cliente</a>
-      <button class="menu-toggle-mobile apsan-mobile-menu" onclick="toggleMobileMenu()" title="Abrir Menu"><i class="fas fa-ellipsis-v" id="menuIcon"></i></button>
+      <button type="button" class="menu-toggle-mobile apsan-mobile-menu" id="apsanExploreMenuButton" onclick="toggleMobileMenu(event)" title="Explorar a plataforma" aria-label="Abrir menu de navegação" aria-controls="navLinks" aria-expanded="false"><i class="fas fa-ellipsis-v" id="menuIcon"></i></button>
     </div>
   </div>
   <nav class="apsan-main-nav" aria-label="Navegação principal">
@@ -1937,6 +1937,8 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
       <li><a class="nav-tab" href="produtos.html"><i class="fas fa-store"></i> Produtos</a></li>
       <li><a class="nav-tab" href="videos.html"><i class="fab fa-youtube"></i> Vídeos</a></li>
       <li><a class="nav-tab" href="#contact" onclick="switchTab('contact', event)"><i class="fas fa-phone"></i> Contacto</a></li>
+      <li class="apsan-menu-booking-item"><a class="nav-tab apsan-menu-booking-link" href="#marcar-consulta" onclick="event.preventDefault(); closeApsanExploreMenu(); openApsanMedicalBooking();"><i class="fas fa-calendar-check"></i> Marcar Consulta Médica na Namíbia</a></li>
+      <li class="apsan-menu-client-item"><a class="nav-tab" href="#client-area" onclick="switchTab('client-area', event); closeApsanExploreMenu();"><i class="fas fa-user"></i> Área do Cliente</a></li>
     </ul>
   </nav>
 </header>
@@ -3558,6 +3560,79 @@ body{background:#f5f8fb!important;color:#082b55!important;font-family:Arial,Helv
 
 
 <script type="module" src="apsan-products.js?v=24"></script>
+
+
+<style id="apsan-explore-menu-v1">
+@media(max-width:760px){
+  .apsan-main-nav{position:relative!important;z-index:3005!important}
+  #navLinks.nav-links-clean{
+    display:none!important;position:fixed!important;top:calc(var(--apsan-menu-top, 86px))!important;
+    right:14px!important;left:auto!important;width:min(340px,calc(100vw - 28px))!important;
+    max-height:calc(100dvh - 110px)!important;height:auto!important;overflow-y:auto!important;
+    padding:12px!important;margin:0!important;gap:4px!important;flex-direction:column!important;
+    align-items:stretch!important;background:linear-gradient(155deg,#06284d,#003b70)!important;
+    border:1px solid rgba(255,255,255,.16)!important;border-radius:18px!important;
+    box-shadow:0 22px 55px rgba(0,18,42,.38)!important;z-index:3006!important;
+    opacity:0;transform:translateY(-8px) scale(.98);transform-origin:top right;
+    transition:opacity .18s ease,transform .18s ease;
+  }
+  #navLinks.nav-links-clean.mobile-active{
+    display:flex!important;right:14px!important;opacity:1;transform:translateY(0) scale(1);
+  }
+  #navLinks.nav-links-clean li{width:100%!important;margin:0!important;padding:0!important}
+  #navLinks.nav-links-clean a{
+    display:flex!important;align-items:center!important;gap:13px!important;width:100%!important;
+    min-height:46px!important;padding:11px 13px!important;border-radius:11px!important;
+    color:#fff!important;font-size:14px!important;font-weight:700!important;text-decoration:none!important;
+    white-space:normal!important;line-height:1.35!important;
+  }
+  #navLinks.nav-links-clean a i{width:20px!important;min-width:20px!important;text-align:center!important;color:#72c9f5!important}
+  #navLinks.nav-links-clean a:hover,#navLinks.nav-links-clean a:focus-visible,
+  #navLinks.nav-links-clean a.active{background:rgba(255,255,255,.12)!important;color:#fff!important;outline:none}
+  #navLinks .apsan-menu-booking-item{border-top:1px solid rgba(255,255,255,.15)!important;margin-top:5px!important;padding-top:7px!important}
+  #navLinks .apsan-menu-booking-link{background:linear-gradient(110deg,#d6ad45,#f0cf79)!important;color:#082b50!important}
+  #navLinks .apsan-menu-booking-link i{color:#082b50!important}
+  #navLinks .apsan-menu-client-item{border-top:1px solid rgba(255,255,255,.12)!important;margin-top:3px!important;padding-top:6px!important}
+  #apsanExploreMenuButton[aria-expanded="true"]{background:rgba(255,255,255,.18)!important}
+}
+@media(min-width:761px){.apsan-menu-booking-item,.apsan-menu-client-item{display:none!important}}
+</style>
+<script id="apsan-explore-menu-behaviour">
+(function(){
+  const menu=document.getElementById('navLinks');
+  const button=document.getElementById('apsanExploreMenuButton');
+  if(!menu||!button)return;
+  window.closeApsanExploreMenu=function(){
+    menu.classList.remove('mobile-active','active');
+    button.setAttribute('aria-expanded','false');
+  };
+  window.toggleMobileMenu=function(event){
+    if(event){event.preventDefault();event.stopPropagation();}
+    const opening=!menu.classList.contains('mobile-active');
+    if(opening){
+      menu.classList.add('mobile-active');
+      menu.classList.add('active');
+      button.setAttribute('aria-expanded','true');
+      const header=document.querySelector('.header-clean');
+      if(header){
+        const rect=header.getBoundingClientRect();
+        document.documentElement.style.setProperty('--apsan-menu-top',Math.max(8,Math.min(rect.bottom,window.innerHeight-100))+'px');
+      }
+    }else window.closeApsanExploreMenu();
+  };
+  menu.addEventListener('click',function(event){
+    if(event.target.closest('a'))window.closeApsanExploreMenu();
+  });
+  document.addEventListener('click',function(event){
+    if(!menu.classList.contains('mobile-active'))return;
+    if(!menu.contains(event.target)&&!button.contains(event.target))window.closeApsanExploreMenu();
+  });
+  document.addEventListener('keydown',function(event){
+    if(event.key==='Escape')window.closeApsanExploreMenu();
+  });
+  window.addEventListener('resize',window.closeApsanExploreMenu);
+})();
+</script>
 
 </body>
 </html>
