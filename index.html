@@ -2023,7 +2023,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
 <section id="apsan-medical-booking" class="apsan-medical-overlay" aria-hidden="true">
  <div class="apsan-medical-panel" role="dialog" aria-modal="true" aria-labelledby="apsanMedicalTitle">
   <button type="button" class="apsan-medical-close" onclick="closeApsanMedicalBooking()" aria-label="Fechar">×</button>
-  <header class="apsan-medical-header"><div class="apsan-medical-mark"><i class="fas fa-stethoscope"></i></div><div><span>APSAN, LDA · ASSISTÊNCIA MÉDICA</span><h2 id="apsanMedicalTitle">Marcar Consulta Médica na Namíbia</h2><p>Preencha os dados para solicitar a marcação. A equipa APSAN entrará em contacto pelo WhatsApp.</p></div><div class="apsan-medical-flag">🇳🇦</div></header>
+  <header class="apsan-medical-header"><div class="apsan-medical-mark"><i class="fas fa-stethoscope"></i></div><div class="apsan-medical-heading"><span>APSAN, LDA · ASSISTÊNCIA MÉDICA</span><h2 id="apsanMedicalTitle">Marcar Consulta Médica na Namíbia</h2><p>Preencha os dados para solicitar a marcação. A equipa APSAN entrará em contacto pelo WhatsApp.</p></div><div class="apsan-medical-illustrations" aria-hidden="true"><i class="fas fa-heartbeat"></i><i class="fas fa-user-md"></i><i class="fas fa-hospital"></i><i class="fas fa-pills"></i><span class="apsan-medical-flag">🇳🇦</span></div></header>
   <div class="apsan-medical-steps"><span class="active">1 <small>Dados do paciente</small></span><i></i><span>2 <small>Consulta e documentos</small></span><i></i><span>3 <small>Envio do pedido</small></span></div>
   <form id="apsanMedicalForm" class="apsan-medical-form">
    <section class="apsan-medical-section"><h3><i class="fas fa-user"></i> Dados do Paciente</h3>
@@ -2101,41 +2101,56 @@ function openApsanMedicalBooking(){const el=document.getElementById("apsan-medic
 function closeApsanMedicalBooking(){const el=document.getElementById("apsan-medical-booking");if(!el)return;el.classList.remove("open");el.setAttribute("aria-hidden","true");document.body.style.overflow=""}
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeApsanMedicalBooking()});
 document.getElementById("apsan-medical-booking")?.addEventListener("click",e=>{if(e.target.id==="apsan-medical-booking")closeApsanMedicalBooking()});
-document.getElementById("apsanMedicalForm")?.addEventListener("submit",async function(e){
- e.preventDefault();const f=e.currentTarget;if(!f.reportValidity())return;
- const fd=new FormData(f),history=f.elements.medicalHistory.files[0],proof=f.elements.paymentProof.files[0],max=10*1024*1024;
+document.getElementById("apsanMedicalForm")?.addEventListener("submit",function(e){
+ e.preventDefault();
+ const f=e.currentTarget;
+ if(!f.reportValidity())return;
+ const fd=new FormData(f);
+ const history=f.elements.medicalHistory.files[0];
+ const proof=f.elements.paymentProof.files[0];
+ const max=10*1024*1024;
  if(!history||!proof){alert("Carregue o histórico médico e o comprovativo de pagamento.");return}
  if(history.size>max||proof.size>max){alert("Cada ficheiro deve ter no máximo 10 MB.");return}
- const patient={name:fd.get("patientName"),age:fd.get("age"),sex:fd.get("sex"),phone:fd.get("phone"),email:fd.get("email")||"Não indicado",province:fd.get("province"),municipality:fd.get("municipality"),specialist:fd.get("specialist"),reason:fd.get("reason"),date:fd.get("date"),period:fd.get("period"),fee:"8.000 Kz"};
+ const patient={
+  name:fd.get("patientName"),age:fd.get("age"),sex:fd.get("sex"),
+  phone:fd.get("phone"),email:fd.get("email")||"Não indicado",
+  province:fd.get("province"),municipality:fd.get("municipality"),
+  specialist:fd.get("specialist"),reason:fd.get("reason"),
+  date:fd.get("date"),period:fd.get("period")
+ };
  const msg=`PEDIDO DE MARCAÇÃO DE CONSULTA MÉDICA NA NAMÍBIA — APSAN, LDA
 
-DADOS DO PACIENTE
-Nome: ${patient.name}
+DADOS COMPLETOS DO PACIENTE
+Nome completo: ${patient.name}
 Idade: ${patient.age}
 Sexo: ${patient.sex}
-WhatsApp: ${patient.phone}
+WhatsApp do cliente: ${patient.phone}
 E-mail: ${patient.email}
-Localização: ${patient.municipality}, ${patient.province}
+Província: ${patient.province}
+Município: ${patient.municipality}
 
-CONSULTA
+DADOS DA CONSULTA
 Especialidade: ${patient.specialist}
-Motivo: ${patient.reason}
+Motivo da consulta: ${patient.reason}
 Data pretendida: ${patient.date}
-Período: ${patient.period}
-
+Período preferencial: ${patient.period}
 Taxa de marcação: 8.000 Kz
+
+DOCUMENTOS SELECCIONADOS
 Histórico médico: ${history.name}
 Comprovativo de pagamento: ${proof.name}
 
-Solicito a confirmação do pedido e o envio das informações da clínica, horário e orientações.`;
- const files=[history,proof],shareData={title:"Pedido de consulta médica — APSAN",text:msg,files};
- const btn=f.querySelector(".apsan-medical-submit");btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> A preparar envio…';
- try{
-  if(navigator.canShare&&navigator.canShare({files})&&navigator.share){await navigator.share(shareData);alert("Partilha iniciada. Seleccione WhatsApp e confirme o envio para +244 944 40 30 93.");}
-  else{const url="https://wa.me/244944403093?text="+encodeURIComponent(msg+"\n\nNOTA: Enviarei os dois documentos anexados nesta conversa.");window.open(url,"_blank","noopener");alert("O WhatsApp foi aberto com os dados do pedido. Anexe manualmente o histórico médico e o comprovativo antes de enviar.");}
- }catch(err){if(err.name!=="AbortError")alert("Não foi possível abrir a partilha. Tente novamente.");}
- finally{btn.disabled=false;btn.innerHTML='<i class="fab fa-whatsapp"></i> Enviar pedido via WhatsApp';}
-});
+Solicito a confirmação da recepção deste pedido e o contacto com o paciente através do WhatsApp indicado: ${patient.phone}.`;
+ const btn=f.querySelector(".apsan-medical-submit");
+ btn.disabled=true;
+ btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> A abrir WhatsApp…';
+ const url="https://wa.me/244944403093?text="+encodeURIComponent(msg);
+ const opened=window.open(url,"_blank");
+ if(!opened){window.location.href=url;}
+ alert("O pedido completo, com todos os dados preenchidos, foi preparado para o WhatsApp da APSAN (+244 944 40 30 93). Por segurança do WhatsApp, anexe também os dois ficheiros selecionados na conversa antes de carregar em Enviar.");
+ btn.disabled=false;
+ btn.innerHTML='<i class="fab fa-whatsapp"></i> Enviar pedido via WhatsApp';
+});;
 </script>
 <section class="content-section" id="about" style="">
 <div class="company-page-head">
@@ -3631,6 +3646,24 @@ body{background:#f5f8fb!important;color:#082b55!important;font-family:Arial,Helv
   window.addEventListener('resize',window.closeApsanExploreMenu);
 })();
 </script>
+
+
+<style id="apsan-medical-header-illustrations">
+.apsan-medical-header{position:relative;isolation:isolate;overflow:hidden}
+.apsan-medical-heading{position:relative;z-index:2;flex:1;min-width:0}
+.apsan-medical-illustrations{position:relative;z-index:1;display:grid;grid-template-columns:repeat(2,48px);grid-template-rows:repeat(2,48px);gap:9px;align-items:center;justify-items:center;flex:0 0 auto;padding:10px 8px 10px 18px}
+.apsan-medical-illustrations>i{width:46px;height:46px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.32);border-radius:14px;background:rgba(255,255,255,.14);color:#fff;font-size:23px;box-shadow:0 5px 14px rgba(0,20,55,.13)}
+.apsan-medical-illustrations .apsan-medical-flag{grid-column:1/-1;font-size:23px;line-height:1;margin-top:2px}
+.apsan-medical-header:after{content:"+";position:absolute;right:145px;top:-34px;font-size:180px;line-height:1;font-weight:200;color:rgba(255,255,255,.055);z-index:-1}
+@media(max-width:600px){
+ .apsan-medical-header{align-items:flex-start;gap:10px;padding:20px 54px 18px 14px}
+ .apsan-medical-mark{flex-basis:42px;height:42px;font-size:21px;border-radius:13px}
+ .apsan-medical-illustrations{grid-template-columns:repeat(2,31px);grid-template-rows:repeat(2,31px);gap:5px;padding:4px 0 4px 2px}
+ .apsan-medical-illustrations>i{width:30px;height:30px;font-size:15px;border-radius:9px}
+ .apsan-medical-illustrations .apsan-medical-flag{font-size:18px}
+ .apsan-medical-header:after{right:80px;font-size:120px}
+}
+</style>
 
 </body>
 </html>
