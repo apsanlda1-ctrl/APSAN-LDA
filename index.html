@@ -2107,34 +2107,32 @@ document.getElementById("apsanMedicalForm")?.addEventListener("submit",async fun
  if(!history||!proof){alert("Carregue o histórico médico e o comprovativo de pagamento.");return}
  if(history.size>max||proof.size>max){alert("Cada ficheiro deve ter no máximo 10 MB.");return}
  const patient={name:fd.get("patientName"),age:fd.get("age"),sex:fd.get("sex"),phone:fd.get("phone"),email:fd.get("email")||"Não indicado",province:fd.get("province"),municipality:fd.get("municipality"),specialist:fd.get("specialist"),reason:fd.get("reason"),date:fd.get("date"),period:fd.get("period"),fee:"8.000 Kz"};
- const msg="PEDIDO DE MARCAÇÃO DE CONSULTA MÉDICA NA NAMÍBIA — APSAN, LDA
+ const msg=`PEDIDO DE MARCAÇÃO DE CONSULTA MÉDICA NA NAMÍBIA — APSAN, LDA
 
 DADOS DO PACIENTE
-Nome: "+patient.name+"
-Idade: "+patient.age+"
-Sexo: "+patient.sex+"
-WhatsApp: "+patient.phone+"
-E-mail: "+patient.email+"
-Localização: "+patient.municipality+", "+patient.province+"
+Nome: ${patient.name}
+Idade: ${patient.age}
+Sexo: ${patient.sex}
+WhatsApp: ${patient.phone}
+E-mail: ${patient.email}
+Localização: ${patient.municipality}, ${patient.province}
 
 CONSULTA
-Especialidade: "+patient.specialist+"
-Motivo: "+patient.reason+"
-Data pretendida: "+patient.date+"
-Período: "+patient.period+"
+Especialidade: ${patient.specialist}
+Motivo: ${patient.reason}
+Data pretendida: ${patient.date}
+Período: ${patient.period}
 
 Taxa de marcação: 8.000 Kz
-Histórico médico: "+history.name+"
-Comprovativo de pagamento: "+proof.name+"
+Histórico médico: ${history.name}
+Comprovativo de pagamento: ${proof.name}
 
-Solicito a confirmação do pedido e o envio das informações da clínica, horário e orientações.";
+Solicito a confirmação do pedido e o envio das informações da clínica, horário e orientações.`;
  const files=[history,proof],shareData={title:"Pedido de consulta médica — APSAN",text:msg,files};
  const btn=f.querySelector(".apsan-medical-submit");btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> A preparar envio…';
  try{
   if(navigator.canShare&&navigator.canShare({files})&&navigator.share){await navigator.share(shareData);alert("Partilha iniciada. Seleccione WhatsApp e confirme o envio para +244 944 40 30 93.");}
-  else{const url="https://wa.me/244944403093?text="+encodeURIComponent(msg+"
-
-NOTA: Enviarei os dois documentos anexados nesta conversa.");window.open(url,"_blank","noopener");alert("O WhatsApp foi aberto com os dados do pedido. Anexe manualmente o histórico médico e o comprovativo antes de enviar.");}
+  else{const url="https://wa.me/244944403093?text="+encodeURIComponent(msg+"\\n\\nNOTA: Enviarei os dois documentos anexados nesta conversa.");window.open(url,"_blank","noopener");alert("O WhatsApp foi aberto com os dados do pedido. Anexe manualmente o histórico médico e o comprovativo antes de enviar.");}
  }catch(err){if(err.name!=="AbortError")alert("Não foi possível abrir a partilha. Tente novamente.");}
  finally{btn.disabled=false;btn.innerHTML='<i class="fab fa-whatsapp"></i> Enviar pedido via WhatsApp';}
 });
