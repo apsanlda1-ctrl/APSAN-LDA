@@ -1949,6 +1949,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
         <p>Acompanhamento hospitalar, tradução, logística e tecnologia com segurança, profissionalismo e eficiência.</p>
         <div class="apsan-hero-buttons">
           <button class="apsan-btn-gold" onclick="switchTab('services', event)">Conheça os nossos serviços <i class="fas fa-arrow-right"></i></button>
+          <button type="button" class="apsan-medical-cta" onclick="openApsanMedicalBooking()"><i class="fas fa-calendar-check"></i> Marcar Consulta Médica na Namíbia</button>
           <a class="apsan-publications-cta" href="publicacoes.html"><i class="far fa-newspaper"></i> Ver publicações</a>
           <a class="apsan-btn-outline apsan-whatsapp-icon-only" href="https://wa.me/244944403093" target="_blank" rel="noopener noreferrer" aria-label="Fale connosco pelo WhatsApp" title="Fale connosco pelo WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
         </div>
@@ -2014,8 +2015,125 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
       @media(max-width:720px){.apsan-home-content-links{padding:25px 14px 8px;margin:18px auto}.apsan-home-content-grid{grid-template-columns:1fr;gap:11px}.apsan-home-content-card{min-height:0;display:grid;grid-template-columns:46px 1fr;align-items:center;padding:15px}.apsan-home-content-card>b{grid-column:2;margin-top:-4px}}
     </style>
     
+
   </div>
 </section>
+<section id="apsan-medical-booking" class="apsan-medical-overlay" aria-hidden="true">
+ <div class="apsan-medical-panel" role="dialog" aria-modal="true" aria-labelledby="apsanMedicalTitle">
+  <button type="button" class="apsan-medical-close" onclick="closeApsanMedicalBooking()" aria-label="Fechar">×</button>
+  <header class="apsan-medical-header"><div class="apsan-medical-mark"><i class="fas fa-stethoscope"></i></div><div><span>APSAN, LDA · ASSISTÊNCIA MÉDICA</span><h2 id="apsanMedicalTitle">Marcar Consulta Médica na Namíbia</h2><p>Preencha os dados para solicitar a marcação. A equipa APSAN entrará em contacto pelo WhatsApp.</p></div><div class="apsan-medical-flag">🇳🇦</div></header>
+  <div class="apsan-medical-steps"><span class="active">1 <small>Dados do paciente</small></span><i></i><span>2 <small>Consulta e documentos</small></span><i></i><span>3 <small>Envio do pedido</small></span></div>
+  <form id="apsanMedicalForm" class="apsan-medical-form">
+   <section class="apsan-medical-section"><h3><i class="fas fa-user"></i> Dados do Paciente</h3>
+    <div class="apsan-medical-grid"><label>Nome completo *<input name="patientName" required maxlength="120" placeholder="Nome completo do paciente"></label><label>Idade *<input name="age" required type="number" min="0" max="120" placeholder="Idade"></label><label>Sexo *<select name="sex" required><option value="">Seleccione</option><option>Feminino</option><option>Masculino</option><option>Prefiro não informar</option></select></label><label>Contacto / WhatsApp *<input name="phone" required type="tel" placeholder="+244 9XX XXX XXX"></label><label class="wide">E-mail (opcional)<input name="email" type="email" placeholder="email@exemplo.com"></label></div>
+   </section>
+   <section class="apsan-medical-section"><h3><i class="fas fa-map-marker-alt"></i> Localização em Angola</h3><div class="apsan-medical-grid"><label>Província *<select name="province" id="apsanMedicalProvince" required><option value="">Seleccione a província</option></select></label><label>Município *<input name="municipality" required list="apsanMedicalMunicipalities" placeholder="Escreva ou seleccione o município"><datalist id="apsanMedicalMunicipalities"></datalist></label></div><small class="apsan-medical-note">Indique a sua localização actual em Angola.</small></section>
+   <section class="apsan-medical-section"><h3><i class="fas fa-heartbeat"></i> Detalhes da Consulta</h3><div class="apsan-medical-grid"><label class="wide">Especialista que pretende consultar *<select name="specialist" required id="apsanMedicalSpecialist"><option value="">Seleccione a especialidade</option></select></label><label class="wide">Descrição da situação / motivo da consulta *<textarea name="reason" required rows="4" maxlength="2500" placeholder="Descreva os sintomas, a situação clínica e o tipo de acompanhamento pretendido."></textarea></label><label>Data pretendida da consulta *<input name="date" required type="date" id="apsanMedicalDate"></label><label>Período preferencial<select name="period"><option value="Indiferente">Indiferente</option><option>Manhã</option><option>Tarde</option></select></label></div></section>
+   <section class="apsan-medical-section"><h3><i class="fas fa-file-medical"></i> Documentos e Pagamento</h3><label class="apsan-medical-upload"><i class="fas fa-cloud-upload-alt"></i><b>Carregar histórico médico *</b><span>Exames, relatórios, receitas ou outros documentos (PDF, JPG, PNG; até 10 MB)</span><input name="medicalHistory" type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" required></label><label class="apsan-medical-upload"><i class="fas fa-receipt"></i><b>Comprovativo de pagamento *</b><span>Taxa de marcação: 8.000 Kz · PDF, JPG ou PNG (até 10 MB)</span><input name="paymentProof" type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" required></label>
+    <div class="apsan-medical-fee"><div><span>Taxa de marcação da consulta</span><strong>8.000 Kz</strong><small>O pagamento é obrigatório para a APSAN iniciar o processo de marcação. A consulta e eventuais custos clínicos são tratados separadamente.</small></div><i class="fas fa-shield-heart"></i></div>
+    <label class="apsan-medical-consent"><input type="checkbox" name="consent" required><span>Autorizo o envio dos dados e documentos fornecidos à APSAN, LDA exclusivamente para tratar este pedido de marcação. *</span></label>
+   </section>
+   <div class="apsan-medical-actions"><button type="button" class="apsan-medical-cancel" onclick="closeApsanMedicalBooking()">Cancelar</button><button type="submit" class="apsan-medical-submit"><i class="fab fa-whatsapp"></i> Enviar pedido via WhatsApp</button></div>
+   <p class="apsan-medical-privacy">Os dados e documentos médicos são informações sensíveis. Envie apenas os documentos necessários. A submissão é um pedido de marcação, não uma confirmação de consulta.</p>
+  </form>
+ </div>
+</section>
+<style id="apsan-medical-booking-css">
+.apsan-medical-cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 22px;border:2px solid #fff;border-radius:999px;background:linear-gradient(120deg,#0878d1,#0649b4);color:#fff;font-weight:850;font-size:14px;box-shadow:0 9px 25px #001e5060;cursor:pointer}
+.apsan-medical-cta:hover{filter:brightness(1.08);transform:translateY(-2px)}
+.apsan-medical-overlay{display:none;position:fixed;inset:0;z-index:100500;background:#071a35d9;backdrop-filter:blur(5px);padding:12px;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.apsan-medical-overlay.open{display:block}
+.apsan-medical-panel{position:relative;width:min(850px,100%);margin:0 auto;background:#f4f8fe;border:1px solid #d6e5f7;border-radius:24px;box-shadow:0 24px 80px #00152d66;overflow:hidden;color:#10294a}
+.apsan-medical-close{position:absolute;right:14px;top:14px;z-index:3;width:42px;height:42px;border:0;border-radius:50%;background:#e9f1fb;color:#12335d;font-size:28px;cursor:pointer}
+.apsan-medical-header{display:flex;align-items:center;gap:15px;padding:25px 65px 23px 24px;background:linear-gradient(120deg,#082c62,#0876c9);color:white}
+.apsan-medical-mark{flex:0 0 54px;height:54px;display:grid;place-items:center;border-radius:16px;background:#ffffff20;font-size:26px}
+.apsan-medical-header span{font-size:10px;font-weight:900;letter-spacing:1.4px;color:#c7e6ff}
+.apsan-medical-header h2{font-size:clamp(20px,3vw,29px);margin:4px 0;line-height:1.15}
+.apsan-medical-header p{margin:0;color:#e3f1ff;font-size:13px;line-height:1.5}
+.apsan-medical-flag{font-size:30px;margin-left:auto}
+.apsan-medical-steps{display:flex;align-items:center;gap:10px;padding:18px 24px;background:#fff;border-bottom:1px solid #e0eaf5}
+.apsan-medical-steps>span{display:flex;align-items:center;gap:8px;font-weight:900;color:#8b9bb0;white-space:nowrap}
+.apsan-medical-steps>span.active{color:#075cba}
+.apsan-medical-steps>span:first-letter{display:inline}
+.apsan-medical-steps small{font-size:11px;font-weight:700}
+.apsan-medical-steps i{height:2px;flex:1;background:#d9e4f0}
+.apsan-medical-form{padding:20px;display:grid;gap:15px}
+.apsan-medical-section{padding:18px;background:#fff;border:1px solid #dce7f4;border-radius:17px;box-shadow:0 5px 18px #0b35600a}
+.apsan-medical-section h3{display:flex;align-items:center;gap:10px;margin:0 0 16px;padding:11px 13px;border-radius:11px;background:linear-gradient(90deg,#e6f1ff,#f5f9ff);color:#09346c;font-size:17px}
+.apsan-medical-section h3 i{color:#0873c8}
+.apsan-medical-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.apsan-medical-grid label,.apsan-medical-form>label{display:grid;gap:7px;color:#183456;font-size:13px;font-weight:800;min-width:0}
+.apsan-medical-grid .wide{grid-column:1/-1}
+.apsan-medical-grid input,.apsan-medical-grid select,.apsan-medical-grid textarea{width:100%;min-width:0;padding:13px;border:1px solid #cbd8e8;border-radius:10px;background:#fff;color:#172b43;font:inherit;font-weight:500;outline:none}
+.apsan-medical-grid input:focus,.apsan-medical-grid select:focus,.apsan-medical-grid textarea:focus{border-color:#0875d1;box-shadow:0 0 0 3px #0875d11c}
+.apsan-medical-upload{position:relative;display:grid;grid-template-columns:38px 1fr;gap:3px 10px;align-items:center;margin:12px 0;padding:15px;border:1.5px dashed #8fb2db;border-radius:12px;background:#f7fbff;cursor:pointer}
+.apsan-medical-upload>i{grid-row:span 2;font-size:25px;color:#0966bd;text-align:center}
+.apsan-medical-upload b{font-size:13px;color:#14345b}
+.apsan-medical-upload span{font-size:11px;color:#64758a;font-weight:500}
+.apsan-medical-upload input{grid-column:2;width:100%;font-size:11px;margin-top:5px}
+.apsan-medical-fee{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-top:14px;padding:17px;border-radius:14px;background:linear-gradient(110deg,#e0f8e7,#f0fff3);border:1px solid #b7e9c5}
+.apsan-medical-fee div{display:grid;gap:4px}.apsan-medical-fee span{font-size:13px;font-weight:800;color:#16532d}.apsan-medical-fee strong{font-size:32px;color:#087c3a}.apsan-medical-fee small{font-size:11px;color:#436b50;line-height:1.4;max-width:560px}.apsan-medical-fee>i{font-size:35px;color:#159447}
+.apsan-medical-consent{display:flex!important;grid-template-columns:20px 1fr;align-items:flex-start;gap:10px!important;margin-top:15px;font-size:11px!important;line-height:1.5}
+.apsan-medical-consent input{margin-top:2px}
+.apsan-medical-actions{display:flex;justify-content:flex-end;gap:10px}
+.apsan-medical-actions button{min-height:50px;padding:0 20px;border-radius:12px;font-weight:900;cursor:pointer}
+.apsan-medical-cancel{border:1px solid #cbd8e8;background:#eaf0f7;color:#23405f}
+.apsan-medical-submit{border:0;background:linear-gradient(120deg,#16a34a,#087d39);color:#fff;box-shadow:0 8px 18px #15944730}
+.apsan-medical-privacy{margin:0;text-align:center;color:#718198;font-size:10px;line-height:1.5}
+@media(max-width:600px){.apsan-medical-overlay{padding:7px}.apsan-medical-panel{border-radius:17px}.apsan-medical-header{padding:19px 54px 18px 15px;gap:10px}.apsan-medical-mark{flex-basis:42px;height:42px;font-size:21px}.apsan-medical-header h2{font-size:19px}.apsan-medical-header p{font-size:11px}.apsan-medical-flag{font-size:22px}.apsan-medical-steps{padding:13px 10px;gap:5px}.apsan-medical-steps>span{gap:4px;font-size:11px}.apsan-medical-steps small{font-size:9px;white-space:normal}.apsan-medical-form{padding:10px;gap:10px}.apsan-medical-section{padding:12px}.apsan-medical-section h3{font-size:14px}.apsan-medical-grid{grid-template-columns:1fr;gap:11px}.apsan-medical-grid .wide{grid-column:auto}.apsan-medical-actions{display:grid;grid-template-columns:.7fr 1.3fr}.apsan-medical-actions button{padding:0 10px;font-size:12px}.apsan-medical-fee strong{font-size:27px}}
+</style>
+<script>
+(function(){
+ const provinces=["Bengo","Benguela","Bié","Cabinda","Cuando","Cubango","Cuanza-Norte","Cuanza-Sul","Cunene","Huambo","Huíla","Icolo e Bengo","Luanda","Lunda-Norte","Lunda-Sul","Malanje","Moxico","Moxico-Leste","Namibe","Uíge","Zaire"];
+ const specialists=["Alergologia e Imunologia","Anatomia Patológica","Anestesiologia","Angiologia e Cirurgia Vascular","Cardiologia","Cirurgia Cardiotorácica","Cirurgia Geral","Cirurgia Pediátrica","Cirurgia Plástica e Reconstrutiva","Cirurgia Torácica","Cirurgia Vascular","Clínica Geral / Medicina Geral","Dermatologia","Endocrinologia","Estomatologia","Fisiatria / Medicina Física e Reabilitação","Gastroenterologia","Genética Médica","Geriatria","Ginecologia e Obstetrícia","Hematologia","Hepatologia","Infectologia","Medicina do Trabalho","Medicina Familiar","Medicina Interna","Nefrologia","Neonatologia","Neurocirurgia","Neurologia","Nutrição Clínica","Oftalmologia","Oncologia","Ortopedia e Traumatologia","Otorrinolaringologia","Pediatria","Pneumologia","Psiquiatria","Psicologia Clínica","Radiologia e Imagiologia","Reumatologia","Urologia","Outro especialista"];
+ const prov=document.getElementById("apsanMedicalProvince"),spec=document.getElementById("apsanMedicalSpecialist"),date=document.getElementById("apsanMedicalDate");
+ if(!prov||!spec)return;
+ provinces.forEach(x=>prov.add(new Option(x,x)));
+ specialists.forEach(x=>spec.add(new Option(x,x)));
+ if(date)date.min=new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,10);
+})();
+function openApsanMedicalBooking(){const el=document.getElementById("apsan-medical-booking");if(!el)return;el.classList.add("open");el.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";const panel=el.querySelector(".apsan-medical-panel");if(panel)panel.scrollTop=0}
+function closeApsanMedicalBooking(){const el=document.getElementById("apsan-medical-booking");if(!el)return;el.classList.remove("open");el.setAttribute("aria-hidden","true");document.body.style.overflow=""}
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeApsanMedicalBooking()});
+document.getElementById("apsan-medical-booking")?.addEventListener("click",e=>{if(e.target.id==="apsan-medical-booking")closeApsanMedicalBooking()});
+document.getElementById("apsanMedicalForm")?.addEventListener("submit",async function(e){
+ e.preventDefault();const f=e.currentTarget;if(!f.reportValidity())return;
+ const fd=new FormData(f),history=f.elements.medicalHistory.files[0],proof=f.elements.paymentProof.files[0],max=10*1024*1024;
+ if(!history||!proof){alert("Carregue o histórico médico e o comprovativo de pagamento.");return}
+ if(history.size>max||proof.size>max){alert("Cada ficheiro deve ter no máximo 10 MB.");return}
+ const patient={name:fd.get("patientName"),age:fd.get("age"),sex:fd.get("sex"),phone:fd.get("phone"),email:fd.get("email")||"Não indicado",province:fd.get("province"),municipality:fd.get("municipality"),specialist:fd.get("specialist"),reason:fd.get("reason"),date:fd.get("date"),period:fd.get("period"),fee:"8.000 Kz"};
+ const msg="PEDIDO DE MARCAÇÃO DE CONSULTA MÉDICA NA NAMÍBIA — APSAN, LDA
+
+DADOS DO PACIENTE
+Nome: "+patient.name+"
+Idade: "+patient.age+"
+Sexo: "+patient.sex+"
+WhatsApp: "+patient.phone+"
+E-mail: "+patient.email+"
+Localização: "+patient.municipality+", "+patient.province+"
+
+CONSULTA
+Especialidade: "+patient.specialist+"
+Motivo: "+patient.reason+"
+Data pretendida: "+patient.date+"
+Período: "+patient.period+"
+
+Taxa de marcação: 8.000 Kz
+Histórico médico: "+history.name+"
+Comprovativo de pagamento: "+proof.name+"
+
+Solicito a confirmação do pedido e o envio das informações da clínica, horário e orientações.";
+ const files=[history,proof],shareData={title:"Pedido de consulta médica — APSAN",text:msg,files};
+ const btn=f.querySelector(".apsan-medical-submit");btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> A preparar envio…';
+ try{
+  if(navigator.canShare&&navigator.canShare({files})&&navigator.share){await navigator.share(shareData);alert("Partilha iniciada. Seleccione WhatsApp e confirme o envio para +244 944 40 30 93.");}
+  else{const url="https://wa.me/244944403093?text="+encodeURIComponent(msg+"
+
+NOTA: Enviarei os dois documentos anexados nesta conversa.");window.open(url,"_blank","noopener");alert("O WhatsApp foi aberto com os dados do pedido. Anexe manualmente o histórico médico e o comprovativo antes de enviar.");}
+ }catch(err){if(err.name!=="AbortError")alert("Não foi possível abrir a partilha. Tente novamente.");}
+ finally{btn.disabled=false;btn.innerHTML='<i class="fab fa-whatsapp"></i> Enviar pedido via WhatsApp';}
+});
+</script>
 <section class="content-section" id="about" style="">
 <div class="company-page-head">
 <div class="hero-kicker"><span class="kicker-dot"></span> SEGUNDA PÁGINA · EMPRESA &amp; CONFIANÇA</div>
