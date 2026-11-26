@@ -60,6 +60,12 @@ function addStyles(){if(document.getElementById("apsanStoreCss"))return;const s=
 #apsan-products-public .aps-detail-layout{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:26px;align-items:start}
 #apsan-products-public .aps-detail-mainimage{height:410px;background:#f1f5fa;border-radius:18px;display:grid;place-items:center;overflow:hidden;padding:14px}
 #apsan-products-public .aps-detail-mainimage img{width:100%;height:100%;object-fit:contain}
+#apsan-products-public .aps-detail-mainimage iframe{display:block;width:100%;height:100%;min-height:260px;border:0}
+#apsan-products-public .aps-detail-mainimage.aps-media-playing{padding:0;background:#071b31}
+#apsan-products-public .aps-detail-thumb .aps-video-thumb{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:#172b43;color:#fff;border-radius:7px}
+#apsan-products-public .aps-detail-thumb .aps-video-thumb>i{font-size:23px;color:#ff2424}
+#apsan-products-public .aps-detail-thumb .aps-video-thumb b{font-size:11px}
+#apsan-products-public .aps-detail-thumb .aps-video-play{font-size:13px;color:#fff}
 #apsan-products-public .aps-detail-noimage{height:260px;border-radius:18px;background:#f1f5fa;display:grid;place-items:center;color:#718096}
 #apsan-products-public .aps-detail-thumbs{display:flex;gap:9px;margin-top:12px;overflow:auto;padding:2px}
 #apsan-products-public .aps-detail-thumb{width:82px;height:76px;flex:0 0 82px;padding:4px;border:2px solid #dce5ef;border-radius:11px;background:#f1f5fa;cursor:pointer}
@@ -96,7 +102,7 @@ function addStyles(){if(document.getElementById("apsanStoreCss"))return;const s=
 #apsan-products-public .aps-detail-tabpanel{min-height:100px;padding:20px 22px;border-radius:16px;background:#f7faff;color:#24364d;font-size:16px;line-height:1.65;white-space:pre-line}
 #apsan-products-public .aps-detail-cta{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
 #apsan-products-public .aps-detail-cta .aps-btn{min-height:62px;font-size:16px;border-radius:14px;gap:9px}
-@media(max-width:700px){#apsan-products-public .aps-modal{padding:10px;align-items:start}#apsan-products-public .aps-dialog{width:100%;max-height:calc(100dvh - 20px);padding:20px 16px 18px;border-radius:22px}#apsan-products-public .aps-dialog .aps-close{position:sticky;float:right;top:0;margin:0 0 -44px 0;right:auto}#apsan-products-public .aps-dialog .aps-detail-top{padding-right:42px;margin-bottom:16px}#apsan-products-public .aps-dialog .aps-detail-heading h2{font-size:23px}#apsan-products-public .aps-detail-layout{grid-template-columns:1fr;gap:12px}#apsan-products-public .aps-detail-mainimage{height:300px;padding:10px}#apsan-products-public .aps-detail-summary{padding:2px 2px 0}#apsan-products-public .aps-detail-description{font-size:16px;margin:14px 0}#apsan-products-public .aps-detail-location{padding-bottom:13px;margin:0}#apsan-products-public .aps-detail-pricebox{padding:14px 0}#apsan-products-public .aps-detail-stock{padding:13px 2px}#apsan-products-public .aps-detail-tabs{gap:6px;margin:16px 0 10px}#apsan-products-public .aps-detail-tabs button{font-size:12px;padding:12px 5px}#apsan-products-public .aps-detail-tabpanel{padding:15px;font-size:14px;min-height:80px}#apsan-products-public .aps-detail-cta{gap:9px;margin-top:16px}#apsan-products-public .aps-detail-cta .aps-btn{font-size:13px;min-height:54px;padding:10px 6px}}
+@media(max-width:700px){#apsan-products-public .aps-modal{padding:10px;align-items:start}#apsan-products-public .aps-dialog{width:100%;max-height:calc(100dvh - 20px);padding:20px 16px 18px;border-radius:22px}#apsan-products-public .aps-dialog .aps-close{position:sticky;float:right;top:0;margin:0 0 -44px 0;right:auto}#apsan-products-public .aps-dialog .aps-detail-top{padding-right:42px;margin-bottom:16px}#apsan-products-public .aps-dialog .aps-detail-heading h2{font-size:23px}#apsan-products-public .aps-detail-layout{grid-template-columns:1fr;gap:12px}#apsan-products-public .aps-detail-mainimage{height:300px;padding:10px}#apsan-products-public .aps-detail-mainimage iframe{min-height:280px}#apsan-products-public .aps-detail-summary{padding:2px 2px 0}#apsan-products-public .aps-detail-description{font-size:16px;margin:14px 0}#apsan-products-public .aps-detail-location{padding-bottom:13px;margin:0}#apsan-products-public .aps-detail-pricebox{padding:14px 0}#apsan-products-public .aps-detail-stock{padding:13px 2px}#apsan-products-public .aps-detail-tabs{gap:6px;margin:16px 0 10px}#apsan-products-public .aps-detail-tabs button{font-size:12px;padding:12px 5px}#apsan-products-public .aps-detail-tabpanel{padding:15px;font-size:14px;min-height:80px}#apsan-products-public .aps-detail-cta{gap:9px;margin-top:16px}#apsan-products-public .aps-detail-cta .aps-btn{font-size:13px;min-height:54px;padding:10px 6px}}
 
 /* APSAN checkout refreshed */
 #apsan-products-public .aps-dialog:has(.aps-checkout){width:min(1120px,100%);padding:0;max-height:96vh;overflow:auto;border-radius:24px;background:#f4f8fd}
@@ -370,19 +376,33 @@ function modal(content){const wrap=document.createElement("div");wrap.className=
 function details(id){
  const p=products[id];if(!p)return;
  const imgs=[...new Set([...(Array.isArray(p.images)?p.images:[]),p.image].filter(Boolean))];
+ const videoId=youtubeId(p.youtubeVideoUrl);
+ const galleryItems=[...imgs.map((src)=>({type:"image",src})),...(videoId?[{type:"video",id:videoId}]:[])];
  const wa=waLink(p),sale=Number(p.promoPrice)>0&&Number(p.promoPrice)<Number(p.price);
  const price=sale?p.promoPrice:p.price,discount=sale?Math.round((1-Number(p.promoPrice)/Number(p.price))*100):0;
  const availability=p.productType==="physical"?(Number(p.quantity)>0?Number(p.quantity)+" unidade(s) disponíveis":"Consultar stock"):"Sob consulta";
  const contentText=p.specifications||p.contents||p.content||"Consulte a APSAN para obter informações detalhadas sobre este anúncio.";
  const benefitsText=p.benefits||p.advantages||"Entre em contacto com a nossa equipa para conhecer as vantagens e condições deste produto ou serviço.";
  const m=modal('<div class="aps-detail-top"><div class="aps-detail-heading"><span class="aps-detail-accent"></span><h2>'+esc(p.name)+'</h2></div></div>'+
- '<div class="aps-detail-layout"><div class="aps-detail-gallery">'+(imgs.length?'<div class="aps-detail-mainimage"><img id="apsDetailMainImage" src="'+esc(imgs[0])+'" alt="'+esc(p.name)+'"></div>'+(imgs.length>1?'<div class="aps-detail-thumbs">'+imgs.map((src,i)=>'<button type="button" class="aps-detail-thumb '+(!i?'active':'')+'" data-aps-image="'+i+'"><img src="'+esc(src)+'" alt="Imagem '+(i+1)+'"></button>').join('')+'</div>':''):'<div class="aps-detail-noimage">Imagem não disponível</div>')+
- (youtubeId(p.youtubeVideoUrl)?'<section class="aps-product-demo"><h3><i class="fab fa-youtube"></i> Vídeo de demonstração</h3><div class="aps-product-demo-frame"><iframe src="https://www.youtube-nocookie.com/embed/'+encodeURIComponent(youtubeId(p.youtubeVideoUrl))+'" title="Demonstração de '+esc(p.name)+'" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div></section>':'')+'</div>'+
+ '<div class="aps-detail-layout"><div class="aps-detail-gallery">'+
+ '<div class="aps-detail-mainimage" id="apsDetailMainMedia">'+(imgs.length?'<img id="apsDetailMainImage" src="'+esc(imgs[0])+'" alt="'+esc(p.name)+'">':'<div class="aps-detail-noimage">Imagem não disponível</div>')+'</div>'+
+ (galleryItems.length>1?'<div class="aps-detail-thumbs">'+galleryItems.map((item,i)=>'<button type="button" class="aps-detail-thumb '+(!i?'active':'')+'" data-aps-gallery="'+i+'" aria-label="'+(item.type==="video"?"Reproduzir vídeo de demonstração":"Ver imagem "+(i+1))+'">'+(item.type==="video"?'<span class="aps-video-thumb"><i class="fab fa-youtube"></i><b>Vídeo</b><span class="aps-video-play">▶</span></span>':'<img src="'+esc(item.src)+'" alt="Imagem '+(i+1)+'">')+'</button>').join('')+'</div>':'')+
+ '</div>'+
  '<div class="aps-detail-summary"><span class="aps-detail-category"><i class="fas fa-heart-pulse"></i> '+esc(p.category||"APSAN")+'</span><div class="aps-detail-description">'+expandableText(p.description||"Contacte a APSAN para mais informações sobre este anúncio.","aps-detail-description-text",260)+'</div><p class="aps-detail-location"><i class="fas fa-location-dot"></i> '+esc([p.municipality,p.province].filter(Boolean).join(", ")||"Angola")+'</p><div class="aps-detail-pricebox">'+(sale?'<span class="aps-detail-promo">PROMOÇÃO</span>':'')+'<div class="aps-detail-price-row"><strong>'+ (Number(price)>0?money(price):"Preço sob consulta")+'</strong>'+(sale?'<span class="aps-detail-discount">-'+discount+'%</span>':'')+'</div>'+(sale?'<del>'+money(p.price)+'</del>':'')+'</div><div class="aps-detail-stock"><i class="fas fa-circle-check"></i><span><b>Disponibilidade:</b><br>'+esc(availability)+'</span></div></div></div>'+
  '<div class="aps-detail-tabs" role="tablist"><button class="active" type="button" data-aps-tab="description"><i class="fas fa-circle-info"></i> Descrição</button><button type="button" data-aps-tab="content"><i class="fas fa-list-ul"></i> Conteúdo</button><button type="button" data-aps-tab="benefits"><i class="far fa-star"></i> Benefícios</button></div><div class="aps-detail-tabpanel" id="apsDetailTabPanel">'+expandableText(p.description||"Contacte a APSAN para mais informações.","aps-tab-description",320)+'</div>'+
  '<div class="aps-detail-cta"><button class="aps-btn primary" id="apsDetailBuy"><i class="fas fa-cart-shopping"></i> Comprar agora</button><a class="aps-btn wa" href="'+(wa||"#")+'" '+(wa?'target="_blank" rel="noopener"':'aria-disabled="true"')+'><i class="fab fa-whatsapp"></i> Contactar pelo WhatsApp</a></div>');
- const main=m.wrap.querySelector("#apsDetailMainImage");
- m.wrap.querySelectorAll("[data-aps-image]").forEach(btn=>btn.onclick=()=>{if(main)main.src=imgs[Number(btn.dataset.apsImage)];m.wrap.querySelectorAll(".aps-detail-thumb").forEach(x=>x.classList.toggle("active",x===btn))});
+ const mainMedia=m.wrap.querySelector("#apsDetailMainMedia");
+ m.wrap.querySelectorAll("[data-aps-gallery]").forEach(btn=>btn.onclick=()=>{
+  const item=galleryItems[Number(btn.dataset.apsGallery)];if(!item||!mainMedia)return;
+  if(item.type==="video"){
+   mainMedia.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+encodeURIComponent(item.id)+'?autoplay=1" title="Demonstração de '+esc(p.name)+'" loading="eager" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
+   mainMedia.classList.add("aps-media-playing");
+  }else{
+   mainMedia.innerHTML='<img src="'+esc(item.src)+'" alt="'+esc(p.name)+'">';
+   mainMedia.classList.remove("aps-media-playing");
+  }
+  m.wrap.querySelectorAll(".aps-detail-thumb").forEach(x=>x.classList.toggle("active",x===btn));
+ });
  const tabData={description:p.description||"Contacte a APSAN para mais informações.",content:contentText,benefits:benefitsText};
  m.wrap.querySelectorAll("[data-aps-tab]").forEach(btn=>btn.onclick=()=>{m.wrap.querySelectorAll("[data-aps-tab]").forEach(x=>x.classList.toggle("active",x===btn));m.wrap.querySelector("#apsDetailTabPanel").innerHTML=expandableText(tabData[btn.dataset.apsTab],"aps-tab-description",320);bindExpandable(m.wrap)});bindExpandable(m.wrap);
  m.wrap.querySelector("#apsDetailBuy").onclick=()=>{m.close();checkout(id)};
