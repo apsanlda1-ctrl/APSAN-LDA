@@ -1991,6 +1991,41 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
 }
 @media(prefers-reduced-motion:reduce){#home .apsan-service-ribbon>a,#home .apsan-hero-buttons>*{transition:none}}
 </style>
+
+<style id="apsan-hospital-slider-css">
+#home .apsan-hospital-slider{position:relative;display:block;width:100%;height:440px;min-width:0;overflow:hidden;border-radius:34px 100px 34px 100px;border:5px solid #fff;box-shadow:0 24px 55px rgba(0,0,0,.28);background:#dce8f5}
+#home .apsan-hospital-slider .apsan-hospital-slide{position:absolute;inset:0;width:100%;height:100%;margin:0;border:0;border-radius:0;box-shadow:none;opacity:0;visibility:hidden;transform:scale(1.025);transition:opacity .8s ease,visibility .8s ease,transform 3s ease}
+#home .apsan-hospital-slider .apsan-hospital-slide.active{opacity:1;visibility:visible;transform:scale(1)}
+#home .apsan-hospital-slider .apsan-hospital-slide:after{content:"";position:absolute;inset:48% 0 0;background:linear-gradient(transparent,rgba(3,25,55,.78))}
+#home .apsan-hospital-slider .apsan-hospital-slide img{width:100%;height:100%;object-fit:cover;display:block}
+#home .apsan-hospital-slider .apsan-hospital-slide figcaption{position:absolute;z-index:2;left:22px;bottom:20px;color:#fff;font-weight:850;font-size:15px;text-shadow:0 2px 6px #000}
+#home .apsan-hospital-slider-dots{position:absolute;z-index:5;right:20px;bottom:22px;display:flex;gap:7px}
+#home .apsan-hospital-slider-dots span{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.55);transition:all .25s}
+#home .apsan-hospital-slider-dots span.active{width:23px;border-radius:9px;background:#ffc21a}
+@media(max-width:640px){#home .apsan-hospital-slider{height:270px;margin:0 2px 5px;border-width:4px;border-radius:25px 70px 25px 70px}#home .apsan-hospital-slider .apsan-hospital-slide figcaption{font-size:12px;left:14px;bottom:14px}#home .apsan-hospital-slider-dots{right:14px;bottom:16px}}
+@media(prefers-reduced-motion:reduce){#home .apsan-hospital-slider .apsan-hospital-slide{transition:opacity .2s ease,visibility .2s ease,transform .2s ease}}
+</style>
+<script id="apsan-hospital-slider-script">
+(function(){
+ function initApsanHospitalSlider(){
+  var root=document.getElementById("apsanHospitalSlider");
+  if(!root||root.dataset.ready==="1")return;
+  var slides=[].slice.call(root.querySelectorAll(".apsan-hospital-slide"));
+  var dots=[].slice.call(root.querySelectorAll(".apsan-hospital-slider-dots span"));
+  if(slides.length<2)return;
+  root.dataset.ready="1";
+  var index=0;
+  window.setInterval(function(){
+   slides[index].classList.remove("active");
+   if(dots[index])dots[index].classList.remove("active");
+   index=(index+1)%slides.length;
+   slides[index].classList.add("active");
+   if(dots[index])dots[index].classList.add("active");
+  },3000);
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",initApsanHospitalSlider);else initApsanHospitalSlider();
+})();
+</script>
 </head>
 <body data-theme="light">
 <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
@@ -2037,15 +2072,16 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
           <a class="apsan-btn-outline apsan-whatsapp-icon-only" href="https://wa.me/244944403093" target="_blank" rel="noopener noreferrer" aria-label="Fale connosco pelo WhatsApp" title="Fale connosco pelo WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
         </div>
       </div>
-      <div class="apsan-hospital-stack">
-        <figure class="apsan-hospital-card apsan-hospital-one">
+      <div class="apsan-hospital-stack apsan-hospital-slider" id="apsanHospitalSlider" aria-label="Hospitais parceiros na Namíbia">
+        <figure class="apsan-hospital-card apsan-hospital-one apsan-hospital-slide active">
           <img src="oshakati-hospital.jpg" alt="Entrada do Oshakati State Hospital, Namíbia" loading="eager">
           <figcaption><i class="fas fa-plus-circle"></i> Oshakati State Hospital</figcaption>
         </figure>
-        <figure class="apsan-hospital-card apsan-hospital-two">
-          <img src="ongwediva-medipark.jpg" alt="Edifício do Ongwediva Medipark, Namíbia" loading="eager">
+        <figure class="apsan-hospital-card apsan-hospital-one apsan-hospital-slide">
+          <img src="ongwediva-medipark.jpg" alt="Edifício do Ongwediva Medipark, Namíbia" loading="lazy">
           <figcaption><i class="fas fa-plus-circle"></i> Ongwediva Medipark</figcaption>
         </figure>
+        <div class="apsan-hospital-slider-dots" aria-hidden="true"><span class="active"></span><span></span></div>
       </div>
       <div class="apsan-hero-wave" aria-hidden="true"></div>
     </section>
