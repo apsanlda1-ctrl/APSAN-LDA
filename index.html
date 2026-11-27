@@ -3719,5 +3719,58 @@ body{background:#f5f8fb!important;color:#082b55!important;font-family:Arial,Helv
 }
 </style>
 
+
+<!-- APSAN PUBLIC NAVIGATION FIX: each menu item opens its real page/section -->
+<script id="apsan-public-navigation-fix">
+(function(){
+  const sectionIds=['home','services','extras','about','contact','client-area','portal'];
+  function closeMenu(){
+    if(typeof window.closeApsanExploreMenu==='function')window.closeApsanExploreMenu();
+    const menu=document.getElementById('navLinks');
+    const button=document.getElementById('apsanExploreMenuButton');
+    if(menu)menu.classList.remove('mobile-active','active');
+    if(button)button.setAttribute('aria-expanded','false');
+  }
+  window.switchTab=function(id,event){
+    if(event){event.preventDefault();event.stopPropagation();}
+    const target=document.getElementById(id);
+    if(!target || !sectionIds.includes(id)){
+      console.warn('[APSAN navigation] Secção não encontrada:',id);
+      return false;
+    }
+    document.querySelectorAll('.content-section').forEach(section=>{
+      section.classList.toggle('active-section',section===target);
+      section.setAttribute('aria-hidden',section===target?'false':'true');
+    });
+    document.querySelectorAll('#navLinks .nav-tab').forEach(link=>{
+      const href=link.getAttribute('href')||'';
+      link.classList.toggle('active',href==='#'+id);
+      if(href==='#'+id)link.setAttribute('aria-current','page');
+      else link.removeAttribute('aria-current');
+    });
+    closeMenu();
+    if(history.replaceState)history.replaceState(null,'','#'+id);
+    window.scrollTo({top:0,behavior:'smooth'});
+    return true;
+  };
+  document.addEventListener('DOMContentLoaded',function(){
+    // Public pages keep their real URLs; only close the mobile menu before navigation.
+    document.querySelectorAll('#navLinks a[href$=".html"]').forEach(link=>{
+      link.addEventListener('click',closeMenu);
+    });
+    document.querySelectorAll('#navLinks a[href^="#"]').forEach(link=>{
+      if(link.hasAttribute('onclick'))return;
+      link.addEventListener('click',function(e){
+        const id=(link.getAttribute('href')||'').slice(1);
+        if(sectionIds.includes(id))window.switchTab(id,e);
+      });
+    });
+    const current=(location.hash||'#home').slice(1);
+    if(sectionIds.includes(current))window.switchTab(current);
+    else window.switchTab('home');
+  });
+})();
+</script>
+
 </body>
 </html>
