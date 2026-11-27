@@ -3865,11 +3865,13 @@ body{background:#f5f8fb!important;color:#082b55!important;font-family:Arial,Helv
       btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> A registar solicitação…';
       try{
         const firebaseConfig={apiKey:"AIzaSyBe28uhKKzOycocioX0YyyUZ0jmODDAnCM",authDomain:"apsan-web-manegment.firebaseapp.com",databaseURL:"https://apsan-web-manegment-default-rtdb.firebaseio.com",projectId:"apsan-web-manegment",storageBucket:"apsan-web-manegment.firebasestorage.app",messagingSenderId:"1026894206568",appId:"1:1026894206568:web:a8896e7caf7f14d6118ddd"};
-        const {initializeApp}=await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js");
+        const {initializeApp,getApps}=await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js");
         const {getDatabase,ref,push,set}=await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js");
-        const app=initializeApp(firebaseConfig,"apsan-service-requests-public"),db=getDatabase(app);
+        const app=getApps().find(x=>x.name==="apsan-service-requests-public")||initializeApp(firebaseConfig,"apsan-service-requests-public"),db=getDatabase(app);
         const record={serviceTitle:title,serviceDescription:description,customerName:values.nome||'',customerPhone:values.telefone||'',customerEmail:values.email||'',customerLocation:values.localizacao||'',details:values,createdAt:Date.now(),status:"new"};
         const item=push(ref(db,"apsanServiceRequests"));await set(item,record);
+        console.info("[APSAN] Solicitação registada na administração:",item.key);
+        alert("Solicitação registada com sucesso na administração da APSAN. A conversa do WhatsApp será aberta agora para concluir o envio.");
         const url="https://wa.me/244944403093?text="+encodeURIComponent(msg);
         if(wa&&!wa.closed)wa.location.href=url;else window.location.href=url;
       }catch(err){console.error("[APSAN Service Request]",err);if(wa&&!wa.closed)wa.close();alert("Não foi possível registar a solicitação na administração. Verifique a ligação à internet e tente novamente. "+(err.message||err));}
