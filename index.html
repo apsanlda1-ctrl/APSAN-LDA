@@ -2026,6 +2026,33 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",initApsanHospitalSlider);else initApsanHospitalSlider();
 })();
 </script>
+
+<style id="apsan-hospital-slider-layout-fix">
+/* Cada fotografia ocupa integralmente o mesmo quadro; nunca criar uma segunda área por baixo. */
+#home .apsan-hospital-slider{
+ position:relative!important;display:block!important;width:100%!important;
+ height:440px!important;min-height:440px!important;max-height:440px!important;
+ overflow:hidden!important;background:#082f61!important;
+}
+#home .apsan-hospital-slider>.apsan-hospital-slide{
+ position:absolute!important;top:0!important;right:0!important;bottom:0!important;left:0!important;
+ display:block!important;width:100%!important;height:100%!important;min-height:100%!important;max-height:none!important;
+ padding:0!important;overflow:hidden!important;margin:0!important;
+}
+#home .apsan-hospital-slider>.apsan-hospital-slide img{
+ position:absolute!important;inset:0!important;display:block!important;
+ width:100%!important;height:100%!important;min-height:100%!important;max-height:none!important;
+ object-fit:cover!important;object-position:center center!important;
+}
+#home .apsan-hospital-slider>.apsan-hospital-slide:not(.active){opacity:0!important;visibility:hidden!important;pointer-events:none!important}
+#home .apsan-hospital-slider>.apsan-hospital-slide.active{opacity:1!important;visibility:visible!important;pointer-events:auto!important}
+#home .apsan-hospital-slider .apsan-hospital-slide:after{inset:48% 0 0!important;pointer-events:none!important}
+@media(max-width:640px){
+ #home .apsan-hospital-slider{height:270px!important;min-height:270px!important;max-height:270px!important}
+ #home .apsan-hospital-slider>.apsan-hospital-slide{height:100%!important}
+ #home .apsan-hospital-slider>.apsan-hospital-slide img{height:100%!important;max-height:none!important}
+}
+</style>
 </head>
 <body data-theme="light">
 <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
@@ -2078,7 +2105,7 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
           <figcaption><i class="fas fa-plus-circle"></i> Oshakati State Hospital</figcaption>
         </figure>
         <figure class="apsan-hospital-card apsan-hospital-one apsan-hospital-slide">
-          <img src="ongwediva-medipark.jpg" alt="Edifício do Ongwediva Medipark, Namíbia" loading="lazy">
+          <img src="ongwediva-medipark.jpg" alt="Edifício do Ongwediva Medipark, Namíbia" loading="eager">
           <figcaption><i class="fas fa-plus-circle"></i> Ongwediva Medipark</figcaption>
         </figure>
         <div class="apsan-hospital-slider-dots" aria-hidden="true"><span class="active"></span><span></span></div>
