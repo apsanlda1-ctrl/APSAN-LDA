@@ -2101,7 +2101,7 @@ function openApsanMedicalBooking(){const el=document.getElementById("apsan-medic
 function closeApsanMedicalBooking(){const el=document.getElementById("apsan-medical-booking");if(!el)return;el.classList.remove("open");el.setAttribute("aria-hidden","true");document.body.style.overflow=""}
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeApsanMedicalBooking()});
 document.getElementById("apsan-medical-booking")?.addEventListener("click",e=>{if(e.target.id==="apsan-medical-booking")closeApsanMedicalBooking()});
-document.getElementById("apsanMedicalForm")?.addEventListener("submit",function(e){
+document.getElementById("apsanMedicalForm")?.addEventListener("submit",async function(e){
  e.preventDefault();
  const f=e.currentTarget;
  if(!f.reportValidity())return;
@@ -2136,20 +2136,37 @@ Data pretendida: ${patient.date}
 Período preferencial: ${patient.period}
 Taxa de marcação: 8.000 Kz
 
-DOCUMENTOS SELECCIONADOS
-Histórico médico: ${history.name}
-Comprovativo de pagamento: ${proof.name}
+DOCUMENTOS ANEXADOS
+1. Histórico médico: ${history.name}
+2. Comprovativo de pagamento: ${proof.name}
 
 Solicito a confirmação da recepção deste pedido e o contacto com o paciente através do WhatsApp indicado: ${patient.phone}.`;
  const btn=f.querySelector(".apsan-medical-submit");
+ const original=btn.innerHTML;
  btn.disabled=true;
- btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> A abrir WhatsApp…';
- const url="https://wa.me/244944403093?text="+encodeURIComponent(msg);
- const opened=window.open(url,"_blank");
- if(!opened){window.location.href=url;}
- alert("O pedido completo, com todos os dados preenchidos, foi preparado para o WhatsApp da APSAN (+244 944 40 30 93). Por segurança do WhatsApp, anexe também os dois ficheiros selecionados na conversa antes de carregar em Enviar.");
- btn.disabled=false;
- btn.innerHTML='<i class="fab fa-whatsapp"></i> Enviar pedido via WhatsApp';
+ btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> A preparar envio…';
+ try{
+  const files=[history,proof];
+  if(navigator.share&&navigator.canShare&&navigator.canShare({files})){
+   await navigator.share({title:"Pedido de consulta médica — APSAN, LDA",text:msg,files});
+   alert("Os dois documentos e o texto completo foram enviados para a opção de partilha escolhida. Seleccione o WhatsApp da APSAN (+244 944 40 30 93) como destinatário para concluir o envio.");
+  }else{
+   const url="https://wa.me/244944403093?text="+encodeURIComponent(msg);
+   const opened=window.open(url,"_blank");
+   if(!opened)window.location.href=url;
+   alert("O seu WhatsApp da APSAN foi aberto com o texto completo. Este navegador não permite anexar ficheiros automaticamente pelo link: anexe manualmente o histórico médico («"+history.name+"») e o comprovativo («"+proof.name+"») antes de enviar.");
+  }
+ }catch(err){
+  if(err&&err.name==="AbortError")return;
+  console.error("[APSAN Medical Booking]",err);
+  const url="https://wa.me/244944403093?text="+encodeURIComponent(msg);
+  const opened=window.open(url,"_blank");
+  if(!opened)window.location.href=url;
+  alert("Não foi possível partilhar os ficheiros automaticamente neste dispositivo. O texto completo foi preparado no WhatsApp da APSAN. Anexe manualmente os dois documentos antes de enviar.");
+ }finally{
+  btn.disabled=false;
+  btn.innerHTML=original;
+ }
 });;
 </script>
 <section class="content-section" id="about" style="">
