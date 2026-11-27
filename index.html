@@ -1910,6 +1910,87 @@ body{background:radial-gradient(circle at 10% 0%,rgba(34,199,232,.08),transparen
 .apsan-hero-buttons .apsan-publications-cta i{font-size:17px}
 @media(max-width:700px){.apsan-hero-buttons .apsan-publications-cta{min-height:46px;padding:0 16px;font-size:12px}}
 </style>
+
+<style id="apsan-home-hero-redesign-2026">
+/* APSAN homepage hero — modern responsive corporate presentation */
+#home .apsan-home-page{background:#f4f7fc;padding-bottom:34px}
+#home .apsan-hero-layout{
+ position:relative;isolation:isolate;overflow:hidden;max-width:100%;min-height:590px;
+ display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:center;
+ gap:34px;padding:58px max(5.2vw,28px) 66px;margin:0 auto;
+ background:radial-gradient(circle at 82% 35%,rgba(16,113,190,.55),transparent 35%),linear-gradient(120deg,#061d3d 0%,#073b78 58%,#0755a0 100%);
+ color:#fff
+}
+#home .apsan-hero-layout:before{content:"";position:absolute;z-index:-1;width:680px;height:680px;border:1px solid rgba(255,255,255,.08);border-radius:50%;right:-190px;top:-220px;box-shadow:0 0 0 55px rgba(255,255,255,.025),0 0 0 110px rgba(255,255,255,.02)}
+#home .apsan-hero-copy{position:relative;z-index:2;max-width:690px;text-align:left}
+#home .apsan-hero-eyebrow{display:flex;align-items:center;gap:16px;color:#fff;font-size:clamp(15px,1.8vw,22px);font-weight:850;letter-spacing:.4px;margin-bottom:22px}
+#home .apsan-hero-eyebrow span{display:inline-block;width:72px;height:6px;border-radius:8px;background:#ffc400}
+#home .apsan-hero-copy h1{color:#fff!important;font-size:clamp(38px,5.1vw,68px)!important;line-height:1.04!important;letter-spacing:-1.8px!important;font-weight:900!important;margin:0 0 22px!important}
+#home .apsan-hero-copy h1 em{font-style:normal;color:#ffc21a}
+#home .apsan-hero-copy>p{max-width:600px;color:#e3efff!important;font-size:clamp(15px,1.5vw,20px)!important;line-height:1.6!important;border-left:5px solid #ffc21a;padding:2px 0 2px 20px;margin:0 0 28px!important}
+#home .apsan-hero-buttons{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+#home .apsan-hero-buttons .apsan-btn-gold,#home .apsan-hero-buttons .apsan-medical-cta,#home .apsan-hero-buttons .apsan-publications-cta,#home .apsan-hero-buttons .apsan-whatsapp-icon-only{
+ min-height:54px;display:inline-flex;align-items:center;justify-content:center;gap:11px;padding:0 22px;border-radius:999px;font-size:14px;font-weight:850;text-decoration:none!important;transition:transform .2s,box-shadow .2s
+}
+#home .apsan-hero-buttons .apsan-btn-gold{background:linear-gradient(135deg,#ffd02d,#ffb900);color:#082b55;border:0;box-shadow:0 10px 24px rgba(255,190,0,.22)}
+#home .apsan-hero-buttons .apsan-medical-cta{background:#075fc2;color:#fff;border:2px solid #fff;box-shadow:0 8px 22px rgba(0,0,0,.16)}
+#home .apsan-hero-buttons .apsan-publications-cta{background:rgba(255,255,255,.08);color:#fff!important;border:1px solid rgba(255,255,255,.25)}
+#home .apsan-hero-buttons .apsan-whatsapp-icon-only{width:56px;min-width:56px;padding:0;background:#08b95b;color:#fff;border:0;font-size:25px;box-shadow:0 8px 20px rgba(0,190,90,.25)}
+#home .apsan-hero-buttons>*:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(0,0,0,.2)}
+#home .apsan-hospital-stack{position:relative;width:100%;height:440px;min-width:0;z-index:1}
+#home .apsan-hospital-card{position:absolute;overflow:hidden;margin:0;border:5px solid #fff;border-radius:34px 110px 34px 110px;box-shadow:0 24px 55px rgba(0,0,0,.28);background:#dce8f5}
+#home .apsan-hospital-one{inset:0 0 18px 0;transform:rotate(1deg)}
+#home .apsan-hospital-two{width:43%;height:38%;right:-8px;bottom:-3px;border:4px solid #ffc21a;border-radius:22px 48px 22px 48px;transform:rotate(-4deg)}
+#home .apsan-hospital-card img{width:100%;height:100%;object-fit:cover;display:block}
+#home .apsan-hospital-one:after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(transparent,rgba(3,25,55,.72))}
+#home .apsan-hospital-card figcaption{position:absolute;z-index:2;left:22px;bottom:18px;color:#fff;font-weight:800;font-size:14px;text-shadow:0 2px 6px #000}
+#home .apsan-hospital-two figcaption{font-size:11px;left:10px;bottom:9px}
+#home .apsan-hero-wave{position:absolute;z-index:-1;left:-4%;right:-4%;bottom:-74px;height:120px;background:#ffc21a;border-radius:50% 50% 0 0/40% 40% 0 0;transform:rotate(-2deg)}
+#home .apsan-service-ribbon{max-width:1200px;margin:-24px auto 35px;position:relative;z-index:4;padding:0 20px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+#home .apsan-service-ribbon>a{min-height:126px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:16px 10px;text-align:center;border:1px solid #dce6f2;border-radius:20px;background:#fff;box-shadow:0 12px 28px rgba(7,38,77,.09);text-decoration:none!important;color:#0a2f60!important;transition:transform .2s,box-shadow .2s}
+#home .apsan-service-ribbon>a:hover{transform:translateY(-5px);box-shadow:0 17px 30px rgba(7,38,77,.15)}
+#home .apsan-service-ribbon>a i{font-size:29px;color:#075eae}
+#home .apsan-service-ribbon>a strong{font-size:13px;line-height:1.35;font-weight:850}
+#home .apsan-about-band{max-width:1160px;margin:35px auto;padding:34px;border-radius:26px;background:#fff;box-shadow:0 14px 40px rgba(7,38,77,.07)}
+#home .apsan-trust-ribbon{max-width:1160px;margin:25px auto;padding:22px;display:grid;grid-template-columns:repeat(4,1fr);gap:15px;border-radius:20px;background:#082e5d;color:#fff}
+#home .apsan-trust-ribbon>div{display:flex;align-items:center;justify-content:center;gap:12px;text-align:left}
+#home .apsan-trust-ribbon i{font-size:25px;color:#ffc21a}
+#home .apsan-trust-ribbon strong{font-size:13px;line-height:1.35}
+@media(max-width:900px){
+ #home .apsan-hero-layout{gap:24px;padding:42px 26px 58px;min-height:520px}
+ #home .apsan-hospital-stack{height:350px}
+ #home .apsan-hero-copy h1{font-size:clamp(36px,5.8vw,54px)!important}
+ #home .apsan-service-ribbon{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:-15px}
+}
+@media(max-width:640px){
+ #home .apsan-home-page{padding-bottom:20px}
+ #home .apsan-hero-layout{display:flex;flex-direction:column;align-items:stretch;gap:25px;padding:34px 20px 52px;min-height:0}
+ #home .apsan-hero-copy{max-width:none}
+ #home .apsan-hero-eyebrow{font-size:15px;margin-bottom:15px}
+ #home .apsan-hero-eyebrow span{width:52px;height:5px}
+ #home .apsan-hero-copy h1{font-size:clamp(37px,10vw,51px)!important;line-height:1.04!important;letter-spacing:-1.2px!important;margin-bottom:17px!important}
+ #home .apsan-hero-copy>p{font-size:15px!important;line-height:1.55!important;padding-left:14px;margin-bottom:22px!important}
+ #home .apsan-hero-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+ #home .apsan-hero-buttons .apsan-btn-gold,#home .apsan-hero-buttons .apsan-medical-cta{grid-column:1/-1;width:100%;min-height:54px;padding:0 15px;font-size:13px}
+ #home .apsan-hero-buttons .apsan-publications-cta{min-height:48px;padding:0 10px;font-size:12px}
+ #home .apsan-hero-buttons .apsan-whatsapp-icon-only{width:48px;min-width:48px;min-height:48px;justify-self:start}
+ #home .apsan-hospital-stack{height:270px;margin:0 2px 5px}
+ #home .apsan-hospital-card{border-width:4px;border-radius:25px 70px 25px 70px}
+ #home .apsan-hospital-two{width:40%;height:36%;border-width:3px;border-radius:17px 35px 17px 35px}
+ #home .apsan-hospital-card figcaption{font-size:11px;left:13px;bottom:12px}
+ #home .apsan-hospital-two figcaption{font-size:9px}
+ #home .apsan-service-ribbon{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:0 14px;margin:-14px auto 24px}
+ #home .apsan-service-ribbon>a{min-height:108px;border-radius:16px;padding:13px 8px;gap:8px}
+ #home .apsan-service-ribbon>a i{font-size:25px}
+ #home .apsan-service-ribbon>a strong{font-size:12px}
+ #home .apsan-about-band{margin:22px 14px;padding:22px 17px;border-radius:20px}
+ #home .apsan-trust-ribbon{margin:18px 14px;padding:18px 12px;grid-template-columns:repeat(2,1fr);gap:18px 10px}
+ #home .apsan-trust-ribbon>div{justify-content:flex-start}
+ #home .apsan-trust-ribbon i{font-size:21px}
+ #home .apsan-trust-ribbon strong{font-size:11px}
+}
+@media(prefers-reduced-motion:reduce){#home .apsan-service-ribbon>a,#home .apsan-hero-buttons>*{transition:none}}
+</style>
 </head>
 <body data-theme="light">
 <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
