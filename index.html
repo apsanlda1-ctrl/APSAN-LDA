@@ -2101,7 +2101,7 @@ function openApsanMedicalBooking(){const el=document.getElementById("apsan-medic
 function closeApsanMedicalBooking(){const el=document.getElementById("apsan-medical-booking");if(!el)return;el.classList.remove("open");el.setAttribute("aria-hidden","true");document.body.style.overflow=""}
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeApsanMedicalBooking()});
 document.getElementById("apsan-medical-booking")?.addEventListener("click",e=>{if(e.target.id==="apsan-medical-booking")closeApsanMedicalBooking()});
-document.getElementById("apsanMedicalForm")?.addEventListener("submit",async function(e){
+document.getElementById("apsanMedicalForm")?.addEventListener("submit",function(e){
  e.preventDefault();
  const f=e.currentTarget;
  if(!f.reportValidity())return;
@@ -2136,37 +2136,21 @@ Data pretendida: ${patient.date}
 Período preferencial: ${patient.period}
 Taxa de marcação: 8.000 Kz
 
-DOCUMENTOS ANEXADOS
+DOCUMENTOS A ENVIAR PELO CLIENTE
 1. Histórico médico: ${history.name}
 2. Comprovativo de pagamento: ${proof.name}
 
-Solicito a confirmação da recepção deste pedido e o contacto com o paciente através do WhatsApp indicado: ${patient.phone}.`;
+Por favor, confirme a recepção deste pedido e contacte o paciente através do WhatsApp indicado: ${patient.phone}.`;
  const btn=f.querySelector(".apsan-medical-submit");
  const original=btn.innerHTML;
  btn.disabled=true;
- btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> A abrir partilha…';
- try{
-  const files=[history,proof];
-  const shareData={title:"Pedido de consulta médica — APSAN, LDA",text:msg,files};
-  if(navigator.share&&navigator.canShare&&navigator.canShare({files})){
-   await navigator.share(shareData);
-  }else{
-   const url="https://wa.me/244944403093?text="+encodeURIComponent(msg);
-   const opened=window.open(url,"_blank");
-   if(!opened)window.location.href=url;
-   alert("O WhatsApp da APSAN foi aberto com os dados do pedido. Neste dispositivo, o navegador não permite levar os dois anexos pela partilha. Anexe manualmente o histórico médico («"+history.name+"») e o comprovativo («"+proof.name+"») nessa conversa antes de enviar.");
-  }
- }catch(err){
-  if(err&&err.name==="AbortError")return;
-  console.error("[APSAN Medical Booking]",err);
-  const url="https://wa.me/244944403093?text="+encodeURIComponent(msg);
-  const opened=window.open(url,"_blank");
-  if(!opened)window.location.href=url;
-  alert("Não foi possível abrir a partilha com os documentos. O texto do pedido foi preparado no WhatsApp da APSAN. Anexe manualmente os dois documentos antes de enviar.");
- }finally{
-  btn.disabled=false;
-  btn.innerHTML=original;
- }
+ btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> A abrir conversa da APSAN…';
+ const url="https://wa.me/244944403093?text="+encodeURIComponent(msg);
+ const opened=window.open(url,"_blank");
+ if(!opened)window.location.href=url;
+ btn.disabled=false;
+ btn.innerHTML=original;
+ alert("A conversa oficial da APSAN (+244 944 40 30 93) será aberta com todos os dados do formulário já escritos. Antes de enviar a mensagem, toque no clipe do WhatsApp e anexe o histórico médico («"+history.name+"») e o comprovativo de pagamento («"+proof.name+"»). Depois, carregue em Enviar.");
 });;
 </script>
 <section class="content-section" id="about" style="">
