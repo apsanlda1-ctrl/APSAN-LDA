@@ -3826,6 +3826,18 @@ body{background:#f5f8fb!important;color:#082b55!important;font-family:Arial,Helv
       field('Data para contacto','data_contacto','date','',false)
     ]}
   ];
+  function serviceImage(title){
+    const t=String(title||'').toLowerCase();
+    if(/limpeza|higieniza|desinfec/.test(t))return 'https://cdn.shopify.com/s/files/1/0680/4606/1707/files/professional_office_cleaning_and_workplace_success.webp?v=1778822729';
+    if(/material de escrit|papelaria|consumíveis|consumiveis/.test(t))return 'https://app.primeservefs.com/images/categories/office-stationeries.png';
+    if(/catering|evento/.test(t))return 'https://edesia.catering/guides/corporate-event-catering-cost-breakdown-2025-1.webp';
+    if(/aluguer|aluguel|rent.?a.?car|viaturas|automóveis|automoveis/.test(t))return 'https://cdn2.paraty.es/club-maspalomas/images/73c851c38e280b6';
+    if(/internet|cabling|rede|informática|informatica|tecnolog/.test(t))return 'https://www.nasscorporate.com/img/Cabling.png';
+    if(/tradu|interpreta/.test(t))return 'https://nexatranslations.com/images/pages/home/Excellence%20linguistique.jpeg';
+    if(/transporte|logística|logistica|importação|importacao|exportação|exportacao/.test(t))return 'https://www.tonlexing.com/wp-content/uploads/2025/06/What-is-FCL-Shipping-1-768x512.jpg';
+    if(/consultoria|auditoria|gestão|gestao/.test(t))return 'https://cdn.sanity.io/images/eab98237/production/2e23be176b90c16f69341f88f4e913e799fbe2e3-1024x1024.webp';
+    return 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600&auto=format&fit=crop';
+  }
   const escapeHtml=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   function renderField(f){
     const req=f.required?' required':'',star=f.required?' *':'';
@@ -3840,17 +3852,28 @@ body{background:#f5f8fb!important;color:#082b55!important;font-family:Arial,Helv
     if(!modal||!body){console.error('APSAN: modal de serviço não encontrado.');return;}
     const cfg=serviceConfigs.find(x=>x.match.test(title))||{heading:'Detalhes específicos do serviço',icon:'fa-clipboard-list',fields:[field('Tipo de solicitação','tipo_solicitacao','text','Indique o serviço pretendido',true),field('Data pretendida','data_pretendida','date','',false),field('Descrição do pedido','descricao_pedido','textarea','Descreva detalhadamente o que necessita',true)]};
     const fields=[...common,...cfg.fields,field('Observações adicionais','observacoes','textarea','Informações complementares',false)];
-    body.innerHTML='<div class="apsan-service-brand"><img src="logo.jpeg?v=20261116" alt="APSAN, LDA"><span>APSAN, LDA<br><small>SERVIÇO APSAN</small></span></div><div class="apsan-service-hero"><img class="apsan-service-photo" src="'+( /limpeza|higieniza|desinfec/i.test(title)?'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&auto=format&fit=crop': /catering|evento/i.test(title)?'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=600&auto=format&fit=crop': /material de escrit|papelaria/i.test(title)?'https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=600&auto=format&fit=crop': 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600&auto=format&fit=crop')+'" alt=""><div><h2></h2><p class="apsan-service-description"></p></div></div><ul class="apsan-service-features"></ul><div class="apsan-service-steps"><span class="current"><b>1</b> Dados do cliente</span><i></i><span><b>2</b> Detalhes do pedido</span><i></i><span><b>3</b> Confirmar e enviar</span></div><form id="apsanServiceRequestForm"><section class="apsan-form-section"><h3><i class="far fa-user"></i> Dados do cliente</h3><div class="modal-form-grid">'+fields.slice(0,4).map(renderField).join('')+'</div></section><section class="apsan-form-section"><h3><i class="fas '+cfg.icon+'"></i> '+cfg.heading+'</h3><div class="modal-form-grid">'+fields.slice(4).map(renderField).join('')+'</div></section><button type="submit" class="apsan-service-submit"><i class="fab fa-whatsapp"></i> Enviar solicitação pelo WhatsApp <i class="fas fa-arrow-right"></i></button><p class="apsan-service-note">O WhatsApp da APSAN será aberto com todos os dados preenchidos para confirmar e enviar.</p></form>';
+    body.innerHTML='<div class="apsan-service-brand"><img src="logo.jpeg?v=20261116" alt="APSAN, LDA"><span>APSAN, LDA<br><small>SERVIÇO APSAN</small></span></div><div class="apsan-service-hero"><img class="apsan-service-photo" src="'+serviceImage(title)+'" alt=""><div><h2></h2><p class="apsan-service-description"></p></div></div><ul class="apsan-service-features"></ul><div class="apsan-service-steps"><span class="current"><b>1</b> Dados do cliente</span><i></i><span><b>2</b> Detalhes do pedido</span><i></i><span><b>3</b> Confirmar e enviar</span></div><form id="apsanServiceRequestForm"><section class="apsan-form-section"><h3><i class="far fa-user"></i> Dados do cliente</h3><div class="modal-form-grid">'+fields.slice(0,4).map(renderField).join('')+'</div></section><section class="apsan-form-section"><h3><i class="fas '+cfg.icon+'"></i> '+cfg.heading+'</h3><div class="modal-form-grid">'+fields.slice(4).map(renderField).join('')+'</div></section><button type="submit" class="apsan-service-submit"><i class="fab fa-whatsapp"></i> Enviar solicitação pelo WhatsApp <i class="fas fa-arrow-right"></i></button></form>';
     body.querySelector('h2').textContent=title;
     body.querySelector('.apsan-service-description').textContent=description;
     const ul=body.querySelector('.apsan-service-features');
     (Array.isArray(features)?features:[]).forEach(item=>{const li=document.createElement('li');li.textContent=item;ul.appendChild(li);});
-    body.querySelector('#apsanServiceRequestForm').addEventListener('submit',function(e){
-      e.preventDefault();const f=new FormData(this);
-      const lines=['SOLICITAÇÃO DE SERVIÇO — APSAN, LDA','','Serviço: '+title];
-      fields.forEach(x=>{const val=f.get(x.name);if(val)lines.push(x.label+': '+val);});
-      const msg=lines.join('\n');
-      window.open('https://wa.me/244944403093?text='+encodeURIComponent(msg),'_blank','noopener');
+    body.querySelector('#apsanServiceRequestForm').addEventListener('submit',async function(e){
+      e.preventDefault();const form=this;if(!form.reportValidity())return;
+      const data=new FormData(form),values={};fields.forEach(x=>{values[x.name]=data.get(x.name)||''});
+      const msg=['SOLICITAÇÃO DE SERVIÇO — APSAN, LDA','','Serviço: '+title,...fields.filter(x=>values[x.name]).map(x=>x.label+': '+values[x.name])].join('\n');
+      const btn=form.querySelector('.apsan-service-submit'),original=btn.innerHTML,wa=window.open('about:blank','_blank');
+      btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> A registar solicitação…';
+      try{
+        const firebaseConfig={apiKey:"AIzaSyBe28uhKKzOycocioX0YyyUZ0jmODDAnCM",authDomain:"apsan-web-manegment.firebaseapp.com",databaseURL:"https://apsan-web-manegment-default-rtdb.firebaseio.com",projectId:"apsan-web-manegment",storageBucket:"apsan-web-manegment.firebasestorage.app",messagingSenderId:"1026894206568",appId:"1:1026894206568:web:a8896e7caf7f14d6118ddd"};
+        const {initializeApp}=await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js");
+        const {getDatabase,ref,push,set}=await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js");
+        const app=initializeApp(firebaseConfig,"apsan-service-requests-public"),db=getDatabase(app);
+        const record={serviceTitle:title,serviceDescription:description,customerName:values.nome||'',customerPhone:values.telefone||'',customerEmail:values.email||'',customerLocation:values.localizacao||'',details:values,createdAt:Date.now(),status:"new"};
+        const item=push(ref(db,"apsanServiceRequests"));await set(item,record);
+        const url="https://wa.me/244944403093?text="+encodeURIComponent(msg);
+        if(wa&&!wa.closed)wa.location.href=url;else window.location.href=url;
+      }catch(err){console.error("[APSAN Service Request]",err);if(wa&&!wa.closed)wa.close();alert("Não foi possível registar a solicitação na administração. Verifique a ligação à internet e tente novamente. "+(err.message||err));}
+      finally{btn.disabled=false;btn.innerHTML=original;}
     });
     modal.classList.add('active');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
   };
