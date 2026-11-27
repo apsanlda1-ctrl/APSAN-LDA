@@ -2101,23 +2101,15 @@ function openApsanMedicalBooking(){const el=document.getElementById("apsan-medic
 function closeApsanMedicalBooking(){const el=document.getElementById("apsan-medical-booking");if(!el)return;el.classList.remove("open");el.setAttribute("aria-hidden","true");document.body.style.overflow=""}
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeApsanMedicalBooking()});
 document.getElementById("apsan-medical-booking")?.addEventListener("click",e=>{if(e.target.id==="apsan-medical-booking")closeApsanMedicalBooking()});
-document.getElementById("apsanMedicalForm")?.addEventListener("submit",function(e){
+document.getElementById("apsanMedicalForm")?.addEventListener("submit",async function(e){
  e.preventDefault();
  const f=e.currentTarget;
  if(!f.reportValidity())return;
  const fd=new FormData(f);
- const history=f.elements.medicalHistory.files[0];
- const proof=f.elements.paymentProof.files[0];
- const max=10*1024*1024;
+ const history=f.elements.medicalHistory.files[0],proof=f.elements.paymentProof.files[0],max=3*1024*1024;
  if(!history||!proof){alert("Carregue o histórico médico e o comprovativo de pagamento.");return}
- if(history.size>max||proof.size>max){alert("Cada ficheiro deve ter no máximo 10 MB.");return}
- const patient={
-  name:fd.get("patientName"),age:fd.get("age"),sex:fd.get("sex"),
-  phone:fd.get("phone"),email:fd.get("email")||"Não indicado",
-  province:fd.get("province"),municipality:fd.get("municipality"),
-  specialist:fd.get("specialist"),reason:fd.get("reason"),
-  date:fd.get("date"),period:fd.get("period")
- };
+ if(history.size>max||proof.size>max){alert("Para guardar os documentos no painel administrativo, cada ficheiro deve ter no máximo 3 MB.");return}
+ const patient={name:fd.get("patientName"),age:fd.get("age"),sex:fd.get("sex"),phone:fd.get("phone"),email:fd.get("email")||"Não indicado",province:fd.get("province"),municipality:fd.get("municipality"),specialist:fd.get("specialist"),reason:fd.get("reason"),date:fd.get("date"),period:fd.get("period")};
  const msg=`PEDIDO DE MARCAÇÃO DE CONSULTA MÉDICA NA NAMÍBIA — APSAN, LDA
 
 DADOS COMPLETOS DO PACIENTE
@@ -2136,21 +2128,33 @@ Data pretendida: ${patient.date}
 Período preferencial: ${patient.period}
 Taxa de marcação: 8.000 Kz
 
-DOCUMENTOS A ENVIAR PELO CLIENTE
+DOCUMENTOS A ENVIAR
 1. Histórico médico: ${history.name}
 2. Comprovativo de pagamento: ${proof.name}
 
-Por favor, confirme a recepção deste pedido e contacte o paciente através do WhatsApp indicado: ${patient.phone}.`;
- const btn=f.querySelector(".apsan-medical-submit");
- const original=btn.innerHTML;
- btn.disabled=true;
- btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> A abrir conversa da APSAN…';
- const url="https://wa.me/244944403093?text="+encodeURIComponent(msg);
- const opened=window.open(url,"_blank");
- if(!opened)window.location.href=url;
- btn.disabled=false;
- btn.innerHTML=original;
- alert("A conversa oficial da APSAN (+244 944 40 30 93) será aberta com todos os dados do formulário já escritos. Antes de enviar a mensagem, toque no clipe do WhatsApp e anexe o histórico médico («"+history.name+"») e o comprovativo de pagamento («"+proof.name+"»). Depois, carregue em Enviar.");
+Este pedido também foi registado no painel administrativo da APSAN, LDA.`;
+ const btn=f.querySelector(".apsan-medical-submit"),original=btn.innerHTML;
+ const wa=window.open("about:blank","_blank");
+ btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> A registar pedido…';
+ const readFile=file=>new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(reader.error||new Error("Falha ao ler "+file.name));reader.readAsDataURL(file)});
+ try{
+  const [historyData,proofData]=await Promise.all([readFile(history),readFile(proof)]);
+  const firebaseConfig={apiKey:"AIzaSyBe28uhKKzOycocioX0YyyUZ0jmODDAnCM",authDomain:"apsan-web-manegment.firebaseapp.com",databaseURL:"https://apsan-web-manegment-default-rtdb.firebaseio.com",projectId:"apsan-web-manegment",storageBucket:"apsan-web-manegment.firebasestorage.app",messagingSenderId:"1026894206568",appId:"1:1026894206568:web:a8896e7caf7f14d6118ddd"};
+  const {initializeApp}=await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js");
+  const {getDatabase,ref,push,set}=await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js");
+  const appName="apsan-medical-public";
+  const app=initializeApp(firebaseConfig,appName),db=getDatabase(app);
+  const record={...patient,createdAt:Date.now(),status:"new",history:{fileName:history.name,mimeType:history.type||"application/octet-stream",size:history.size,data:historyData},proof:{fileName:proof.name,mimeType:proof.type||"application/octet-stream",size:proof.size,data:proofData}};
+  const item=push(ref(db,"apsanMedicalAppointments"));
+  await set(item,record);
+  const url="https://wa.me/244944403093?text="+encodeURIComponent(msg);
+  if(wa&&!wa.closed)wa.location.href=url;else window.location.href=url;
+  alert("Pedido registado no painel administrativo. A conversa da APSAN será aberta com os dados preenchidos. Anexe os dois documentos no WhatsApp e carregue em Enviar.");
+ }catch(err){
+  console.error("[APSAN Medical Appointment]",err);
+  if(wa&&!wa.closed)wa.close();
+  alert("Não foi possível registar o pedido no painel administrativo. Verifique a ligação à internet e tente novamente. Detalhe: "+(err.message||err));
+ }finally{btn.disabled=false;btn.innerHTML=original}
 });;
 </script>
 <section class="content-section" id="about" style="">
