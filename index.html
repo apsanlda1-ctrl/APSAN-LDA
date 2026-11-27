@@ -3772,5 +3772,68 @@ body{background:#f5f8fb!important;color:#082b55!important;font-family:Arial,Helv
 })();
 </script>
 
+
+<script id="apsan-service-detail-workflow">
+(function(){
+  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  window.openServiceDetail=function(title,description,features){
+    const modal=document.getElementById('serviceModal');
+    const body=document.getElementById('modalBodyContent');
+    if(!modal||!body){console.error('APSAN: janela de detalhes do serviço não encontrada.');return;}
+    const items=Array.isArray(features)?features:[];
+    body.innerHTML=`
+      <div style="padding:8px 0 18px">
+        <span style="display:inline-flex;align-items:center;gap:8px;color:var(--primary-color);font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.08em"><i class="fas fa-check-circle"></i> Serviço APSAN</span>
+        <h2 style="font-size:25px;margin:10px 42px 10px 0;color:var(--text-color)"></h2>
+        <p class="apsan-service-description" style="color:var(--text-muted);line-height:1.7"></p>
+        <ul class="apsan-service-features" style="padding:14px 0 18px 22px;line-height:1.9;color:var(--text-color)"></ul>
+      </div>
+      <form id="apsanServiceRequestForm">
+        <h3 style="font-size:18px;margin-bottom:14px;color:var(--text-color)">Solicitar este serviço</h3>
+        <div class="modal-form-grid">
+          <div class="modal-form-group"><label for="apsanReqName">Nome completo *</label><input id="apsanReqName" name="nome" required autocomplete="name" placeholder="O seu nome"></div>
+          <div class="modal-form-group"><label for="apsanReqPhone">Telefone / WhatsApp *</label><input id="apsanReqPhone" name="telefone" required type="tel" autocomplete="tel" placeholder="+244..."></div>
+          <div class="modal-form-group"><label for="apsanReqEmail">E-mail</label><input id="apsanReqEmail" name="email" type="email" autocomplete="email" placeholder="nome@email.com"></div>
+          <div class="modal-form-group"><label for="apsanReqLocation">Localização</label><input id="apsanReqLocation" name="localizacao" placeholder="Cidade / País"></div>
+          <div class="modal-form-group full-width"><label for="apsanReqDetails">Detalhes do pedido *</label><textarea id="apsanReqDetails" name="detalhes" rows="4" required placeholder="Descreva o que pretende e quaisquer informações importantes."></textarea></div>
+        </div>
+        <button type="submit" style="width:100%;padding:14px 18px;border:0;border-radius:10px;background:#0876c9;color:#fff;font-weight:800;font-size:15px;cursor:pointer"><i class="fab fa-whatsapp"></i> Enviar solicitação pelo WhatsApp</button>
+        <p style="font-size:12px;color:var(--text-muted);margin-top:9px;text-align:center">O WhatsApp da APSAN será aberto com os dados preenchidos para confirmar e enviar.</p>
+      </form>`;
+    body.querySelector('h2').textContent=title;
+    body.querySelector('.apsan-service-description').textContent=description;
+    const ul=body.querySelector('.apsan-service-features');
+    items.forEach(item=>{const li=document.createElement('li');li.textContent=item;ul.appendChild(li);});
+    body.querySelector('#apsanServiceRequestForm').addEventListener('submit',function(e){
+      e.preventDefault();
+      const f=new FormData(this);
+      const message=[
+        'SOLICITAÇÃO DE SERVIÇO — APSAN, LDA','',
+        'Serviço: '+title,
+        'Nome: '+f.get('nome'),
+        'Telefone/WhatsApp: '+f.get('telefone'),
+        'E-mail: '+(f.get('email')||'Não indicado'),
+        'Localização: '+(f.get('localizacao')||'Não indicada'),
+        'Detalhes: '+f.get('detalhes')
+      ].join('\n');
+      window.open('https://wa.me/244944403093?text='+encodeURIComponent(message),'_blank','noopener');
+    });
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+  };
+  window.closeServiceModal=function(){
+    const modal=document.getElementById('serviceModal');
+    if(!modal)return;
+    modal.classList.remove('active');modal.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+  };
+  window.closeServiceDetail=function(event){
+    if(!event||event.target===document.getElementById('serviceModal'))window.closeServiceModal();
+  };
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')window.closeServiceModal();});
+})();
+</script>
+
 </body>
 </html>
