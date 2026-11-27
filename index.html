@@ -2144,17 +2144,17 @@ Solicito a confirmação da recepção deste pedido e o contacto com o paciente 
  const btn=f.querySelector(".apsan-medical-submit");
  const original=btn.innerHTML;
  btn.disabled=true;
- btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> A preparar envio…';
+ btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> A abrir partilha…';
  try{
   const files=[history,proof];
+  const shareData={title:"Pedido de consulta médica — APSAN, LDA",text:msg,files};
   if(navigator.share&&navigator.canShare&&navigator.canShare({files})){
-   await navigator.share({title:"Pedido de consulta médica — APSAN, LDA",text:msg,files});
-   alert("Os dois documentos e o texto completo foram enviados para a opção de partilha escolhida. Seleccione o WhatsApp da APSAN (+244 944 40 30 93) como destinatário para concluir o envio.");
+   await navigator.share(shareData);
   }else{
    const url="https://wa.me/244944403093?text="+encodeURIComponent(msg);
    const opened=window.open(url,"_blank");
    if(!opened)window.location.href=url;
-   alert("O seu WhatsApp da APSAN foi aberto com o texto completo. Este navegador não permite anexar ficheiros automaticamente pelo link: anexe manualmente o histórico médico («"+history.name+"») e o comprovativo («"+proof.name+"») antes de enviar.");
+   alert("O WhatsApp da APSAN foi aberto com os dados do pedido. Neste dispositivo, o navegador não permite levar os dois anexos pela partilha. Anexe manualmente o histórico médico («"+history.name+"») e o comprovativo («"+proof.name+"») nessa conversa antes de enviar.");
   }
  }catch(err){
   if(err&&err.name==="AbortError")return;
@@ -2162,7 +2162,7 @@ Solicito a confirmação da recepção deste pedido e o contacto com o paciente 
   const url="https://wa.me/244944403093?text="+encodeURIComponent(msg);
   const opened=window.open(url,"_blank");
   if(!opened)window.location.href=url;
-  alert("Não foi possível partilhar os ficheiros automaticamente neste dispositivo. O texto completo foi preparado no WhatsApp da APSAN. Anexe manualmente os dois documentos antes de enviar.");
+  alert("Não foi possível abrir a partilha com os documentos. O texto do pedido foi preparado no WhatsApp da APSAN. Anexe manualmente os dois documentos antes de enviar.");
  }finally{
   btn.disabled=false;
   btn.innerHTML=original;
