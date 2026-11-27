@@ -3775,63 +3775,92 @@ body{background:#f5f8fb!important;color:#082b55!important;font-family:Arial,Helv
 
 <script id="apsan-service-detail-workflow">
 (function(){
-  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const field=(label,name,type='text',placeholder='',required=true,options=[])=>({label,name,type,placeholder,required,options});
+  const common=[
+    field('Nome completo','nome','text','O seu nome',true),
+    field('WhatsApp','telefone','tel','+244...',true),
+    field('E-mail','email','email','nome@email.com',false),
+    field('Localização','localizacao','text','Cidade / Município / Província',true)
+  ];
+  const serviceConfigs=[
+    {match:/limpeza|higieniza|desinfec/i,heading:'Detalhes específicos do serviço',icon:'fa-broom',fields:[
+      field('Tipo de instalação','tipo_instalacao','select','',true,['Escritório','Edifício comercial','Instituição pública','Hospital / Clínica','Residência','Outro']),
+      field('Área aproximada','area','text','Ex.: 250 m²',true),
+      field('Frequência do serviço','frequencia','select','',true,['Pontual','Diária','Semanal','Quinzenal','Mensal']),
+      field('Data de início preferencial','data_inicio','date','',true)
+    ]},
+    {match:/material de escrit|papelaria|consumíveis|consumiveis/i,heading:'Detalhes específicos do serviço',icon:'fa-box-open',fields:[
+      field('Lista de itens e quantidades','itens','textarea','Ex.: Papel A4 — 10 resmas; Canetas azuis — 20 unidades',true),
+      field('Local de entrega','entrega','text','Endereço de entrega',true),
+      field('Prazo de entrega desejado','prazo_entrega','date','',true)
+    ]},
+    {match:/catering|evento/i,heading:'Detalhes específicos do serviço',icon:'fa-concierge-bell',fields:[
+      field('Data do evento','data_evento','date','',true),
+      field('Número de convidados','convidados','number','Ex.: 50',true),
+      field('Tipo de serviço','tipo_evento','select','',true,['Coffee break','Almoço / Jantar','Buffet','Cocktail','Evento corporativo completo','Outro']),
+      field('Local do evento','local_evento','text','Hotel, salão, empresa, etc.',true)
+    ]},
+    {match:/internet|cabling|rede|informática|informatica|tecnolog/i,heading:'Detalhes técnicos',icon:'fa-network-wired',fields:[
+      field('Tipo de solução','solucao','select','',true,['Instalação de internet','Cablagem estruturada','Configuração de rede','Manutenção / Reparação','Outro']),
+      field('Quantidade de pontos / equipamentos','quantidade','text','Indique a quantidade',false),
+      field('Data pretendida','data_pretendida','date','',false),
+      field('Descrição técnica','descricao_tecnica','textarea','Descreva a necessidade técnica',true)
+    ]},
+    {match:/tradu|interpreta/i,heading:'Detalhes da tradução',icon:'fa-language',fields:[
+      field('Tipo de serviço','tipo_traducao','select','',true,['Tradução escrita','Tradução juramentada','Interpretação presencial','Interpretação remota']),
+      field('Idiomas','idiomas','text','Ex.: Português — Inglês',true),
+      field('Número de páginas / duração','volume','text','Indique o volume',false),
+      field('Prazo pretendido','prazo','date','',false)
+    ]},
+    {match:/transporte|logística|logistica|importação|importacao|exportação|exportacao/i,heading:'Detalhes logísticos',icon:'fa-truck',fields:[
+      field('Tipo de operação','operacao','select','',true,['Transporte de pessoas','Transporte de mercadorias','Importação','Exportação','Desalfandegamento','Outro']),
+      field('Local de recolha','origem','text','Cidade / endereço de origem',true),
+      field('Destino','destino','text','Cidade / endereço de destino',true),
+      field('Data pretendida','data_pretendida','date','',false),
+      field('Descrição da carga / necessidade','carga','textarea','Descreva o que pretende transportar ou tratar',true)
+    ]},
+    {match:/consultoria|auditoria|gestão|gestao/i,heading:'Detalhes da consultoria',icon:'fa-briefcase',fields:[
+      field('Área de assistência','area_consultoria','select','',true,['Consultoria empresarial','Auditoria','Gestão operacional','Assessoria administrativa','Outro']),
+      field('Tipo de entidade','entidade','select','',true,['Empresa','Instituição','Particular']),
+      field('Objectivo do serviço','objectivo','textarea','Explique o apoio de que necessita',true),
+      field('Data para contacto','data_contacto','date','',false)
+    ]}
+  ];
+  const escapeHtml=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  function renderField(f){
+    const req=f.required?' required':'',star=f.required?' *':'';
+    let control='';
+    if(f.type==='select')control='<select name="'+f.name+'"'+req+'><option value="">Seleccione uma opção</option>'+f.options.map(o=>'<option>'+escapeHtml(o)+'</option>').join('')+'</select>';
+    else if(f.type==='textarea')control='<textarea name="'+f.name+'" rows="3" placeholder="'+escapeHtml(f.placeholder)+'"'+req+'></textarea>';
+    else control='<input name="'+f.name+'" type="'+f.type+'" placeholder="'+escapeHtml(f.placeholder)+'"'+req+'>';
+    return '<div class="modal-form-group"><label>'+escapeHtml(f.label)+star+'</label>'+control+'</div>';
+  }
   window.openServiceDetail=function(title,description,features){
-    const modal=document.getElementById('serviceModal');
-    const body=document.getElementById('modalBodyContent');
-    if(!modal||!body){console.error('APSAN: janela de detalhes do serviço não encontrada.');return;}
-    const items=Array.isArray(features)?features:[];
-    body.innerHTML=`
-      <div style="padding:8px 0 18px">
-        <span style="display:inline-flex;align-items:center;gap:8px;color:var(--primary-color);font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.08em"><i class="fas fa-check-circle"></i> Serviço APSAN</span>
-        <h2 style="font-size:25px;margin:10px 42px 10px 0;color:var(--text-color)"></h2>
-        <p class="apsan-service-description" style="color:var(--text-muted);line-height:1.7"></p>
-        <ul class="apsan-service-features" style="padding:14px 0 18px 22px;line-height:1.9;color:var(--text-color)"></ul>
-      </div>
-      <form id="apsanServiceRequestForm">
-        <h3 style="font-size:18px;margin-bottom:14px;color:var(--text-color)">Solicitar este serviço</h3>
-        <div class="modal-form-grid">
-          <div class="modal-form-group"><label for="apsanReqName">Nome completo *</label><input id="apsanReqName" name="nome" required autocomplete="name" placeholder="O seu nome"></div>
-          <div class="modal-form-group"><label for="apsanReqPhone">Telefone / WhatsApp *</label><input id="apsanReqPhone" name="telefone" required type="tel" autocomplete="tel" placeholder="+244..."></div>
-          <div class="modal-form-group"><label for="apsanReqEmail">E-mail</label><input id="apsanReqEmail" name="email" type="email" autocomplete="email" placeholder="nome@email.com"></div>
-          <div class="modal-form-group"><label for="apsanReqLocation">Localização</label><input id="apsanReqLocation" name="localizacao" placeholder="Cidade / País"></div>
-          <div class="modal-form-group full-width"><label for="apsanReqDetails">Detalhes do pedido *</label><textarea id="apsanReqDetails" name="detalhes" rows="4" required placeholder="Descreva o que pretende e quaisquer informações importantes."></textarea></div>
-        </div>
-        <button type="submit" style="width:100%;padding:14px 18px;border:0;border-radius:10px;background:#0876c9;color:#fff;font-weight:800;font-size:15px;cursor:pointer"><i class="fab fa-whatsapp"></i> Enviar solicitação pelo WhatsApp</button>
-        <p style="font-size:12px;color:var(--text-muted);margin-top:9px;text-align:center">O WhatsApp da APSAN será aberto com os dados preenchidos para confirmar e enviar.</p>
-      </form>`;
+    const modal=document.getElementById('serviceModal'),body=document.getElementById('modalBodyContent');
+    if(!modal||!body){console.error('APSAN: modal de serviço não encontrado.');return;}
+    const cfg=serviceConfigs.find(x=>x.match.test(title))||{heading:'Detalhes específicos do serviço',icon:'fa-clipboard-list',fields:[field('Tipo de solicitação','tipo_solicitacao','text','Indique o serviço pretendido',true),field('Data pretendida','data_pretendida','date','',false),field('Descrição do pedido','descricao_pedido','textarea','Descreva detalhadamente o que necessita',true)]};
+    const fields=[...common,...cfg.fields,field('Observações adicionais','observacoes','textarea','Informações complementares',false)];
+    body.innerHTML='<div class="apsan-service-intro"><span class="apsan-service-kicker"><i class="fas fa-check-circle"></i> SERVIÇO APSAN</span><h2></h2><p class="apsan-service-description"></p><ul class="apsan-service-features"></ul></div><div class="apsan-service-steps"><span class="current">1&nbsp; Dados do cliente</span><span>2&nbsp; Detalhes do pedido</span><span>3&nbsp; Enviar</span></div><form id="apsanServiceRequestForm"><section class="apsan-form-section"><h3><i class="far fa-user"></i> Dados do cliente</h3><div class="modal-form-grid">'+fields.slice(0,4).map(renderField).join('')+'</div></section><section class="apsan-form-section"><h3><i class="fas '+cfg.icon+'"></i> '+cfg.heading+'</h3><div class="modal-form-grid">'+fields.slice(4).map(renderField).join('')+'</div></section><button type="submit" class="apsan-service-submit"><i class="fab fa-whatsapp"></i> Enviar solicitação <i class="fas fa-arrow-right"></i></button><p class="apsan-service-note">O WhatsApp da APSAN será aberto com todos os dados preenchidos para confirmar e enviar.</p></form>';
     body.querySelector('h2').textContent=title;
     body.querySelector('.apsan-service-description').textContent=description;
     const ul=body.querySelector('.apsan-service-features');
-    items.forEach(item=>{const li=document.createElement('li');li.textContent=item;ul.appendChild(li);});
+    (Array.isArray(features)?features:[]).forEach(item=>{const li=document.createElement('li');li.textContent=item;ul.appendChild(li);});
     body.querySelector('#apsanServiceRequestForm').addEventListener('submit',function(e){
-      e.preventDefault();
-      const f=new FormData(this);
-      const message=[
-        'SOLICITAÇÃO DE SERVIÇO — APSAN, LDA','',
-        'Serviço: '+title,
-        'Nome: '+f.get('nome'),
-        'Telefone/WhatsApp: '+f.get('telefone'),
-        'E-mail: '+(f.get('email')||'Não indicado'),
-        'Localização: '+(f.get('localizacao')||'Não indicada'),
-        'Detalhes: '+f.get('detalhes')
-      ].join('\n');
-      window.open('https://wa.me/244944403093?text='+encodeURIComponent(message),'_blank','noopener');
+      e.preventDefault();const f=new FormData(this);
+      const lines=['SOLICITAÇÃO DE SERVIÇO — APSAN, LDA','','Serviço: '+title];
+      fields.forEach(x=>{const val=f.get(x.name);if(val)lines.push(x.label+': '+val);});
+      const msg=lines.join('\n');
+      window.open('https://wa.me/244944403093?text='+encodeURIComponent(msg),'_blank','noopener');
     });
-    modal.classList.add('active');
-    modal.setAttribute('aria-hidden','false');
-    document.body.style.overflow='hidden';
+    modal.classList.add('active');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
   };
-  window.closeServiceModal=function(){
-    const modal=document.getElementById('serviceModal');
-    if(!modal)return;
-    modal.classList.remove('active');modal.setAttribute('aria-hidden','true');
-    document.body.style.overflow='';
-  };
-  window.closeServiceDetail=function(event){
-    if(!event||event.target===document.getElementById('serviceModal'))window.closeServiceModal();
-  };
-  document.addEventListener('keydown',function(e){if(e.key==='Escape')window.closeServiceModal();});
+  window.closeServiceModal=function(){const modal=document.getElementById('serviceModal');if(!modal)return;modal.classList.remove('active');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';};
+  window.closeServiceDetail=function(event){if(!event||event.target===document.getElementById('serviceModal'))window.closeServiceModal();};
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')window.closeServiceModal();});
+  const style=document.createElement('style');
+  style.textContent=`
+  .apsan-service-intro{padding:5px 0 15px}.apsan-service-kicker{display:inline-flex;gap:8px;color:#0874bb;font-weight:850;font-size:12px;letter-spacing:1px}.apsan-service-intro h2{font-size:25px;margin:12px 42px 10px 0;color:#102b55}.apsan-service-description{font-size:16px;line-height:1.65;color:#53657b}.apsan-service-features{padding:12px 0 10px 22px;line-height:1.8;color:#253d59}.apsan-service-steps{display:flex;justify-content:space-between;gap:7px;margin:5px 0 18px;padding:12px 10px;background:#f0f6ff;border-radius:12px;color:#6b7d91;font-size:11px;font-weight:750}.apsan-service-steps .current{color:#075fae}.apsan-form-section{margin:14px 0 18px;padding:14px;border:1px solid #e2eaf4;border-radius:15px;background:#fff}.apsan-form-section h3{margin:0 0 14px;padding:10px 12px;border-radius:9px;background:#eaf3ff;color:#123762;font-size:16px}.apsan-form-section .modal-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.apsan-form-section .modal-form-group{min-width:0}.apsan-form-section .modal-form-group label{display:block;margin-bottom:6px;font-size:13px;font-weight:750;color:#33475f}.apsan-form-section input,.apsan-form-section select,.apsan-form-section textarea{width:100%;box-sizing:border-box;min-height:44px;padding:11px 12px;border:1px solid #d9e3ef;border-radius:10px;background:#fafdff;color:#142e4f;font:inherit;font-size:14px}.apsan-form-section textarea{min-height:84px;resize:vertical}.apsan-service-submit{width:100%;display:flex;justify-content:center;align-items:center;gap:12px;padding:15px;border:0;border-radius:12px;background:linear-gradient(110deg,#0755a3,#087bc9);color:white;font-size:16px;font-weight:850;cursor:pointer}.apsan-service-note{text-align:center;font-size:12px;color:#708198;margin:9px 0 0}@media(max-width:600px){.apsan-service-intro h2{font-size:22px}.apsan-form-section{padding:11px}.apsan-form-section .modal-form-grid{grid-template-columns:1fr}.apsan-service-steps{font-size:9px;padding:10px 7px}}`;
+  document.head.appendChild(style);
 })();
 </script>
 
