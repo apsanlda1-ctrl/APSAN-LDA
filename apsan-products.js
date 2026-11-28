@@ -396,7 +396,7 @@ function bindExpandable(root){root.querySelectorAll("[data-expand-text]").forEac
 function favoriteIds(){try{return JSON.parse(localStorage.getItem("apsanFavoriteProducts")||"[]")}catch{return []}}
 function apsanProductShareUrl(id){
  // Links partilhados devem abrir sempre o catálogo, nunca a página inicial.
- const url=new URL("/produtos.html",window.location.origin);
+ const url=new URL("/produtos/",window.location.origin);
  url.searchParams.set("produto",String(id));
  return url.href;
 }
